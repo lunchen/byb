@@ -1,0 +1,38 @@
+<view class="tabbarBtn-box">
+  <view class="tabbar-service-btnView">
+    <view class="tabbar-service-btnView-left">
+      
+      <view bindtap="showBtn" class="tabbar-service-btnView-left-btn">
+        <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_10@3x.png"></image>
+        <text>在线咨询</text>
+      </view>
+      <view  class="tabbar-service-btnView-left-btn lightThemeBGC">
+        <!-- <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_11@3x.png"></image> -->
+        <text>预约试课</text>
+      </view>
+    </view>
+    <view class="tabbar-service-btnView-right">
+      立即报名
+    </view>
+  </view>
+  <view class="contactUs" style="{{ display ? '' : 'display: none;'}}">
+    <view class="contactUs-bg {{showType?'':'fadeIn'}}" bindtap="closeBtn"></view>
+    <view class="contactUs-view {{showType?'enter-leave':''}}">
+      <view class="contactUs-view-title">
+        <view style="width:30rpx;height:30rpx;"></view>
+        <view class="contactUs-view-title-txt">联系我们</view>
+        <image bindtap="closeBtn" style="width:30rpx;height:30rpx;" src="./icon/apply_1@2x.png"></image>
+      </view>
+      <view class="contactUs-view-text">
+        <view class="contactUs-view-text-txt1">
+          联系电话：187****0980
+        </view>
+        <view class="contactUs-view-text-txt2">
+          <view>微信二维码：</view>
+          <image bindtap='previewImg' style="width:100rpx;height:100rpx;margin-left:10rpx" src="{{qrCodeUrl}}"></image>
+        </view>
+      </view>
+      
+    </view>
+  </view>
+</view>

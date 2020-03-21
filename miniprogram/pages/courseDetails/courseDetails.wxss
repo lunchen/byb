@@ -1,0 +1,146 @@
+/**courseDetails.wxss**/
+.courseDetailsImg-view{
+  width: 620rpx;
+  height:375rpx;
+  border-radius:20rpx;
+  box-shadow: 0px 10px 6px #bebebe;
+  margin: 0 auto;
+}
+
+.courseDetailsImg{
+  width:690rpx;
+  height:375rpx;
+  border-radius:20rpx;
+  margin-left: -35rpx;
+}
+.courseDetails-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 0rpx 30rpx 200rpx;
+}
+
+
+.courseDetails-content-view2{
+  margin-top: 60rpx;
+  background: #feb707;
+  padding: 50rpx 0 36rpx 20rpx;
+  border-radius: 26rpx;
+}
+.courseDetails-content-view2-top{
+  padding: 0 56rpx 0 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.courseDetails-content-view2-top-textView{
+  margin-left: 34rpx;
+}
+.courseDetails-content-view2-top-text{
+  display: flex;
+  align-items: center;
+  color:#333;
+  font-weight: bolder;
+}
+.courseDetails-content-view2-middle{
+  margin-top: 34rpx;
+  padding: 0 56rpx 0 60rpx;
+  font-size: 26rpx;
+  line-height: 40rpx;
+  color: #333;
+}
+.courseDetails-content-view2-bottom{
+  display: flex;
+  justify-content: space-around;
+  font-size: 28rpx;
+  color: #fff;
+  margin-top: 40rpx;
+}
+.courseDetails-content-view2-bottom-item{
+  display: flex;
+  align-items: center;
+}
+.courseDetails-link{
+  height: 1rpx;
+  background: #f0f0f0;
+  margin: 40rpx 0;
+}
+
+.courseDetails-content-introduction-title{
+  display: flex;
+  align-items: center;
+  font-size: 36rpx;
+  color: #000000;
+  font-weight: bolder;
+}
+.courseDetails-content-introduction-top{
+  margin-top: 40rpx;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+}
+.courseDetails-content-introduction-top-textView{
+}
+.courseDetails-content-introduction-top-textView-item{
+  display: flex;
+  align-items: center;
+  margin: 18rpx 0;
+}
+.courseDetails-content-introduction-top-text1{
+  width: 73rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  background: #454545;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 6rpx;
+}
+/* 小三角 */
+.courseDetails-triangle{
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-bottom: 47rpx solid #f5f5f5;
+  border-left: 27rpx solid transparent;
+  border-right: 27rpx solid transparent;
+  margin: 25rpx 0 0 60rpx;
+}
+.courseDetails-content-introduction-info{
+  background: #f5f5f5;
+  border-radius: 26rpx;
+  padding: 50rpx 45rpx 5rpx 30rpx;
+}
+.courseDetails-content-introduction-info-title{
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bolder;
+  margin-bottom: 30rpx;
+}
+.courseDetails-content-introduction-info-text{
+  font-size: 28rpx;
+  color: #333;
+  line-height: 46rpx;
+  margin-bottom: 49rpx;
+}
+.textIndent28{
+  text-indent: 56rpx;
+  text-align: left;
+}
+.courseDetails-ul{
+  margin: 30rpx auto 0rpx;
+}
+.courseDetails-ul-li{
+  width: 620rpx;
+  height:310rpx;
+  border-radius:20rpx;
+  box-shadow: 0px 6px 6px #ccc;
+  margin: 0 auto 37rpx;
+}
+
+.courseDetails-ul-li-img{
+  width:690rpx;
+  height:310rpx;
+  border-radius:20rpx;
+  margin-left: -35rpx;
+}

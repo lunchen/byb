@@ -1,0 +1,117 @@
+<!--index.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view class="search-view" style="position:relative;z-index:2;margin-top:{{height}}px;">
+    <view class="search-view-location">
+      <text>杭州</text>
+      <image style="" src="../../images/home_9@2x.png"></image>
+    </view>
+    <view class="search-view-btn" bindtap="goToSearch">
+      <van-search
+        placeholder="请输入搜索关键词"
+        bind:search="onSearch"
+        background="none"
+        shape="round"
+        disabled
+      />
+    </view>
+    <view hover-class="btnClick" bindtap="toScan">
+      <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/home_3@3x.png"></image>
+    </view>
+  </view>
+      
+  <scroll-view bindscrolltoupper="scrolltoupper" bindscroll="scrollY" scroll-y style="position:relative;height: 100%;" scroll-top="{{scrollTop}}px">
+    <view class="scroll-view-item" style='padding-top:1px;background:{{onceToTop?"#feb707":"transpant"}};'>
+      <view class="content" style="margin-top:{{cmt}}%;min-height:1000rpx;">
+        <!-- <block>
+          <view class="content-view">
+            <view class="content-title">
+              <text class="content-title-text1">育儿资讯</text>
+              <view wx:if="{{true}}" class="content-title-right">
+                <text class="content-title-text2" bindtap="goToChildListSearch">查看更多</text>
+                <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
+              </view>
+            </view>
+            <block wx:for="{{informationListData}}" wx:key="id">
+              <childItem informationData="{{item}}"></childItem>
+            </block>
+          </view>
+        </block> -->
+        
+        <view class="content-view">
+          <view class="content-title">
+            <view class="content-title-text1">
+              <text>您的孩子适合哪些课程</text>
+              <image src="../../images/home_11@2x.png" style="height:34rpx;width:34rpx;margin: 3rpx 0 0 20rpx;"></image>
+            </view>
+            <view wx:if="{{false}}" class="content-title-right">
+              <text class="content-title-text2" bindtap="goToActivityListSearch" data-id="123">查看更多</text>
+              <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
+            </view>
+          </view>
+          <scroll-view class="index-scroll-viewX" scroll-x="true" style="width: 100%">
+            <view class="course-videoList">
+              <view class="course-videoList-item">
+                <image wx:if="{{item.img.type===1}}" style="height:100%;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
+                <video wx:else  style="height:100%;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+
+        <view class="link"></view>
+
+        <view class="content-view">
+          <view class="content-title">
+            <text class="content-title-text1">机构列表</text>
+            <view wx:if="{{true}}" class="content-title-right">
+              <text class="content-title-text2" bindtap="goToActivityListSearch">查看更多</text>
+              <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
+            </view>
+          </view>
+          <van-tabs active="{{ active }}" bind:change="onChange">
+            <van-tab title="优惠">
+              <view class="tabs-item">
+                <!-- 活动列表组件 -->
+                <view wx:for="{{activityListData}}" wx:key="id">
+                  <activityItem activityData="{{item}}"></activityItem>
+                </view>
+              </view>
+            </van-tab>
+            <van-tab title="免费试课">内容 2</van-tab>
+            <van-tab title="附近机构">内容 3</van-tab>
+            <van-tab title="活跃机构">内容 3</van-tab>
+          </van-tabs>
+        </view>
+
+        <view class="link"></view>
+
+        <view class="content-view">
+          <view class="content-title">
+            <text class="content-title-text1">活动列表</text>
+            <view wx:if="{{true}}" class="content-title-right">
+              <text class="content-title-text2" bindtap="goToActivityListSearch" data-id="123">查看更多</text>
+              <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
+            </view>
+          </view>
+          <van-tabs active="{{ active }}" bind:change="onChange">
+            <van-tab title="优惠">
+              <view class="tabs-item">
+                <!-- 活动列表组件 -->
+                <view wx:for="{{activityListData}}" wx:key="id">
+                  <activityItem activityData="{{item}}"></activityItem>
+                </view>
+              </view>
+            </van-tab>
+            <van-tab title="免费试课">内容 2</van-tab>
+            <van-tab title="附近机构">内容 3</van-tab>
+            <van-tab title="活跃机构">内容 3</van-tab>
+          </van-tabs>
+        </view>
+        
+      </view>
+    </view>
+  </scroll-view>
+  <login></login>
+  <tabbar tabbar="{{tabbar}}"></tabbar>
+</view>

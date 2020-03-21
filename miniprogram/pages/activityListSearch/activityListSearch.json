@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "navbar": "../../components/navbarComponent/navbar",
+    "van-search": "../../miniprogram_npm/@vant/weapp/search/index",
+    "activityItem": "../../components/activityItemComponent/activityItem"
+  },
+  "navigationBarTextStyle": "white"
+}

@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/releaseActivity/releaseActivity",
+    "pages/editActivityDesc/editActivityDesc",
+    "pages/schoolDetails/schoolDetails",
+    "pages/schoolHome/schoolHome",
+    "pages/mine/mine",
+    "pages/index/index",
+    "pages/eTicket/eTicket",
+    "pages/business/business",
+    "pages/activityDetails/activityDetails",
+    "pages/writeOffOrder/writeOffOrder",
+    "pages/confirmOrder/confirmOrder",
+    "pages/personalCenter/personalCenter",
+    "pages/signUpSuccess/signUpSuccess",
+    "pages/orderDetails/orderDetails",
+    "pages/activityListSearch/activityListSearch",
+    "pages/search/search",
+    "pages/childListSearch/childListSearch",
+    "pages/courseDetails/courseDetails",
+    "pages/middle/middle"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    
+    "selectedColor": "#feb707",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "components/tabbarComponent/icon/icon_home.png",
+        "selectedIconPath": "components/tabbarComponent/icon/icon_home_HL.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "components/tabbarComponent/icon/icon_mine.png",
+        "selectedIconPath": "components/tabbarComponent/icon/icon_mine_HL.png"
+      }
+    ]
+  },
+  "disableScroll": true,
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "login": "./components/loginComponent/login"
+  }
+}

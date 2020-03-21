@@ -1,0 +1,55 @@
+<!--eTicket.wxml-->
+<view class="container eTicket">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view class="">
+    <view class="eTicket-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
+      <view class="eTicket-view">
+        <view class="eTicket-view-title">
+          请展示二维码
+        </view>
+        <!-- 2白色条 -->
+        <view class="eTicket-view-title-decorate">
+          <view class="eTicket-view-title-decorate-left"></view>
+          <view class="eTicket-view-title-decorate-right"></view>
+        </view>
+        <view class="eTicket-view-middle">
+          <!-- <image class="eTicket-view-middle-barCode" src="../../images/activityDetails.png"></image>
+          <view class="eTicket-view-middle-barCode-text">
+            2822 ****** 查看数字
+          </view> -->
+          <image bindtap='previewImg' class="eTicket-view-middle-QRCode" src="{{qrCodeUrl}}"></image>
+        </view>
+        <view class="eTicket-view-middle-line">
+          <view class="eTicket-view-middle-line-dotted"></view>
+        </view>
+        <view class="eTicket-view-bottom">
+          <view class="eTicket-view-bottom-item">
+            <text>定了！45场重磅演讲！ 60家知名企业联合主办！</text>
+            <image style="width:32rpx;height:32rpx;" src="../../images/home_4@2x.png"></image>
+          </view>
+          <view class="eTicket-view-bottom-item">
+            <text>时间：  2020-03-11 14：00</text>
+          </view>
+          <view class="eTicket-view-bottom-item">
+            <text>地点：  线上活动</text>
+          </view>
+          <view class="eTicket-view-bottom-item">
+            <text>主办方：  中企联合</text>
+          </view>
+        </view>
+      </view>
+      
+    </view>
+        
+    <scroll-view scroll-y style="position:relative;height: 100%;">
+      <view class="scroll-view" style='padding-top:1px;'>
+        <view class="eTicket-content">
+         
+        </view>
+      </view>
+    </scroll-view>
+
+    
+  </view>
+ 
+</view>

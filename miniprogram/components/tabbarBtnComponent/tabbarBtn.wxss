@@ -1,0 +1,112 @@
+/* tabbarBtn.wxss */
+.tabbarBtn-box{
+  position: relative;
+  z-index: 10;
+}
+.tabbar-service-btnView{
+  position: fixed;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
+}
+.tabbar-service-btnView-left{
+  width: 66%;
+  height: 120rpx;
+  background: #fff;
+  line-height: 120rpx;
+  font-size: 28rpx;
+  color: #999;
+  display: flex;
+}
+.tabbar-service-btnView-left-btn{
+  flex: 1 auto;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.tabbar-service-btnView-right{
+  width: 34%;
+  height: 68rpx;
+  padding: 26rpx 0;
+  background: #fe8800;
+  text-align: center;
+  line-height: 68rpx;
+  font-size: 36rpx;
+  color: #fff;
+}
+.lightThemeBGC{
+  background: #feb707;
+  color: #ffffff;
+  font-size: 36rpx;
+}
+
+.contactUs{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.contactUs-bg{
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  transition: opacity linear 200ms;
+}
+.contactUs-view{
+  width: 460rpx;
+  height: 330rpx;
+  border-radius: 10rpx;
+  background: #fff;
+  position: absolute;
+  bottom: -500rpx;
+  left: 30rpx;
+  transition: bottom linear 100ms;
+}
+/* 动画 */
+.fadeIn{
+  opacity: 0
+}
+.enter-leave{
+  bottom: 116rpx;
+}
+
+.contactUs-view::after{
+  content: '';
+  position: absolute;
+  border: 20rpx transparent solid;
+  border-top: 20rpx #ffffff solid;
+  bottom: -40rpx; 
+  left: 70rpx;
+}
+.contactUs-view-title{
+  color: #fe8800;
+  font-size: 36rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40rpx 30rpx 20rpx;
+}
+.contactUs-view-title-txt{
+  border-bottom: 1rpx #fe8800 solid;
+}
+.contactUs-view-text{
+  padding: 0 40rpx;
+  font-size: 30rpx;
+  color: #666666;
+}
+.contactUs-view-text-txt1{
+  line-height: 80rpx;
+  border-bottom: 1rpx #f0f0f0 solid;
+}
+.contactUs-view-text-txt2{
+  padding: 20rpx 0;
+  display: flex;
+  align-items: center;
+}

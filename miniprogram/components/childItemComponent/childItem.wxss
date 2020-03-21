@@ -1,0 +1,64 @@
+/* childItem.wxss */
+
+.child-view-item{
+  display: flex;
+  flex-wrap: nowrap; 
+  margin: 0rpx 0 40rpx;
+}
+.child-view-item-left{
+  width: 201rpx;
+  height: 154rpx;
+  border-radius: 10rpx;
+  flex: 0 0 auto;
+}
+.child-view-item-center{
+  margin-left: 20rpx;
+  padding: 10rpx 0;
+  min-width: 340rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow:hidden;
+}
+.child-view-item-center-text{
+  margin-bottom: 10rpx;
+}
+.child-view-text1{
+  font-size: 30rpx;
+  color: #333;
+}
+.child-view-text2{
+  font-size: 20rpx;
+  color: #999;
+  margin-right: 30rpx;
+}
+.child-view-text3{
+  font-size: 30rpx;
+  color: #333;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.child-view-text4{
+  font-size: 20rpx;
+  color: #999;
+  margin-right: 30rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  margin-bottom: 10rpx;
+}
+.child-view-item-right{
+  display: flex;
+  align-items: center;
+}
+.child-view-btn{
+  width: 96rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  border: #fe8800 1rpx solid;
+  border-radius: 6rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #fe8800;
+}

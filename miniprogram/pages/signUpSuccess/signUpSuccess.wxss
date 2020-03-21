@@ -1,0 +1,80 @@
+/* pages/mine/mine.wxss */
+.container.signUpSuccess{
+  background: #f5f5f5;
+}
+.signUpSuccess-view{
+  padding: 50rpx 30rpx 0;
+}
+.signUpSuccess-view-title{
+  height: 84rpx;
+  line-height: 84rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+}
+.signUpSuccess-view-title image{
+  height: 80rpx;
+  width: 80rpx;
+  margin-right: 30rpx;
+}
+.signUpSuccess-view-middle{
+  width: 570rpx;
+  padding: 30rpx 30rpx 15rpx;
+  margin: 50rpx auto 0;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0px 1px 4px 1px #eee;
+}
+.signUpSuccess-view-middle-img{
+  width: 570rpx;
+  height: 350rpx;
+  border-radius: 10rpx;
+}
+.signUpSuccess-view-middle-title{
+  font-size: 30rpx;
+  color: #333333;
+  margin: 30rpx 0 18rpx;
+}
+.signUpSuccess-view-middle-text{
+  font-size: 24rpx;
+  color: #999999;
+  margin-bottom: 15rpx;
+}
+.signUpSuccess-shareToFriend{
+  width: 270rpx;
+  height: 60rpx;
+  position: relative;
+  margin: 90rpx auto 0;
+}
+.signUpSuccess-shareToFriend image{
+  width: 270rpx;
+  height: 60rpx;
+}
+.signUpSuccess-shareToFriend view{
+  width: 270rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.signUpSuccess-shareView{
+  padding: 70rpx 70rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.signUpSuccess-shareView-item{
+  text-align: center;
+  color: #666666;
+  font-size: 28rpx;
+}
+.signUpSuccess-shareView-item image{
+  width: 64rpx;
+  height: 64rpx;
+  margin-bottom: 20rpx; 
+}

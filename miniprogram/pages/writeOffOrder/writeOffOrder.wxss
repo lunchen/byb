@@ -1,0 +1,49 @@
+/* pages/writeOffOrder/writeOffOrder.wxss */
+.container.writeOffOrder{
+  background: #f5f5f5;
+}
+.writeOffOrder-top-view{
+  border-top: 1rpx #f0f0f0 solid;
+  border-bottom: 20rpx #f5f5f5 solid;
+  background: #ffffff;
+}
+.writeOffOrder-top-view-title{
+  border-bottom: 1rpx #f0f0f0 solid;
+  margin: 0 30rpx;
+  padding-right: 60rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #333333;
+}
+.writeOffOrder-top-view-text{
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+}
+.writeOffOrder-top-view-txt text{
+  line-height: 50rpx;
+}
+.writeOffOrder-top-view-txt1{
+  color: #999999;
+}
+.writeOffOrder-top-view-txt2{
+  color: #333333;
+}
+.writeOffOrder-top-view-txt3{
+  color: #fe8800;
+}
+
+.subBtn{
+  background: #feb707;
+  width: 390rpx;
+  height: 90rpx;
+  border-radius: 45rpx;
+  line-height: 90rpx;
+  text-align: center;
+  margin: 100rpx auto;
+  color: #fff;
+  font-size: 40rpx;
+  box-shadow: 0px 4px 0px 0px #fe8800;
+}

@@ -1,0 +1,117 @@
+/* pages/mine/mine.wxss */
+.container.eTicket{
+  background: #feb707;
+}
+.eTicket-view{
+  padding: 50rpx 30rpx 0;
+}
+.eTicket-view-title{
+  height: 84rpx;
+  line-height: 84rpx;
+  background: #fe8800;
+  text-align: center;
+  font-size: 30rpx;
+  color: #ffffff;
+}
+.eTicket-view-title-decorate{
+  display: flex;
+  justify-content: space-between;
+  margin-top: -28rpx;
+}
+.eTicket-view-title-decorate-left{
+  width: 220rpx;
+  height: 28rpx;
+  background: #fff;
+  position: relative;
+}
+.eTicket-view-title-decorate-left::after{
+  width: 0;
+  height: 0;
+  content: '';
+  border: 15rpx transparent solid;
+  border-bottom: 28rpx #fff solid;
+  position: absolute;
+  right: -14rpx;
+  top: -14rpx;
+}
+.eTicket-view-title-decorate-right{
+  width: 220rpx;
+  height: 28rpx;
+  background: #fff;
+  position: relative;
+}
+.eTicket-view-title-decorate-right::before{
+  width: 0;
+  height: 0;
+  content: '';
+  border: 15rpx transparent solid;
+  border-bottom: 28rpx #fff solid;
+  position: absolute;
+  left: -14rpx;
+  top: -14rpx;
+}
+
+.eTicket-view-middle{
+  padding: 30rpx 0;
+  background: #fff;
+  text-align: center;
+}
+.eTicket-view-middle-barCode{
+  width: 590rpx;
+  height: 160rpx;
+}
+.eTicket-view-middle-barCode-text{
+  margin-top: 20rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+.eTicket-view-middle-QRCode{
+  margin: 30rpx 0 30rpx;
+  width: 400rpx;
+  height: 400rpx;
+}
+.eTicket-view-middle-line{
+  height: 1rpx;
+  padding: 12rpx 32rpx;
+  background: #fff;
+  position: relative;
+}
+.eTicket-view-middle-line::before{
+  width: 25rpx;
+  height: 25rpx;
+  border-radius: 50%;
+  content: '';
+  background: #feb707;
+  position: absolute;
+  left: -12.5rpx;
+  top: 0rpx;
+}
+.eTicket-view-middle-line::after{
+  width: 25rpx;
+  height: 25rpx;
+  border-radius: 50%;
+  content: '';
+  background: #feb707;
+  position: absolute;
+  right: -12.5rpx;
+  top: 0rpx;
+}
+.eTicket-view-middle-line-dotted{
+  border-bottom: 1rpx #999999 dotted; 
+}
+.eTicket-view-bottom{
+  background: #fff;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #666666;
+}
+.eTicket-view-bottom-item{
+  background: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx #f0f0f0 solid;
+  white-space: nowrap;
+}

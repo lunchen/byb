@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navbar": "../../components/navbarComponent/navbar",
+    "van-area": "../../miniprogram_npm/@vant/weapp/area/index",
+    "van-popup": "../../miniprogram_npm/@vant/weapp/popup/index"
+  }
+}

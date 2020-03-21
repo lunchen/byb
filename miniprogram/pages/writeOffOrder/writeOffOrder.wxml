@@ -1,0 +1,48 @@
+<!--writeOffOrder.wxml-->
+<!--index.wxml-->
+<view class="container writeOffOrder">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view class="">
+    <view class="writeOffOrder-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
+      <view class="writeOffOrder-top-view" style="padding-top:20rpx;">
+        <view class="writeOffOrder-top-view-title">
+          <text>活动信息</text>
+        </view>
+        <view class="writeOffOrder-top-view-text">
+          <view class="writeOffOrder-top-view-txt">
+            <text class="writeOffOrder-top-view-txt1">活动标题：</text>
+            <text class="writeOffOrder-top-view-txt2">鼎承街舞十周年新手学舞 从0开始</text>
+          </view>
+          <view class="writeOffOrder-top-view-txt">
+            <text class="writeOffOrder-top-view-txt1">活动时间：</text>
+            <text class="writeOffOrder-top-view-txt2">2020-03-18 20:0:00</text>
+          </view>
+          <view class="writeOffOrder-top-view-txt">
+            <text class="writeOffOrder-top-view-txt1">价格：</text>
+            <text class="writeOffOrder-top-view-txt3">¥ 98.9元</text>
+          </view>
+        </view>
+        
+      </view>
+      <view class="writeOffOrder-top-view"  style="padding-bottom:20rpx;">
+        <view class="writeOffOrder-top-view-title">
+          <text>报名信息</text>
+        </view>
+        <view class="writeOffOrder-top-view-text">
+          <view class="writeOffOrder-top-view-txt">
+            <text class="writeOffOrder-top-view-txt1">姓名：</text>
+            <text class="writeOffOrder-top-view-txt2">王萌萌</text>
+          </view>
+          <view class="writeOffOrder-top-view-txt">
+            <text class="writeOffOrder-top-view-txt1">手机号码：</text>
+            <text class="writeOffOrder-top-view-txt2">187****0980</text>
+          </view>
+        </view>
+        
+      </view>
+    </view>
+
+    <view class="subBtn">确认核销</view>
+  </view>
+ 
+</view>

@@ -1,0 +1,92 @@
+<!--orderDetails.wxml-->
+<!--index.wxml-->
+<view class="container orderDetails">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view class="">
+    <view class="orderDetails-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
+      <view class="orderDetails-top-view">
+        <view class="orderDetails-top-view-item">
+          <text>报名人姓名</text>
+          <text>王萌萌</text>
+        </view>
+        <view class="orderDetails-top-view-item">
+          <text>手机号码</text>
+          <text>王萌萌</text>
+        </view>
+      </view>
+      
+    </view>
+        
+    <scroll-view scroll-y style="position:relative;height: 100%;">
+      <view class="scroll-view" style='padding-top:1px;'>
+        <view class="orderDetails-content">
+          <view class="orderDetails-content-item">
+            <block>
+              <view class="orderDetails-content-item-top">
+                <view class="orderDetails-content-item-top-left">
+                  <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/ic_tab_issue@2x.png"></image>
+                  <text>鼎承街舞社</text>
+                </view>
+                <text wx:if="{{false}}">报名成功</text>
+              </view>
+              <view class="orderDetails-content-item-middle">
+                <view>
+                  <image class="orderDetails-content-item-middle-left" src="../../images/huodong.png"></image>
+                </view>
+                <view class="orderDetails-content-item-middle-center">
+                  <view class="orderDetails-content-item-middle-center-text">
+                    <text class="orderDetails-view-text1">鼎承街舞十周从0开始..鼎承街舞十周从0开始.</text>
+                    <view class="orderDetails-view-text2">时间：11-28 10：00开始</view>
+                    <view class="orderDetails-view-text2">地点：线下活动</view> 
+                  </view>
+                </view>
+              </view>
+            </block>
+            
+            <view class="orderDetails-content-ticket">
+              <view class="orderDetails-content-ticket-left">
+                <text>默认免费票  ¥ 0</text>
+                <text>王萌萌</text>
+                <text>1877***0980</text>
+              </view>
+              <view class="orderDetails-content-ticket-center">
+                待使用
+              </view>
+              <view class="orderDetails-content-ticket-cLine">
+                <view class="orderDetails-content-ticket-cLine-dotted"></view>
+              </view>
+              <view class="orderDetails-content-ticket-right">
+                <image class="orderDetails-content-item-middle-left" src="../../images/order_1@2x.png"></image>
+                <view>
+                  查看电子票
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="orderDetails-bottom-view">
+          <view>
+            <text>票总价</text>
+            <text>¥ 0</text>
+          </view>
+          <view>
+            <text>订单实际支付金额</text>
+            <text style="color:fe8800；">¥ 0</text>
+          </view>
+        </view>
+        <view class="orderDetails-bottom-view">
+          <view>
+            <text>订单编号：110595731157112</text>
+          </view>
+          <view>
+            <text>创建时间：2020-03-08 17:55</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+   
+
+  </view>
+ 
+</view>

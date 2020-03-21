@@ -1,0 +1,12 @@
+/**activityListSearch.wxss**/
+.activityListSearch-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 50rpx;
+  padding: 20rpx 30rpx 400rpx;
+}
+.activityListSearch-content-view{
+  padding: 0 40rpx;
+}

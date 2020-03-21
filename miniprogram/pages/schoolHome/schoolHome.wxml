@@ -1,0 +1,92 @@
+<!--schoolHome.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+     
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px'>
+      <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
+        <!-- <view class="activityDetailsImg-view">
+          <image class="activityDetailsImg" src="../../images/activityDetails.png"></image>
+        </view> -->
+        <swiper style="height:375rpx;width:100%;" previous-margin="20rpx" next-margin="20rpx" indicator-dots="{{indicatorDots}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" bindchange="swiperChange">
+            <block wx:for="{{schoolHomeData.orgBannerList}}" wx:key="*this">
+              <swiper-item>
+                <view style="padding:0 10rpx;height:375rpx;width:{{750-60}}rpx;border-radius:26rpx;overflow:hidden;" class="swiper-item {{item}} {{current==index ? 'scaleY1' : 'scaleY0_95'}}">
+                  <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
+                  <video wx:else  style="height:375rpx;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+                </view>
+              </swiper-item>
+            </block>
+          </swiper>
+      </view>
+      <view class="schoolHome-content">
+      
+        <!-- 卡片信息 -->
+        <view class="schoolHome-infoCard">
+          <infoCard infoCardrData="{{schoolHomeData.activity}}" infoCardType="{{2}}"></infoCard>
+        </view>
+        <view class="schoolHome-link"></view>
+
+        <view class="schoolHome-content-title">
+          <view class="schoolHome-content-title-text">
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+            <text>精品课程</text>
+            <image style="width:28rpx;height:28rpx;margin-left:8rpx;" src="../../images/detail_6@3x.png"></image>
+          </view>
+          
+        </view>
+        <!-- 学校所有课程 -->
+        <scroll-view class="schoolHome-scroll-viewX" scroll-x="true" style="width: 100%">
+          <view class="schoolHome-content-course">
+            <view class="schoolHome-content-course-item" wx:for="{{schoolHomeData.courseList}}" wx:key="{{id}}">
+              <image style="width:120rpx;height:120rpx;border-radius:50%;margin-bottom:30rpx;" src="{{item.img}}"></image>
+              <text>{{item.name}}</text>
+            </view>
+          </view>
+        </scroll-view>
+        
+        <view class="schoolHome-link"></view>
+
+        <view class="schoolHome-content-title">
+          <view class="schoolHome-content-title-text">
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+           <text>了解我们</text>
+          </view>
+          <view class="schoolHome-content-title-btn">学校详情编辑</view>
+        </view>
+        <view class="schoolHome-content-card">
+          <view>
+            <image class="schoolHome-content-card-left" src="../../images/huodong.png"></image>
+          </view>
+          <block>
+            <view class="schoolHome-content-card-right">
+              <text class="schoolHome-content-card-title">{{schoolHomeData.name}}</text>
+              <view class="schoolHome-content-card-label">
+                <view wx:for="{{schoolHomeData.labelList}}" wx:key="*this" class="label-item">{{item}}</view>
+              </view>
+              <view class="schoolHome-content-card-text">{{schoolHomeData.remark}}</view>
+              
+            </view>
+          </block>
+        </view>
+
+        <view class="schoolHome-link"></view>
+        <view class="schoolHome-content-title">
+          <view class="schoolHome-content-title-text">
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+            <text>找到我们</text>
+          </view>
+        </view>
+
+        <view class="schoolHome-map">
+          <map id="map" longitude="{{longitudeCenter}}" latitude="{{latitudeCenter}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 250rpx;"></map>
+        </view>
+
+      </view>
+      <tabbarBtn></tabbarBtn>
+      
+    </view>
+  </scroll-view>
+  
+</view>

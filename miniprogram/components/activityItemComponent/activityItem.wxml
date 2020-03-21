@@ -1,0 +1,24 @@
+<view class="activity-view-item" bindtap="goToActivityDetails" data-id="{{activityData.id}}">
+  <view>
+    <image class="activity-view-item-left" src="../../images/huodong.png"></image>
+  </view>
+  
+  <block>
+    <view class="activity-view-item-right">
+      <text class="activity-view-text1">{{activityData.name}}</text>
+      <view class="activity-view-text2">{{activityData.remark}}</view>
+      <view class="activity-view-item-right-bottom">
+        <view class="activity-view-item-right-bottom-text">
+          <view class="activity-item-visit">
+          <image style="height:30rpx;width:30rpx;" src="../../images/home_6@2x.png"></image>
+          <text>{{activityData.hotsValue}}</text>
+          </view>
+          <text class="activity-view-text3">{{activityData.levelName}}课程共{{activityData.totalCount}}节</text>
+        </view>
+        <view class="activity-view-btn">
+          立即查看
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

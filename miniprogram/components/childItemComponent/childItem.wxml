@@ -1,0 +1,34 @@
+<navigator class="" hover-class="none" url="{{}}">
+  <view class="child-view-item">
+    <view>
+      <image class="child-view-item-left" src="{{informationData.img}}"></image>
+    </view>
+    <block wx:if="{{informationData.type==1}}">
+      <view class="child-view-item-center">
+        <text class="child-view-text1">{{informationData.title}}</text>
+        <view class="child-view-item-center-text">
+          <text class="child-view-text2">育儿资讯</text>
+          <text class="child-view-text2">{{informationData.readCount>=10000?informationData.readCountValue:informationData.readCount}}阅读</text>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="child-view-item-center">
+        <text class="child-view-text3">{{informationData.title}}</text>
+        <view>
+         <van-rate
+            readonly
+            value="{{ informationData.star }}"
+            bind:change="onChange"
+          />
+        </view>
+        <view class="child-view-text4">{{informationData.remark}}</view>
+      </view>
+      <view class="child-view-item-right">
+      <view class="child-view-btn">
+        开始
+      </view>
+      </view>
+    </block>
+  </view>
+</navigator>

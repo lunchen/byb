@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "login": "../../components/loginComponent/login",
+    "navbar": "../../components/navbarComponent/navbar",
+    "tabbar": "../../components/tabbarComponent/tabbar",
+    "van-search": "../../miniprogram_npm/@vant/weapp/search/index",
+    "activityItem": "../../components/activityItemComponent/activityItem",
+    "childItem": "../../components/childItemComponent/childItem",
+    "van-tab": "../../miniprogram_npm/@vant/weapp/tab/index",
+    "van-tabs": "../../miniprogram_npm/@vant/weapp/tabs/index"
+  },
+  "navigationBarTextStyle": "white"
+}

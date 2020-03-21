@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navbar": "../../components/navbarComponent/navbar",
+    "tabbarBtn": "../../components/tabbarBtnComponent/tabbarBtn",
+    "van-tab": "../../miniprogram_npm/@vant/weapp/tab/index",
+    "van-tabs": "../../miniprogram_npm/@vant/weapp/tabs/index"
+  },
+  "navigationBarTextStyle": "white"
+}

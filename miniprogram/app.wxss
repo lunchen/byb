@@ -1,0 +1,30 @@
+/**app.wxss**/
+page {
+  height: 100%;
+  overflow: hidden;
+}
+.container {
+  height: 100%;
+  overflow: hidden;
+}
+.contents {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+.btnClick{
+  background: rgba(200, 200, 200, 0.2)
+}
+.ftSize22{
+ font-size: 22rpx;
+}
+.colorOrange{
+  color: #fe8800;
+}
+.colorYellow{
+  color: #feb707;
+}

@@ -1,0 +1,31 @@
+<view class="infocard-content">
+  <view class="infocard-content-title">
+    <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_1@3x.png"></image>
+    <text>{{infoCardrData.name}}</text>
+  </view>
+  <view class="infocard-content-text">
+    <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_2@3x.png"></image>
+    <text>{{infoCardrData.betweenTime}}</text>
+  </view>
+  <view class="infocard-content-text">
+    <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_3@3x.png"></image>
+    <text>{{infoCardrData.addr.addr}}</text>
+  </view>
+  <block wx:if="{{infoCardType==1}}">
+    <view class="infocard-content-text">
+      <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_4@3x.png"></image>
+      <text class="colorOrange">{{infoCardrData.price}}元</text>
+    </view>
+    <view class="infocard-content-text">
+      <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_5@3x.png"></image>
+      <text class="colorYellow">安心购</text>
+      <text style="margin-left:20rpx" class="ftSize22">认证卖家  担保风险  24小时客服在线</text>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="infocard-content-text">
+      <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/school_4@3x.png"></image>
+      <text>已报名{{infoCardrData.totalJoin}} / 不限名额</text>
+    </view>
+  </block>
+</view>

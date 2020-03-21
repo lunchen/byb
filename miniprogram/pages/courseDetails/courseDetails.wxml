@@ -1,0 +1,85 @@
+<!--index.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+     
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px'>
+      <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
+        <view class="courseDetailsImg-view">
+          <image class="courseDetailsImg" src="../../images/activityDetails.png"></image>
+        </view>
+      </view>
+      <view class="courseDetails-content">
+        <!-- 卡片信息 -->
+        <infoCard></infoCard>
+
+        <view class="courseDetails-link"></view>
+
+        <view class="courseDetails-content-introduction">
+          <!-- 课程简介 -->
+          <view class="courseDetails-content-introduction-title">
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+            <text>课程简介</text>
+          </view>
+          <!-- 课程简介课时简介卡 -->
+          <view class="courseDetails-content-introduction-top">
+            <image style="width:180rpx;height:180rpx;border-radius:90rpx;margin-right:40rpx;" src="../../images/huodong.png"></image> 
+            <view class="courseDetails-content-introduction-top-textView">
+              <view class="courseDetails-content-introduction-top-textView-item">
+                <view class="courseDetails-content-introduction-top-text1">
+                  <text>时长</text>
+                </view>
+                <text style="margin-left:18rpx;">4小时14分</text>
+              </view>
+              <view class="courseDetails-content-introduction-top-textView-item">
+                <view class="courseDetails-content-introduction-top-text1">
+                  <text>课时</text>
+                </view>
+                <text style="margin-left:18rpx;">30分钟</text>
+              </view>
+              <view class="courseDetails-content-introduction-top-textView-item">
+                <view class="courseDetails-content-introduction-top-text1">
+                  <text>难度</text>
+                </view>
+                <text style="margin-left:18rpx;">入门</text>
+              </view>
+            </view>
+          </view>
+          <!-- 小三角 -->
+          <view class="courseDetails-triangle"></view>
+          <!-- 课程简介详细介绍 -->
+          <view class="courseDetails-content-introduction-info">
+           <block>
+            <view class="courseDetails-content-introduction-info-title">
+              <text>一：舞蹈课程介绍</text>
+            </view>
+            <view class="courseDetails-content-introduction-info-text">
+              <view class="textIndent28">舞蹈教育适合幼儿的发育成长，使之更好地掌握身体，便于有表情地、创造性地使用动作语言，以表达丰富的内心世界。舞蹈教育适合幼儿的发育成长，使之更好地掌握身体，便于有表情地、创造性地使用动作语言，以表达丰富的内心世界。</view>
+            </view>
+           </block>
+           <block>
+            <view class="courseDetails-content-introduction-info-title">
+              <text>二：关于课程</text>
+            </view>
+            <view class="courseDetails-content-introduction-info-text">
+              <view>适学对象：3岁以上.</view>
+              <view>教师介绍：舞蹈十级舞蹈教师,多年教学,懂教育,抓方法.</view>
+              <view>其他说明：课程课时为90分钟.</view>
+            </view>
+           </block>
+          </view>
+          <view class="courseDetails-ul">
+            <view class="courseDetails-ul-li">
+              <image class="courseDetails-ul-li-img" src="../../images/activityDetails.png"></image>
+            </view>
+            <view class="courseDetails-ul-li">
+              <image class="courseDetails-ul-li-img" src="../../images/activityDetails.png"></image>
+            </view>
+          </view>
+        </view>
+        <tabbarBtn></tabbarBtn>
+      </view>
+    </view>
+  </scroll-view>
+  
+</view>

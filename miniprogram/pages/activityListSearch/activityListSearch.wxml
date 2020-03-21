@@ -1,0 +1,28 @@
+<!--activityListSearch.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+     <view style="position:relative;z-index:2;margin-top:{{height}}px;">
+      <van-search
+        value="{{ value }}"
+        placeholder="请输入搜索关键词"
+        use-action-slot
+        bind:change="onChange"
+        bind:search="onSearch"
+        shape="round"
+      >
+        <view slot="action" bind:tap="onClick">搜索</view>
+      </van-search>
+     </view>
+      
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="activityListSearch-content">
+      <view class="activity-view">
+        <!-- 活动列表组件 -->
+        <block wx:for="{{activityListData}}" wx:key="id">
+          <activityItem activityData="{{item}}"></activityItem>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+ 
+</view>

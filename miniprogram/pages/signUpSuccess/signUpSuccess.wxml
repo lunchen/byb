@@ -1,0 +1,54 @@
+<!--signUpSuccess.wxml-->
+<view class="container signUpSuccess">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view class="">
+    <view class="signUpSuccess-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
+      <view class="signUpSuccess-view">
+        <view class="signUpSuccess-view-title">
+          <image src="../../images/apply_1@2x.png"></image>
+          <text>报名成功</text>
+        </view>
+        <view class="signUpSuccess-view-middle">
+          <image class="signUpSuccess-view-middle-img" src="../../images/activityDetails.png"></image>
+          <view class="signUpSuccess-view-middle-title">鼎承街舞社·中国超级街舞活动！</view>
+          <view class="signUpSuccess-view-middle-text">时间：2020-03-11 14:00:00</view>
+          <view class="signUpSuccess-view-middle-text">活动方式：线上活动</view>
+        </view>
+        <view class="signUpSuccess-shareToFriend">
+          <image src="../../images/apply_2@2x.png"></image>
+          <view>分享给好友</view>
+        </view>
+        <view class="signUpSuccess-shareView">
+          <view class="signUpSuccess-shareView-item">
+            <image src="../../images/apply_3@2x.png"></image>
+            <view>微信</view>
+          </view>
+          <view class="signUpSuccess-shareView-item">
+            <image src="../../images/apply_4@2x.png"></image>
+            <view>朋友圈</view>
+          </view>
+          <view class="signUpSuccess-shareView-item">
+            <image src="../../images/apply_5@2x.png"></image>
+            <view>小程序</view>
+          </view>
+          <view class="signUpSuccess-shareView-item">
+            <image src="../../images/apply_6@2x.png"></image>
+            <view>复制链接</view>
+          </view>
+        </view>
+      </view>
+      
+    </view>
+        
+    <scroll-view scroll-y style="position:relative;height: 100%;">
+      <view class="scroll-view" style='padding-top:1px;'>
+        <view class="signUpSuccess-content">
+         
+        </view>
+      </view>
+    </scroll-view>
+
+    
+  </view>
+ 
+</view>

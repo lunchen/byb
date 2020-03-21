@@ -1,0 +1,407 @@
+/* pages/mine/mine.wxss */
+.sponsor,.participant{
+  height: 100%;
+  overflow: hidden;
+}
+.mine-top{
+  padding-top: 130rpx;
+}
+.mine-top-view{
+  width: 690rpx;
+  height: 160rpx;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.participant .mine-top-view{
+  box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.sponsor .mine-top-view{
+}
+.mine-top-capital{
+  width: 690rpx;
+  height: 120rpx;
+  margin: 0 auto 0;
+  background: #fff;
+  border-radius: 18rpx;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.capital-cline{
+  width: 1px;
+  height: 40rpx;
+  background: #e6e6e6;
+}
+.mine-top-capital view{
+  display: flex;
+  align-items: center;
+}
+.mine-top-view-left{
+  display: flex;
+  align-items:flex-end; 
+  margin-left:30rpx;
+  margin-top: -130rpx;
+}
+.mine-top-view-left-img{
+}
+.mine-top-view-left-text{
+  margin-left: 20rpx;
+}
+.mine-top-view-right{
+  height: 55rpx;
+  line-height: 55rpx;
+  border-top-left-radius:27.5rpx;
+  border-bottom-left-radius:27.5rpx;
+  background: #fe8800;
+  color: #fff;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  padding: 0rpx 20rpx 0 23rpx;
+}
+
+.mine-content-title{
+  display: flex;
+  align-items: center;
+  color: #333333;
+  font-size: 36rpx;
+  font-weight: bolder;
+  padding: 22rpx 30rpx;
+  border-bottom: 1px #f0f0f0 solid;
+}
+.cLine{
+  width: 6rpx;
+  height: 38rpx;
+  background: #fe8800;
+  margin-right: 13rpx;
+}
+/* 参与方下方列表 */
+.participantCard-content-item{
+  border-bottom: 20rpx #f0f0f0 solid;
+}
+.participantCard-content-item-top{
+  display: flex;
+  justify-content: space-between;
+  padding: 40rpx 30rpx;
+  font-size: 26rpx;
+  color: #fe8800;
+  font-weight: bolder;
+}
+.participantCard-content-item-top-left{
+  display: flex;
+  align-items: center;
+  color: #999999;
+}
+
+.participantCard-content-item-middle{
+  display: flex;
+  align-items: center;
+  padding-left: 30rpx;
+}
+.participantCard-content-item-middle-left{
+  width: 180rpx;
+  height: 240rpx;
+  border-radius: 10rpx;
+  flex: 0 0 auto;
+}
+.participantCard-content-item-middle-center{
+  display: flex;
+  align-items: center;
+  background:#f5f5f5;
+  flex: 1;
+  padding: 0 23rpx 0 30rpx;
+}
+.participantCard-content-item-middle-center-text{
+  height: 180rpx;
+  max-height: 180rpx;
+  padding: 20rpx 0rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow:hidden;
+
+}
+.participantCard-view-text1{
+  font-size: 28rpx;
+  color: #333;
+}
+.participantCard-view-text2{
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 30rpx;
+}
+.participantCard-content-item-middle-right-bottom-text{
+  height: 70rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.participantCard-content-item-middle-right{
+  height: 220rpx;
+  background: #feb707;
+  width: 61rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+}
+.participantCard-content-item-middle-right-text{
+  padding: 13rpx 14rpx;
+  line-height: 32rpx;
+  height: 200rpx;
+  max-height: 200rpx;
+  flex: 1;
+}
+.trapezoidTop{
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-top: 14rpx solid transparent;
+  border-right: 61rpx solid #feb707;
+  border-bottom: 14rpx solid transparent;
+  margin-top: -11rpx;
+}
+.trapezoidBottom{
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-top: 14rpx solid transparent;
+  border-right: 61rpx solid #feb707;
+  border-bottom: 14rpx solid transparent;
+  margin-bottom: -11rpx;
+}
+
+.participantCard-content-item-bottom-view1{
+  height: 77rpx;
+  line-height: 77rpx;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px #f0f0f0 solid;
+  margin: 0 30rpx;
+  font-size: 28rpx;
+  font-weight: bolder;
+}
+.participantCard-content-item-bottom-view2{
+  height: 77rpx;
+  line-height: 77rpx;
+  color: #666;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px #f0f0f0 solid;
+  margin: 0 30rpx;
+  font-size: 28rpx;
+  font-weight: bolder;
+}
+/* 参与方下方列表 */
+
+
+/* 主办方下方列表 */
+.sponsor .mine-top-view{
+}
+.sponsor-edit{
+  margin: 0 30rpx;
+  padding-left: 200rpx;
+  padding-bottom: 50rpx;
+  margin-top: -40rpx;
+}
+.sponsor-edit-btn{
+  border: 1rpx #fe8800 solid;
+  border-radius: 8rpx;
+  color: #fe8800;
+  font-size: 28rpx;
+  line-height: 48 rpx;
+  text-align: center;
+  width: 200rpx;
+}
+.sponsorCard-content-item{
+  border-bottom: 20rpx #f0f0f0 solid;
+  position: relative;
+}
+.sponsorCard-content-item-top{
+  display: flex;
+  justify-content: space-between;
+  padding: 40rpx 30rpx;
+  font-size: 26rpx;
+  color: #fe8800;
+  font-weight: bolder;
+}
+.sponsorCard-content-item-top-left{
+  display: flex;
+  align-items: center;
+  color: #999999;
+}
+
+.sponsorCard-content-item-middle{
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+}
+.sponsorCard-content-item-middle-left{
+  width: 180rpx;
+  height: 240rpx;
+  border-radius: 10rpx;
+  flex: 0 0 auto;
+}
+.sponsorCard-content-item-middle-center{
+  display: flex;
+  align-items: center;
+  background:#f5f5f5;
+  flex: 1;
+  padding: 0 23rpx 0 30rpx;
+  border-top-right-radius: 14rpx;
+  border-bottom-right-radius: 14rpx;
+}
+.sponsorCard-content-item-middle-center-text{
+  height: 180rpx;
+  max-height: 180rpx;
+  max-width: 300rpx;
+  padding: 20rpx 0rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow:hidden;
+  margin-right: 30rpx;
+}
+.sponsorCard-view-text1{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bloder;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.sponsorCard-view-text2{
+  font-size: 24rpx;
+  color: #666;
+}
+.sponsorCard-view-status{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size:28rpx;
+  color:#fff;
+  font-weight:bloder;
+  padding: 0 24rpx;
+  border-radius: 30rpx;
+  background: #b3b3b3;
+}
+.sponsorCard-view-status.statusIng{
+  background: #feb707;
+}
+.sponsorCard-view-status.statusEnd{
+  background: #b3b3b3;
+}
+.sponsorCard-content-item-bottom-view1{
+  height: 75rpx;
+  line-height: 77rpx;
+  color: #999;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px #f0f0f0 solid;
+  margin: 20rpx 0 0;
+  font-size: 28rpx;
+  font-weight: bolder;
+}
+.sponsorCard-content-item-bottom-view1 view{
+  display: flex;
+  align-items: center;
+}
+.sponsorCard-content-item-bottom-view1 view image{
+  width:40rpx;
+  height:40rpx;
+  margin-top:2rpx;
+  margin-right: 6rpx;
+}
+.sponsorCard-content-item-bottom-view1 view image.bigimage{
+  width:50rpx;
+  height:50rpx;
+}
+.sponsorCard-content-item-bottom-view2{
+  height: 77rpx;
+  line-height: 77rpx;
+  color: #666;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px #f0f0f0 solid;
+  margin: 0 30rpx;
+  font-size: 28rpx;
+  font-weight: bolder;
+}
+
+.sponsorCard-isEnd{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.sponsorCard-isEnd-bg{
+  background: #eee;
+  opacity: 0.6;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.sponsorCard-isEnd-top{
+  padding: 40rpx 30rpx;
+  font-size: 28rpx;
+  color: #fe8800;
+  font-weight: bolder;
+  text-align: right;
+  position: relative;
+  z-index: 2;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.sponsorCard-isEnd-middle{
+  height: 240rpx;
+  padding: 1rpx 30rpx;
+  position: relative;
+  z-index: 2;
+}
+.sponsorCard-isEnd-middle view{
+  height: 110rpx;
+  line-height: 110rpx;
+  width: 110rpx;
+  border-radius: 50%;
+  background: #6e6d68;
+  text-align: center;
+  color: #ffffff;
+  font-size: 28rpx;
+  margin: 64rpx 39rpx;
+}
+.sponsorCard-isEnd-bottom{
+  height: 50rpx;
+  margin-top: 20rpx;
+  padding: 12.5rpx 40rpx;
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+  z-index: 2;
+}
+.sponsorCard-isEnd-bottom-btn{
+  margin-top: 6rpx;
+  width: 130rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #fdfdfd;
+  border:1px #fe8800 solid;
+  font-size: 28rpx;
+  text-align: center;
+  color: #fe8800;
+  border-radius: 8rpx;
+}
+/* 主办方下方列表 */

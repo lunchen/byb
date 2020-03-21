@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navbar": "../../components/navbarComponent/navbar",
+    "van-field": "../../miniprogram_npm/@vant/weapp/field/index"
+  },
+  "navigationBarTextStyle": "white"
+}
