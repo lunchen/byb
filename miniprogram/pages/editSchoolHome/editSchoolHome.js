@@ -1,4 +1,4 @@
-//editActivityDesc.js
+//editSchoolHome.js
 const util = require('../../utils/util.js')
 //获取应用实例
 const app = getApp()
@@ -9,18 +9,21 @@ Page({
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
-      title: '活动详情描述', //导航栏 中间的标题
+      title: '学校主页编辑', //导航栏 中间的标题
       white: false, // 是就显示白的，不是就显示黑的。
       address: '' // 加个背景 不加就是没有
     },
     // 导航头的高度
     height: app.globalData.navheight,
 
-    value: ''
+    active: 0,
+    schoolDetails: {},
   },
-  onChange(event) {
-    // event.detail 为当前输入的值
-    console.log(event.detail);
+  //事件处理函数
+  goToSchoolHome: function() {
+    wx.navigateTo({
+      url: '../schoolHome/schoolHome'
+    })
   },
   onLoad: function (e) {
     wx.setNavigationBarColor({

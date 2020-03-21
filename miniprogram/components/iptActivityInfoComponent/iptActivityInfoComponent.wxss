@@ -1,0 +1,65 @@
+/* iptActivityInfoComponent.wxss */
+
+.iptActivityInfo-content-form{
+  padding: 13rpx 0 0 30rpx;
+  background: #ffffff;
+}
+.iptActivityInfo-content-form-item{
+  display: flex;
+  height: 100rpx;
+  align-items: center;
+  border-bottom: 1rpx #f0f0f0 solid;
+}
+.item1{
+  justify-content: space-between;
+  padding-right: 30rpx;
+}
+.item2{
+  padding-bottom: 100rpx;
+}
+.iptActivityInfo-content-form-item-title{
+  font-size: 30rpx;
+  color: #666666;
+  flex: 0 0 auto;
+  font-weight: bold;
+}
+.iptActivityInfo-content-form-item-title.withTitle{
+  width: 180rpx;
+}
+.iptActivityInfo-content-form-item-text{
+  font-size: 28rpx;
+  color: #333333;
+}
+.iptActivityInfo-content-form-item-right{
+  color: #cccccc;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+.iptActivityInfo-content-form-item-radio{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-left: 80rpx;
+}
+.iptActivityInfo-content-form-item-radio-btn1{
+  width: 150rpx;
+  height: 55rpx;
+  font-size: 28rpx;
+  line-height: 55rpx;
+  text-align: center;
+  margin-right: 40rpx;
+  border: 1rpx #cccccc solid;
+  color: #cccccc;
+  border-radius: 10rpx;
+}
+.iptActivityInfo-content-form-item-radio-btn1.active{
+  border: 1rpx #feb707 solid;
+  color: #feb707;
+}
+.radio2-view{
+  display: flex;
+  align-items: center;
+  margin-left:50rpx;
+}

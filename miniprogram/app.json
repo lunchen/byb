@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/editSchoolHome/editSchoolHome",
     "pages/releaseActivity/releaseActivity",
     "pages/editActivityDesc/editActivityDesc",
     "pages/schoolDetails/schoolDetails",

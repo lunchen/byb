@@ -34,7 +34,7 @@ Page({
     let id = 1;
     if (!e.id) {
       wx.request({
-        url: util.apiUrl(`/org/info/${id}`),
+        url: util.apiUrl(`/app/org/info/${id}`),
         method: 'post',
         data: {
         },

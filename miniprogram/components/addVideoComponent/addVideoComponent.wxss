@@ -1,1 +1,5 @@
 /* activityItem.wxss */
+.addVideoComponent{
+  width: 100%;
+  height: 100%;
+}

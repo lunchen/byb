@@ -1,0 +1,159 @@
+<!--editSchoolHome.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid;">
+  </view>
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{height}}px;'>
+      <view class="editSchoolHome-content">
+        <view class="editSchoolHome-content-view">
+          <view class="editSchoolHome-content-view-title">
+            添加活动
+          </view>
+          <view class="editSchoolHome-content-view-addActVideo">
+            <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
+            <text>添加海报/视频</text>
+          </view>
+          <block>
+            <!-- 下方活动form表单 -->
+            <iptActivityInfoComponent></iptActivityInfoComponent>
+          </block>
+          <view class="editSchoolHome-moreActivity-btn">+继续新增</view>
+        </view>
+
+        <view class="editSchoolHome-line"></view>
+
+        <view class="editSchoolHome-content-view">
+          <view class="editSchoolHome-content-view-title mgb20">
+            精品活动
+          </view>
+          <view class="editSchoolHome-content-form-item">
+            <text class="editSchoolHome-content-form-item-title">课程名称</text>
+            <van-field
+              value="{{ value }}"
+              placeholder="活动标题"
+              border="{{ false }}"
+              bind:change="onChange"
+            />
+          </view>
+
+          <view class="editSchoolHome-content-form-item" style="border:none">
+            <text class="editSchoolHome-content-form-item-title">老师头像</text>
+            <view class="upPicBtn">
+              <image src="../../images/upPic@2x.png"></image>
+              <view>上传</view>
+            </view>
+          </view>
+
+          <view class="editSchoolHome-content-view-addActVideo" st>
+            <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
+            <text>添加海报/视频</text>
+          </view>
+          <block>
+            <!-- 下方活动form表单 -->
+          </block>
+          <view class="editSchoolHome-moreActivity-btn">+继续新增</view>
+
+        </view>
+
+        <view class="editSchoolHome-line"></view>
+
+        <view class="editSchoolHome-content-view">
+          <view class="editSchoolHome-content-view-addActVideo" st>
+            <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
+            <text>添加海报/视频</text>
+          </view>
+
+          <view class="editSchoolHome-content-form-item">
+            <text class="editSchoolHome-content-form-item-title">机构logo</text>
+            <view class="upPicBtn">
+              <image src="../../images/upPic@2x.png"></image>
+              <view>上传</view>
+            </view>
+          </view>
+          <view class="editSchoolHome-content-form-item">
+            <text class="editSchoolHome-content-form-item-title">机构名称</text>
+            <van-field
+              value="{{ value }}"
+              placeholder="机构名称"
+              border="{{ false }}"
+              bind:change="onChange"
+            />
+          </view>
+          <view class="editSchoolHome-content-form-item">
+            <text class="editSchoolHome-content-form-item-title">热门标签</text>
+            <van-field
+              value="{{ value }}"
+              placeholder="爵士，瑜伽，现代舞"
+              border="{{ false }}"
+              bind:change="onChange"
+            />
+          </view>
+          <view class="editSchoolHome-content-form-item item1">
+            <text class="editSchoolHome-content-form-item-title">地点</text>
+            <view class="editSchoolHome-content-form-item-right">
+              <text>请选择</text>
+              <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image>
+            </view>
+          </view>
+
+          <view class="editSchoolHome-content-iptContact">
+            <text class="editSchoolHome-content-iptContact-title">联系方式：</text>
+            <view class="editSchoolHome-content-iptContact-item">
+              <view class="editSchoolHome-content-iptContact-item-left">电话</view>
+              <view class="editSchoolHome-content-iptContact-item-right">
+                <van-field
+                  custom-style="padding:0;"
+                  value="{{ value }}"
+                  placeholder=""
+                  border="{{ false }}"
+                  bind:change="onChange"
+                />
+              </view>
+            </view>
+            <view class="editSchoolHome-content-iptContact-item">
+              <view class="editSchoolHome-content-iptContact-item-left">微信号</view>
+              <view class="editSchoolHome-content-iptContact-item-right">
+                <van-field
+                  custom-style="padding:0;"
+                  value="{{ value }}"
+                  placeholder=""
+                  border="{{ false }}"
+                  bind:change="onChange"
+                />
+              </view>
+            </view>
+            <view class="editSchoolHome-content-iptContact-item">
+              <view class="editSchoolHome-content-iptContact-item-left">微信二维码</view>
+              <view class="editSchoolHome-content-iptContact-item-right_Img">
+              </view>
+            </view>
+          </view>
+
+        </view>
+
+        <view class="editSchoolHome-line"></view>
+        
+        <view class="editSchoolHome-content-view-confirm">
+          <view class="editSchoolHome-content-view-confirm-btn">确认提交</view>
+          <view class="editSchoolHome-content-view-confirm-warn">
+            <image src="../../images/warn@2x.png"></image>
+            <text>您可以选择回到学校主页查看效果或继续编辑机构详情</text>
+          </view>
+          <view class="editSchoolHome-content-view-confirm-toOtherPage">
+            <view class="editSchoolHome-content-view-confirm-toOtherPage-left">
+              <image style="margin-right:10rpx;" src="../../images/backl1@2x.png"></image>
+              <text>返回学校主页</text>
+            </view>
+            <view class="editSchoolHome-content-view-confirm-toOtherPage-right">
+              <text>编辑详情</text>
+              <image style="margin-left:10rpx;" src="../../images/more@2x.png"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </scroll-view>
+  
+</view>

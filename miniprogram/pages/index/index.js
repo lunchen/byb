@@ -100,7 +100,7 @@ Page({
   onLoad: function () {
     var that = this;
     wx.request({
-      url: util.apiUrl('/index/info'),
+      url: util.apiUrl('/app/index/info'),
       method: 'post',
       data: {
       },

@@ -44,7 +44,7 @@ const formatNumber = n => {
 }
 
 const apiUrl = url => {
-  return "https://test.byb88.cn/enlist/app"+url; 
+  return "https://test.byb88.cn/enlist"+url; 
 }
 
 module.exports = {

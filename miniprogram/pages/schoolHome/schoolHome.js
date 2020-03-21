@@ -91,7 +91,7 @@ Page({
     let id =1;
     if (!e.id) {
       wx.request({
-        url: util.apiUrl(`/org/index/${id}`),
+        url: util.apiUrl(`/app/org/index/${id}`),
         method: 'post',
         data: {
         },
