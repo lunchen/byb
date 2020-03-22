@@ -30,7 +30,7 @@ component_1.VantComponent({
         },
         name: {
             type: [Number, String],
-            value: '',
+            value: ''
         }
     },
     data: {

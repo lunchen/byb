@@ -1,4 +1,7 @@
 /**search.wxss**/
+.container{
+  height: 100%;
+}
 .search-title{
   margin-left: 30rpx;
   color: #000;
@@ -22,4 +25,7 @@
   margin: 0 20rpx 30rpx 0;
   font-size: 28rpx;
   flex: 0 0 auto;
+}
+.activity-view{
+  padding: 0 30rpx;
 }

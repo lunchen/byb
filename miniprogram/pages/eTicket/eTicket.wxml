@@ -17,24 +17,24 @@
           <view class="eTicket-view-middle-barCode-text">
             2822 ****** 查看数字
           </view> -->
-          <image bindtap='previewImg' class="eTicket-view-middle-QRCode" src="{{qrCodeUrl}}"></image>
+          <image bindtap='previewImg' class="eTicket-view-middle-QRCode" src="{{eTicketData.qrcode}}"></image>
         </view>
         <view class="eTicket-view-middle-line">
           <view class="eTicket-view-middle-line-dotted"></view>
         </view>
         <view class="eTicket-view-bottom">
           <view class="eTicket-view-bottom-item">
-            <text>定了！45场重磅演讲！ 60家知名企业联合主办！</text>
+            <text>{{eTicketData.activityName}}</text>
             <image style="width:32rpx;height:32rpx;" src="../../images/home_4@2x.png"></image>
           </view>
           <view class="eTicket-view-bottom-item">
-            <text>时间：  2020-03-11 14：00</text>
+            <text>时间：  {{eTicketData.betweenTime}}</text>
           </view>
           <view class="eTicket-view-bottom-item">
-            <text>地点：  线上活动</text>
+            <text>地点： {{eTicketData.addr}}</text>
           </view>
           <view class="eTicket-view-bottom-item">
-            <text>主办方：  中企联合</text>
+            <text>主办方：  {{eTicketData.orgName}}</text>
           </view>
         </view>
       </view>

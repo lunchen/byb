@@ -23,6 +23,8 @@ Page({
     console.log(event.detail);
   },
   onLoad: function (e) {
+    var pagess = getCurrentPages();
+    console.log(pagess)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'

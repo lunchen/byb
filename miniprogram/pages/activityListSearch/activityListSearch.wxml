@@ -1,4 +1,4 @@
-<!--activityListSearch.wxml-->
+<!-- activityListSearch.wxml -->
 <view class="container">
   <navbar navbar-data='{{nvabarData}}'></navbar>
      <view style="position:relative;z-index:2;margin-top:{{height}}px;">
@@ -10,7 +10,7 @@
         bind:search="onSearch"
         shape="round"
       >
-        <view slot="action" bind:tap="onClick">搜索</view>
+        <view slot="action" bind:tap="onSearch">搜索</view>
       </van-search>
      </view>
       
@@ -18,7 +18,7 @@
     <view class="activityListSearch-content">
       <view class="activity-view">
         <!-- 活动列表组件 -->
-        <block wx:for="{{activityListData}}" wx:key="id">
+        <block wx:for="{{activityList}}" wx:key="id">
           <activityItem activityData="{{item}}"></activityItem>
         </block>
       </view>

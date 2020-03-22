@@ -1,12 +1,12 @@
-/**activityListSearch.wxss**/
-.activityListSearch-content {
+/**orgListSearch.wxss**/
+.orgListSearch-content {
   position: relative;
   display: flex;
   flex-direction: column;
   background: #fff;
   border-radius: 50rpx;
-  padding: 20rpx 30rpx 400rpx;
+  padding: 20rpx 30rpx 240rpx;
 }
-.activityListSearch-content-view{
+.orgListSearch-content-view{
   padding: 0 40rpx;
 }

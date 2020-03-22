@@ -3,6 +3,7 @@
     "navbar": "../../components/navbarComponent/navbar",
     "activityItem": "../../components/activityItemComponent/activityItem",
     "infoCard": "../../components/infoCardComponent/infoCard",
+    "login": "../../components/loginComponent/login",
     "tabbarBtn": "../../components/tabbarBtnComponent/tabbarBtn"
   },
   "navigationBarTextStyle": "white"

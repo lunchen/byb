@@ -42,6 +42,8 @@ Component({
     isIphoneX: app.globalData.systemInfo.model.search('iPhone X') != -1 ? true : false
   },
 
+  attached: function () {
+  },
   /**
    * 组件的方法列表
    */

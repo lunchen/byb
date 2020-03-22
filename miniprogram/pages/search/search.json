@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "navbar": "../../components/navbarComponent/navbar",
-    "van-search": "../../miniprogram_npm/@vant/weapp/search/index"
+    "van-search": "../../miniprogram_npm/@vant/weapp/search/index",
+    "activityItem": "../../components/activityItemComponent/activityItem",
+    "orgItem": "../../components/orgItemComponent/orgItem"
   },
   "navigationBarTextStyle": "white"
 }

@@ -1,25 +1,31 @@
 {
   "pages": [
+    "pages/video-swiper/video-swiper",
+    "pages/activityDetails/activityDetails",
+    "pages/schoolHome/schoolHome",
+    "pages/schoolDetails/schoolDetails",
+
+    "pages/editActivityDesc/editActivityDesc",
+    "pages/editSchoolDetails/editSchoolDetails",
     "pages/editSchoolHome/editSchoolHome",
     "pages/releaseActivity/releaseActivity",
-    "pages/editActivityDesc/editActivityDesc",
-    "pages/schoolDetails/schoolDetails",
-    "pages/schoolHome/schoolHome",
     "pages/mine/mine",
-    "pages/index/index",
-    "pages/eTicket/eTicket",
     "pages/business/business",
-    "pages/activityDetails/activityDetails",
     "pages/writeOffOrder/writeOffOrder",
     "pages/confirmOrder/confirmOrder",
     "pages/personalCenter/personalCenter",
     "pages/signUpSuccess/signUpSuccess",
+    "pages/middle/middle",
+    
+    "pages/courseDetails/courseDetails",
+    
     "pages/orderDetails/orderDetails",
+    "pages/eTicket/eTicket",
     "pages/activityListSearch/activityListSearch",
     "pages/search/search",
-    "pages/childListSearch/childListSearch",
-    "pages/courseDetails/courseDetails",
-    "pages/middle/middle"
+    "pages/orgListSearch/orgListSearch",
+    "pages/index/index",
+    "pages/logs/logs"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -29,9 +35,7 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "custom": true,
     "color": "#999999",
-    
     "selectedColor": "#feb707",
     "list": [
       {

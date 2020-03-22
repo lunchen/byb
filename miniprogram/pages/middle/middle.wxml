@@ -1,2 +1,15 @@
 <!--pages/middle/middle.wxml-->
-<text>pages/middle/middle.wxml</text>
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view class="search-view" style="position:relative;z-index:2;margin-top:{{height}}px;">
+  </view>
+      
+  <scroll-view bindscrolltoupper="scrolltoupper" bindscroll="scrollY" scroll-y style="position:relative;height: 100%;" scroll-top="{{scrollTop}}px">
+    <view class="scroll-view-item" style='padding-top:1px;background:{{onceToTop?"#feb707":"transpant"}};'>
+      <view class="content" style="">
+        
+      </view>
+    </view>
+  </scroll-view>
+  <tabbar tabbar="{{tabbar}}"></tabbar>
+</view>

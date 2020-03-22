@@ -55,7 +55,7 @@
           </view>
           <view class="schoolHome-content-title-btn">学校详情编辑</view>
         </view>
-        <view class="schoolHome-content-card">
+        <view class="schoolHome-content-card" bindtap="goToSchoolDetails" data-id="{{schoolHomeData.id}}">
           <view>
             <image class="schoolHome-content-card-left" src="../../images/huodong.png"></image>
           </view>
@@ -84,9 +84,10 @@
         </view>
 
       </view>
-      <tabbarBtn></tabbarBtn>
       
     </view>
   </scroll-view>
   
+  <login showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
+  <tabbarBtn loginShow="{{loginShow}}" bind:changeFLogin="changeFLogin" needChooseCourse="{{true}}"></tabbarBtn>
 </view>

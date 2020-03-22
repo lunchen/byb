@@ -1,0 +1,25 @@
+<view class="orgItem-view-item" bindtap="goToOrgItemDetails" data-id="{{orgItemData.id}}">
+  <view>
+    <image class="orgItem-view-item-left" src="../../images/huodong.png"></image>
+  </view>
+  
+  <block>
+    <view class="orgItem-view-item-right">
+      <text class="orgItem-view-text1">{{orgItemData.name}}</text>
+      <view class="orgItem-content-card-label">
+        <view wx:for="{{orgItemData.labelList}}" wx:key="*this" class="label-item">{{item}}</view>
+      </view>
+      <view class="orgItem-view-text2">{{orgItemData.remark}}</view>
+      
+      <view class="orgItem-view-text3">
+        <image style="flex:0 0 auto;width:40rpx;height:40rpx;margin-right:6rpx;margin-top:4rpx;" src="./icon/location1@2x.png"></image>
+        <text>{{orgItemData.addr.name}}</text>
+      </view>
+      <view class="orgItem-view-item-right-bottom">
+        <view class="orgItem-view-btn">
+          立即查看
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

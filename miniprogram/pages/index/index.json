@@ -5,6 +5,7 @@
     "tabbar": "../../components/tabbarComponent/tabbar",
     "van-search": "../../miniprogram_npm/@vant/weapp/search/index",
     "activityItem": "../../components/activityItemComponent/activityItem",
+    "orgItem": "../../components/orgItemComponent/orgItem",
     "childItem": "../../components/childItemComponent/childItem",
     "van-tab": "../../miniprogram_npm/@vant/weapp/tab/index",
     "van-tabs": "../../miniprogram_npm/@vant/weapp/tabs/index"

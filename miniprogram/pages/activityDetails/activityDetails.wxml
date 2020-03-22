@@ -14,7 +14,7 @@
         <!-- 卡片信息 -->
         <infoCard infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCard>
         <!-- 学校卡片 -->
-        <view class="activityDetails-content-view2" bindtap="goToSchoolHome">
+        <view class="activityDetails-content-view2" bindtap="goToSchoolHome" data-id="{{activityListData.org.id}}">
           <view class="activityDetails-content-view2-top">
             <image style="width:112rpx;height:112rpx;border-radius:56rpx;" src="{{activityListData.org.img}}"></image> 
             <view class="activityDetails-content-view2-top-textView">
@@ -114,7 +114,7 @@
       </view>
     </view>
   </scroll-view>
-  <tabbarBtn></tabbarBtn>
-  <login></login>
   
+  <login showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
+  <tabbarBtn loginShow="{{loginShow}}" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
 </view>

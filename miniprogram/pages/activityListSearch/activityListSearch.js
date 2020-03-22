@@ -1,5 +1,6 @@
 //activityListSearch.js
-const util = require('../../utils/util.js')
+const util = require('../../utils/util.js');
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 
@@ -17,9 +18,24 @@ Page({
     height: app.globalData.navheight,
     value: '',
     // 活动数据
-    activityListData: [
+    activityList: [
 
     ],
+  },
+  onChange(event) {
+    this.setData({
+      value: event.detail
+    })
+  },
+  onSearch() {
+    var that = this;
+    let keyword = this.data.value
+    apiServer.post('/app/activity/list', { keyword: keyword}).then(res => {
+      console.log(res.data);
+      that.setData({
+        activityList: res.data.data.list,
+      })
+    })
   },
   onLoad: function () {
     var that = this;
@@ -27,20 +43,11 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    wx.request({
-      url: util.apiUrl('/activity/list'),
-      method: 'post',
-      data: {
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data);
-        that.setData({
-          "activityListData": res.data.data.list
-        })
-      }
+    apiServer.post('/app/activity/list').then(res => {
+      console.log(res.data);
+      that.setData({
+        activityList: res.data.data.list,
+      })
     })
   },
 })

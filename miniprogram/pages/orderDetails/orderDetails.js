@@ -1,5 +1,6 @@
-// pages/mine/mine.js
+// orderDetails.js
 const util = require('../../utils/util.js')
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -16,17 +17,32 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
-    cmt: app.globalData.isIphoneX ? 20 : 24,
-    //tabbar
-    tabbar: {},
+    orderDetails:[],
   },
-  onLoad: function (options) {
-
-    var that = this;
+  onLoad: function (e) {
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
+    var that = this;
+    let id = e.id ? e.id : 1;
+    if (id) {
+      console.log(id)
+      apiServer.post(`/app/order/info/id/${id}`).then(res => {
+        console.log(res.data);
+        that.setData({
+          orderDetails: res.data.data,
+        })
+      })
+    }
+  },
+  goToETicket(e) {
+    var id = e.currentTarget.dataset.id
+    console.log(11)
+    console.log(e)
+    wx.navigateTo({
+      url: `../eTicket/eTicket?id=${id}`,
+    })
   },
   onReady: function () {
 

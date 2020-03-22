@@ -9,6 +9,8 @@
   height: 100rpx;
   align-items: center;
   border-bottom: 1rpx #f0f0f0 solid;
+  padding: 1rpx 0;
+  overflow: hidden;
 }
 .item1{
   justify-content: space-between;
@@ -22,6 +24,7 @@
   color: #666666;
   flex: 0 0 auto;
   font-weight: bold;
+  margin-right: 30rpx;
 }
 .iptActivityInfo-content-form-item-title.withTitle{
   width: 180rpx;
@@ -29,6 +32,7 @@
 .iptActivityInfo-content-form-item-text{
   font-size: 28rpx;
   color: #333333;
+  margin: 0 20rpx;
 }
 .iptActivityInfo-content-form-item-right{
   color: #cccccc;

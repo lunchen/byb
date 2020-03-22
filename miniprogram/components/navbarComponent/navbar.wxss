@@ -6,10 +6,8 @@
   position: fixed;
   width: 100%;
   top: 0;
-  background: #fff;
   color: #fff;
   z-index: 9999999;
-  background: #fff;
   overflow: hidden;
 }
 /* 背景图 */

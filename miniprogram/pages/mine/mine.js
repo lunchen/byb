@@ -32,7 +32,7 @@ Page({
 
   },
   onShow: function () {
-
+    wx.hideTabBar()
   },
   onHide: function () {
 

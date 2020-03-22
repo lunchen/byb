@@ -1,5 +1,6 @@
 //schoolHome.js
-const util = require('../../utils/util.js')
+const util = require('../../utils/util.js');
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 
@@ -32,12 +33,12 @@ Page({
     longitudeCenter: 113.324520,
     latitudeCenter: 23.099994,
     markers: [{
-      iconPath: "../../images/location.png",
+      iconPath: "../../images/marker@2x.png",
       id: 0,
       latitude: 23.099994,
       longitude: 113.324520,
-      width: 50,
-      height: 50
+      width: 20,
+      height: 26
     }],
     // 划线
     polyline: [{
@@ -52,7 +53,9 @@ Page({
       width: 2,
       dottedLine: true
     }],
-    schoolHomeData:{},
+
+    schoolHomeData: {},
+    loginShow: 0
   },
   // 滑块
   swiperChange(e) {
@@ -65,22 +68,31 @@ Page({
       wx.createVideoContext('myVideo' + e.detail.current).play()
     }
   }, 
+  // 地图
   regionchange(e) {
     console.log(e.type)
   },
   markertap(e) {
     console.log(e.markerId)
   },
-  //事件处理函数
-  bindViewTap: function() {
+
+  videoErrorCallback: function (e) {
+    console.log('视频错误信息:' + e.detail.errMsg);
+  },
+  goToSchoolDetails: function(e) {
+    var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../logs/logs'
+      url: `../schoolDetails/schoolDetails?id=${id}`
     })
   },
-  videoErrorCallback: function (e) {
-
-    console.log('视频错误信息:' + e.detail.errMsg);
-
+  changeFLogin: function (e) {
+    // 获取从底部3按钮获取的报课弹窗状态  底部按钮组件还需要获取用户登录状态
+    // 状态1 需登录 2
+    console.log(666)
+    console.log(e.detail.loginShow)
+    this.setData({
+      loginShow: e.detail.loginShow
+    })
   },
   onLoad: function (e) {
     wx.setNavigationBarColor({
@@ -88,44 +100,29 @@ Page({
       backgroundColor: '#fff'
     });
     var that = this;
-    let id =1;
-    if (!e.id) {
-      wx.request({
-        url: util.apiUrl(`/app/org/index/${id}`),
-        method: 'post',
-        data: {
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success(res) {
-          console.log(res.data)
-          that.setData({
-            schoolHomeData: res.data.data,
-            markers: [{
-              iconPath: "../../images/location.png",
-              id: 0,
-              latitude: res.data.data.addr.latitude,
-              longitude: res.data.data.addr.longitude,
-              width: 50,
-              height: 50
-            }],
-            latitudeCenter: res.data.data.addr.latitude,
-            longitudeCenter: res.data.data.addr.longitude
-          })
-        }
+    let id = e.id ? e.id : 1;
+    if (id) {
+      console.log(id)
+      apiServer.post(`/app/org/index/${id}`).then(res => {
+        console.log(res.data);
+        that.setData({
+          schoolHomeData: res.data.data,
+          markers: [{
+            iconPath: "../../images/marker@2x.png",
+            id: 0,
+            latitude: res.data.data.addr.latitude,
+            longitude: res.data.data.addr.longitude,
+            width: 20,
+            height: 26
+          }],
+          latitudeCenter: res.data.data.addr.latitude,
+          longitudeCenter: res.data.data.addr.longitude
+        })
       })
     }
   },
   onReady: function () {
     // wx.createVideoContext('myVideo' + 0).play();
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
+ 
 })

@@ -1,4 +1,6 @@
-//index.js
+//search.js
+const util = require('../../utils/util.js');
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 
@@ -44,9 +46,38 @@ Page({
       {
         value: 5,
         name: "桃李杯"
-      }]
+      }],
+    activityList:[],
+  
+  },
+  hotSearch(event) {
+    var that = this;
+    let keyword = event.currentTarget.dataset.keyword;
+    this.setData({
+      value: keyword
+    })
+    apiServer.post('/app/search/search', {keyword: keyword}).then(res => {
+      console.log(res.data);
+      that.setData({
+        activityList: res.data.data.activity.list,
+      })
+    })
+  },
+  onSearch(event){
+    var that = this;
+    let keyword = "";
+    apiServer.post('/app/search/search', keyword).then(res => {
+      console.log(res.data);
+      that.setData({
+        activityList: res.data.data.activity.list,
+      })
+    })
+  },
+  onCancel() {
+    wx.navigateBack()
   },
   onLoad: function () {
+    var that = this;
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'

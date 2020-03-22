@@ -1,12 +1,16 @@
 const app = getApp()
 Component({
   properties: {
-    ashowType: {
-      //ashowType   由父页面传递的数据，变量名字自命名
+    needChooseCourse: {
+      //是否需要选择课程  true 表示父组件为学校主页 false 表示父组件为活动详情
       type: Boolean,
       value: true,
-      observer: function (newVal, oldVal) { }
-    }
+    },
+    loginShow: {
+      //loginShow  预约课程弹窗状态 1登录 2选课程 3不用选课程 4填姓名手机号提交
+      type: Number,
+      value: 0,
+    },
   },
   data: {
     qrCodeUrl: "./icon/qrCode.png",  //要改成线上图片
@@ -24,6 +28,7 @@ Component({
     })
   },
   methods: {
+    
     // 返回上一页面
     _navback() {
       wx.navigateBack()
@@ -54,7 +59,6 @@ Component({
         complete: function (res) { },
       })
     },
-
     closeBtn: function () {
       this.setData({
         "showType": false
@@ -72,6 +76,31 @@ Component({
         })
       }, 20);
     },
+
+    appointBtn:function() {
+      // 点击出发父组件事件并传值
+      // 微信默认toast
+      // wx.showToast({
+      //   title: '333',
+      //   icon: 'loading',
+      //   duration: 1000
+      // })
+      var needLogin = true
+      if (needLogin){
+        this.triggerEvent('changeFLogin', {
+          loginShow: 1
+        })
+      } else if (!needLogin && this.needChooseCourse){
+        this.triggerEvent('changeFLogin', {
+          loginShow: 2
+        })
+      }else{
+        this.triggerEvent('changeFLogin', {
+          loginShow: 3
+        })
+      }
+    },
+    
     //返回到首页
     // _backhome() {
     //   wx.switchTab({

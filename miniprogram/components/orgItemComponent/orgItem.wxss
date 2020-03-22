@@ -1,0 +1,78 @@
+/* orgItemItem.wxss */
+.navigator-hover{
+  color:blue;
+}
+.orgItem-view-item{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin: 0rpx 0 40rpx;
+}
+.orgItem-view-item-left{
+  width: 257rpx;
+  height: 350rpx;
+  border-radius: 26rpx;
+  flex: 0 0 auto;
+}
+.orgItem-view-item-right{
+  height: 266rpx;
+  flex: 0 0 390rpx;
+  background: #f5f5f5;
+  border-top-right-radius: 26rpx;
+  border-bottom-right-radius: 26rpx;
+  padding: 20rpx 25rpx 32rpx 25rpx;
+  overflow: hidden;
+}
+.orgItem-view-text1{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bolder;
+}
+.orgItem-view-text2{
+  margin-right: 30rpx;
+  height: 80rpx;
+  max-height: 80rpx;
+  overflow: hidden;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 38rpx;
+  text-overflow:ellipsis;
+}
+.orgItem-view-text3{
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666;
+}
+.orgItem-view-item-right-bottom{
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 0 20rpx;
+}
+.orgItem-view-btn{
+  width: 140rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border: #fe8800 1rpx solid;
+  border-radius: 20rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fe8800;
+}
+
+
+.orgItem-content-card-label{
+  display: flex;
+  margin: 20rpx 0 10rpx;
+}
+.orgItem-content-card-label .label-item{
+  margin-right: 20rpx;
+  padding: 0 16rpx;
+  height: 34rpx;
+  border-radius: 17rpx;
+  background: #ffeec4;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: #fe8800;
+}

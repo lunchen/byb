@@ -6,6 +6,12 @@ Component({
       type: Object,
       value: {},
       observer: function (newVal, oldVal) { }
+    },
+    backgroundColor: {
+      //navbarData   由父页面传递的数据，变量名字自命名
+      type: String,
+      value: "#ffffff",
+      observer: function (newVal, oldVal) { }
     }
   },
   data: {
@@ -35,7 +41,6 @@ Component({
     },
     // 计算图片高度
     imgLoaded(e) {
-      console.log("nav")
       this.setData({
         imageHeight:
           e.detail.height *

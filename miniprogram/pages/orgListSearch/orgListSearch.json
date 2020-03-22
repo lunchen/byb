@@ -2,7 +2,7 @@
   "usingComponents": {
     "navbar": "../../components/navbarComponent/navbar",
     "van-search": "../../miniprogram_npm/@vant/weapp/search/index",
-    "childItem": "../../components/childItemComponent/childItem"
+    "orgItem": "../../components/orgItemComponent/orgItem"
   },
   "navigationBarTextStyle": "white"
 }

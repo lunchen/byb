@@ -1,5 +1,6 @@
 //index.js
 const util = require('../../utils/util.js')
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 
@@ -16,48 +17,42 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
 
-    //tabbar
-    tabbar: {},
-    value: '',
-    
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    
-    activityDetails:{}
+    activityDetails:{},
+    loginShow: 0
   },
   //事件处理函数
-  goToSchoolHome: function() {
+  goToSchoolHome: function (e) {
+    var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../schoolHome/schoolHome'
+      url: `../schoolHome/schoolHome?id=${id}`
+    })
+  },
+  changeFLogin: function (e) {
+    // 获取从底部3按钮获取的报课弹窗状态  底部按钮组件还需要获取用户登录状态
+    // 状态1：需登录，2：由学校主页打开需要选择课程，3：由活动详情页打开不用选取课程直接，4：填写姓名电话和基础
+    console.log(666)
+    console.log(e.detail.loginShow)
+    this.setData({
+      loginShow: e.detail.loginShow
     })
   },
   onLoad: function (e) {
-    var that = this;
-    let id = 1;
-    if(!e.id){
-      wx.request({
-        url: util.apiUrl(`/activity/info/${id}`),
-        method: 'post',
-        data: {
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success(res) {
-          console.log(res.data);
-          that.setData({
-            "activityListData": res.data.data
-          })
-        }
-      })
-    }
-    console.log(e)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
+
+    var that = this;
+    let id = e.id ? e.id : 1;
+    if (id) {
+      console.log(id)
+      apiServer.post(`/app/activity/info/${id}`).then(res => {
+        console.log(res.data);
+        that.setData({
+          "activityListData": res.data.data
+        })
+      })
+    }
   },
   getUserInfo: function(e) {
     console.log(e)

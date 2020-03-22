@@ -1,5 +1,6 @@
 //schoolDetails.js
 const util = require('../../utils/util.js')
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 
@@ -18,12 +19,17 @@ Page({
 
     active: 0,
     schoolDetails: {},
+
+    loginShow: 4
   },
   //事件处理函数
-  goToSchoolHome: function() {
+  goToSchoolHome: function (e) {
+    var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../schoolHome/schoolHome'
+      url: `../schoolHome/schoolHome?id=${id}`
     })
+  },
+  methods: {
   },
   onLoad: function (e) {
     wx.setNavigationBarColor({
@@ -31,22 +37,14 @@ Page({
       backgroundColor: '#fff'
     });
     var that = this;
-    let id = 1;
-    if (!e.id) {
-      wx.request({
-        url: util.apiUrl(`/app/org/info/${id}`),
-        method: 'post',
-        data: {
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success(res) {
-          console.log(res.data)
-          that.setData({
-            schoolDetails: res.data.data,
-          })
-        }
+    let id = e.id ? e.id : 1;
+    if (id) {
+      console.log(id)
+      apiServer.post(`/app/org/info/${id}`).then(res => {
+        console.log(res.data);
+        that.setData({
+          schoolDetails: res.data.data,
+        })
       })
     }
   },

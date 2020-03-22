@@ -101,8 +101,36 @@
                 </view>
               </view>
             </van-tab>
-            <van-tab title="学员展示">内容 3</van-tab>
-            <van-tab title="资质荣誉">内容 4</van-tab>
+            <van-tab title="学员展示">
+              <view class="schoolEnv tab-list">
+                <view wx:for="{{schoolDetails.showList}}" wx:key="id" class="schoolDetails-tabs-item">
+                  <view class="schoolDetailsImg-view">
+                    <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
+                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+                  </view>
+                </view>
+
+                <view class="tab-list-moreBtn">
+                  <text>查看更多</text>
+                  <image src="../../images/home_4@2x.png"></image>
+                </view>
+              </view>
+            </van-tab>
+            <van-tab title="资质荣誉">
+              <view class="schoolEnv tab-list">
+                <view wx:for="{{schoolDetails.honorList}}" wx:key="id" class="schoolDetails-tabs-item">
+                  <view class="schoolDetailsImg-view">
+                    <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
+                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+                  </view>
+                </view>
+
+                <view class="tab-list-moreBtn">
+                  <text>查看更多</text>
+                  <image src="../../images/home_4@2x.png"></image>
+                </view>
+              </view>
+            </van-tab>
           </van-tabs>
         </view>
 
@@ -132,5 +160,4 @@
     </view>
   </scroll-view>
   
-  <tabbarBtn></tabbarBtn>
 </view>

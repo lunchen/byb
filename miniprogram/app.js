@@ -1,6 +1,8 @@
 //app.js
 App({
-  
+  created: function(){
+    this.hideTabBar();
+  },
   onLaunch: function (e) {
     this.hideTabBar();
     this.getSystemInfo();
@@ -46,12 +48,11 @@ App({
     })
   },
   hideTabBar() {
-    return
     wx.hideTabBar({
       fail: function () {
         setTimeout(function () { // 做了个延时重试一次，作为保底。
           wx.hideTabBar()
-        }, 500)
+        }, 100)
       }
     });
   },
@@ -59,7 +60,6 @@ App({
     let t = this;
     wx.getSystemInfo({
       success: function (res) {
-        console.log(res);
         t.globalData.systemInfo = res;
         t.globalData.height = res.statusBarHeight;
         t.globalData.isIphoneX = res.model.search('iPhone X') != -1 ? true : false; 

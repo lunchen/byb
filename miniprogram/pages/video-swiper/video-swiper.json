@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-video-swiper": "../../components/video-swiper/index",
+    "navbar": "../../components/navbarComponent/navbar"
+  }
+}

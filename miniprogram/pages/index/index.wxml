@@ -51,10 +51,13 @@
           </view>
           <scroll-view class="index-scroll-viewX" scroll-x="true" style="width: 100%">
             <view class="course-videoList">
-              <view class="course-videoList-item">
-                <image wx:if="{{item.img.type===1}}" style="height:100%;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
-                <video wx:else  style="height:100%;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
-              </view>
+              <block wx:for="{{bannerList.bannerVideoList}}" wx:key="id">
+                <view class="course-videoList-item">
+                  <image wx:if="{{item.type===1}}" style="height:100%;width:100%;border-radius:26rpx;" src="{{item.video}}"></image>
+                  <video wx:else  style="height:100%;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.video}}" controls></video>
+                </view>
+              </block>
+              
             </view>
           </scroll-view>
         </view>
@@ -65,14 +68,13 @@
           <view class="content-title">
             <text class="content-title-text1">机构列表</text>
             <view wx:if="{{true}}" class="content-title-right">
-              <text class="content-title-text2" bindtap="goToActivityListSearch">查看更多</text>
+              <text class="content-title-text2" bindtap="goToOrgListSearch">查看更多</text>
               <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
             </view>
           </view>
-          <van-tabs active="{{ active }}" bind:change="onChange">
-            <van-tab title="优惠">
+          <van-tabs active="{{ active }}" bind:click="orgListClick">
+            <!-- <van-tab title="优惠">
               <view class="tabs-item">
-                <!-- 活动列表组件 -->
                 <view wx:for="{{activityListData}}" wx:key="id">
                   <activityItem activityData="{{item}}"></activityItem>
                 </view>
@@ -80,7 +82,17 @@
             </van-tab>
             <van-tab title="免费试课">内容 2</van-tab>
             <van-tab title="附近机构">内容 3</van-tab>
-            <van-tab title="活跃机构">内容 3</van-tab>
+            <van-tab title="活跃机构">内容 3</van-tab> -->
+            <block wx:for="{{orgList.selectList}}" wx:key="value">
+              <van-tab title="{{item.label}}">
+                <view class="tabs-item">
+                  <!-- 活动列表组件 -->
+                  <view wx:for="{{orgList.orgList}}" wx:key="id">
+                    <orgItem orgItemData="{{item}}"></orgItem>
+                  </view>
+                </view>
+              </van-tab>
+            </block>
           </van-tabs>
         </view>
 
@@ -90,22 +102,32 @@
           <view class="content-title">
             <text class="content-title-text1">活动列表</text>
             <view wx:if="{{true}}" class="content-title-right">
-              <text class="content-title-text2" bindtap="goToActivityListSearch" data-id="123">查看更多</text>
+              <text class="content-title-text2" bindtap="goToActivityListSearch">查看更多</text>
               <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
             </view>
           </view>
-          <van-tabs active="{{ active }}" bind:change="onChange">
-            <van-tab title="优惠">
+          <van-tabs active="{{ active }}" bind:click="activityClick">
+            <!-- <van-tab title="优惠">
               <view class="tabs-item">
-                <!-- 活动列表组件 -->
-                <view wx:for="{{activityListData}}" wx:key="id">
+                <view wx:for="{{activityList}}" wx:key="id">
                   <activityItem activityData="{{item}}"></activityItem>
                 </view>
               </view>
             </van-tab>
             <van-tab title="免费试课">内容 2</van-tab>
             <van-tab title="附近机构">内容 3</van-tab>
-            <van-tab title="活跃机构">内容 3</van-tab>
+            <van-tab title="活跃机构">内容 3</van-tab> -->
+            <block wx:for="{{activityList.selectList}}" wx:key="value">
+              <!-- 无法传入name -->
+              <van-tab title="{{item.label}}">
+                <view class="tabs-item">
+                  <!-- 活动列表组件 -->
+                  <view wx:for="{{activityList.activityList}}" wx:key="id">
+                    <activityItem activityData="{{item}}"></activityItem>
+                  </view>
+                </view>
+              </van-tab>
+            </block>
           </van-tabs>
         </view>
         

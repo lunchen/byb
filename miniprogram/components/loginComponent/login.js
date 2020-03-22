@@ -22,5 +22,13 @@ Component({
         url: `../activityDetails/activityDetails?id=${id}`,
       })
     },
+    onClose(){
+      this.triggerEvent('changeFLogin', {
+        loginShow: 0
+      })
+    }
+  },
+  created(){
+    console.log(369)
   }
 })

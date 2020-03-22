@@ -1,27 +1,41 @@
-<!--index.wxml-->
+<!-- search.wxml-->
 <view class="container">
   <navbar navbar-data='{{nvabarData}}'></navbar>
-     <view style="position:relative;z-index:2;margin-top:{{height}}px;">
-     <van-search
-        value="{{ value }}"
-        placeholder="请输入搜索关键词"
-        show-action
-        bind:search="onSearch"
-        bind:cancel="onCancel"
-        shape="round"
-      />
-     </view>
-      
-  <scroll-view scroll-y style="position:relative;height: 100%;">
-    <view class="search-title">
-     热门搜索
+    <view style="position:relative;z-index:2;margin-top:{{height}}px;">
+      <van-search
+          value="{{ value }}"
+          placeholder="请输入搜索关键词"
+          show-action
+          bind:search="onSearch"
+          bind:cancel="onCancel"
+          shape="round"
+        />
     </view>
-    <view class="search-theme">
-      <view class="search-theme-item" wx:for="{{searchTheme}}" wx:key="{{item.name}}">
-        <image style="width:50rpx;height:50rpx" src="../../images/search_1@3x.png"></image>
-        <text>{{item.name}}</text>
+    
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{2*height}}px;'>
+      <view wx:if="{{activityList.length<1}}">
+        <view class="search-title">热门搜索</view>
+        <view class="search-theme">
+          <view class="search-theme-item" wx:for="{{searchTheme}}" wx:key="{{item.name}}" bindtap="hotSearch" data-keyword="{{item.name}}">
+            <image style="width:50rpx;height:50rpx" src="../../images/search_1@3x.png"></image>
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+      <view wx:else>
+        <view class="activity-view">
+          <!-- 活动列表组件 -->
+          <block wx:for="{{activityList}}" wx:key="id">
+            <activityItem activityData="{{item}}"></activityItem>
+          </block>
+          <block wx:for="{{activityList}}" wx:key="id">
+            <activityItem activityData="{{item}}"></activityItem>
+          </block>
+        </view>
       </view>
     </view>
+    
   </scroll-view>
  
 </view>

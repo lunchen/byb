@@ -1,4 +1,4 @@
-/* pages/mine/mine.wxss */
+/* orderDetails.wxss */
 .container.orderDetails{
   background: #f5f5f5;
 }

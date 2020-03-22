@@ -1,5 +1,6 @@
 //index.js
-const util = require('../../utils/util.js')
+const util = require('../../utils/util.js');
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -14,37 +15,29 @@ Page({
       addressimg1: '../../images/home_1@2x.png', // 加个背景 不加就是没有
       addressimg2: '../../images/home_8@2x.png' // 加个背景 不加就是没有
     },
-    // 育儿资讯数据
-    informationListData:[
+    // banner视频
+    bannerList:[
      
     ],
-    // 活动数据
-    activityListData: [
-
-    ],
-    // 活动列表数据
-    activityList: [
-      {
-        "hotsValue": "",
-        "id": 0,
-        "img": "",
-        "levelName": "",
-        "name": "",
-        "remark": "",
-        "status": 0,
-        "totalCount": 0
-      }
-    ],
+    // 活动
+    activityList: {
+      activityList:[],
+      selectList:[]
+    },
+    // 机构
+    orgList: {
+      orgList:[],
+      selectList:[]
+    },
     // 导航头的高度
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
-    cmt: app.globalData.isIphoneX ? 20 : 24,
+    cmt: app.globalData.isIphoneX ? 20 : 22,
     onceToTop: false,
     scrollTop: 0,
     //tabbar
     tabbar: {},
     active: 0,
-    
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
@@ -63,14 +56,14 @@ Page({
       }
     })
   },
-  goToChildListSearch() {
-    wx.navigateTo({
-      url: '../childListSearch/childListSearch',
-    })
-  },
   goToActivityListSearch(e) {
     wx.navigateTo({
-      url: '../activityListSearch/activityListSearch',
+      url: `../activityListSearch/activityListSearch`,
+    })
+  },
+  goToOrgListSearch() {
+    wx.navigateTo({
+      url: '../orgListSearch/orgListSearch',
     })
   },
   goToSearch() {
@@ -95,31 +88,51 @@ Page({
     }
   },
   methods:{
-    
+  },
+  activityClick(event) {
+    var that = this;
+    var select = this.data.activityList.selectList[event.detail.index].value
+    apiServer.post(`/app/activity/list/index/select/${select}`).then(res => {
+      console.log(res.data);
+      that.setData({
+        "activityList.activityList": res.data.data.list
+      })
+    })
+  },
+  orgListClick(event) {
+    var that = this;
+    var select = this.data.orgList.selectList[event.detail.index].value
+    apiServer.post(`/app/org/list/index/select/${select}`).then(res => {
+      console.log(res.data);
+      that.setData({
+        "orgList.orgList": res.data.data.list
+      })
+    })
+  },
+  onShow: function () {
+    wx.hideTabBar()
   },
   onLoad: function () {
     var that = this;
-    wx.request({
-      url: util.apiUrl('/app/index/info'),
-      method: 'post',
-      data: {
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data);
-        that.setData({
-          "informationListData": res.data.data.informationList,
-          "activityListData": res.data.data.activityList
-        })
-      }
-    })
     app.editTabbar();
+    this.setData({
+      tabbar: app.editTabbar()
+    })
+
+    apiServer.post('/app/index/info2').then(res=>{
+      console.log(res.data);
+      that.setData({
+        bannerList: res.data.data.banner,
+        activityList: res.data.data.activityList,
+        orgList: res.data.data.orgList,
+      })
+    })
+
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#fff'
     });
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
