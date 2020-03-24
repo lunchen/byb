@@ -1,3 +1,4 @@
+// 学校主页
 //schoolHome.js
 const util = require('../../utils/util.js');
 const apiServer = require('../../api/request.js');
@@ -81,6 +82,7 @@ Page({
   },
   goToSchoolDetails: function(e) {
     var id = e.currentTarget.dataset.id
+    util.setId(id)
     wx.navigateTo({
       url: `../schoolDetails/schoolDetails?id=${id}`
     })

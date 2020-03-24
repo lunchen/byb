@@ -1,3 +1,4 @@
+// 活动搜索页
 //activityListSearch.js
 const util = require('../../utils/util.js');
 const apiServer = require('../../api/request.js');

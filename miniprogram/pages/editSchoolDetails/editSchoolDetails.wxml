@@ -1,9 +1,9 @@
 <!-- editSchoolDetails.wxml-->
-<view class="container">
+<view class="container editSchoolDetails">
   <navbar navbar-data='{{nvabarData}}'></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
-    <view class="scroll-view-item" style='padding-top:1px'>
+    <view class="scroll-view-item" style='padding-top:1rpx'>
       <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid">
       </view>
       <view class="editSchoolDetails-content">
@@ -12,11 +12,11 @@
             机构简介
           </view>
           <view class="editSchoolDetails-textarea">
-            <textarea value="{{value}}" maxlength="200" auto-height="{{false}}" placeholder="点击输入内容" auto-focus />
+            <textarea value="{{schoolDetails.remark}}" bindinput="textareaIpt" maxlength="200" auto-height="{{false}}" placeholder="点击输入内容" auto-focus />
           </view>
 
           <view class="editSchoolDetails-content-toEditList">
-            <view class="editSchoolDetails-content-toEditList-item">
+            <view class="editSchoolDetails-content-toEditList-item" bindtap="editVideoDesc" data-api="/app/org/info/env" data-updateapi="/app/org/info/update/env" data-key="envList">
               <view>学校环境</view>
               <view class="editSchoolDetails-content-toEditList-item-right">
                 <text class="themeColor">去编辑</text>
@@ -24,7 +24,7 @@
               </view>
             </view>
             
-            <view class="editSchoolDetails-content-toEditList-item">
+            <view class="editSchoolDetails-content-toEditList-item" bindtap="editVideoDesc" data-api="/app/org/info/teach/video" data-updateapi="/app/org/info/update/teach/video" data-key="teachVideoList">
               <view>教学视频</view>
               <view class="editSchoolDetails-content-toEditList-item-right">
                 <text class="themeColor">去编辑</text>
@@ -34,13 +34,13 @@
             
             <view class="editSchoolDetails-content-toEditList-item">
               <view>学员展示</view>
-              <view class="editSchoolDetails-content-toEditList-item-right">
+              <view class="editSchoolDetails-content-toEditList-item-right" bindtap="editVideoDesc" data-api="/app/org/info/show" data-updateapi="/app/org/info/update/show" data-key="showList">
                 <text class="themeColor">去编辑</text>
                 <image src="../../images/edit@2x.png"></image>
               </view>
             </view>
             
-            <view class="editSchoolDetails-content-toEditList-item">
+            <view class="editSchoolDetails-content-toEditList-item" bindtap="editVideoDesc" data-api="/enlist/app/org/info/honor" data-updateapi="/app/org/info/update/honor" data-key="honorList">
               <view>资质荣誉</view>
               <view class="editSchoolDetails-content-toEditList-item-right">
                 <text class="themeColor">去编辑</text>
@@ -57,20 +57,39 @@
           <view class="editSchoolDetails-content-view-title">
             最近动态
           </view>
-          <view class="editSchoolDetails-content-view-addActVideo">
-            <view class="editSchoolDetails-content-view-addActVideo-btn">+</view>
-            <text>添加海报/视频</text>
+          <view class="dynamic" wx:for="{{schoolDetails.activityList}}" wx:key="id">
+            <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle">删除</view>
+            
+            <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
+              <view class="editSchoolDetails-content-view-addActVideo {{item.imgList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="activityList" data-index="{{index}}">
+                <block wx:if="{{item.imgList.length>0}}">
+                    <view wx:for="{{item.imgList}}" wx:key="id">
+                      <view style="margin:0 10rpx 0 10rpx;">
+                        <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+                      </view>
+                    </view>
+                    <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                      <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                    </view>
+                </block>
+                <block wx:else>
+                  <view class="editSchoolDetails-content-view-addActVideo-btn">
+                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                  </view>
+                  <text>添加海报/视频</text>
+                </block>
+              </view>
+            </scroll-view>
+              <!-- 下方活动form表单 -->
+            <iptActivityInfoComponent iptActivityInfoData="{{item}}" viewIndex="{{index}}" bind:getIptMes="getIptMes"></iptActivityInfoComponent>
           </view>
-          <block>
-            <!-- 下方活动form表单 -->
-            <iptActivityInfoComponent></iptActivityInfoComponent>
-          </block>
-          <view class="editSchoolDetails-moreActivity-btn">+继续新增</view>
+          
+          <view class="editSchoolDetails-moreActivity-btn" bindtap="addHandle">+继续新增</view>
         </view>
       </view>
-      <view class="editSchoolDetails-content-view-confirm">
-        <view class="editSchoolDetails-content-view-confirm-btn">确认提交</view>
-      </view>
+      <cover-view class="editSchoolDetails-content-view-confirm">
+        <cover-view bindtap="submit" class="editSchoolDetails-content-view-confirm-btn">确认提交</cover-view>
+      </cover-view>
     </view>
   </scroll-view>
   

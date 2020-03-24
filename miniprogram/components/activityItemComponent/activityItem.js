@@ -1,3 +1,4 @@
+// 活动小方块 活动列表用
 const app = getApp()
 Component({
   properties: {
@@ -21,6 +22,7 @@ Component({
   methods: {
     goToActivityDetails(e) {
       var id = e.currentTarget.dataset.id
+      util.setId(id)
       wx.navigateTo({
         url: `../activityDetails/activityDetails?id=${id}`,
       })

@@ -1,4 +1,5 @@
-//search.js
+// 搜索页
+// search.js
 const util = require('../../utils/util.js');
 const apiServer = require('../../api/request.js');
 //获取应用实例

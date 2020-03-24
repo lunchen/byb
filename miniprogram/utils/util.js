@@ -12,7 +12,7 @@ const formatTime = date => {
 const formatDate = function(date1, fmt) {
   // date1 传时间戳 1534487084
   // fmt 传格式 yyyy-MM-dd hh:mm
-  fmt = "yyyy-MM-dd hh:mm"
+  fmt = "yyyy-MM-dd hh:mm:ss"
   let date = new Date(date1)
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
@@ -46,9 +46,17 @@ const formatNumber = n => {
 const apiUrl = url => {
   return "https://test.byb88.cn/enlist"+url; 
 }
+const setId = id => {
+  wx.setStorageSync("id", id)
+}
+const getId = id => {
+  return wx.getStorageSync('id')
+}
 
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
-  apiUrl: apiUrl
+  apiUrl: apiUrl,
+  setId: setId,
+  getId: getId
 }

@@ -1,3 +1,4 @@
+// 订单详情
 // orderDetails.js
 const util = require('../../utils/util.js')
 const apiServer = require('../../api/request.js');
@@ -38,8 +39,7 @@ Page({
   },
   goToETicket(e) {
     var id = e.currentTarget.dataset.id
-    console.log(11)
-    console.log(e)
+    util.setId(id)
     wx.navigateTo({
       url: `../eTicket/eTicket?id=${id}`,
     })

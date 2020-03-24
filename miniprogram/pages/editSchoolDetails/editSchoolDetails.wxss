@@ -6,19 +6,21 @@
 .editSchoolDetails-content-editInfo-title{
   color: #666666;
   font-size: 30rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
 }
 .editSchoolDetails-content-editInfo{
   padding: 50rpx 0 50rpx 30rpx;
 }
 .editSchoolDetails-textarea{
   position: relative;
+  z-index: 1;
   border-bottom: 1rpx #f0f0f0 solid;
+  padding-bottom: 50rpx;
 }
 .editSchoolDetails-textarea::after{
   content: "限200字以内";
   position: absolute;
-  bottom: 30rpx;
+  bottom: 20rpx;
   right: 30rpx;
   font-size: 30rpx;
   color: #cccccc;
@@ -62,7 +64,7 @@
 .editSchoolDetails-content-view-title{
   font-size: 30rpx;
   border-left: 6rpx #fe8800 solid;
-  margin: 0 0 40rpx 30rpx;
+  margin: 0 0 20rpx 30rpx;
   padding-left: 15rpx;
   height: 30rpx;
   line-height: 30rpx;
@@ -72,14 +74,23 @@
   border-top: 1rpx #d9d9d9 dotted; 
   border-bottom: 1rpx #d9d9d9 dotted; 
   min-height: 200rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 28rpx;
   color: #999999;
 }
+.editSchoolDetails-content-view-addActVideo.type1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.editSchoolDetails-content-view-addActVideo.type2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
 .editSchoolDetails-content-view-addActVideo-btn{
+  width: 60rpx;
+  height: 60rpx;
   margin-right: 30rpx;
 }
 .editSchoolDetails-moreActivity-btn{
@@ -93,6 +104,7 @@
 
 .editSchoolDetails-content-view-confirm{
   padding: 10rpx 30rpx 70rpx;
+
 }
 .editSchoolDetails-content-view-confirm-btn{
   background: #fe8800;
@@ -103,4 +115,13 @@
   width: 100%;
   height: 90rpx;
   line-height: 90rpx;
+}
+.dynamic{
+  border-bottom: 4rpx #d9d9d9 solid;
+}
+.editSchoolDetails .deleteBtn{
+  color: #ff0101;
+  text-align: right;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
 }

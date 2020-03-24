@@ -1,3 +1,4 @@
+// 顶部状态栏
 const app = getApp()
 Component({
   properties: {

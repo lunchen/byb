@@ -1,6 +1,6 @@
-<view class="addVideoComponent" data-id="{{activityData.id}}">
-    <block wx:if="{{src != ''}}">
+<view class="addVideoComponent">
+    <!-- <block wx:if="{{src != ''}}">
       <video src="{{src}}" bindload="imgLoaded" class="video"></video>
-    </block>
+    </block> -->
   <image bindtap="asd" style="width:100%;height:100%" src="../../images/add1@2x.png"></image>
 </view>

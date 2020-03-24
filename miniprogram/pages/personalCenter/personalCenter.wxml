@@ -1,4 +1,4 @@
-<!--personalCenter.wxml-->
+<!-- personalCenter.wxml-->
 <view class="container">
   <navbar navbar-data='{{nvabarData}}'></navbar>
   <view class="personalCenter">

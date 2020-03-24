@@ -1,3 +1,4 @@
+// 底部报名 客服 预约 按钮
 const app = getApp()
 Component({
   properties: {

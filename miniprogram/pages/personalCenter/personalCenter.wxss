@@ -1,4 +1,4 @@
-/* pages/mine/mine.wxss */
+/* personalCenter.wxss */
 .container.personalCenter{
   background: #f5f5f5;
 }

@@ -5,10 +5,11 @@
         <text class="iptActivityInfo-content-form-item-title">主题</text>
         <van-field
           custom-style="padding:0"
-          value="{{ value }}"
+          value="{{ iptActivityInfo.name }}"
           placeholder="活动标题"
           border="{{ false }}"
           bind:change="onChange"
+          bind:blur="sendIptMes"
         />
       </view>
       <view class="iptActivityInfo-content-form-item" >
@@ -16,8 +17,8 @@
         <van-field
           custom-style="padding:0;font-size:28rpx;"
           bindtap="getTime"
-          data-timename = "time1"
-          value="{{ time1 }}"
+          data-timename = "startTime"
+          value="{{ iptActivityInfo.startTime }}"
           placeholder="请选择时间"
           border="{{ false }}"
           readonly="true"
@@ -26,87 +27,91 @@
         <van-field
           custom-style="padding:0;font-size:28rpx;"
           bindtap="getTime"
-          data-timename = "time2"
-          value="{{ time2 }}"
+          data-timename = "endTime"
+          value="{{ iptActivityInfo.endTime }}"
           placeholder="请选择时间"
           border="{{ false }}"
-          bind:change="onChange"
           readonly="true"
         />
       </view>
       <view class="iptActivityInfo-content-form-item item1">
         <text class="iptActivityInfo-content-form-item-title">地点</text>
         <view class="iptActivityInfo-content-form-item-right">
-          <text>请选择</text>
+          <text style="color:#666;" wx:if="{{iptActivityInfo.addr.addr}}">{{iptActivityInfo.addr.addr}}</text>
+          <text wx:else>请选择</text>
           <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image>
         </view>
       </view>
       <view class="iptActivityInfo-content-form-item item1 item2">
         <text class="iptActivityInfo-content-form-item-title ">活动详情</text>
-        <view class="iptActivityInfo-content-form-item-right">
+        
+        <textarea value="{{item.remark}}" bindinput="iptValue" bindblur="sendIptMes" placeholder="请输入" />
+        <!-- <view class="iptActivityInfo-content-form-item-right">
           <text>编辑</text>
           <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image>
-        </view>
+        </view> -->
       </view>
-
-      <view class="iptActivityInfo-content-form-item">
-        <text class="iptActivityInfo-content-form-item-title ">活动范围</text>
-        <view class="iptActivityInfo-content-form-item-radio">
-          <view class="iptActivityInfo-content-form-item-radio-btn1 {{radio1==0?'active':''}}" data-io="0" bindtap="inOrOut">外部活动</view>
-          <view class="iptActivityInfo-content-form-item-radio-btn1 {{radio1==1?'active':''}}" data-io="1" bindtap="inOrOut">内部活动</view>
-        </view>
-      </view>
-      <view class="iptActivityInfo-content-form-item ">
-        <text class="iptActivityInfo-content-form-item-title withTitle">设置费用</text>
-        <view class="iptActivityInfo-content-form-item-radio">
-          <van-radio-group use-icon-slot value="{{ radio2 }}" bind:change="onRadio2Change" style="width:100%;display:flex;align-items:center">
-            <view style="width:140rpx;font-size:28rpx!important;">
-              <van-radio name="0" icon-size="36rpx" shape="square" checked-color="#feb707">免费</van-radio>
-            </view>
-            <view class="radio2-view" style="font-size:28rpx!important;">
-              <van-radio name="1" icon-size="36rpx" shape="square" checked-color="#feb707"></van-radio>
-              <view style="height:40rpx;width:100rpx;margin:0 20rpx;">
-                <van-field
-                  custom-style="padding:0 10rpx;border-bottom:2rpx #666666 solid;"
-                  value="{{ radio2Value }}"
-                  placeholder=""
-                  autosize
-                  disabled="{{radio2 == 1?false:true}}"
-                  border="{{ false }}"
-                  bind:change="onChange"
-                />
-              </view>
-              元
-            </view>
-          </van-radio-group>
-        </view>
-      </view>
-
+      <block wx:if="{{activityType==1}}">
         <view class="iptActivityInfo-content-form-item">
-        <text class="iptActivityInfo-content-form-item-title withTitle">报名名额设置</text>
-        <view class="iptActivityInfo-content-form-item-radio">
-          <van-radio-group use-icon-slot value="{{ radio3 }}" bind:change="onRadio3Change" style="width:100%;display:flex;align-items:center">
-            <view style="width:140rpx;font-size:28rpx!important;">
-              <van-radio custom-style="font-size:28rpx;" name="0" icon-size="36rpx" shape="square" checked-color="#feb707">不限额</van-radio>
-            </view>
-            <view class="radio2-view" style="font-size:28rpx!important;">
-              <van-radio name="1" icon-size="36rpx" shape="square" checked-color="#feb707"></van-radio>
-              <view style="height:40rpx;width:100rpx;margin:0 20rpx;">
-                <van-field
-                  custom-style="padding:0 10rpx;border-bottom:2rpx #666666 solid;"
-                  value="{{ radio3Value }}"
-                  placeholder=""
-                  autosize
-                  disabled="{{radio3 == 1?false:true}}"
-                  border="{{ false }}"
-                  bind:change="onChange"
-                />
-              </view>
-              人
-            </view>
-          </van-radio-group>
+          <text class="iptActivityInfo-content-form-item-title ">活动范围</text>
+          <view class="iptActivityInfo-content-form-item-radio">
+            <view class="iptActivityInfo-content-form-item-radio-btn1 {{radio1==0?'active':''}}" data-io="0" bindtap="inOrOut">外部活动</view>
+            <view class="iptActivityInfo-content-form-item-radio-btn1 {{radio1==1?'active':''}}" data-io="1" bindtap="inOrOut">内部活动</view>
+          </view>
         </view>
-      </view>
+        <view class="iptActivityInfo-content-form-item ">
+          <text class="iptActivityInfo-content-form-item-title withTitle">设置费用</text>
+          <view class="iptActivityInfo-content-form-item-radio">
+            <van-radio-group use-icon-slot value="{{ radio2 }}" bind:change="onRadio2Change" style="width:100%;display:flex;align-items:center">
+              <view style="width:140rpx;font-size:28rpx!important;">
+                <van-radio name="0" icon-size="36rpx" shape="square" checked-color="#feb707">免费</van-radio>
+              </view>
+              <view class="radio2-view" style="font-size:28rpx!important;">
+                <van-radio name="1" icon-size="36rpx" shape="square" checked-color="#feb707"></van-radio>
+                <view style="height:40rpx;width:100rpx;margin:0 20rpx;">
+                  <van-field
+                    custom-style="padding:0 10rpx;border-bottom:2rpx #666666 solid;"
+                    value="{{ radio2Value }}"
+                    placeholder=""
+                    autosize
+                    disabled="{{radio2 == 1?false:true}}"
+                    border="{{ false }}"
+                    bind:change="onChange"
+                  />
+                </view>
+                元
+              </view>
+            </van-radio-group>
+          </view>
+        </view>
+        <view class="iptActivityInfo-content-form-item">
+          <text class="iptActivityInfo-content-form-item-title withTitle">报名名额设置</text>
+          <view class="iptActivityInfo-content-form-item-radio">
+            <van-radio-group use-icon-slot value="{{ radio3 }}" bind:change="onRadio3Change" style="width:100%;display:flex;align-items:center">
+              <view style="width:140rpx;font-size:28rpx!important;">
+                <van-radio custom-style="font-size:28rpx;" name="0" icon-size="36rpx" shape="square" checked-color="#feb707">不限额</van-radio>
+              </view>
+              <view class="radio2-view" style="font-size:28rpx!important;">
+                <van-radio name="1" icon-size="36rpx" shape="square" checked-color="#feb707"></van-radio>
+                <view style="height:40rpx;width:100rpx;margin:0 20rpx;">
+                  <van-field
+                    custom-style="padding:0 10rpx;border-bottom:2rpx #666666 solid;"
+                    value="{{ radio3Value }}"
+                    placeholder=""
+                    autosize
+                    disabled="{{radio3 == 1?false:true}}"
+                    border="{{ false }}"
+                    bind:change="onChange"
+                  />
+                </view>
+                人
+              </view>
+            </van-radio-group>
+          </view>
+        </view>
+
+      </block>
+     
     </van-cell-group>
     
   </view>

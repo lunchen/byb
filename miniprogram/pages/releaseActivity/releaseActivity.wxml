@@ -15,7 +15,7 @@
           <text>添加活动海报/视频</text>
         </view>
         <!-- 下方form表单 -->
-        <iptActivityInfoComponent></iptActivityInfoComponent>
+        <iptActivityInfoComponent activityType="{{1}}"></iptActivityInfoComponent>
         <view class="releaseActivity-content-btnView">
           <view class="releaseActivity-content-btn">
             发布

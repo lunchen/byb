@@ -1,4 +1,5 @@
-// pages/mine/mine.js
+// 报名成功分享页
+// signUpSuccess.js
 const util = require('../../utils/util.js')
 //获取应用实例
 const app = getApp()

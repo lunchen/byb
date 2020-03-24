@@ -1,3 +1,4 @@
+// 活动信息卡
 const app = getApp()
 Component({
   properties: {

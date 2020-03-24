@@ -1,4 +1,4 @@
-<!--signUpSuccess.wxml-->
+<!-- signUpSuccess.wxml-->
 <view class="container signUpSuccess">
   <navbar navbar-data='{{nvabarData}}'></navbar>
   <view class="">

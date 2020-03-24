@@ -1,3 +1,4 @@
+// 编辑活动 动态form
 const util = require('../../utils/util.js')
 const app = getApp()
 Component({
@@ -5,16 +6,32 @@ Component({
     iptActivityInfoData: {
       type: Object,
       value: {},
+      observer: function (newVal, oldVal) {
+        this.setData({
+          iptActivityInfo: newVal
+        })
+      }
+    },
+    activityType: {
+      // 默认类型为动态类型  1为发布活动类型
+      type: Number, 
+      value: 0, 
       observer: function (newVal, oldVal) { }
     },
+    viewIndex: {
+      // 默认类型为动态类型  1为发布活动类型
+      type: Number,
+      value: 0,
+      observer: function (newVal, oldVal) { }
+    }, 
   },
   data: {
     // 时间选择
     value: '',
     minHour: 10,
     maxHour: 20,
-    minDate: new Date().getTime(),
-    maxDate: new Date(2030, 10, 1).getTime(),
+    minDate: new Date(1990, 1, 1).getTime(),
+    maxDate: new Date(2030, 12, 12).getTime(),
     currentDate: new Date().getTime(),
     show: false,
     time1: '',
@@ -25,42 +42,121 @@ Component({
     radio2Value: '',
     radio3: "0",
     radio3Value: '',
+    // 动态数据模板
+    dataModel: {
+      "addr": {
+        "addr": "",
+        "id": 0,
+        "latitude": 0,
+        "longitude": 0,
+        "name": "",
+        "place": "",
+        "placeNo": ""
+      },
+      "imgList": [
+        {
+          "imgNo": "",
+          "remark": "",
+          "title": "",
+          "type": 0,
+          "url": ""
+        }
+      ],
+      "endTime": "",
+      "id": 0,
+      "name": "",
+      "statusName": ""
+    },
+    iptActivityInfo: {
+      "addr": {
+        "addr": "",
+        "id": 0,
+        "latitude": 0,
+        "longitude": 0,
+        "name": "",
+        "place": "",
+        "placeNo": ""
+      },
+      "imgList": [
+        {
+          "imgNo": "",
+          "remark": "",
+          "title": "",
+          "type": 0,
+          "url": ""
+        }
+      ],
+      "endTime": "",
+      "id": 0,
+      "name": "",
+      "statusName": ""
+    }
+    // 活动数据模板
   },
   
-  onLoad(){
+  attached() {
+    // 每次组件进入页面时执行
+    // console.log(789)
+    // console.log(this.data.iptActivityInfo)
   },
   methods: {
-    // 返回上一页面
-    _navback() {
-      wx.navigateBack()
+    sendIptMes(e) {
+      var _this = this
+      console.log("send")
+      console.log(_this.data.iptActivityInfo)
+      console.log(_this.data.viewIndex)
+      console.log("send")
+      this.triggerEvent('getIptMes', {
+        mes: _this.data.iptActivityInfo,
+        index: _this.data.viewIndex
+      })
     },
     getTime: function (event) {
+      console.log(this.data.iptActivityInfo)
       var d = event.target.dataset.timename
       this.setData({
         show: true,
         picker: event.target.dataset.timename
       });
+      console.log(this.data.picker)
     },
     onClose: function () {
       this.setData({
         show: false
       });
     },
+    onChange: function(e) {
+      this.setData({
+        "iptActivityInfo.name": e.detail
+      });
+    },
+    iptValue: function(e) {
+      this.setData({
+        "iptActivityInfo.remark": e.detail.value
+      });
+    },
     confirm(event) {
+      // 时间选择确定
       var _this = this;
-      var time = util.formatDate(event.detail)
+      var time = util.formatDate(event.detail),
+          time1 = _this.data.iptActivityInfo.startTime,
+          time2 = _this.data.iptActivityInfo.endTime,
+          active = _this.data.picker;
       this.setData({
         currentDate: event.detail,
         show: false,
-        [_this.data.picker]: time
+        [`iptActivityInfo.${active}`]: time
       });
-      if (this.data.time1 && this.data.time2 && this.data.time1 > this.data.time2) {
-        time = this.data.time1
+
+      time1 = _this.data.iptActivityInfo.startTime;
+      time2 = _this.data.iptActivityInfo.endTime;
+      if (time1 && time2 && time1 > time2) {
         this.setData({
-          time1: this.data.time2,
-          time2: time
+          "iptActivityInfo.startTime": time1,
+          "iptActivityInfo.endTime": time1
         });
       }
+      this.sendIptMes();
     },
     inOrOut(event) {
 

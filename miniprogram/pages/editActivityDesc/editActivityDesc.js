@@ -1,3 +1,4 @@
+// 编辑活动详情 视频加内容 暂还用上
 //editActivityDesc.js
 const util = require('../../utils/util.js')
 //获取应用实例
@@ -9,7 +10,7 @@ Page({
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
-      title: '活动详情描述', //导航栏 中间的标题
+      title: '活动详情编辑', //导航栏 中间的标题
       white: false, // 是就显示白的，不是就显示黑的。
       address: '' // 加个背景 不加就是没有
     },
@@ -22,6 +23,10 @@ Page({
     // event.detail 为当前输入的值
     console.log(event.detail);
   },
+  getUploadMes: function (e) {
+    console.log(666)
+    console.log(e.detail)
+  },
   onLoad: function (e) {
     var pagess = getCurrentPages();
     console.log(pagess)
@@ -29,25 +34,6 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    var that = this;
-    let id = 1;
-    if (!e.id) {
-      wx.request({
-        url: util.apiUrl(`/app/org/info/${id}`),
-        method: 'post',
-        data: {
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success(res) {
-          console.log(res.data)
-          that.setData({
-            schoolDetails: res.data.data,
-          })
-        }
-      })
-    }
   },
   getUserInfo: function(e) {
     console.log(e)

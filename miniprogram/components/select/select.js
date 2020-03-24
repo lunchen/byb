@@ -1,3 +1,4 @@
+// select下拉 
 Component({
   properties: {
     options: {

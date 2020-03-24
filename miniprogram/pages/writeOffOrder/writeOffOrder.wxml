@@ -1,4 +1,4 @@
-<!--writeOffOrder.wxml-->
+<!-- writeOffOrder.wxml-->
 <!--index.wxml-->
 <view class="container writeOffOrder">
   <navbar navbar-data='{{nvabarData}}'></navbar>

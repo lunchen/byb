@@ -1,3 +1,4 @@
+// 学校主页编辑
 //editSchoolHome.js
 const util = require('../../utils/util.js')
 //获取应用实例

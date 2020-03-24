@@ -1,4 +1,4 @@
-/* pages/mine/mine.wxss */
+/* signUpSuccess.wxss */
 .container.signUpSuccess{
   background: #f5f5f5;
 }

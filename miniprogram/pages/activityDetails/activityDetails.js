@@ -1,3 +1,4 @@
+// 活动详情
 //index.js
 const util = require('../../utils/util.js')
 const apiServer = require('../../api/request.js');
@@ -23,6 +24,7 @@ Page({
   //事件处理函数
   goToSchoolHome: function (e) {
     var id = e.currentTarget.dataset.id
+    util.setId(id)
     wx.navigateTo({
       url: `../schoolHome/schoolHome?id=${id}`
     })

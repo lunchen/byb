@@ -1,4 +1,4 @@
-/* pages/writeOffOrder/writeOffOrder.wxss */
+/* writeOffOrder.wxss */
 .container.writeOffOrder{
   background: #f5f5f5;
 }

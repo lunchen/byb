@@ -1,5 +1,7 @@
-//editSchoolDetails.js
-const util = require('../../utils/util.js')
+// 学校页详情编辑
+// editSchoolDetails.js
+const util = require('../../utils/util.js');
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 
@@ -17,12 +19,173 @@ Page({
     height: app.globalData.navheight,
 
     active: 0,
+    "id": "",
+    "name": "",
+    "remark": "", //简介
+    "activityListModel": {
+        "addr": {
+          "addr": "",
+          "id": 0,
+          "latitude": 0,
+          "longitude": 0,
+          "name": "",
+          "place": "",
+          "placeNo": ""
+        },
+        "endTime": "",
+        "id": 0,
+        "img": "",
+        "name": "",
+        "statusName": ""
+      },
+    "envListModel": {
+        "img": {
+          "imgNo": "",
+          "remark": "",
+          "title": "",
+          "type": 0,
+          "url": ""
+        }
+      },
+    "honorListModel":{
+        "img": {
+          "imgNo": "",
+          "remark": "",
+          "title": "",
+          "type": 0,
+          "url": ""
+        }
+      },
+    "showListModel": {
+        "img": {
+          "imgNo": "",
+          "remark": "",
+          "title": "",
+          "type": 0,
+          "url": ""
+        }
+      },
+    "teachVideoListModel": {
+        "id": 0,
+        "teachName": "",
+        "title": "",
+        "url": ""
+      },
     schoolDetails: {},
+    activityList: [{
+      "addr": {
+        "addr": "",
+        "id": 0,
+        "latitude": 0,
+        "longitude": 0,
+        "name": "",
+        "place": "",
+        "placeNo": ""
+      },
+      "endTime": "",
+      "id": 0,
+      "img": "",
+      "name": "",
+      "statusName": ""
+    }],
+    nowIndex:0,
   },
   //事件处理函数
-  goToSchoolHome: function() {
-    wx.navigateTo({
-      url: '../schoolHome/schoolHome'
+  textareaIpt(e){
+    // 机构简介
+    var value = e.detail.value
+    this.setData({
+      "schoolDetails.remark": value
+    });
+  },
+  editVideoDesc: function (e) {
+    // 跳转到学校环境等的视频编辑
+    if (e.currentTarget.dataset.api){
+      var api = e.currentTarget.dataset.api,
+        updateapi = e.currentTarget.dataset.updateapi
+      wx.navigateTo({
+        url: `../editVideoDesc/editVideoDesc?api=${api}&updateapi=${updateapi}`
+      })
+    }else{
+      var index = e.currentTarget.dataset.index;
+      var data = JSON.stringify({
+          index: index,
+          list: this.data.schoolDetails.activityList[index].imgList
+        })
+      wx.setStorageSync("imageList", data)
+      wx.navigateTo({
+        url: `../editVideoDesc/editVideoDesc`
+      })
+    }
+  },
+  deleteHandle(e){
+    // 删除动态
+    var index = e.currentTarget.dataset.index;
+    var data = this.data.schoolDetails.activityList;
+    data.splice(index,1)
+    this.setData({
+      "schoolDetails.activityList": data
+    });
+    console.log(index)
+  },
+  addHandle() {
+    // 添加空的动态
+    var dataModel = this.data.activityListModel
+    var data = this.data.schoolDetails.activityList;
+    data.push(dataModel)
+    this.setData({
+      "schoolDetails.activityList": data
+    });
+
+  },
+  getIptMes: function (e) {
+    // 获得动态下方编辑的数据
+    var index = e.detail.index;
+    var data = this.data.schoolDetails
+    this.setData({
+      [`schoolDetails.activityList[${index}]`]: e.detail.mes,
+      nowIndex: index
+    });
+  },
+  methods:{
+    
+  },
+  backFn(e){
+    // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息
+    console.log(e)
+    let getData = JSON.parse(wx.getStorageSync("imageList"));
+    let prevIndex = getData.index;
+    let prevData = getData.list
+    this.setData({
+      [`schoolDetails.activityList[${prevIndex}].imgList`]: prevData
+    })
+  },
+  submit(){
+    var data = {
+      "recentActivityList": this.data.schoolDetails.activityList,
+      "remark": this.data.schoolDetails.remark
+    }
+    wx.showToast({
+      title: '请稍后',
+      icon: 'loading',
+      duration: 5000
+    })
+    var _this = this
+    console.log(JSON.stringify(data))
+    apiServer.post(`/app/org/info/update`, data).then(res => {
+      _this.getData()
+      // activityList: res.data.data.activityList
+    })
+  },
+  getData(){
+    var that = this
+    apiServer.post(`/app/org/info`).then(res => {
+      console.log(res.data);
+      wx.hideToast()
+      that.setData({
+        schoolDetails: res.data.data,
+      })
+      // activityList: res.data.data.activityList
     })
   },
   onLoad: function (e) {
@@ -30,32 +193,13 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
+
     var that = this;
-    let id = 1;
-    if (!e.id) {
-      wx.request({
-        url: util.apiUrl(`/org/info/${id}`),
-        method: 'post',
-        data: {
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success(res) {
-          console.log(res.data)
-          that.setData({
-            schoolDetails: res.data.data,
-          })
-        }
-      })
+    let id = e.id ? e.id : util.getId();
+    console.log(id)
+    if (id) {
+      this.getData()
     }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
+  
 })

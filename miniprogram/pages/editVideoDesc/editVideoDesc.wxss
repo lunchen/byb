@@ -1,0 +1,78 @@
+/**editVideoDesc.wxss**/
+.scroll-view-item{
+  padding-bottom: 400rpx;
+}
+.editVideoDesc-textarea{
+  padding: 50rpx 30rpx 40rpx;
+}
+.editVideoDesc-textarea textarea{
+  width: 100%;
+  min-height: 40rpx;
+}
+.textareaReplace{
+  width: 100%;
+  min-height: 40rpx;
+  line-height: 1;
+}
+.editVideoDesc-content-addView{
+  margin: 0 30rpx;
+  display: flex;
+  border-top: 1rpx #d9d9d9 dotted;
+  border-bottom: 1rpx #d9d9d9 dotted;
+  min-height: 200rpx;
+  color: #999999;
+  font-size: 28rpx;
+  align-items: center;
+  justify-content: center;
+}
+.editVideoDesc-content-addView-btn{
+  height: 60rpx;
+  width: 60rpx;
+  margin-right: 30rpx;
+}
+.editVideoDesc-btnView{
+  width: 100%;
+  position: fixed;
+  bottom: 50rpx;
+  left: 0;
+}
+.editVideoDesc-btn{
+  width: 90%;
+  border-radius: 10rpx;
+  background: #fe8800;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #ffffff;
+  margin: 0 auto;
+  font-size: 40rpx;
+  text-align: center;
+}
+.editVideoDesc-content-showView{
+  margin: 0 30rpx;
+  max-height: 460rpx;
+  margin-bottom: 30rpx;
+  border-radius: 6rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.editVideoDesc-content-showView .delBtn{
+  width: 57rpx;
+  height: 57rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}
+.editVideoDesc-content-addnewView{
+  padding-left: 30rpx;
+}
+.editVideoDesc-content-addnewView-btn{
+  width: 100rpx;
+  height: 100rpx;
+  border: 1rpx #d9d9d9 solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

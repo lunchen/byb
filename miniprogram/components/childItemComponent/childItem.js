@@ -1,3 +1,4 @@
+// 育儿小方块 暂不用
 const app = getApp()
 Component({
   properties: {

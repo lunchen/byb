@@ -1,3 +1,4 @@
+// 中间发布按钮跳转页
 // pages/middle/middle.js
 //获取应用实例
 const app = getApp()

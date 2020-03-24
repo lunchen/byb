@@ -1,4 +1,6 @@
+// 添加视频 
 const util = require('../../utils/util.js')
+const apiServer = require('../../api/request.js');
 
 const app = getApp()
 Component({
@@ -6,13 +8,6 @@ Component({
     activityData: {
       type: Object,
       value: {
-        "hotsValue": "",
-        "id": 0,
-        "img": "",
-        "levelName": "",
-        "name": "",
-        "remark": "",
-        "status": 0,
         "totalCount": 0
       }
     },
@@ -59,38 +54,42 @@ Component({
     console.log(789)
   },
   methods: {
+    sendUploadMes(e) {
+      this.triggerEvent('getUploadMes', {
+        mes: e
+      })
+    },
     asd() {
-      console.log(666)
-
       var that = this
-      wx.chooseVideo({
+      wx.chooseMedia({
+        count: 1,
+        mediaType: ['image', 'video'],
         sourceType: ['album', 'camera'],
         maxDuration: 60,
         camera: 'back',
         compressed: false,
         success(res) {
-          console.log(res)
-          let src = res.tempFilePath,
+          let src = res.tempFiles[0],
               height = res.height,
-              width = res.width;
-          
-          var videoName = src.split("/")[src.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi,'');
+              width = res.width,
+              type = 1; //type:1 图片  2 视频
+          if (res.type === "video") type = 2;
+          src.type = type;
+          var videoName = src.tempFilePath.split("/")[src.tempFilePath.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi,'');
           wx.uploadFile({
             url: util.apiUrl(`/picture/upload/${videoName}`),
             method: 'post',
-            filePath: res.tempFilePath,
+            filePath: src.tempFilePath,
             name: 'file',
-            file: res,
-            data: {
-            },
-            header: {
-              'content-type': 'application/json' // 默认值
-            },
+            file: src,
+            data: {},
+            header: {'content-type': 'application/json'},
             success(res) {
-              console.log(JSON.parse(res.data).data.string);
-              that.setData({
-                src: JSON.parse(res.data).data.string,
-              })
+              console.log(JSON.parse(res.data));
+              that.sendUploadMes({
+                url: JSON.parse(res.data).data.string,
+                type: type
+              });
             }
           })
         }

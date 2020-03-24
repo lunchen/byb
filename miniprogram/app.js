@@ -1,6 +1,7 @@
 //app.js
 App({
-  created: function(){
+  created: function () {
+    // var pagess = getCurrentPages();
     this.hideTabBar();
   },
   onLaunch: function (e) {

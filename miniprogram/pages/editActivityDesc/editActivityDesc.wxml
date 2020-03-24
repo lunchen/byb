@@ -2,20 +2,23 @@
 <view class="container editActivityDesc">
   <navbar navbar-data='{{nvabarData}}'></navbar>
   <view style="position:relative;z-index:2;margin-top:{{height+2}}px;border-top:1rpx #f0f0f0 solid">
-    <view class="editActivityDesc-textarea">
-      <textarea value="{{value}}" auto-height placeholder="点击输入内容" auto-focus />
-    </view>
+    
   </view>
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
-      
-      <view class="editActivityDesc-content">
-        <view class="editActivityDesc-content-addView">
-          <view class="editActivityDesc-content-addView-btn">
-            +
+      <block>
+        <view class="editActivityDesc-textarea">
+          <textarea value="{{value}}" auto-height placeholder="点击输入内容" auto-focus />
+        </view>
+        <view class="editActivityDesc-content">
+          <view class="editActivityDesc-content-addView">
+            <view class="editActivityDesc-content-addView-btn">
+              <addVideoComponent bind:getUploadMes="getUploadMes"></addVideoComponent>
+            </view>
           </view>
         </view>
-      </view>
+      </block>
+      
     </view>
   </scroll-view>
   <view class="editActivityDesc-btnView">

@@ -6,7 +6,7 @@
 }
 .iptActivityInfo-content-form-item{
   display: flex;
-  height: 100rpx;
+  min-height: 100rpx;
   align-items: center;
   border-bottom: 1rpx #f0f0f0 solid;
   padding: 1rpx 0;
@@ -18,6 +18,17 @@
 }
 .item2{
   padding-bottom: 100rpx;
+
+  padding-bottom: 20rpx;
+  padding-top: 30rpx;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.item2 textarea{
+  font-size: 26rpx;
+  height: 100rpx;
+  flex: 0 0 auto;
+  margin-top: 10rpx;
 }
 .iptActivityInfo-content-form-item-title{
   font-size: 30rpx;
@@ -39,6 +50,12 @@
   font-size: 28rpx;
   display: flex;
   align-items: center;
+  overflow: hidden;
+}
+.iptActivityInfo-content-form-item-right>text{
+  max-width: 500rpx;
+  text-overflow:ellipsis;
+  overflow: hidden;
 }
 .iptActivityInfo-content-form-item-radio{
   display: flex;

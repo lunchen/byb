@@ -1,14 +1,16 @@
 {
   "pages": [
-    "pages/video-swiper/video-swiper",
-    "pages/activityDetails/activityDetails",
-    "pages/schoolHome/schoolHome",
-    "pages/schoolDetails/schoolDetails",
-
+    "pages/releaseActivity/releaseActivity",
     "pages/editActivityDesc/editActivityDesc",
     "pages/editSchoolDetails/editSchoolDetails",
     "pages/editSchoolHome/editSchoolHome",
-    "pages/releaseActivity/releaseActivity",
+    "pages/editVideoDesc/editVideoDesc",
+    
+    "pages/schoolDetails/schoolDetails",
+    "pages/activityDetails/activityDetails",
+    
+    "pages/schoolHome/schoolHome",
+
     "pages/mine/mine",
     "pages/business/business",
     "pages/writeOffOrder/writeOffOrder",
@@ -16,15 +18,17 @@
     "pages/personalCenter/personalCenter",
     "pages/signUpSuccess/signUpSuccess",
     "pages/middle/middle",
+    "pages/video-swiper/video-swiper",
     
     "pages/courseDetails/courseDetails",
-    
+
+
+    "pages/index/index",
     "pages/orderDetails/orderDetails",
     "pages/eTicket/eTicket",
     "pages/activityListSearch/activityListSearch",
     "pages/search/search",
     "pages/orgListSearch/orgListSearch",
-    "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {

@@ -1,4 +1,5 @@
-// pages/writeOffOrder/writeOffOrder.js
+// 核销页
+// writeOffOrder.js
 const util = require('../../utils/util.js')
 //获取应用实例
 const app = getApp()

@@ -1,4 +1,5 @@
-//releaseActivity.js
+// 发布活动
+// releaseActivity.js
 const util = require('../../utils/util.js')
 //获取应用实例
 const app = getApp()

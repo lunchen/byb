@@ -1,3 +1,4 @@
+// 课程详情页 暂不用
 //index.js
 //获取应用实例
 const app = getApp()

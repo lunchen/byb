@@ -1,3 +1,4 @@
+// 电子票
 // pages/mine/mine.js
 const util = require('../../utils/util.js')
 const apiServer = require('../../api/request.js');

@@ -1,3 +1,4 @@
+// 底部栏
 // tabBarComponent/tabBar.js
 const app = getApp();
 Component({

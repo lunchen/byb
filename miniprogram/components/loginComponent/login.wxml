@@ -13,7 +13,7 @@
           <image src="./icon/login_3@2x.png"></image>
           <text>一键登录</text>
         </view>
-        <view class="login-view-item-text2 mpLoginBtn">
+        <view class="login-view-item-text2 mpLoginBtn" bindtap="loginHandle">
           <image src="./icon/login_4@2x.png"></image>
           <text>手机号登录</text>
         </view>

@@ -1,4 +1,5 @@
-// pages/mine/mine.js
+// 个人中心编辑
+// personalCenter.js
 const util = require('../../utils/util.js')
 //获取应用实例
 const app = getApp()
