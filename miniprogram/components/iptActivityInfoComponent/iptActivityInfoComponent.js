@@ -42,6 +42,7 @@ Component({
     radio2Value: '',
     radio3: "0",
     radio3Value: '',
+    storeAddress:'',
     // 动态数据模板
     dataModel: {
       "addr": {
@@ -93,13 +94,18 @@ Component({
     }
     // 活动数据模板
   },
-  
   attached() {
     // 每次组件进入页面时执行
     // console.log(789)
     // console.log(this.data.iptActivityInfo)
   },
   methods: {
+    toMap() {
+      var index = this.data.viewIndex
+      wx.navigateTo({
+        url: `../../pages/shopMap/shopMap?index=${index}`
+      })
+    },
     sendIptMes(e) {
       var _this = this
       console.log("send")

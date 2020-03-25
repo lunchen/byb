@@ -41,3 +41,66 @@
 .personalCenter-top-view-right{
 
 }
+.popup-changeName{
+  background: #f0f0f0;
+  height: 100%;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.popup-changeName-text{
+  width: 120rpx;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  color: #fe8800;
+}
+.popup-changeName-text_hover{
+  background: #ddd;
+}
+
+.popup-chooseGender{
+
+}
+.popup-chooseGender-title{
+  line-height: 120rpx;
+  text-align: center;
+}
+.popup-chooseGender-choose-View{
+  display: flex;
+}
+.popup-chooseGender-choose-View>view{
+  width: 50%;
+  text-align: center;
+  padding: 20rpx 0;
+}
+.popup-chooseGender-choose-View>view image{
+  width:80rpx;
+  height:80rpx;
+}
+.popup-chooseGender-choose-btn{
+  border-top: 1rpx #999 solid;
+  line-height: 120rpx;
+  text-align: center;
+}
+.selected{
+  color: #fe8800;
+}
+.selected_hover{
+  background: #f0f0f0;
+}
+.btn_hover{
+  background: #f0f0f0;
+}
+.loginOut-btn{
+  width:300rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin: 100rpx auto;
+  background: #ffffff;
+  border: 1rpx #cccccc solid;
+  border-radius: 10rpx;
+  color: #fe8800;
+  font-size: 28rpx;
+}

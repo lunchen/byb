@@ -1,15 +1,47 @@
 <!--pages/middle/middle.wxml-->
-<view class="container">
+<view class="container middle">
   <navbar navbar-data='{{nvabarData}}'></navbar>
   <view class="search-view" style="position:relative;z-index:2;margin-top:{{height}}px;">
   </view>
-      
-  <scroll-view bindscrolltoupper="scrolltoupper" bindscroll="scrollY" scroll-y style="position:relative;height: 100%;" scroll-top="{{scrollTop}}px">
+  <view class="middle-content">
+    <view class="middle-content-title">
+      您可以发布
+    </view>
+    <view class="middle-content-item item1" bindtap="goToRelease" data-type="1">
+      <image class="middle-content-item-left" src="../../images/issue_1@2x.png"></image>
+      <view class="middle-content-item-right">
+        <view class="middle-content-item-text1">
+          <text>线上活动</text>
+          <image class="middle-content-item-text-icon" src="../../images/issue_4@2x.png"></image>
+        </view>
+        <view class="middle-content-item-text2">通过网络工具举办的线上教学</view>
+      </view>
+    </view>
+    <view class="middle-content-item item2" bindtap="goToRelease" data-type="2">
+      <image class="middle-content-item-left" src="../../images/issue_2@2x.png"></image>
+      <view class="middle-content-item-right">
+        <view class="middle-content-item-text1">
+          <text>线下活动</text>
+        </view>
+        <view class="middle-content-item-text2">在某个具体地点举办的活动</view>
+      </view>
+    </view>
+    <view class="middle-content-item item3" bindtap="goToRelease" data-type="3">
+      <image class="middle-content-item-left" src="../../images/issue_3@2x.png"></image>
+      <view class="middle-content-item-right">
+        <view class="middle-content-item-text1">
+          <text>其他</text>
+        </view>
+        <view class="middle-content-item-text2">其他无固定地举办点的线上活动</view>
+      </view>
+    </view>
+  </view>
+  <!-- <scroll-view bindscrolltoupper="scrolltoupper" bindscroll="scrollY" scroll-y style="position:relative;height: 100%;" scroll-top="{{scrollTop}}px">
     <view class="scroll-view-item" style='padding-top:1px;background:{{onceToTop?"#feb707":"transpant"}};'>
       <view class="content" style="">
         
       </view>
     </view>
-  </scroll-view>
+  </scroll-view> -->
   <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>

@@ -1,6 +1,6 @@
 <cover-view class='nav-wrap' style='background:{{backgroundColor}};height: {{isIphoneX ? (height*1.5 + 20):(height*2 + 20)}}px;'>
   <!-- 导航栏背景图片 -->
-  <cover-view class="backgroundimg" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px" />
+  <cover-image class="backgroundimg" wx:if="{{navbarData.address!=''}}" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px" />
   <!-- // 导航栏 中间的标题 -->
   <cover-view class='nav-title' wx:if='{{!navbarData.white}}' style='line-height: {{height*2 + 44}}px;'>
     {{navbarData.title}}

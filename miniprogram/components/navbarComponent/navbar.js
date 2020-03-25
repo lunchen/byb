@@ -13,6 +13,12 @@ Component({
       type: String,
       value: "#ffffff",
       observer: function (newVal, oldVal) { }
+    },
+    hasShow: {
+      //navbarData   由父页面传递的数据，变量名字自命名
+      type: Object,
+      value: {},
+      observer: function (newVal, oldVal) { }
     }
   },
   data: {
@@ -38,7 +44,27 @@ Component({
   methods: {
     // 返回上一页面
     _navback() {
-      wx.navigateBack()
+      var hasShowValue = false;
+      var data =this.data.hasShow;
+      var showTrueList = []
+      for(let i in data){
+        if(data[i]===true){
+          hasShowValue=true
+          showTrueList.push(i)
+        }
+      }
+      console.log(hasShowValue)
+      console.log(data)
+      console.log(showTrueList)
+      if (hasShowValue){
+        this.triggerEvent('checkShow', {
+          hasShowValue: hasShowValue,
+          showTrueList: showTrueList
+        })
+      }else{
+        wx.navigateBack()
+      }
+     
     },
     // 计算图片高度
     imgLoaded(e) {

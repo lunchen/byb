@@ -1,23 +1,25 @@
 {
   "pages": [
-    "pages/releaseActivity/releaseActivity",
-    "pages/editActivityDesc/editActivityDesc",
+    "pages/joinerManage/joinerManage",
+    "pages/activityDetails/activityDetails",
+    "pages/middle/middle",
+    "pages/mine/mine",
+    "pages/personalCenter/personalCenter",
     "pages/editSchoolDetails/editSchoolDetails",
+    "pages/shopMap/shopMap",
+    "pages/editActivityDesc/editActivityDesc",
     "pages/editSchoolHome/editSchoolHome",
     "pages/editVideoDesc/editVideoDesc",
     
     "pages/schoolDetails/schoolDetails",
-    "pages/activityDetails/activityDetails",
     
     "pages/schoolHome/schoolHome",
+    "pages/releaseActivity/releaseActivity",
 
-    "pages/mine/mine",
     "pages/business/business",
     "pages/writeOffOrder/writeOffOrder",
     "pages/confirmOrder/confirmOrder",
-    "pages/personalCenter/personalCenter",
     "pages/signUpSuccess/signUpSuccess",
-    "pages/middle/middle",
     "pages/video-swiper/video-swiper",
     
     "pages/courseDetails/courseDetails",
@@ -31,6 +33,11 @@
     "pages/orgListSearch/orgListSearch",
     "pages/logs/logs"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "window": {
     "navigationStyle": "custom",
     "backgroundTextStyle": "light",

@@ -1,1 +1,58 @@
 /* pages/middle/middle.wxss */
+.container.middle{
+  background: #fafafa;
+  position: relative;
+}
+.middle-content{
+  position: absolute;
+  bottom: 100rpx;
+  padding: 0 60rpx;
+  left: 0;
+  right: 0;
+}
+.middle-content-title{
+  color: #fe8800;
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 120rpx;
+}
+.item1{
+  background: #5ebc74;
+}
+.item2{
+  background: #f6a737;
+}
+.item3{
+  background: #6bb5ef;
+}
+.middle-content-item{
+  height: 60rpx;
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 10rpx;
+  color: #ffffff;
+  margin-bottom: 60rpx;
+}
+.middle-content-item-left{
+  width: 90rpx;
+  height: 90rpx;
+  margin-right: 50rpx;
+}
+.middle-content-item-right{
+  flex: 1 0 auto;
+}
+.middle-content-item-text1{
+  font-size: 36rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.middle-content-item-text-icon{
+  width: 40rpx;
+  height: 40rpx;
+  margin: 6rpx 0 0 17rpx;
+}
+.middle-content-item-text2{
+  font-size: 28rpx;
+}

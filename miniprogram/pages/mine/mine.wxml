@@ -2,21 +2,25 @@
 <!--index.wxml-->
 <view class="container">
   <navbar navbar-data='{{nvabarData}}'></navbar>
-  <view class="participant"  wx:if="{{true}}" >
+  <view class="participant"  wx:if="{{identity==1}}" >
   <!-- 参与方 -->
     <view class="mine-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
       <view class="mine-top-view">
         <view class="mine-top-view-left">
-          <image class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="../../images/userimg.png"></image>
+          <view>
+            <image wx:if="{{participantInfo.user}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{participantInfo.user.heardImg}}" bindtap="goToPersonalCenter"></image>
+            <view wx:else class="mine-top-view-left-noImg"></view>
+          </view>
+          
           <view class="mine-top-view-left-text">
-            <view style="font-size:36rpx;color:#010101;font-weight:bloder;">Aliceli</view>
-            <view style="font-size:24rpx;color:#999999;display:flex;align-items:center;">
+            <view style="font-size:36rpx;color:#010101;font-weight:bloder;">{{participantInfo.user?participantInfo.user.nickName:"--"}}</view>
+            <view style="font-size:28rpx;color:#999999;display:flex;align-items:center;">
               <text>商务洽谈</text>
-              <image style="width:22rpx;height:22rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_4@2x.png"></image>
+              <image style="width:28rpx;height:28rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_4@2x.png"></image>
             </view>
           </view>
         </view>
-        <view class="mine-top-view-right">
+        <view class="mine-top-view-right" bindtap="changeIdentity" data-identity="2">
           <image style="width:40rpx;height:40rpx;margin-top:4rpx;" src="../../images/participant_2@2x.png"></image>
           <text>切换为主办方</text>
         </view>
@@ -32,58 +36,64 @@
             <text>全部订单</text>
           </view>
           <view class="participantCard">
-            <view class="participantCard-content-item">
-              <view class="participantCard-content-item-top">
-                <view class="participantCard-content-item-top-left">
-                  <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/ic_tab_issue@2x.png"></image>
-                  <text>鼎承街舞社</text>
-                </view>
-                <text>报名成功</text>
-              </view>
-              <view class="participantCard-content-item-middle">
-                <view>
-                  <image class="participantCard-content-item-middle-left" src="../../images/huodong.png"></image>
-                </view>
-                <view class="participantCard-content-item-middle-center">
-                  <view class="participantCard-content-item-middle-center-text">
-                    <text class="participantCard-view-text1">鼎承街舞十周从0开始...</text>
-                    <view class="participantCard-view-text2">时间：11-28 10：00开始</view>
-                    <view class="participantCard-view-text2">地点：线下活动</view> 
+            <block wx:for="{{participantInfo.orderList}}" wx:key="id">
+              <view class="participantCard-content-item">
+                <view class="participantCard-content-item-top">
+                  <view class="participantCard-content-item-top-left">
+                    <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                    <text>{{item.org.name}}</text>
                   </view>
-                  <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">待使用</view>
+                  <text>{{item.statusName}}</text>
                 </view>
-                <view class="participantCard-content-item-middle-right">
-                  <view class="trapezoidTop"></view>
-                  <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
-                  <view class="trapezoidBottom"></view>
+                <view class="participantCard-content-item-middle" bindtap="goToETicket" data-orderNo="{{item.orderNo}}">
+                  <view>
+                    <image class="participantCard-content-item-middle-left" src="../../images/huodong.png"></image>
+                  </view>
+                  <view class="participantCard-content-item-middle-center">
+                    <view class="participantCard-content-item-middle-center-text">
+                      <text class="participantCard-view-text1">{{item.activity.name}}</text>
+                      <view class="participantCard-view-text2">时间：{{item.activity.startTime}}开始</view>
+                      <view class="participantCard-view-text2">地点：{{item.activity.addr}}</view> 
+                    </view>
+                    <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
+                  </view>
+                  <view class="participantCard-content-item-middle-right">
+                    <view class="trapezoidTop"></view>
+                    <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
+                    <view class="trapezoidBottom"></view>
+                  </view>
+                </view>
+                <view class="participantCard-content-item-bottom">
+                  <view class="participantCard-content-item-bottom-view1">
+                    <text>票种1</text>
+                    <text style="font-size:26rpx">X{{item.count}}</text>
+                    <text>¥ {{item.price}}</text>
+                  </view>
+                  <view class="participantCard-content-item-bottom-view2">
+                    <text>共一订单 合计：</text>
+                    <text style="color:#fe8800">¥ {{item.totalPrice}}</text>
+                  </view>
                 </view>
               </view>
-              <view class="participantCard-content-item-bottom">
-                <view class="participantCard-content-item-bottom-view1">
-                  <text>票种1</text>
-                  <text style="font-size:26rpx">X1</text>
-                  <text>¥ 98.8</text>
-                </view>
-                <view class="participantCard-content-item-bottom-view2">
-                  <text>共一订单 合计：</text>
-                  <text style="color:#fe8800">¥ 98.8</text>
-                </view>
-              </view>
-            </view>
+            </block>
+            
           </view>
         </view>
       </view>
     </scroll-view>
   </view>
 
-  <view class="sponsor" wx:else>
+  <view class="sponsor" wx:if="{{identity==2}}">
   <!-- 主办方 -->
     <view class="mine-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
       <view class="mine-top-view">
         <view class="mine-top-view-left">
-          <image class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="../../images/userimg.png"></image>
+          <view>
+            <image wx:if="{{sponsorInfo.org}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{sponsorInfo.org.logo}}"></image>
+            <view wx:else class="mine-top-view-left-noImg"></view>
+          </view>
           <view class="mine-top-view-left-text">
-            <view style="font-size:36rpx;color:#010101;font-weight:bloder;">Aliceli</view>
+            <view style="font-size:36rpx;color:#010101;font-weight:bloder;">{{sponsorInfo.org.name}}</view>
             <view style="font-size:28rpx;color:#999999;display:flex;align-items:center;">
               <text>学校主页</text>
               <image style="width:28rpx;height:28rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_4@2x.png"></image>
@@ -91,7 +101,7 @@
           </view>
           
         </view>
-        <view class="mine-top-view-right">
+        <view class="mine-top-view-right" bindtap="changeIdentity" data-identity="1">
           <image style="width:40rpx;height:40rpx;margin-top:4rpx;" src="../../images/participant_2@2x.png"></image>
           <text>切换为参与方</text>
         </view>
@@ -103,13 +113,13 @@
         <view>
           <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/sponsor_4@2x.png"></image>
           <text>总收入：</text>
-          <text style="color:#fe8800">1000元</text>
+          <text style="color:#fe8800">{{sponsorInfo.org.income}}元</text>
         </view>
         <view class="capital-cline"></view>
         <view> 
           <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/sponsor_5@2x.png"></image>
           <text>提现：</text>
-          <text style="color:#fe8800">1000元</text>
+          <text style="color:#fe8800">{{sponsorInfo.org.leftIncome}}元</text>
         </view>
       </view>
     </view>
@@ -124,63 +134,65 @@
           </view>
 
           <view class="sponsorCard">
-            <view class="sponsorCard-content-item">
-              <block>
-                <view class="sponsorCard-content-item-top">
-                  <view class="sponsorCard-content-item-top-left">
-                    <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/ic_tab_issue@2x.png"></image>
-                    <text>鼎承街舞社</text>
+            <block wx:for="{{sponsorInfo.activityList}}" wx:key="id">
+              <view class="sponsorCard-content-item" wx:if="{{item.status!=-1}}">
+                <block>
+                  <view class="sponsorCard-content-item-top">
+                    <view class="sponsorCard-content-item-top-left">
+                      <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                      <text>{{item.org.name}}</text>
+                    </view>
+                    <text wx:if="{{item.status!=-1}}">编辑活动</text>
                   </view>
-                  <text wx:if="{{true }}">编辑活动</text>
-                </view>
-                <view class="sponsorCard-content-item-middle">
-                  <view>
-                    <image class="sponsorCard-content-item-middle-left" src="../../images/huodong.png"></image>
-                  </view>
-                  <view class="sponsorCard-content-item-middle-center">
-                    <view class="sponsorCard-content-item-middle-center-text">
-                      <text class="sponsorCard-view-text1">鼎承街舞十周从0开始..鼎承街舞十周从0开始.</text>
-                      <view class="sponsorCard-view-text2">时间：11-28 10：00开始</view>
-                      <view class="sponsorCard-view-text2">地点：线下活动</view> 
-                    </view>
-                    <view class="sponsorCard-view-status statusIng statusEnd">未开始</view>
-                  </view>
-                </view>
-                <view class="sponsorCard-content-item-bottom">
-                  <view class="sponsorCard-content-item-bottom-view1">
+                  <view class="sponsorCard-content-item-middle">
                     <view>
-                      <image src="../../images/sponsor_6@2x.png"></image>
-                      <text>261</text>
+                      <image class="sponsorCard-content-item-middle-left" src="../../images/huodong.png"></image>
                     </view>
-                    <view>
-                      <image src="../../images/sponsor_7@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image src="../../images/sponsor_8@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
-                      <text>下架</text>
+                    <view class="sponsorCard-content-item-middle-center">
+                      <view class="sponsorCard-content-item-middle-center-text">
+                        <text class="sponsorCard-view-text1">{{item.name}}</text>
+                        <view class="sponsorCard-view-text2">{{item.remark}}</view> 
+                        <view class="sponsorCard-view-text3">时间：{{item.betweenTime}}</view>
+                      </view>
+                      <view class="sponsorCard-view-status {{item.status==-1?'statusEnd':'statusIng'}}">{{item.statusName}}</view>
                     </view>
                   </view>
-                </view>
-              </block>
-              <view class="sponsorCard-isEnd" wx:if="{{false}}">
-                <view  class="sponsorCard-isEnd-bg"></view>
-                <view class="sponsorCard-isEnd-top">
-                  编辑活动
-                </view>
-                <view class="sponsorCard-isEnd-middle">
-                  <view>已下架</view>
-                </view>
-                <view class="sponsorCard-isEnd-bottom">
-                  <view class="sponsorCard-isEnd-bottom-btn">重新上架</view>
-                </view>
+                  <view class="sponsorCard-content-item-bottom">
+                    <view class="sponsorCard-content-item-bottom-view1">
+                      <view>
+                        <image src="../../images/sponsor_6@2x.png"></image>
+                        <text>{{item.lookCount?item.lookCount:0}}</text>
+                      </view>
+                      <view>
+                        <image src="../../images/sponsor_7@2x.png"></image>
+                        <text>{{item.joinCount?item.joinCount:0}}</text>
+                      </view>
+                      <view>
+                        <image src="../../images/sponsor_8@2x.png"></image>
+                        <text>{{item.shareCount?item.shareCount:0}}</text>
+                      </view>
+                      <view>
+                        <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
+                        <text>下架</text>
+                      </view>
+                    </view>
+                  </view>
+                </block>
+                <view class="sponsorCard-isEnd" wx:if="{{item.status==-1}}">
+                  <view  class="sponsorCard-isEnd-bg"></view>
+                  <view class="sponsorCard-isEnd-top">
+                    编辑活动
+                  </view>
+                  <view class="sponsorCard-isEnd-middle">
+                    <view>已下架</view>
+                  </view>
+                  <view class="sponsorCard-isEnd-bottom">
+                    <view class="sponsorCard-isEnd-bottom-btn">重新上架</view>
+                  </view>
 
+                </view>
               </view>
-            </view>
+            </block>
           </view>
 
 
@@ -189,185 +201,68 @@
             <text>已下架</text>
           </view>
 
-          <view class="sponsorCard">
-            <view class="sponsorCard-content-item">
-              <block>
-                <view class="sponsorCard-content-item-top">
-                  <view class="sponsorCard-content-item-top-left">
-                    <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/ic_tab_issue@2x.png"></image>
-                    <text>鼎承街舞社</text>
+          <view class="sponsorCard" style="padding-bottom:{{isIphoneX?100:100}}rpx">
+            <block wx:for="{{sponsorInfo.activityList}}" wx:key="id">
+              <view class="sponsorCard-content-item" wx:if="{{item.status==-1}}">
+                <block>
+                  <view class="sponsorCard-content-item-top">
+                    <view class="sponsorCard-content-item-top-left">
+                      <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                      <text>{{item.org.name}}</text>
+                    </view>
+                    <text wx:if="{{item.status!=-1}}">编辑活动</text>
                   </view>
-                  <text wx:if="{{false}}">编辑活动</text>
-                </view>
-                <view class="sponsorCard-content-item-middle">
-                  <view>
-                    <image class="sponsorCard-content-item-middle-left" src="../../images/huodong.png"></image>
-                  </view>
-                  <view class="sponsorCard-content-item-middle-center">
-                    <view class="sponsorCard-content-item-middle-center-text">
-                      <text class="sponsorCard-view-text1">鼎承街舞十周从0开始..鼎承街舞十周从0开始.</text>
-                      <view class="sponsorCard-view-text2">时间：11-28 10：00开始</view>
-                      <view class="sponsorCard-view-text2">地点：线下活动</view> 
-                    </view>
-                    <view class="sponsorCard-view-status statusIng statusEnd">未开始</view>
-                  </view>
-                </view>
-                <view class="sponsorCard-content-item-bottom">
-                  <view class="sponsorCard-content-item-bottom-view1">
+                  <view class="sponsorCard-content-item-middle">
                     <view>
-                      <image src="../../images/sponsor_6@2x.png"></image>
-                      <text>261</text>
+                      <image class="sponsorCard-content-item-middle-left" src="../../images/huodong.png"></image>
                     </view>
-                    <view>
-                      <image src="../../images/sponsor_7@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image src="../../images/sponsor_8@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
-                      <text>下架</text>
+                    <view class="sponsorCard-content-item-middle-center">
+                      <view class="sponsorCard-content-item-middle-center-text">
+                        <text class="sponsorCard-view-text1">{{item.name}}</text>
+                        <view class="sponsorCard-view-text2">{{item.remark}}</view> 
+                        <view class="sponsorCard-view-text3">时间：{{item.betweenTime}}</view>
+                      </view>
+                      <view class="sponsorCard-view-status {{item.status==-1?'statusEnd':'statusIng'}}">{{item.statusName}}</view>
                     </view>
                   </view>
-                </view>
-              </block>
-              <view class="sponsorCard-isEnd" wx:if="{{true}}">
-                <view  class="sponsorCard-isEnd-bg"></view>
-                <view class="sponsorCard-isEnd-top">
-                  编辑活动
-                </view>
-                <view class="sponsorCard-isEnd-middle">
-                  <view>已下架</view>
-                </view>
-                <view class="sponsorCard-isEnd-bottom">
-                  <view class="sponsorCard-isEnd-bottom-btn">重新上架</view>
-                </view>
+                  <view class="sponsorCard-content-item-bottom">
+                    <view class="sponsorCard-content-item-bottom-view1">
+                      <view>
+                        <image src="../../images/sponsor_6@2x.png"></image>
+                        <text>{{item.lookCount?item.lookCount:0}}</text>
+                      </view>
+                      <view>
+                        <image src="../../images/sponsor_7@2x.png"></image>
+                        <text>{{item.joinCount?item.joinCount:0}}</text>
+                      </view>
+                      <view>
+                        <image src="../../images/sponsor_8@2x.png"></image>
+                        <text>{{item.shareCount?item.shareCount:0}}</text>
+                      </view>
+                      <view>
+                        <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
+                        <text>下架</text>
+                      </view>
+                    </view>
+                  </view>
+                </block>
+                <view class="sponsorCard-isEnd" wx:if="{{item.status==-1}}">
+                  <view  class="sponsorCard-isEnd-bg"></view>
+                  <view class="sponsorCard-isEnd-top">
+                    编辑活动
+                  </view>
+                  <view class="sponsorCard-isEnd-middle">
+                    <view>已下架</view>
+                  </view>
+                  <view class="sponsorCard-isEnd-bottom">
+                    <view class="sponsorCard-isEnd-bottom-btn">重新上架</view>
+                  </view>
 
+                </view>
               </view>
-            </view>
+            </block>
           </view>
           
-          <view class="sponsorCard">
-            <view class="sponsorCard-content-item">
-              <block>
-                <view class="sponsorCard-content-item-top">
-                  <view class="sponsorCard-content-item-top-left">
-                    <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/ic_tab_issue@2x.png"></image>
-                    <text>鼎承街舞社</text>
-                  </view>
-                  <text wx:if="{{false}}">编辑活动</text>
-                </view>
-                <view class="sponsorCard-content-item-middle">
-                  <view>
-                    <image class="sponsorCard-content-item-middle-left" src="../../images/huodong.png"></image>
-                  </view>
-                  <view class="sponsorCard-content-item-middle-center">
-                    <view class="sponsorCard-content-item-middle-center-text">
-                      <text class="sponsorCard-view-text1">鼎承街舞十周从0开始..鼎承街舞十周从0开始.</text>
-                      <view class="sponsorCard-view-text2">时间：11-28 10：00开始</view>
-                      <view class="sponsorCard-view-text2">地点：线下活动</view> 
-                    </view>
-                    <view class="sponsorCard-view-status statusIng statusEnd">未开始</view>
-                  </view>
-                </view>
-                <view class="sponsorCard-content-item-bottom">
-                  <view class="sponsorCard-content-item-bottom-view1">
-                    <view>
-                      <image src="../../images/sponsor_6@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image src="../../images/sponsor_7@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image src="../../images/sponsor_8@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
-                      <text>下架</text>
-                    </view>
-                  </view>
-                </view>
-              </block>
-              <view class="sponsorCard-isEnd" wx:if="{{true}}">
-                <view  class="sponsorCard-isEnd-bg"></view>
-                <view class="sponsorCard-isEnd-top">
-                  编辑活动
-                </view>
-                <view class="sponsorCard-isEnd-middle">
-                  <view>已下架</view>
-                </view>
-                <view class="sponsorCard-isEnd-bottom">
-                  <view class="sponsorCard-isEnd-bottom-btn">重新上架</view>
-                </view>
-
-              </view>
-            </view>
-          </view>
-          
-          <view class="sponsorCard">
-            <view class="sponsorCard-content-item">
-              <block>
-                <view class="sponsorCard-content-item-top">
-                  <view class="sponsorCard-content-item-top-left">
-                    <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/ic_tab_issue@2x.png"></image>
-                    <text>鼎承街舞社</text>
-                  </view>
-                  <text wx:if="{{false}}">编辑活动</text>
-                </view>
-                <view class="sponsorCard-content-item-middle">
-                  <view>
-                    <image class="sponsorCard-content-item-middle-left" src="../../images/huodong.png"></image>
-                  </view>
-                  <view class="sponsorCard-content-item-middle-center">
-                    <view class="sponsorCard-content-item-middle-center-text">
-                      <text class="sponsorCard-view-text1">鼎承街舞十周从0开始..鼎承街舞十周从0开始.</text>
-                      <view class="sponsorCard-view-text2">时间：11-28 10：00开始</view>
-                      <view class="sponsorCard-view-text2">地点：线下活动</view> 
-                    </view>
-                    <view class="sponsorCard-view-status statusIng statusEnd">未开始</view>
-                  </view>
-                </view>
-                <view class="sponsorCard-content-item-bottom">
-                  <view class="sponsorCard-content-item-bottom-view1">
-                    <view>
-                      <image src="../../images/sponsor_6@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image src="../../images/sponsor_7@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image src="../../images/sponsor_8@2x.png"></image>
-                      <text>261</text>
-                    </view>
-                    <view>
-                      <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
-                      <text>下架</text>
-                    </view>
-                  </view>
-                </view>
-              </block>
-              <view class="sponsorCard-isEnd" wx:if="{{true}}">
-                <view  class="sponsorCard-isEnd-bg"></view>
-                <view class="sponsorCard-isEnd-top">
-                  编辑活动
-                </view>
-                <view class="sponsorCard-isEnd-middle">
-                  <view>已下架</view>
-                </view>
-                <view class="sponsorCard-isEnd-bottom">
-                  <view class="sponsorCard-isEnd-bottom-btn">重新上架</view>
-                </view>
-
-              </view>
-            </view>
-          </view>
         </view>
       </view>
     </scroll-view>

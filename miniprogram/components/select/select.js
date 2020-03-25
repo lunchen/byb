@@ -1,6 +1,10 @@
 // select下拉 
 Component({
   properties: {
+    customStyle: {
+      type: String,
+      value: ''
+    },
     options: {
       type: Array,
       value: [

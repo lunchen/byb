@@ -1,0 +1,75 @@
+<!-- joinerManage.wxml-->
+<view class="container joinerManage">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+    <view style="position:relative;z-index:2;margin-top:{{height}}px;">
+      <van-search
+          value="{{ value }}"
+          placeholder="搜索你想要的内容"
+          show-action
+          bind:search="onSearch"
+          bind:cancel="onCancel"
+          shape="round"
+        />
+    </view>
+    <view class="joinerManage-screen-view">
+      <view class="joinerManage-screen-view-item">
+        <view>日期</view>
+        <view class="screen-date" bindtap="showTime">
+          <view class="screen-date-text">
+            {{req.startTime}}
+          </view>
+          <image src="../../images/riqi@2x.png"></image>
+        </view>
+      </view>
+      <view class="joinerManage-screen-view-item">
+        <view>状态</view>
+        <view class="screen-status">
+          <select wx:if="{{selectList.length>0}}" bind:change="selectChange" key="value" text="label" options="{{selectList}}" defaultOption="{{defaultSelectList}}" custom-style="height:56rpx;line-height:56rpx;font-size:24rpx;width:200rpx;"></select>
+        </view>
+      </view> 
+    </view>
+    <view class="joinerManage-total">
+      总共：{{count}}条数据
+    </view>
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{2*height}}px;'>
+      <view class="joinerManage-orderList">
+        <block wx:for="{{orderList}}" wx:key="*this">
+          <view class="joinerManage-orderList-item">
+            <view class="joinerManage-orderList-item-left" bindtap="selectHandle" data-index="{{index}}">
+              <image wx:if="{{item.select}}" class="selected" style="width:30rpx;height:30rpx" src="../../images/select@2x.png"></image>
+              <view wx:else class="select"></view>
+            </view>
+            <view class="joinerManage-orderList-item-middle">
+              <view class="joinerManage-orderList-item-middle-title">
+                <text>{{item.name}}</text>
+                <text style="font-size:20rpx;margin-left:20rpx;color:#666666">{{item.telephone}}</text>
+              </view>
+              <view class="joinerManage-orderList-item-middle-text1">{{item.remark}}</view>
+              <view class="joinerManage-orderList-item-middle-text2">
+                <text>金额：</text>
+                <text class="color:#fe8800">¥ {{item.totalPrice}}元</text>
+              </view>
+              <view class="joinerManage-orderList-item-middle-text2">时间：{{item.createTime}}</view>
+            </view>
+            <view class="joinerManage-orderList-item-right ">
+              <text class="status1 status2 status3">{{item.statusName}}</text>
+              <!-- <image style="width:36rpx;height:36rpx;margin-top:4rpx;" src="../../images/more2@2x.png"></image> -->
+            </view>
+          </view>
+        </block>  
+      </view>
+    </view>
+    
+  </scroll-view>
+    <van-popup show="{{ timeShow }}" bind:close="onCloseTime" custom-style="height: 40%" position="bottom">
+      <van-datetime-picker
+        type="date"
+        value="{{ currentDate }}"
+        min-date="{{ minDate }}"
+        formatter="{{ formatter }}"
+        bind:confirm = "confirm"
+        bind:cancel = "onCloseTime"
+      />
+    </van-popup>
+</view>

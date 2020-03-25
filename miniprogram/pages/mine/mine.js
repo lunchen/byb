@@ -1,6 +1,7 @@
 // 我的
 // pages/mine/mine.js
 const util = require('../../utils/util.js')
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -20,6 +21,28 @@ Page({
     cmt: app.globalData.isIphoneX ? 20 : 24,
     //tabbar
     tabbar: {},
+    identity:2,       //1参与方 2主办方
+    participantInfo: {},
+    sponsorInfo: {},
+  },
+  changeIdentity(e){
+    var identity = e.currentTarget.dataset.identity
+    console.log(e)
+    this.setData({
+      identity: identity
+    })
+  },
+  goToETicket(e) {
+    var orderNo = e.currentTarget.dataset.orderno
+    console.log(orderNo)
+    wx.navigateTo({
+      url: `../eTicket/eTicket?orderNo=${orderNo}`,
+    })
+  },
+  goToPersonalCenter(e) {
+    wx.navigateTo({
+      url: `../personalCenter/personalCenter`,
+    })
   },
   onLoad: function (options) {
     app.editTabbar();
@@ -27,7 +50,19 @@ Page({
       frontColor: '#ffffff',
       backgroundColor: '#fff'
     });
-
+    var _this = this
+    apiServer.post('/app/my/user/index').then(res => {
+      // console.log(res.data);
+      _this.setData({
+        participantInfo: res.data.data
+      })
+    })
+    apiServer.post('/app/my/org/index').then(res => {
+      console.log(res.data);
+      _this.setData({
+        sponsorInfo: res.data.data
+      })
+    })
   },
   onReady: function () {
 

@@ -40,13 +40,13 @@ Page({
       frontColor: '#ffffff',
       backgroundColor: '#000000'
     });
-    var that = this;
-    let id = e.id ? e.id : 1;
-    if (id) {
-      console.log(id)
-      apiServer.post(`/app/order/qrCode/id/${id}`).then(res => {
+    var _this = this;
+    console.log(e)
+    let orderNo = e.orderNo ? e.orderNo : 1;
+    if (orderNo) {
+      apiServer.post(`/app/my/user/qrCode/orderNo/${orderNo}`).then(res => {
         console.log(res.data);
-        that.setData({
+        _this.setData({
           eTicketData: res.data.data,
         })
       })

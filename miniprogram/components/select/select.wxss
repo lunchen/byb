@@ -18,8 +18,9 @@
 .select-current::after {
   position: absolute;
   display: block;
-  right: 40rpx;
-  top: 40rpx;
+  right: 20rpx;
+  top: 50%;
+  margin-top: -10rpx;
   content: '';
   width: 0;
   height: 0;
@@ -36,9 +37,10 @@
 }
 
 .option-list {
-  position: absolute;
+  position: relative;
   left: 0;
-  top: 76rpx;
+  margin-top: -2rpx;
+  /* top: 76rpx; */
   width: 100%;
   padding: 12rpx 30rpx 10rpx;
   border-radius: 6rpx;

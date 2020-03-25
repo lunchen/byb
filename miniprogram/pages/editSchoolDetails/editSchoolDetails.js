@@ -71,7 +71,12 @@ Page({
         "title": "",
         "url": ""
       },
-    schoolDetails: {},
+    schoolDetails: {
+      activityList:[],
+      id:'',
+      name:"",
+      remark:''
+    },
     activityList: [{
       "addr": {
         "addr": "",
@@ -89,6 +94,7 @@ Page({
       "statusName": ""
     }],
     nowIndex:0,
+    storeAddress: ""   //地图页直接设好数据 将需要的地址数据设置到setAddress
   },
   //事件处理函数
   textareaIpt(e){
@@ -150,6 +156,19 @@ Page({
   methods:{
     
   },
+  setAddress(e){
+    console.log(e)
+    var index = e.index
+    var address = e.storeAddress
+    // 地图页返回并执行的方法
+    this.setData({
+      [`schoolDetails.activityList[${index}].addr.addr`]: address.addr,
+      [`schoolDetails.activityList[${index}].addr.longitude`]: address.longitude,
+      [`schoolDetails.activityList[${index}].addr.latitude`]: address.latitude,
+      [`schoolDetails.activityList[${index}].addr.name`]: address.title,
+      [`schoolDetails.activityList[${index}].addr.place`]: address.province + address.city + address.district
+    })
+  },
   backFn(e){
     // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息
     console.log(e)
@@ -195,6 +214,7 @@ Page({
     });
 
     var that = this;
+    util.setId(1)
     let id = e.id ? e.id : util.getId();
     console.log(id)
     if (id) {

@@ -34,7 +34,7 @@
           readonly="true"
         />
       </view>
-      <view class="iptActivityInfo-content-form-item item1">
+      <view class="iptActivityInfo-content-form-item item1" bindtap="toMap">
         <text class="iptActivityInfo-content-form-item-title">地点</text>
         <view class="iptActivityInfo-content-form-item-right">
           <text style="color:#666;" wx:if="{{iptActivityInfo.addr.addr}}">{{iptActivityInfo.addr.addr}}</text>

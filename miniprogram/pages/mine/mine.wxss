@@ -47,7 +47,11 @@
   margin-left:30rpx;
   margin-top: -130rpx;
 }
-.mine-top-view-left-img{
+.mine-top-view-left-noImg{
+  width:148rpx;
+  height:148rpx;
+  border-radius:74rpx;
+  background: #ddd;
 }
 .mine-top-view-left-text{
   margin-left: 20rpx;
@@ -283,6 +287,13 @@
 .sponsorCard-view-text2{
   font-size: 24rpx;
   color: #666;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.sponsorCard-view-text3{
+  font-size: 24rpx;
+  color: #666;
 }
 .sponsorCard-view-status{
   height: 60rpx;
@@ -292,7 +303,6 @@
   font-weight:bloder;
   padding: 0 24rpx;
   border-radius: 30rpx;
-  background: #b3b3b3;
 }
 .sponsorCard-view-status.statusIng{
   background: #feb707;
@@ -346,7 +356,7 @@
 }
 .sponsorCard-isEnd-bg{
   background: #eee;
-  opacity: 0.6;
+  opacity: 0.4;
   width: 100%;
   height: 100%;
   position: absolute;

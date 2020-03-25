@@ -12,7 +12,7 @@ Page({
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 0, //是否显示左上角图标   1表示显示    0表示不显示
-      title: '首页', //导航栏 中间的标题
+      title: '发布', //导航栏 中间的标题
       white: '', // 是就显示白的，不是就显示黑的。
       address: '', // 加个背景 不加就是没有
     },
@@ -21,7 +21,26 @@ Page({
     //tabbar
     tabbar: {},
   },
-
+  goToRelease(e){
+    let event = e.currentTarget.dataset.type
+    if (event==1){
+      wx.showToast({
+        title: '暂未开发，敬请期待。。。',
+        icon: 'none',
+        duration: 1000
+      })
+    } else if (event == 2) {
+      wx.navigateTo({
+        url: '../releaseActivity/releaseActivity'
+      })
+    } else if (event == 3) {
+      wx.showToast({
+        title: '暂未开发，敬请期待。。。',
+        icon: 'none',
+        duration: 1000
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
