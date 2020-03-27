@@ -28,8 +28,16 @@ Page({
   onSearch(){
     console.log(this.data.value)
   },
-  onLoad: function () {
+  comingTo(options) {
+    var data = {}
+    var strs = decodeURIComponent(options.scene)
+    var pages = getCurrentPages()
+    var currentPage = pages[pages.length - 1]
+    console.log(currentPage.options)
+  },
+  onLoad: function (e) {
     var that = this;
+    this.comingTo(e)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'

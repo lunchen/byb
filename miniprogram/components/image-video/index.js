@@ -4,7 +4,7 @@ Component({
   properties: {
     src: {
       type: String,
-      value: '../../images/huodong.png'
+      value: ''
     },
     type: {
       type: Number,

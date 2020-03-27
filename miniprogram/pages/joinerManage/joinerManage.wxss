@@ -137,3 +137,16 @@
   color: #999999;
   margin-right: 20rpx;
 }
+.exportExcel{
+  position: fixed;
+  right: 30rpx;
+  bottom: 80rpx;
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  border: 1rpx #fe8800 solid;
+  color: #fe8800;
+}

@@ -56,6 +56,59 @@ Page({
     count:"--",
     orderList: []
   },
+  exportExcelHandle(){
+    var that = this;
+    let req = this.data.req;
+    wx.showToast({
+      title: '导出数据中，请稍后...',
+      icon: 'loading'
+    })
+    req.startTime = new Date(req.startTime).getTime()
+    apiServer.post(`/app/my/org/order/excel`, req).then(res => {
+      console.log(res.data)
+      var durl = res.data.data.string
+      console.log(durl)
+      // wx.showToast({
+      //   title: '导出数据中，请稍后',
+      //   icon: 'loading'
+      // })
+
+      wx.showToast({
+        title: '导出成功',
+        icon: 'none',
+        duration: 1000
+      })
+      const downloadTask = wx.downloadFile({
+        url: durl, //仅为示例，并非真实的资源
+        success(res) {
+          if (res.statusCode == 200){
+            console.log("tempFilePath" + res.tempFilePath)
+            wx.openDocument({
+              filePath: res.tempFilePath,
+              success(res){
+                console.log(res)
+              },
+              fail(res) {
+                console.log(res)
+              }
+            })
+          }
+          // wx.playVoice({
+          //   filePath: res.tempFilePath
+          // })
+        }
+      })
+
+      downloadTask.onProgressUpdate((res) => {
+        console.log('下载进度', res.progress)
+        console.log('已经下载的数据长度', res.totalBytesWritten)
+        console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+        // if (res.progress==100){
+        //   wx.saveImageToPhotosAlbum()
+        // }
+      })
+    })
+  },
   selectChange(e){
     // 由于select内部转换过key 所以取值时候 value->id label->name
     console.log(e.detail)

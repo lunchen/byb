@@ -12,7 +12,7 @@
           <!-- 课程简介 -->
           <view class="schoolDetails-content-introduction-title">
             <view class="title">
-              <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+              <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
               <text>课程简介</text>
             </view>
           </view>
@@ -39,7 +39,7 @@
           <!-- 近期活动 -->
           <view class="schoolDetails-content-introduction-title">
             <view class="title">
-              <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+              <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
               <text>近期活动</text>
             </view>
             <view class="more">更多活动</view>
@@ -140,7 +140,7 @@
            教学视频 
           <view class="schoolDetails-content-introduction-title">
             <view class="title">
-              <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+              <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
               <text>教学视频</text>
             </view>
             <view class="more">更多视频</view>

@@ -44,16 +44,20 @@
 }
 .signUpSuccess-shareToFriend{
   width: 270rpx;
+  min-height: 60rpx;
+  line-height: 60rpx;
   height: 60rpx;
   position: relative;
   margin: 90rpx auto 0;
+  padding: 0;
+  background: transparent;
 }
 .signUpSuccess-shareToFriend image{
   width: 270rpx;
   height: 60rpx;
 }
 .signUpSuccess-shareToFriend view{
-  width: 270rpx;
+  width: 100%;
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;

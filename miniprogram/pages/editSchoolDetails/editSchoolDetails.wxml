@@ -61,7 +61,7 @@
             <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle">删除</view>
             
             <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
-              <view class="editSchoolDetails-content-view-addActVideo {{item.imgList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="activityList" data-index="{{index}}">
+              <view class="editSchoolDetails-content-view-addActVideo {{item.imgList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="imgList" data-index="{{index}}">
                 <block wx:if="{{item.imgList.length>0}}">
                     <view wx:for="{{item.imgList}}" wx:key="id">
                       <view style="margin:0 10rpx 0 10rpx;">

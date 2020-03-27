@@ -62,6 +62,9 @@
     </view>
     
   </scroll-view>
+  <view class="exportExcel" bindtap="exportExcelHandle">
+    导出名单
+  </view>
     <van-popup show="{{ timeShow }}" bind:close="onCloseTime" custom-style="height: 40%" position="bottom">
       <van-datetime-picker
         type="date"

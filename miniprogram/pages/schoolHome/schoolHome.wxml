@@ -30,9 +30,9 @@
 
         <view class="schoolHome-content-title">
           <view class="schoolHome-content-title-text">
-            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
             <text>精品课程</text>
-            <image style="width:28rpx;height:28rpx;margin-left:8rpx;" src="../../images/detail_6@3x.png"></image>
+            <image style="width:28rpx;height:28rpx;margin-left:8rpx;" src="../../images/detail_6@2x.png"></image>
           </view>
           
         </view>
@@ -50,14 +50,14 @@
 
         <view class="schoolHome-content-title">
           <view class="schoolHome-content-title-text">
-            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
            <text>了解我们</text>
           </view>
-          <view class="schoolHome-content-title-btn">学校详情编辑</view>
+          <view class="schoolHome-content-title-btn" bindtap="goToEditSchoolDetails">学校详情编辑</view>
         </view>
         <view class="schoolHome-content-card" bindtap="goToSchoolDetails" data-id="{{schoolHomeData.id}}">
           <view>
-            <image class="schoolHome-content-card-left" src="../../images/huodong.png"></image>
+            <image class="schoolHome-content-card-left" src="{{schoolHomeData.img}}"></image>
           </view>
           <block>
             <view class="schoolHome-content-card-right">
@@ -74,7 +74,7 @@
         <view class="schoolHome-link"></view>
         <view class="schoolHome-content-title">
           <view class="schoolHome-content-title-text">
-            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
             <text>找到我们</text>
           </view>
         </view>
@@ -88,6 +88,6 @@
     </view>
   </scroll-view>
   
-  <login showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
-  <tabbarBtn loginShow="{{loginShow}}" bind:changeFLogin="changeFLogin" needChooseCourse="{{true}}"></tabbarBtn>
+  <login showType="{{loginShow}}" signUpType="{{signUpType}}" bind:changeFLogin="changeFLogin"></login>
+  <tabbarBtn loginShow="{{loginShow}}" bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{true}}"></tabbarBtn>
 </view>

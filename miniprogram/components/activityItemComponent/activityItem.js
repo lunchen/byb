@@ -1,4 +1,5 @@
 // 活动小方块 活动列表用
+const util = require('../../utils/util.js');
 const app = getApp()
 Component({
   properties: {

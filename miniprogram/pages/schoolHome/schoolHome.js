@@ -21,6 +21,8 @@ Page({
 
     swiperWidth: wx.getSystemInfoSync().windowWidth,
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+    signUpType: false,  //确定是免费true 还是花费false 
+    loginShow: 0,   //打开报名弹窗参数
     // 视频
     indicatorDots: true,
     vertical: false,
@@ -56,7 +58,6 @@ Page({
     }],
 
     schoolHomeData: {},
-    loginShow: 0
   },
   // 滑块
   swiperChange(e) {
@@ -87,11 +88,21 @@ Page({
       url: `../schoolDetails/schoolDetails?id=${id}`
     })
   },
-  changeFLogin: function (e) {
-    // 获取从底部3按钮获取的报课弹窗状态  底部按钮组件还需要获取用户登录状态
-    // 状态1 需登录 2
+  goToEditSchoolDetails(e) {
+    wx.navigateTo({
+      url: `../../pages/editSchoolDetails/editSchoolDetails`
+    })
+  },
+  changeSignUpType: function (e) {
+    // 底部按钮 true 为免费预约 false 花费
     console.log(666)
-    console.log(e.detail.loginShow)
+    this.setData({
+      signUpType: e.detail.signUpType
+    })
+  },
+  changeFLogin: function (e) {
+    // 获取从底部打开报名弹窗
+    console.log(666)
     this.setData({
       loginShow: e.detail.loginShow
     })
@@ -107,6 +118,7 @@ Page({
       console.log(id)
       apiServer.post(`/app/org/index/${id}`).then(res => {
         console.log(res.data);
+        wx.setStorageSync("aliveData", JSON.stringify(res.data.data))
         that.setData({
           schoolHomeData: res.data.data,
           markers: [{

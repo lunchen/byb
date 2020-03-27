@@ -100,6 +100,21 @@ Component({
     // console.log(this.data.iptActivityInfo)
   },
   methods: {
+    editVideoDesc: function (e) {
+      console.log(e)
+      // 跳转到学校环境等的视频编辑
+      var key= e.currentTarget.dataset.key;
+      var index = this.data.viewIndex;
+      var data = JSON.stringify({
+        key: key,
+        index: index,
+        list: this.data.iptActivityInfoData[key]
+      })
+      wx.setStorageSync("addivList", data)
+      wx.navigateTo({
+        url: `../editVideoDesc/editVideoDesc`
+      })
+    },
     toMap() {
       var index = this.data.viewIndex
       wx.navigateTo({
@@ -165,19 +180,47 @@ Component({
       this.sendIptMes();
     },
     inOrOut(event) {
-
       this.setData({
-        radio1: event.target.dataset.io
+        "iptActivityInfo.style": event.target.dataset.io
       });
+      this.sendIptMes();
     },
     onRadio2Change(event) {
+      if (event.detail == 1){
+        this.setData({
+          "iptActivityInfo.freeFlg": event.detail,
+          "iptActivityInfo.price": ''
+        });
+      }else{
+        this.setData({
+          "iptActivityInfo.freeFlg": event.detail
+        });
+      }
+      this.sendIptMes();
+    },
+    onRadio2iptChange(event){
+      console.log(event.detial)
       this.setData({
-        radio2: event.detail
+        "iptActivityInfo.price": event.detail
       });
     },
     onRadio3Change(event) {
+      if (event.detail == 1) {
+        this.setData({
+          "iptActivityInfo.joinLimitlessFlg": event.detail,
+          "iptActivityInfo.totalJoin": ''
+        });
+      } else {
+        this.setData({
+          "iptActivityInfo.joinLimitlessFlg": event.detail
+        });
+      }
+      this.sendIptMes();
+    },
+    onRadio3iptChange(event) {
+      console.log(event.detial)
       this.setData({
-        radio3: event.detail
+        "iptActivityInfo.totalJoin": event.detail
       });
     },
   }

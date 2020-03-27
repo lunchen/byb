@@ -28,6 +28,7 @@ Page({
   onClose() {
     this.setData({ show: false });
   },
+
   onLoad: function (options) {
 
     var that = this;
@@ -35,6 +36,8 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#ffffff'
     });
+    console.log(6666)
+    console.log(options)
 
     // wx.could.init();
     // const db = wx.cloud.database();
@@ -81,7 +84,36 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
 
-  }
+  onShareAppMessage: function (ops) {
+    var json = encodeURIComponent(JSON.stringify({ a: 1 }));
+    console.log(123123)
+    console.log(ops)
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    return {
+      title: '分享卡片',
+      path: '/pages/signUpSuccess/signUpSuccess?share=' + json,
+      imageUrl: "../../images/huodong.png",
+      success: function (res) {
+        // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log("转发失败:" + JSON.stringify(res));
+      }
+    }
+    // console.log(123)
+    // var options = {
+    //   title:123,
+    //   path:'',
+    //   imageUrl: 'https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/test/2020/03/21/logo.png'
+    // }
+    // wx.onShareAppMessage(options)
+
+  },
 })

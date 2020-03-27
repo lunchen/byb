@@ -16,7 +16,7 @@
       />
     </view>
     <view hover-class="btnClick" bindtap="toScan">
-      <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/home_3@3x.png"></image>
+      <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/home_3@2x.png"></image>
     </view>
   </view>
       
@@ -41,7 +41,7 @@
         <view class="content-view">
           <view class="content-title">
             <view class="content-title-text1">
-              <text>您的孩子适合哪些课程</text>
+              <text>{{banner.title}}</text>
               <image src="../../images/home_11@2x.png" style="height:34rpx;width:34rpx;margin: 3rpx 0 0 20rpx;"></image>
             </view>
             <view wx:if="{{false}}" class="content-title-right">
@@ -51,10 +51,11 @@
           </view>
           <scroll-view class="index-scroll-viewX" scroll-x="true" style="width: 100%">
             <view class="course-videoList">
-              <block wx:for="{{bannerList.bannerVideoList}}" wx:key="id">
+              <block wx:for="{{banner.bannerVideoList}}" wx:key="id">
                 <view class="course-videoList-item">
-                  <image wx:if="{{item.type===1}}" style="height:100%;width:100%;border-radius:26rpx;" src="{{item.video}}"></image>
-                  <video wx:else  style="height:100%;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.video}}" controls></video>
+                  <!-- <image wx:if="{{item.type===1}}" style="height:100%;width:100%;border-radius:26rpx;" src="{{item.video}}"></image>
+                  <video wx:else  style="height:100%;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.video}}" controls></video> -->
+                  <image-video show="{{true}}" src="{{item.video}}" type="{{2}}" height="220" width="320"></image-video>
                 </view>
               </block>
               

@@ -17,9 +17,10 @@ Page({
       addressimg2: '../../images/home_8@2x.png' // 加个背景 不加就是没有
     },
     // banner视频
-    bannerList:[
-     
-    ],
+    banner:{
+      bannerVideoList:[],
+      title:''
+    },
     // 活动
     activityList: {
       activityList:[],
@@ -113,7 +114,17 @@ Page({
   onShow: function () {
     wx.hideTabBar()
   },
-  onLoad: function () {
+  comingTo(options){
+    var data = {}
+    var strs = decodeURIComponent(options.scene)
+    var pages = getCurrentPages()
+    console.log(pages)
+    var currentPage = pages[pages.length - 1]
+    console.log(currentPage)
+    console.log(currentPage.options)
+  },
+  onLoad: function (e) {
+    this.comingTo(e)
     var that = this;
     app.editTabbar();
     this.setData({
@@ -123,7 +134,7 @@ Page({
     apiServer.post('/app/index/info2').then(res=>{
       console.log(res.data);
       that.setData({
-        bannerList: res.data.data.banner,
+        banner: res.data.data.banner,
         activityList: res.data.data.activityList,
         orgList: res.data.data.orgList,
       })

@@ -23,18 +23,11 @@ Component({
   },
   onLoad(){
     console.log(this.properties)
-    console.log(666)
   },
   attached: function () {
-    console.log(this.properties)
-    console.log(666)
     // 获取是否是通过分享进入的小程序
     this.setData({
       share: app.globalData.share
-    })
-    // 定义导航栏的高度   方便对齐
-    this.setData({
-      height: app.globalData.height
     })
   },
   methods: {

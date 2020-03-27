@@ -8,14 +8,17 @@ Component({
     options: {
       type: Array,
       value: [
-        {
-        id: '001',
-        name: '是'
-        },{
-          id: '002',
-          name: '否'
-        }
-      ]
+        // {
+        // id: '001',
+        // name: '是'
+        // },{
+        //   id: '002',
+        //   name: '否'
+        // }
+      ],
+      observer: function (newVal, oldVal) {
+        this.changekv()
+      }
     },
     defaultOption: {
       type: Object,
@@ -60,15 +63,8 @@ Component({
       this.setData({
         isShow: false
       })
-    }
-  },
-  lifetimes: {
-    attached() {
-      // 属性名称转换, 如果不是 { id: '', name:'' } 格式，则转为 { id: '', name:'' } 格式
-      console.log(777)
-
-      console.log(this.properties)
-      console.log(this.data)
+    },
+    changekv(){
       let result = []
       // if (this.data.key !== 'id' || this.data.text !== 'name') { 
       //   for (let item of this.data.options) {
@@ -76,7 +72,6 @@ Component({
       //     result.push({ id, name })
       //   }
       // }
-
       for (let item of this.data.options) {
         let { [this.data.key]: id, [this.data.text]: name } = item
         result.push({ id, name })
@@ -85,6 +80,13 @@ Component({
         current: Object.assign({}, this.data.defaultOption),
         result: result
       })
+    }
+  },
+
+  lifetimes: {
+    attached() {
+      // 属性名称转换, 如果不是 { id: '', name:'' } 格式，则转为 { id: '', name:'' } 格式
+      this.changekv()
     }
   }
 })

@@ -1,5 +1,4 @@
 <!--confirmOrder.wxml-->
-<!--index.wxml-->
 <view class="container confirmOrder">
   <navbar navbar-data='{{nvabarData}}'></navbar>
   <view class="">
@@ -7,11 +6,11 @@
       <view class="confirmOrder-top-view">
         <view class="confirmOrder-top-view-item">
           <text>报名人姓名</text>
-          <text>王萌萌</text>
+          <text>{{orderData.name}}</text>
         </view>
         <view class="confirmOrder-top-view-item">
           <text>手机号码</text>
-          <text>王萌萌</text>
+          <text>{{orderData.telephone}}</text>
         </view>
       </view>
       
@@ -21,11 +20,12 @@
       <view class="scroll-view" style='padding-top:1px;'>
         <view class="confirmOrder-content">
           <view class="confirmOrder-content-item">
-            <block>
+
+            <block wx:for="{{orderData.infoDetailList}}" wx:key="*this">
               <view class="confirmOrder-content-item-top">
                 <view class="confirmOrder-content-item-top-left">
-                  <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/ic_tab_issue@2x.png"></image>
-                  <text>鼎承街舞社</text>
+                  <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                  <text>{{item.org.name}}</text>
                 </view>
                 <text wx:if="{{false}}">报名成功</text>
               </view>
@@ -35,9 +35,9 @@
                 </view>
                 <view class="confirmOrder-content-item-middle-center">
                   <view class="confirmOrder-content-item-middle-center-text">
-                    <text class="confirmOrder-view-text1">鼎承街舞十周从0开始..鼎承街舞十周从0开始.</text>
-                    <view class="confirmOrder-view-text2">时间：11-28 10：00开始</view>
-                    <view class="confirmOrder-view-text2">地点：线下活动</view> 
+                    <text class="confirmOrder-view-text1">{{item.activity.name}}</text>
+                    <view class="confirmOrder-view-text2">时间：{{item.activity.betweenTime}}</view>
+                    <view class="confirmOrder-view-text2">地点：{{item.activity.typeName}}</view> 
                   </view>
                 </view>
               </view>
@@ -47,14 +47,16 @@
                     <text>票种1</text>
                   </view>
                   <view>
-                    <text style="font-size:24rpx;">X1</text>
+                    <text style="font-size:24rpx;">X{{item.count}}</text>
                   </view>
                   <view>
-                    <text>￥98.8</text>
+                    <text>￥{{item.price}}</text>
                   </view>
                 </view>
               </view>
             </block>
+
+            
           </view>
         </view>
       </view>
@@ -63,7 +65,7 @@
       <view class="confirmOrder-bottom-view-item">
         <view>
           <text>合计： </text>
-          <text>¥ 98.9</text>
+          <text style="color:#fe8800;">¥ {{orderData.total}}</text>
         </view>
         <view class="confirmOrder-bottom-view-btn">马上支付</view>
       </view>

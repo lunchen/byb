@@ -18,7 +18,7 @@
         <view class="search-title">热门搜索</view>
         <view class="search-theme">
           <view class="search-theme-item" wx:for="{{searchTheme}}" wx:key="{{item.name}}" bindtap="hotSearch" data-keyword="{{item.name}}">
-            <image style="width:50rpx;height:50rpx" src="../../images/search_1@3x.png"></image>
+            <image style="width:50rpx;height:50rpx" src="../../images/search_1@2x.png"></image>
             <text>{{item.name}}</text>
           </view>
         </view>

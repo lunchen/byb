@@ -8,7 +8,7 @@
 .editSchoolHome-content-view-title{
   font-size: 30rpx;
   border-left: 6rpx #fe8800 solid;
-  margin: 0 0 40rpx 30rpx;
+  margin: 0 0 10rpx 30rpx;
   padding-left: 15rpx;
   height: 30rpx;
   line-height: 30rpx;
@@ -18,11 +18,18 @@
   border-top: 1rpx #d9d9d9 dotted; 
   border-bottom: 1rpx #d9d9d9 dotted; 
   min-height: 200rpx;
+  font-size: 28rpx;
+  color: #999999;
+}
+.editSchoolHome-content-view-addActVideo.type1{
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28rpx;
-  color: #999999;
+}
+.editSchoolHome-content-view-addActVideo.type2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .editSchoolHome-content-view-addActVideo-btn{
   margin-right: 30rpx;
@@ -166,4 +173,10 @@
   height: 60rpx;
   padding: 0 20rpx;
   border-radius: 8rpx;
+}
+.editSchoolHome .deleteBtn{
+  color: #ff0101;
+  text-align: right;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
 }

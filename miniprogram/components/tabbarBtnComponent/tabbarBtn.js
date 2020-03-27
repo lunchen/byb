@@ -1,32 +1,37 @@
 // 底部报名 客服 预约 按钮
+const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
     needChooseCourse: {
-      //是否需要选择课程  true 表示父组件为学校主页 false 表示父组件为活动详情
+      //是否需要选择课程  true 表示父组件为学校主页需要选 false 表示父组件为活动详情不用选
       type: Boolean,
-      value: true,
+      value: false,
     },
     loginShow: {
-      //loginShow  预约课程弹窗状态 1登录 2选课程 3不用选课程 4填姓名手机号提交
+      //loginShow  预约课程弹窗状态  1选课程 2不用选课程
       type: Number,
       value: 0,
-    },
+    }
   },
   data: {
     qrCodeUrl: "./icon/qrCode.png",  //要改成线上图片
-    showType: false,
-    display: false
+    showType: false,   // 客服小弹窗bg显示控制
+    display: false,   // 客服小弹窗显示控制
   },
   attached: function () {
     // 获取是否是通过分享进入的小程序
     this.setData({
       share: app.globalData.share
     })
-    // 定义导航栏的高度   方便对齐
-    this.setData({
-      height: app.globalData.height
-    })
+    var _this = this
+    console.log(this.data.needChooseCourse)
+    if (this.data.needChooseCourse) {
+      
+    }
+    
+  },
+  onLoad(){
   },
   methods: {
     
@@ -77,31 +82,27 @@ Component({
         })
       }, 20);
     },
-
-    appointBtn:function() {
-      // 点击出发父组件事件并传值
-      // 微信默认toast
-      // wx.showToast({
-      //   title: '333',
-      //   icon: 'loading',
-      //   duration: 1000
-      // })
-      var needLogin = true
-      if (needLogin){
+    appointFreeBtn: function () {
+      
+    },
+    appointBtn:function(e) {
+      // 打开触发父组件打开报名弹窗
+      if (this.data.needChooseCourse) {
         this.triggerEvent('changeFLogin', {
           loginShow: 1
         })
-      } else if (!needLogin && this.needChooseCourse){
+      } else {
         this.triggerEvent('changeFLogin', {
           loginShow: 2
         })
-      }else{
-        this.triggerEvent('changeFLogin', {
-          loginShow: 3
-        })
       }
+      this.freeBtn(e)
     },
-    
+    freeBtn(e){
+      this.triggerEvent('changeSignUpType', {
+        signUpType: e.currentTarget.dataset.freetype
+      })
+    }
     //返回到首页
     // _backhome() {
     //   wx.switchTab({

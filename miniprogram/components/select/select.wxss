@@ -9,6 +9,7 @@
   position: relative;
   width: 100%;
   padding: 0 40rpx;
+  height: 90rpx;
   line-height: 90rpx;
   border: 1rpx solid #fe8800;
   border-radius: 10rpx;

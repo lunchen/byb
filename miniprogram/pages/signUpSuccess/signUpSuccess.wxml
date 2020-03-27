@@ -14,10 +14,16 @@
           <view class="signUpSuccess-view-middle-text">时间：2020-03-11 14:00:00</view>
           <view class="signUpSuccess-view-middle-text">活动方式：线上活动</view>
         </view>
-        <view class="signUpSuccess-shareToFriend">
+        
+        <button class="signUpSuccess-shareToFriend" open-type='share' bindtap="onShareAppMessage">
           <image src="../../images/apply_2@2x.png"></image>
           <view>分享给好友</view>
-        </view>
+        </button>
+
+        <!-- <view class="signUpSuccess-shareToFriend" >
+          <image src="../../images/apply_2@2x.png"></image>
+          <view>分享给好友</view>
+        </view> -->
         <view class="signUpSuccess-shareView">
           <view class="signUpSuccess-shareView-item">
             <image src="../../images/apply_3@2x.png"></image>

@@ -1,6 +1,6 @@
 <view class="orgItem-view-item" bindtap="goToOrgItemDetails" data-id="{{orgItemData.id}}">
   <view>
-    <image class="orgItem-view-item-left" src="../../images/huodong.png"></image>
+    <image class="orgItem-view-item-left" src="{{orgItemData.img}}"></image>
   </view>
   
   <block>

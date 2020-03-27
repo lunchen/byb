@@ -1,27 +1,8 @@
 <view class="login" style="padding-top:{{isIphoneX?50:40}}%" wx:if="{{showType>0}}">
   <view class="login-bg" bindtap="onClose"></view>
+  
   <block wx:if="{{showType===1}}">
-    <!-- 登录 -->
-    <view class="login_closeBtn" bindtap="onClose">
-      <image style="width:46rpx;height:46rpx;" src="./icon/login_2@2x.png"></image>
-    </view>
-    <view class="login-view">
-      <image class="login-view-bgImg" src="./icon/login_1@2x.png"></image>
-      <view class="login-view-item">
-        <view class="login-view-item-text1">离成功只差登录</view>
-        <view class="login-view-item-text2 wxLoginBtn">
-          <image src="./icon/login_3@2x.png"></image>
-          <text>一键登录</text>
-        </view>
-        <view class="login-view-item-text2 mpLoginBtn" bindtap="loginHandle">
-          <image src="./icon/login_4@2x.png"></image>
-          <text>手机号登录</text>
-        </view>
-      </view>
-    </view>
-  </block>
-  <block wx:elif="{{showType===2}}">
-    <!-- 选择活动 -->
+    <!-- 选择活动 由学校主页报名打开 -->
     <view class="ticketChose-container">
       <view class="ticketChose-container-title">
         <view style="width:40rpx;height:40rpx;"></view>
@@ -31,30 +12,32 @@
       <view class="ticketChose-view">
         <view class="ticketChose-view-label">选择活动</view>
         <view class="ticketChose-view-select">
-          <select defaultOption="{{activeityDefaultOption}}"></select>
+          <select bind:change="selectChange" key="value" text="label" options="{{activityList}}" defaultOption="{{activeityDefaultOption}}"></select>
         </view>
         <view class="ticketChose-view-label">选择票种</view>
         <view class="ticketChose-view-selected">
           <text>票种1</text>
-          <text style="color:#fe8800;">¥98.9</text>
+          <text wx:if="{{activitySelected.price!==''}}" style="color:#fe8800;">¥ {{activitySelected.price}}</text>
+          <text wx:else style="color:#fe8800;">¥ --{{activitySelected.length}}123</text>
           <image class="ticketChose-view-selected_img" style="width:40rpx;height:40rpx;" src="./icon/apply_7@2x.png"></image>
         </view>
         <view class="ticketChose-view-label">选择数量</view>
         <view class="ticketChose-view-totalPrice">
           <view class="ticketChose-view-totalPrice-left">
-            <van-stepper value="{{ inputValue }}" integer />
+            <van-stepper value="{{ stepValue }}" bind:change="stepperChange" integer />
+            <view wx:if="{{signUpType}}" class="ticketChose-view-totalPrice-left_hide"></view>
           </view>
           <view class="ticketChose-view-totalPrice-left">
             <text>合计：</text>
-            <text style="color:#fe8800;">¥ 98.9</text>
+            <text style="color:#fe8800;">¥{{totalMoney}}</text>
           </view>
         </view>
-        <view class="nextBtn">下一步</view>
+        <view class="nextBtn" bindtap="toNext" data-next="{{3}}">下一步</view>
       </view>
     </view>
   </block>
-  <block wx:elif="{{showType===3}}">
-    <!-- 票种 -->
+  <block wx:elif="{{showType===2}}">
+    <!-- 无需选择 由活动详情报名打开 -->
     <view class="ticket-container">
       <view class="ticket-container-title">
         <view style="width:40rpx;height:40rpx;"></view>
@@ -71,39 +54,90 @@
         <view class="ticket-view-label">选择数量</view>
         <view class="ticket-view-totalPrice">
           <view class="ticket-view-totalPrice-left">
-            <van-stepper value="{{ inputValue }}" integer />
+            <van-stepper value="{{ stepValue }}" bind:change="stepperChange" integer />
+            <view wx:if="{{signUpType}}" class="ticketChose-view-totalPrice-left_hide"></view>
           </view>
           <view class="ticket-view-totalPrice-left">
             <text>合计：</text>
             <text style="color:#fe8800;">¥ 98.9</text>
           </view>
         </view>
-        <view class="nextBtn">下一步</view>
+        <view class="nextBtn" bindtap="toNext" data-next="{{3}}">下一步</view>
       </view>
     </view>
   </block>
-  <block wx:elif="{{showType===4}}" bindtap="onClose">
+  <block wx:elif="{{showType===3}}" bindtap="onClose">
     <!-- 填写报名信息 -->
     <view  class="inputMes-container">
       <view class="inputMes-container-title">
         <view style="width:40rpx;height:40rpx;"></view>
         <text>请填写约课信息</text>
-        <image style="width:40rpx;height:40rpx;" src="./icon/apply_1@2x.png"></image>
+        <image style="width:40rpx;height:40rpx;" src="./icon/apply_1@2x.png" bindtap="onClose"></image>
       </view>
       <view class="inputMes-view">
         <view class="inputMes-view-ipt">
           <image src="./icon/apply_3@2x.png"></image>
-          <input value="" placeholder="请输入您的姓名"></input>
+          <input value="{{joinName}}" bindinput="joinNameIpt" placeholder="请输入您的姓名"></input>
         </view>
         <view class="inputMes-view-ipt">
           <image src="./icon/apply_4@2x.png"></image>
-          <input value="" placeholder="请输入您的手机号"></input>
+          <input value="{{joinTel}}" bindinput="joinTelIpt" placeholder="请输入您的手机号"></input>
         </view>
         <view class="inputMes-view-select">
-          <select></select>
+          <select bind:change="selectChange" options="{{baseList}}" defaultOption="{{baseDefaultOption}}"></select>
         </view>
-        <view class="nextBtn">提交</view>
+        <view class="nextBtn"  bindtap="sub">提交</view>
       </view>
     </view>
   </block>
+  <block wx:elif="{{showType===4}}">
+    <!-- 登录 -->
+    <view class="login_closeBtn" bindtap="onClose">
+      <image style="width:46rpx;height:46rpx;" src="./icon/login_2@2x.png"></image>
+    </view>
+    <view class="login-view">
+      <image class="login-view-bgImg" src="./icon/login_1@2x.png"></image>
+      <block wx:if="{{showLogin==0}}">
+        <view class="login-view-item">
+          <view class="login-view-item-text1">离成功只差登录</view>
+          <view class="login-view-item-text2 wxLoginBtn">
+            <image src="./icon/login_3@2x.png"></image>
+            <text>一键登录</text>
+          </view>
+          <view class="login-view-item-text2 mpLoginBtn" bindtap="telLoginHandle">
+            <image src="./icon/login_4@2x.png"></image>
+            <text>手机号登录</text>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="login-view-item1">
+          <view class="login-view-item-text1">离成功只差登录</view>
+          <view class="login-view-item-text3">
+            <text>手机号</text>
+            <view class="login-telIpt">
+              <input value="{{telephone}}" bindinput="loginTelIpt" placeholder="请输入手机号"></input>
+            </view>
+            <view wx:if="{{dt==61}}" class="login-getCode" bindtap="getSms" hover-class="login-getCode_hover">
+              获取验证码
+            </view>
+            <view wx:else class="login-getCode">
+              {{dt}}s
+            </view>
+          </view>
+          <view class="login-view-item-text3">
+            <text>验证码</text>
+            <view class="login-telIpt">
+              <input value="{{smsCode}}" bindinput="loginSmscodeIpt" placeholder="请输入验证码"></input>
+            </view>
+          </view>
+          <view class="login-handle">
+            <view class="login-esc" bindtap="loginEsc" hover-class="login-esc_hover">取消</view>
+            <view class="login-sub" bindtap="loginHandle" hover-class="login-sub_hover">确认提交</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+  
 </view>

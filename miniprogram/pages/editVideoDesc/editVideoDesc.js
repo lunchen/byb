@@ -31,7 +31,8 @@ Page({
     data:[],
     api: '',          //获取数据接口
     updateapi: '',      //更新数据接口
-    prevIndex: ''       //上一个页面的跳转过来的下标 在动态编辑添加图片用到
+    prevIndex: '',       //上一个页面的跳转过来的下标 在动态编辑添加图片用到
+    prevKey: ''       //上一个页面的跳转过来的列表取值key
   },
   onLoad: function (e) {
     console.log(e)
@@ -56,14 +57,20 @@ Page({
       })
     }else{
       // 通过本地存储获取动态编辑的数据 本地存储的图片仅做本地存储操作 最后统一提交
-      let getData = JSON.parse(wx.getStorageSync("imageList"));
+      wx.getStorageSync("addivList");
+      let getData = JSON.parse(wx.getStorageSync("addivList"));
       let prevIndex = getData.index;
+      let prevkey = getData.key
       let prevData = getData.list
+      console.log("getData")
+      console.log(getData)
       that.setData({
         prevIndex: prevIndex,
-        data: prevData
+        data: prevData,
+        prevKey: prevkey
       })
-      console.log(getData)
+      console.log(that.data)
+      console.log(5555)
     }
   },
 
@@ -124,7 +131,7 @@ Page({
     this.setData({ show: false });
   },
   submit(){
-    // 提交图片列表
+    // 提交图片列表 并返回
     let data = this.data.data
     let updateapi = this.data.updateapi;
     if (updateapi){
@@ -148,13 +155,15 @@ Page({
       })
     }else{
       var nowData = JSON.stringify({
-        index: this.data.prevIndex,
+        index: this.data.prevIndex, 
+        key: this.data.prevKey, 
         list: this.data.data
       }) 
-      
-      wx.setStorageSync("imageList", nowData)
+      console.log("nowData")
+      console.log(this.data.prevKey)
+      wx.setStorageSync("addivList", nowData)
       wx.showToast({
-        title: '保存成功,真正返回编辑主页',
+        title: '保存成功',
         icon: 'loading',
         duration: 1000
       })
@@ -164,7 +173,7 @@ Page({
         wx.navigateBack({
           // 返回并执行上一页面方法
           success: function () {
-            beforePage.backFn(data); // 执行前一个页面的方法
+            beforePage.backFn(nowData); // 执行前一个页面的方法
           }
         });
       }, 1200)

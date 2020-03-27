@@ -20,7 +20,7 @@
             <view class="activityDetails-content-view2-top-textView">
               <view class="activityDetails-content-view2-top-text">
                 <text style="font-size:32rpx;">{{activityListData.org.name}}</text>
-                <image style="width:32rpx;height:32rpx;margin-left:16rpx;" src="../../images/detail_6@3x.png"></image>
+                <image style="width:32rpx;height:32rpx;margin-left:16rpx;" src="../../images/detail_6@2x.png"></image>
               </view>
             <view style="margin-top:14rpx;" class="activityDetails-content-view2-top-text">
               <text style="font-size:30rpx;">{{activityListData.org.activityCount}}活动</text>
@@ -34,11 +34,11 @@
           </view>
           <view class="activityDetails-content-view2-bottom">
             <view class="activityDetails-content-view2-bottom-item">
-              <image style="width:40rpx;height:40rpx;" src="../../images/detail_7@3x.png"></image>
+              <image style="width:40rpx;height:40rpx;" src="../../images/detail_7@2x.png"></image>
               <text style="margin-left:16rpx;">{{activityListData.org.lookCount}}人</text>
             </view>
             <view class="activityDetails-content-view2-bottom-item">
-              <image style="width:40rpx;height:40rpx;margin-top:4rpx" src="../../images/detail_8@3x.png"></image>
+              <image style="width:40rpx;height:40rpx;margin-top:4rpx" src="../../images/detail_8@2x.png"></image>
               <text style="margin-left:16rpx;">了解更多</text>
             </view>
           </view>
@@ -49,7 +49,7 @@
         <view class="activityDetails-content-introduction">
           <!-- 课程简介 -->
           <view class="activityDetails-content-introduction-title">
-            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@3x.png"></image>
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
             <text>课程简介</text>
           </view>
           <!-- 课程简介课时简介卡 -->
@@ -115,6 +115,6 @@
     </view>
   </scroll-view>
   
-  <login showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
+  <login showType="{{loginShow}}" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></login>
   <tabbarBtn loginShow="{{loginShow}}" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
 </view>

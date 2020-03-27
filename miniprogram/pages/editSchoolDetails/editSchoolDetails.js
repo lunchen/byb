@@ -104,26 +104,6 @@ Page({
       "schoolDetails.remark": value
     });
   },
-  editVideoDesc: function (e) {
-    // 跳转到学校环境等的视频编辑
-    if (e.currentTarget.dataset.api){
-      var api = e.currentTarget.dataset.api,
-        updateapi = e.currentTarget.dataset.updateapi
-      wx.navigateTo({
-        url: `../editVideoDesc/editVideoDesc?api=${api}&updateapi=${updateapi}`
-      })
-    }else{
-      var index = e.currentTarget.dataset.index;
-      var data = JSON.stringify({
-          index: index,
-          list: this.data.schoolDetails.activityList[index].imgList
-        })
-      wx.setStorageSync("imageList", data)
-      wx.navigateTo({
-        url: `../editVideoDesc/editVideoDesc`
-      })
-    }
-  },
   deleteHandle(e){
     // 删除动态
     var index = e.currentTarget.dataset.index;
@@ -144,6 +124,30 @@ Page({
     });
 
   },
+  methods:{
+    
+  },
+  editVideoDesc: function (e) {
+    // 跳转到学校环境等的视频编辑
+    if (e.currentTarget.dataset.api) {
+      var api = e.currentTarget.dataset.api,
+        updateapi = e.currentTarget.dataset.updateapi
+      wx.navigateTo({
+        url: `../editVideoDesc/editVideoDesc?api=${api}&updateapi=${updateapi}`
+      })
+    } else {
+      var index = e.currentTarget.dataset.index;
+      var data = JSON.stringify({
+        key: e.currentTarget.dataset.key,
+        index: index,
+        list: this.data.schoolDetails.activityList[index].imgList
+      })
+      wx.setStorageSync("addivList", data)
+      wx.navigateTo({
+        url: `../editVideoDesc/editVideoDesc`
+      })
+    }
+  },
   getIptMes: function (e) {
     // 获得动态下方编辑的数据
     var index = e.detail.index;
@@ -152,9 +156,6 @@ Page({
       [`schoolDetails.activityList[${index}]`]: e.detail.mes,
       nowIndex: index
     });
-  },
-  methods:{
-    
   },
   setAddress(e){
     console.log(e)
@@ -172,14 +173,19 @@ Page({
   backFn(e){
     // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息
     console.log(e)
-    let getData = JSON.parse(wx.getStorageSync("imageList"));
+    let getData = JSON.parse(wx.getStorageSync("addivList"));
     let prevIndex = getData.index;
-    let prevData = getData.list
+    let prevData = getData.list;
+    let prevkey = getData.key;
+    console.log(321654)
+    console.log(getData)
+    console.log(`schoolDetails.activityList[${prevIndex}].${prevkey}`)
     this.setData({
-      [`schoolDetails.activityList[${prevIndex}].imgList`]: prevData
+      [`schoolDetails.activityList[${prevIndex}].${prevkey}`]: prevData
     })
   },
   submit(){
+    // 提交所有数据
     var data = {
       "recentActivityList": this.data.schoolDetails.activityList,
       "remark": this.data.schoolDetails.remark

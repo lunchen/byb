@@ -45,11 +45,18 @@ Page({
     });
 
     var that = this;
-    let id = e.id ? e.id : 1;
+    let id = e.id ? e.id : 4;
     if (id) {
       console.log(id)
       apiServer.post(`/app/activity/info/${id}`).then(res => {
         console.log(res.data);
+        // 设置选中的活动信息用于报名
+        var activitySelected = {
+          price: res.data.data.info.price,
+          id: res.data.data.info.id,
+          label: res.data.data.info.name
+        }
+        wx.setStorageSync("activitySelected", JSON.stringify(activitySelected))
         that.setData({
           "activityListData": res.data.data
         })

@@ -1,32 +1,32 @@
 {
   "pages": [
-    "pages/joinerManage/joinerManage",
     "pages/activityDetails/activityDetails",
+    "pages/schoolHome/schoolHome",
+    "pages/confirmOrder/confirmOrder",
+    "pages/orderDetails/orderDetails",
+    "pages/signUpSuccess/signUpSuccess",
+    "pages/index/index",
+    "pages/editSchoolHome/editSchoolHome",
+    "pages/editSchoolDetails/editSchoolDetails",
+    "pages/editActivityDesc/editActivityDesc",
+    "pages/joinerManage/joinerManage",
     "pages/middle/middle",
     "pages/mine/mine",
     "pages/personalCenter/personalCenter",
-    "pages/editSchoolDetails/editSchoolDetails",
     "pages/shopMap/shopMap",
-    "pages/editActivityDesc/editActivityDesc",
-    "pages/editSchoolHome/editSchoolHome",
     "pages/editVideoDesc/editVideoDesc",
     
     "pages/schoolDetails/schoolDetails",
     
-    "pages/schoolHome/schoolHome",
     "pages/releaseActivity/releaseActivity",
 
     "pages/business/business",
     "pages/writeOffOrder/writeOffOrder",
-    "pages/confirmOrder/confirmOrder",
-    "pages/signUpSuccess/signUpSuccess",
     "pages/video-swiper/video-swiper",
     
     "pages/courseDetails/courseDetails",
 
 
-    "pages/index/index",
-    "pages/orderDetails/orderDetails",
     "pages/eTicket/eTicket",
     "pages/activityListSearch/activityListSearch",
     "pages/search/search",
