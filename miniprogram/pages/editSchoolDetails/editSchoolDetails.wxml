@@ -81,7 +81,10 @@
               </view>
             </scroll-view>
               <!-- 下方活动form表单 -->
-            <iptActivityInfoComponent iptActivityInfoData="{{item}}" viewIndex="{{index}}" bind:getIptMes="getIptMes"></iptActivityInfoComponent>
+              <view>
+                <iptActivityInfoComponent iptActivityInfoData="{{item}}" viewIndex="{{index}}" listKeyName="{{'remarkList'}}" bind:getIptMes="getIptMes"></iptActivityInfoComponent>
+              </view>
+            
           </view>
           
           <view class="editSchoolDetails-moreActivity-btn" bindtap="addHandle">+继续新增</view>

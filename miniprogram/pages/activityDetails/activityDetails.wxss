@@ -5,6 +5,7 @@
   border-radius:20rpx;
   box-shadow: 0px 10px 6px #bebebe;
   margin: 0 auto;
+  background: #f0f0f0;
 }
 
 .activityDetailsImg{
@@ -12,6 +13,7 @@
   height:375rpx;
   border-radius:20rpx;
   margin-left: -35rpx;
+  overflow: hidden;
 }
 .activityDetails-content {
   position: relative;

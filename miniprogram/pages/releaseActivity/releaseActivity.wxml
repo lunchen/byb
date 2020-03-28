@@ -7,17 +7,39 @@
       <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid">
       </view>
       <view class="releaseActivity-content">
-        <view class="releaseActivity-content-addView">
+        <view class="releaseActivity-content-addView {{activityModel.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
+          <!-- <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
+          <text>添加海报/视频</text> -->
+          <block wx:if="{{activityModel.bannerList.length>0}}">
+            <view wx:for="{{activityModel.bannerList}}" wx:key="id">
+              <view style="margin:0 10rpx 0 10rpx;">
+                <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+              </view>
+            </view>
+            <view style="width:210rpx;height:210rpx;background:#e5e5e5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+              <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="releaseActivity-content-addView-btn">
+              <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+            </view>
+            <text>添加海报/视频</text>
+          </block>
+        </view>
+        <!-- <view class="releaseActivity-content-addView">
           <view class="releaseActivity-content-addView-btn">
-            <!-- <image style="width:100%;height:100%" src="../../images/add1@2x.png"></image> -->
+          
             <addVideoComponent></addVideoComponent>
           </view>
           <text>添加活动海报/视频</text>
-        </view>
+        </view> -->
         <!-- 下方form表单 -->
-        <iptActivityInfoComponent activityType="{{1}}"></iptActivityInfoComponent>
+        <view>
+          <iptActivityInfoComponent iptActivityInfoData="{{activityModel}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
+        </view>
         <view class="releaseActivity-content-btnView">
-          <view class="releaseActivity-content-btn">
+          <view class="releaseActivity-content-btn" bindtap="release">
             发布
           </view>
         </view>

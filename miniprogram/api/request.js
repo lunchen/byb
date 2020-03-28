@@ -5,13 +5,24 @@
 // })
 // wx.setStorageSync('id', "99")
 // var data = wx.getStorageSync('img')
+wx.getSystemInfo({
+  success(res) {
+    // 异步将数据更新到视图层
+    console.log(res)
+  }
+})
+
 const apiUrl = url => {
   return "https://test.byb88.cn/enlist"+url; 
 }
 
 const host = "https://test.byb88.cn/";
 const domian = "enlist";
-
+const getToken = function(keyName){
+  console.log(wx.getStorageSync("token"))
+  var userToken = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token"))[keyName] : '';
+  return userToken
+}
 const service = {
   get(url, data) {
     return new Promise((resolve, reject) => {
@@ -43,7 +54,8 @@ const service = {
         data: data,
         header: { 
           "content-type": "application/json",
-          "Authorization": "RFFcND5+NvyRnYh3GlhBVnbeJ0JjoSHeU9OiFyYMb2+uvVA26g0BNEtzCy4a1INY" 
+          "Authorization": getToken("authorization"),
+          "token": getToken("token"),
         },
         success: (res) => {
           // 调用接口成功

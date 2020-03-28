@@ -85,7 +85,8 @@ Page({
     // 添加空的编辑
     var data = this.data.data;
     console.log(this.data)
-    data.push(this.data.dataModel)
+    if(data=='') data = []
+    data.push({...this.data.dataModel})
     this.setData({
       data: data
     });

@@ -167,6 +167,9 @@ Page({
       [`schoolDetails.activityList[${index}].addr.longitude`]: address.longitude,
       [`schoolDetails.activityList[${index}].addr.latitude`]: address.latitude,
       [`schoolDetails.activityList[${index}].addr.name`]: address.title,
+      [`schoolDetails.activityList[${index}].addr.province`]: address.province,
+      [`schoolDetails.activityList[${index}].addr.city`]: address.city,
+      [`schoolDetails.activityList[${index}].addr.district`]: address.district,
       [`schoolDetails.activityList[${index}].addr.place`]: address.province + address.city + address.district
     })
   },

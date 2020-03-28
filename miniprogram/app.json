@@ -1,24 +1,24 @@
 {
   "pages": [
-    "pages/activityDetails/activityDetails",
-    "pages/schoolHome/schoolHome",
-    "pages/confirmOrder/confirmOrder",
-    "pages/orderDetails/orderDetails",
-    "pages/signUpSuccess/signUpSuccess",
     "pages/index/index",
-    "pages/editSchoolHome/editSchoolHome",
+    "pages/mine/mine",
+    "pages/signUpSuccess/signUpSuccess",
+    "pages/activityListSearch/activityListSearch",
+    "pages/releaseActivity/releaseActivity",
     "pages/editSchoolDetails/editSchoolDetails",
+    "pages/editSchoolHome/editSchoolHome",
+    "pages/orderDetails/orderDetails",
+    "pages/schoolHome/schoolHome",
+    "pages/activityDetails/activityDetails",
+    "pages/confirmOrder/confirmOrder",
     "pages/editActivityDesc/editActivityDesc",
     "pages/joinerManage/joinerManage",
     "pages/middle/middle",
-    "pages/mine/mine",
-    "pages/personalCenter/personalCenter",
     "pages/shopMap/shopMap",
     "pages/editVideoDesc/editVideoDesc",
     
     "pages/schoolDetails/schoolDetails",
     
-    "pages/releaseActivity/releaseActivity",
 
     "pages/business/business",
     "pages/writeOffOrder/writeOffOrder",
@@ -28,9 +28,9 @@
 
 
     "pages/eTicket/eTicket",
-    "pages/activityListSearch/activityListSearch",
     "pages/search/search",
     "pages/orgListSearch/orgListSearch",
+    "pages/personalCenter/personalCenter",
     "pages/logs/logs"
   ],
   "permission": {

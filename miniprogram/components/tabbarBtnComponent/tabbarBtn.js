@@ -25,10 +25,6 @@ Component({
       share: app.globalData.share
     })
     var _this = this
-    console.log(this.data.needChooseCourse)
-    if (this.data.needChooseCourse) {
-      
-    }
     
   },
   onLoad(){
@@ -82,11 +78,9 @@ Component({
         })
       }, 20);
     },
-    appointFreeBtn: function () {
-      
-    },
     appointBtn:function(e) {
       // 打开触发父组件打开报名弹窗
+      this.freeBtn(e)
       if (this.data.needChooseCourse) {
         this.triggerEvent('changeFLogin', {
           loginShow: 1
@@ -96,7 +90,6 @@ Component({
           loginShow: 2
         })
       }
-      this.freeBtn(e)
     },
     freeBtn(e){
       this.triggerEvent('changeSignUpType', {

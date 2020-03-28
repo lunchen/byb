@@ -17,9 +17,11 @@
   align-items: center;
 }
 .participant .mine-top-view{
+  position: relative;
   box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.1);
 }
 .sponsor .mine-top-view{
+  position: relative;
 }
 .mine-top-capital{
   width: 690rpx;
@@ -57,6 +59,9 @@
   margin-left: 20rpx;
 }
 .mine-top-view-right{
+  position: absolute;
+  right: 0;
+  min-width: 210rpx;
   height: 55rpx;
   line-height: 55rpx;
   border-top-left-radius:27.5rpx;
@@ -216,6 +221,7 @@
   padding-left: 200rpx;
   padding-bottom: 50rpx;
   margin-top: -40rpx;
+  position: relative;
 }
 .sponsor-edit-btn{
   border: 1rpx #fe8800 solid;

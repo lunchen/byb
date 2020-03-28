@@ -19,7 +19,13 @@ Component({
       type: Object,
       value: {},
       observer: function (newVal, oldVal) { }
-    }
+    },
+    prevReload: {
+      //navbarData   由父页面传递的数据，变量名字自命名
+      type: Boolean,
+      value: false,
+      observer: function (newVal, oldVal) { }
+    },
   },
   data: {
     isIphoneX: app.globalData.systemInfo.model.search('iPhone X') != -1 ? true : false,
@@ -62,7 +68,19 @@ Component({
           showTrueList: showTrueList
         })
       }else{
-        wx.navigateBack()
+        
+        if(this.data.prevReload){
+          let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+          let prevPage = pages[pages.length - 2];
+          wx.navigateBack({
+            // 返回并执行上一页面方法
+            success: function () {
+              prevPage.onLoad() // 执行前一个页面的方法
+            }
+          });
+        }else{
+          wx.navigateBack()
+        }
       }
      
     },

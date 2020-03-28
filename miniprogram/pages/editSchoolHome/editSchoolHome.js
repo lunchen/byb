@@ -145,6 +145,9 @@ Page({
         [`schoolHome.understand.addr.longitude`]: address.longitude,
         [`schoolHome.understand.addr.latitude`]: address.latitude,
         [`schoolHome.understand.addr.name`]: address.title,
+        [`schoolHome.understand.addr.province`]: address.province,
+        [`schoolHome.understand.addr.city`]: address.city,
+        [`schoolHome.understand.addr.district`]: address.district,
         [`schoolHome.understand.addr.place`]: address.province + address.city + address.district
       })
     }else{
@@ -381,15 +384,7 @@ Page({
     })
   },
   onLoad: function (e) {
-    // wx.login({
-    //   success(res) {
-    //     if (res.code) {
-    //       console.log(res)
-    //     } else {
-    //       console.log('登录失败！' + res.errMsg)
-    //     }
-    //   }
-    // })
+   
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.userInfo']) {

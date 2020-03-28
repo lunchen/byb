@@ -52,11 +52,20 @@ const setId = id => {
 const getId = id => {
   return wx.getStorageSync('id')
 }
+const checkLogin = () => {
+  var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")) : ''
+  if (token){
+    return true
+  }else {
+    return false
+  }
+}
 
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
   apiUrl: apiUrl,
   setId: setId,
-  getId: getId
+  getId: getId,
+  checkLogin: checkLogin
 }

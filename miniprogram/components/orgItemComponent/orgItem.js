@@ -26,7 +26,6 @@ Component({
   methods: {
     goToOrgItemDetails(e) {
       var id = e.currentTarget.dataset.id
-      util.setId(id)
       wx.navigateTo({
         url: `../schoolHome/schoolHome?id=${id}`,
       })

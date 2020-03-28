@@ -95,14 +95,12 @@ Page({
   },
   changeSignUpType: function (e) {
     // 底部按钮 true 为免费预约 false 花费
-    console.log(666)
     this.setData({
       signUpType: e.detail.signUpType
     })
   },
   changeFLogin: function (e) {
     // 获取从底部打开报名弹窗
-    console.log(666)
     this.setData({
       loginShow: e.detail.loginShow
     })

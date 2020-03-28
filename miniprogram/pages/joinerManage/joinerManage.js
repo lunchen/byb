@@ -20,7 +20,7 @@ Page({
 
     // 时间选择
     timeShow: false,
-    value: '',
+    searchValue: '',
     minHour: 10,
     maxHour: 20,
     minDate: new Date(1960, 1, 1).getTime(),
@@ -115,6 +115,8 @@ Page({
     this.setData({
       "req.status": e.detail.id
     })
+
+    this.getOrderList()
   },
   onCloseTime() {
     this.setData({
@@ -131,6 +133,12 @@ Page({
     console.log(time)
     // 时间选择确定
     this.onCloseTime()
+    this.getOrderList()
+  },
+  searchChange(event){
+    this.setData({
+      searchValue: event.detail
+    })
   },
   onSearch(event){
     this.getOrderList()
@@ -147,9 +155,9 @@ Page({
   getOrderList() {
     var that = this;
     let req = this.data.req;
-    req.startTime = new Date(req.startTime).getTime()
-    req.startTime = ''
-    console.log(req)
+    if (req.startTime){
+      req.startTime = new Date(req.startTime).getTime()
+    }
     apiServer.post(`/app/my/org/order`, req).then(res => {
       console.log(res.data);
       res.data.data.list.forEach(item =>{
@@ -161,7 +169,7 @@ Page({
       })
     })
   },
-  onLoad: function () {
+  onLoad: function (e) {
     var that = this;
     wx.setNavigationBarColor({
       frontColor: '#000000',
@@ -172,6 +180,9 @@ Page({
       that.setData({
         selectList: res.data.data.list,
       })
+    })
+    this.setData({
+      "req.activityId": e.id,
     })
     this.getOrderList()
   },

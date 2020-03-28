@@ -1,6 +1,7 @@
 // 个人中心编辑
 // personalCenter.js
 const util = require('../../utils/util.js')
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -41,13 +42,84 @@ Page({
       nameShow: false,
       genderShow: false,
       birthShow: false,
+      logoutShow: false
     },
     gender: 1, //1男 0 女
     nameValue: "",
     birthValue: "",
-    storeAddress: ""   //地图页直接设好数据 将需要的地址数据设置到setAddress
+    storeAddress: "",   //地图页直接设好数据 将需要的地址数据设置到setAddress
+    participantInfo:'',
+    req: {
+      "addr": {
+        "addr": "",
+        "city": "",
+        "district": "",
+        "id": 0,
+        "latitude": 0,
+        "longitude": 0,
+        "name": "",
+        "place": "",
+        "placeNo": "",
+        "province": ""
+      },
+      "birthday": "",
+      "heardImg": "",
+      "nickName": "",
+      "sex": '',
+      "sexName": "",
+      "userNo": ""
+    }
   },
   methods:{
+  },
+  getInfo() {
+    var _this = this;
+    apiServer.post('/app/user/info').then(res => {
+      console.log("user");
+      console.log(res.data);
+      _this.setData({
+        participantInfo: res.data.data
+      })
+    })
+  },
+  updataInfo() {
+    var _this = this;
+    var req = this.data.participantInfo
+    console.log(req)
+    apiServer.post('/app/user/update', req).then(res => {
+      console.log("user");
+      _this.getInfo()
+    })
+  },
+  uploadTeacherLogo(e) {
+    // 教师头像上传
+    var index = e.currentTarget.dataset.index;
+    var that = this;
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success(res) {
+        console.log(res)
+        let src = res.tempFiles[0];
+        var videoName = src.path.split("/")[src.path.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi, '');
+        wx.uploadFile({
+          url: util.apiUrl(`/picture/upload/${videoName}`),
+          method: 'post',
+          filePath: src.path,
+          name: 'file',
+          file: src,
+          data: {},
+          header: { 'content-type': 'application/json' },
+          success(res) {
+            var data = JSON.parse(res.data)
+            that.setData({
+              [`participantInfo.heardImg`]: data.data.string
+            });
+            that.updataInfo()
+          }
+        })
+      }
+    })
   },
   toMap() {
     var index = this.data.viewIndex
@@ -60,10 +132,26 @@ Page({
     var index = e.index
     var address = e.storeAddress
     // 地图页返回并执行的方法
-    
+    this.setData({
+      [`participantInfo.addr.addr`]: address.addr,
+      [`participantInfo.addr.longitude`]: address.longitude,
+      [`participantInfo.addr.latitude`]: address.latitude,
+      [`participantInfo.addr.name`]: address.title,
+      [`participantInfo.addr.province`]: address.province,
+      [`participantInfo.addr.city`]: address.city,
+      [`participantInfo.addr.district`]: address.district,
+      [`participantInfo.addr.place`]: address.province + address.city + address.district
+    })
+    this.updataInfo()
   },
   confirm(event) {
     var time = util.formatDate(event.detail,"yyyy-mm-dd");
+    this.setData({
+      "showList.nameShow": false,
+      "participantInfo.birthday": time
+    })
+    this.onCloseAll()
+    this.updataInfo()
       console.log(time)
     // 时间选择确定
   },
@@ -74,8 +162,18 @@ Page({
   },
   confirmName(){
     this.setData({
-      "showList.nameShow": false
+      "showList.nameShow": false,
+      "participantInfo.nickName": this.data.nameValue
     })
+    this.updataInfo()
+  },
+  confirmGenderHandle(){
+    this.setData({
+      "showList.genderShow": false,
+      "participantInfo.sex": this.data.gender,
+      "participantInfo.sexName": this.data.gender==1?"男":"女"
+    })
+    this.updataInfo()
   },
   checkShow(e){
     var key = e.detail.showTrueList[0]
@@ -99,7 +197,8 @@ Page({
     var key = e.currentTarget.dataset.key
     // 打开弹窗 还有赋值操作
     this.setData({
-      ["showList." + key]: true
+      ["showList." + key]: true,
+      nameValue: ''
     })
   },
   chooseGenderHandle(){
@@ -108,17 +207,22 @@ Page({
       "showList.genderShow": false
     })
   },
-  onCloseGender() {
-    this.setData({ "showList.genderShow": false });
+  onCloseAll(){
+    this.setData({ 
+      "showList.genderShow": false,
+      "showList.nameShow": false,
+      "showList.birthShow": false,
+      "showList.logoutShow": false
+    });
+
   },
-  onCloseUsername() {
-    this.setData({ "showList.nameShow": false });
-  },
-  onCloseBirth() {
-    this.setData({ "showList.birthShow": false });
-  },
-  loginOut(){
+  logout(){
     console.log("退出");
+    wx.clearStorageSync()
+    this.onCloseAll();
+    this.setData({
+      participantInfo: this.data.req
+    })
   },
   onLoad: function (options) {
 
@@ -127,7 +231,7 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-
+    this.getInfo()
   },
   onReady: function () {
 

@@ -214,6 +214,7 @@
   align-items: center;
   font-size: 32rpx;
   font-weight: bolder;
+  position: relative;
 }
 
 /* 选活动 */

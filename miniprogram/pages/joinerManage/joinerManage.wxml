@@ -3,11 +3,12 @@
   <navbar navbar-data='{{nvabarData}}'></navbar>
     <view style="position:relative;z-index:2;margin-top:{{height}}px;">
       <van-search
-          value="{{ value }}"
+          value="{{ searchValue }}"
           placeholder="搜索你想要的内容"
           show-action
           bind:search="onSearch"
           bind:cancel="onCancel"
+          bind:change="searchChange"
           shape="round"
         />
     </view>

@@ -42,7 +42,7 @@
           <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image>
         </view>
       </view>
-      <view class="iptActivityInfo-content-form-item item1 item2" bindtap="editVideoDesc" bindtap="editVideoDesc" data-key="imgList" >
+      <view class="iptActivityInfo-content-form-item item1 item2" bindtap="editVideoDesc" data-key="{{listKeyName}}" >
         <text class="iptActivityInfo-content-form-item-title ">活动详情</text>
 <!--         
         <textarea value="{{item.remark}}" bindinput="iptValue" bindblur="sendIptMes" placeholder="请输入" /> -->

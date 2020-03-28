@@ -1,6 +1,6 @@
 <!-- personalCenter.wxml-->
 <view class="container personalCenter">
-  <navbar navbar-data='{{nvabarData}}' hasShow="{{showList}}" bind:checkShow="checkShow"></navbar>
+  <navbar navbar-data='{{nvabarData}}' prevReload="{{true}}" hasShow="{{showList}}" bind:checkShow="checkShow"></navbar>
   <view class="">
     <view class="personalCenter-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
       <view class="personalCenter-top-view">
@@ -8,8 +8,8 @@
           <view class="personalCenter-top-view-left">
             头像
           </view>
-          <view class="personalCenter-top-view-right ">
-            <view><image style="width:120rpx;height:120rpx;border-radius:50%;margin-top:4rpx;" src="../../images/userimg.png"></image></view>
+          <view class="personalCenter-top-view-right" bindtap="uploadTeacherLogo">
+            <view style="width:120rpx;height:120rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;"><image style="width:120rpx;height:120rpx;border-radius:50%;" src="{{participantInfo.heardImg}}"></image></view>
             <view><image style="width:36rpx;height:36rpx;margin-left:23rpx;" src="../../images/home_4@2x.png"></image></view>
           </view>
         </view>
@@ -18,7 +18,7 @@
             昵称
           </view>
           <view class="personalCenter-top-view-right color666">
-            <view>Alice588</view>
+            <view>{{participantInfo.nickName}}</view>
             <view><image style="width:36rpx;height:36rpx;margin-top:4rpx;margin-left:23rpx;" src="../../images/home_4@2x.png"></image></view>
           </view>
         </view>
@@ -27,7 +27,8 @@
             性别
           </view>
           <view class="personalCenter-top-view-right">
-            <view>{{gender==1?'男':'女'}}</view>
+            <view>{{ participantInfo.sexName }}</view>
+           
             <view><image style="width:36rpx;height:36rpx;margin-top:4rpx;margin-left:23rpx;" src="../../images/home_4@2x.png"></image></view>
           </view>
         </view>
@@ -36,7 +37,7 @@
             出生日期
           </view>
           <view class="personalCenter-top-view-right ">
-            <view>Alice588</view>
+            <view>{{participantInfo.birthday}}</view>
             <view><image style="width:36rpx;height:36rpx;margin-top:4rpx;margin-left:23rpx;" src="../../images/home_4@2x.png"></image></view>
           </view>
         </view>
@@ -45,35 +46,29 @@
             地区
           </view>
           <view class="personalCenter-top-view-right ">
-            <view>Alice588</view>
+            <view>{{participantInfo.addr.province + participantInfo.addr.city + participantInfo.addr.district + participantInfo.addr.addr}}</view>
             <view><image style="width:36rpx;height:36rpx;margin-top:4rpx;margin-left:23rpx;" src="../../images/home_4@2x.png"></image></view>
           </view>
         </view>
 
       </view>
       
-      <view class="loginOut-btn" hover-class="btn_hover" bindtap="loginOut">退出登陆</view>
+      <view class="loginOut-btn" hover-class="btn_hover" bindtap="logout">退出登陆</view>
     </view>
     
   </view>
-  <van-popup show="{{ showList.areaShow }}" closeable position="bottom" custom-style="height: 30%" bind:close="onClose" bind:close="onClose" close-icon="none">
-      <van-area
-        area-list="{{ areaList }}"
-        columns-placeholder="{{ ['请选择', '请选择', '请选择'] }}"
-        title="标题"
-        bind:cancel="onClose"
-      />  
-    </van-popup>
     
-    <van-popup show="{{ showList.nameShow }}" closeable position="bottom" custom-style="height: 100%;padding-top:{{height}}px" bind:close="onCloseUsername" close-icon="none">
-      <view class="popup-changeName">
+  <van-popup show="{{ showList.nameShow }}" closeable position="bottom" custom-style="height: 100%;padding-top:{{height}}px" bind:close="onCloseAll" close-icon="none">
+    <view class="popup-changeName">
+      <view class="popup-close-bg" bindtap="onCloseAll"></view>
+      <view class="popup-changeName-view">
+        <view class="popup-changeName-label">用户名</view>
         <view>
           <van-cell-group>
             <van-field
               value="{{ nameValue }}"
               bind:input="onNameValueChange"
               clearable
-              label="用户名"
               placeholder="请输入用户名"
             />
           </van-cell-group>
@@ -81,37 +76,50 @@
         <view class="popup-changeName-text" hover-class="popup-changeName-text_hover" bindtap="confirmName">
           确认
         </view>
-      </view> 
-    </van-popup> 
-
-
-    <van-popup show="{{ showList.genderShow }}" custom-style="height: 30%;width:80%;border-radius:10rpx;overflow:hidden;" bind:close="onCloseGender" close-icon="none">
-      <view class="popup-chooseGender">
-        <view class="popup-chooseGender-title">请选择</view>
-        <view class="popup-chooseGender-choose-View">
-          <view class="{{gender==1?'selected':''}}" hover-class="selected_hover" data-gender="1" bindtap="chooseGender">
-            <image wx:if="{{gender==1}}" src="../../images/manselected.png"></image>
-            <image wx:else src="../../images/man.png"></image>
-            <view>男</view>
-          </view>
-          <view class="{{gender==0?'selected':''}}"  hover-class="selected_hover" data-gender="0" bindtap="chooseGender">
-            <image wx:if="{{gender==0}}" src="../../images/womanselected.png"></image>
-            <image wx:else src="../../images/woman.png"></image>
-            <view>女</view>
-          </view>
-        </view>
-        <view class="popup-chooseGender-choose-btn" hover-class="btn_hover" bindtap="chooseGenderHandle">确定</view>
       </view>
-    </van-popup>
+      
+    </view> 
+  </van-popup> 
 
-    <van-popup show="{{ showList.birthShow }}" bind:close="onCloseBirth" custom-style="height: 40%" position="bottom">
-      <van-datetime-picker
-        type="date"
-        value="{{ currentDate }}"
-        min-date="{{ minDate }}"
-        formatter="{{ formatter }}"
-        bind:confirm = "confirm"
-        bind:cancel = "onCloseBirth"
-      />
-    </van-popup>
+
+  <van-popup show="{{ showList.genderShow }}" custom-style="height: 30%;width:80%;border-radius:10rpx;overflow:hidden;" bind:close="onCloseAll" close-icon="none">
+    <view class="popup-chooseGender">
+      <view class="popup-chooseGender-title">请选择</view>
+      <view class="popup-chooseGender-choose-View">
+        <view class="{{gender==1?'selected':''}}" hover-class="selected_hover" data-gender="1" bindtap="chooseGender">
+          <image wx:if="{{gender==1}}" src="../../images/manselected.png"></image>
+          <image wx:else src="../../images/man.png"></image>
+          <view>男</view>
+        </view>
+        <view class="{{gender==0?'selected':''}}"  hover-class="selected_hover" data-gender="0" bindtap="chooseGender">
+          <image wx:if="{{gender==0}}" src="../../images/womanselected.png"></image>
+          <image wx:else src="../../images/woman.png"></image>
+          <view>女</view>
+        </view>
+      </view>
+      <view class="popup-chooseGender-choose-btn" hover-class="btn_hover" bindtap="confirmGenderHandle">确定</view>
+    </view>
+  </van-popup>
+
+  <van-popup show="{{ showList.birthShow }}" bind:close="onCloseAll" custom-style="height: 40%" position="bottom">
+    <van-datetime-picker
+      type="date"
+      value="{{ currentDate }}"
+      min-date="{{ minDate }}"
+      formatter="{{ formatter }}"
+      bind:confirm = "confirm"
+      bind:cancel = "onCloseAll"
+    />
+  </van-popup>
+  <van-popup show="{{ showList.logoutShow }}" custom-style="height: 240rpx;width:80%;border-radius:10rpx;overflow:hidden;" bind:close="onCloseAll" close-icon="none">
+    <view class="popup-logout">
+
+      <view class="popup-logout-title">是否确认退出</view>
+      <view class="popup-logout-choose-View">
+        <view class="popup-logout-choose-btn" style="border-right:1rpx #999 solid;" hover-class="btn_hover" bindtap="onCloseAll">取消</view>
+          
+        <view class="popup-logout-choose-btn" hover-class="btn_hover" bindtap="logout">确定</view>
+      </view>
+    </view>
+  </van-popup>
 </view>

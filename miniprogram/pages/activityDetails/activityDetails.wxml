@@ -6,8 +6,12 @@
     <view class="scroll-view-item" style='padding-top:1px'>
       <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
         <view class="activityDetailsImg-view">
-          <image wx:if="{{activityListData.img.type===1}}" class="activityDetailsImg" src="{{activityListData.img.url}}"></image>
-          <video wx:else class="activityDetailsImg" id="{{'myVideo' + index}}" src="{{activityListData.img.url}}" controls></video>
+          <!-- <view class="activityDetailsImg">
+            <image-video show="{{true}}" src="{{activityListData.img.url}}" type="{{activityListData.img.type}}" height="375" width="690"></image-video>
+          </view> -->
+          
+          <!-- <image wx:if="{{activityListData.img.type===1}}" class="activityDetailsImg" src="{{activityListData.img}}"></image>
+          <video wx:else class="activityDetailsImg" id="{{'myVideo' + index}}" src="{{activityListData.img}}" controls></video> -->
         </view>
       </view>
       <view class="activityDetails-content">
@@ -115,6 +119,6 @@
     </view>
   </scroll-view>
   
-  <login showType="{{loginShow}}" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></login>
-  <tabbarBtn loginShow="{{loginShow}}" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
+  <login needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
+  <tabbarBtn loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
 </view>

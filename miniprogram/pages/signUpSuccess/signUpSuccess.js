@@ -1,6 +1,7 @@
 // 报名成功分享页
 // signUpSuccess.js
 const util = require('../../utils/util.js')
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -19,7 +20,8 @@ Page({
     isIphoneX: app.globalData.isIphoneX,
     cmt: app.globalData.isIphoneX ? 20 : 24,
     areaList:'',
-    show:true
+    show:true,
+    orderData:''
   },
   showPopup() {
     this.setData({ show: true });
@@ -29,30 +31,25 @@ Page({
     this.setData({ show: false });
   },
 
-  onLoad: function (options) {
+  onLoad: function (e) {
 
     var that = this;
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#ffffff'
     });
-    console.log(6666)
-    console.log(options)
-
-    // wx.could.init();
-    // const db = wx.cloud.database();
-
-    // db.collection('region').limit(1).get()
-    //   .then(res => {
-    //     if (res.data && res.data.length > 0) {
-    //       this.setData({
-    //         areaList: res.data[0]
-    //       });
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    console.log(e)
+    let orderNo = e.orderNo ? e.orderNo : 1;
+    orderNo = "O15852908889622020032700006"    // 无价格0
+    if (orderNo) {
+      console.log(orderNo)
+      apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {
+        console.log(res.data);
+        that.setData({
+          orderData: res.data.data
+        })
+      })
+    }
   },
   onReady: function () {
 

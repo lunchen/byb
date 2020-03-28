@@ -24,6 +24,12 @@ Component({
       value: 0,
       observer: function (newVal, oldVal) { }
     }, 
+    listKeyName: {
+      // 默认类型为动态类型  1为发布活动类型
+      type: String,
+      value: "imgList",
+      observer: function (newVal, oldVal) { }
+    }, 
   },
   data: {
     // 时间选择
@@ -101,7 +107,6 @@ Component({
   },
   methods: {
     editVideoDesc: function (e) {
-      console.log(e)
       // 跳转到学校环境等的视频编辑
       var key= e.currentTarget.dataset.key;
       var index = this.data.viewIndex;

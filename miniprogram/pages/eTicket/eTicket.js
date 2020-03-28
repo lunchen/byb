@@ -27,6 +27,7 @@ Page({
   },
   previewImg: function (e) {
     var imgArr = [this.data.qrCodeUrl];
+    console.log(imgArr)
     wx.previewImage({
       current: imgArr[0],     //当前图片地址
       urls: imgArr,               //所有要预览的图片的地址集合 数组形式

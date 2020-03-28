@@ -10,15 +10,18 @@
         </view> -->
         <swiper style="height:375rpx;width:100%;" previous-margin="20rpx" next-margin="20rpx" indicator-dots="{{indicatorDots}}"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" bindchange="swiperChange">
-            <block wx:for="{{schoolHomeData.orgBannerList}}" wx:key="*this">
-              <swiper-item>
-                <view style="padding:0 10rpx;height:375rpx;width:{{750-60}}rpx;border-radius:26rpx;overflow:hidden;" class="swiper-item {{item}} {{current==index ? 'scaleY1' : 'scaleY0_95'}}">
-                  <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
-                  <video wx:else  style="height:375rpx;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+          <block wx:for="{{schoolHomeData.orgBannerList}}" wx:key="*this">
+            <swiper-item>
+              <view style="padding:0 10rpx;height:375rpx;width:{{750-60}}rpx;border-radius:20rpx;" class="swiper-item {{item}} {{current==index ? 'scaleY1' : 'scaleY0_95'}}">
+                <!-- <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
+                <video wx:else  style="height:375rpx;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
+                <view style="border-radius:20rpx;overflow:hidden;height:375rpx;">
+                  <image-video show="{{true}}" src="{{item.img.url}}" type="{{item.img.type}}" height="375" width="690"></image-video>
                 </view>
-              </swiper-item>
-            </block>
-          </swiper>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
       </view>
       <view class="schoolHome-content">
       
@@ -88,6 +91,6 @@
     </view>
   </scroll-view>
   
-  <login showType="{{loginShow}}" signUpType="{{signUpType}}" bind:changeFLogin="changeFLogin"></login>
+  <login signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
   <tabbarBtn loginShow="{{loginShow}}" bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{true}}"></tabbarBtn>
 </view>

@@ -1,8 +1,25 @@
 // 登陆 选择课种等
+const util = require('../../utils/util.js');
 const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
+    signUpType: {   // 报名类型 true免费 false花钱
+      type: Boolean,
+      value: false,
+      observer: function (newVal, oldVal) {
+      }
+    },
+    needChooseCourse: {
+      //是否需要选择课程  true 表示父组件为学校主页需要选 false 表示父组件为活动详情不用选
+      type: Boolean,
+      value: true,
+    },
+    onlyLogin: {
+      //是否需要选择课程  true 表示父组件为学校主页需要选 false 表示父组件为活动详情不用选
+      type: Boolean,
+      value: false,
+    },
     showType: {   // 显示的弹窗
       type: Number,
       value: 0,
@@ -15,28 +32,26 @@ Component({
               activitySelected: '',
               stepValue: 1
             })
-          }else{
-            this.setData({
-              activitySelected: wx.getStorageSync("activitySelected"),
-              stepValue: 1
-            })
           }
+        } else if (newVal == 2){
+          this.setData({
+            activitySelected: JSON.parse(wx.getStorageSync("activitySelected")),
+            stepValue: 1
+          })
+          this.calcMoney()
+        } else if (newVal == 4) {
+          this.setData({
+            telephone: '',
+            smsCode: ''
+          })
+          this.calcMoney()
         }
+        
       }
-    },
-    signUpType: {   // 报名类型 true免费 false花钱
-      type: Boolean,
-      value: false,
-      observer: function (newVal, oldVal) {
-      }
-    },
-    needChooseCourse: {
-      //是否需要选择课程  true 表示父组件为学校主页需要选 false 表示父组件为活动详情不用选
-      type: Boolean,
-      value: true,
     },
   },
   data: {
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isIphoneX: app.globalData.isIphoneX,
     baseDefaultOption: {
       id: '000',
@@ -58,20 +73,41 @@ Component({
     activitySelected: '',    //课程的选择
     showLogin: 0,    //登录切换手机号登录
     telephone1: '13777822654',
-    telephone: '17826833703',
-    smsCode:'913452',
+    telephone: '',
+    smsCode:'',
     dt:61,
     joinTel:'',
     joinName:'',
     orderNo: '',
     stepValue: 1,
     totalMoney: '',
+    userInfoModel: {
+      "addr": {
+        "addr": "",
+        "city": "",
+        "district": "",
+        "id": 0,
+        "latitude": 0,
+        "longitude": 0,
+        "name": "",
+        "place": "",
+        "placeNo": "",
+        "province": ""
+      },
+      "birthday": "",
+      "heardImg": "",
+      "nickName": "",
+      "sex": 0,
+      "sexName": "",
+      "userNo": ""
+    }
   },
   methods: {
+    
     calcMoney(){
       // 计算总价
       var money = 0;
-      if (this.data.activitySelected.price){
+      if (this.data.activitySelected.price && !this.data.signUpType) {
         money = this.data.activitySelected.price
       }
       this.setData({
@@ -80,7 +116,6 @@ Component({
     },
     stepperChange(e) {
       // 计数器变化 票数
-      console.log(e)
       this.setData({
         stepValue: e.detail
       })
@@ -96,7 +131,6 @@ Component({
         })
       } else if (this.data.showType == 3){
         var select = this.data.baseList.filter(item => item.id == e.detail.id)[0]
-        console.log(select)
         this.setData({
           baseSelected: select
         })
@@ -117,10 +151,7 @@ Component({
       })
     },
     toNext(e){
-
-      // this.goToConfirmOrder()
-      // return
-      // 下一步
+      //登录的下一步
       var next = e.currentTarget.dataset.next
       if (this.data.showType == 1){
         if (this.data.activitySelected ==''){
@@ -139,7 +170,7 @@ Component({
     },
     sub() {
       // 提交结果 调用生成订单
-      var hasLogin = true
+      var hasLogin = util.checkLogin()
       if (this.data.showType == 3) {
         if (this.data.baseSelected == '' || this.data.joinName == '' || this.data.joinTel == '') {
           wx.showToast({
@@ -173,7 +204,6 @@ Component({
       } else {
         url = "/app/activity/join"
       }
-      console.log(this.data)
       var data = {
         "flg": this.data.baseSelected.id,
         "id": this.data.activitySelected.value,
@@ -189,7 +219,12 @@ Component({
         })
         wx.hideToast();
         _this.onClose()
-        _this.goToConfirmOrder(res.data.data.orderNo)
+        if (_this.data.signUpType) {
+          _this.goToSignUpSuccess(res.data.data.orderNo)
+        } else {
+          _this.goToConfirmOrder(res.data.data.orderNo)
+        }
+        
       })
     },
     dtFn(e){
@@ -210,6 +245,12 @@ Component({
           dt: dt
         })
       }
+    },
+    goToSignUpSuccess(e) {
+      var orderNo = e
+      wx.navigateTo({
+        url: `../signUpSuccess/signUpSuccess?orderNo=${orderNo}`,
+      })
     },
     goToConfirmOrder(e) {
       // 跳转确认订单页
@@ -237,6 +278,77 @@ Component({
       // 预约者电话输入
       this.setData({
         joinTel: e.detail.value
+      })
+    },
+    bindGetUserInfo(e) {
+      // 微信一键登录获取用户信息
+      var _this = this
+      _this.setData({
+        "userInfoModel.nickName": e.detail.userInfo.nickName,
+        "userInfoModel.heardImg": e.detail.userInfo.avatarUrl,
+        "userInfoModel.sex": e.detail.userInfo.gender,
+      })
+      wx.getSetting({
+        success(res) {
+          if (res.authSetting['scope.userInfo']) {
+            _this.wxChatLogin()
+          }
+        }
+      })
+    },
+    wxChatLogin(){
+      // 微信登录
+      var _this = this
+      wx.showToast({
+        title: '微信一键登录中，请稍后',
+        icon: 'loading',
+        duration: 2000
+      })
+       wx.login({
+         success(res) {
+          console.log(res)
+          if (res.code) {
+            apiServer.post(`/wechat/auth/jscode2session/${res.code}`).then(res => {
+              console.log(res.data.data.data)
+              wx.showToast({
+                title: '登录成功',
+                icon: 'loading',
+                duration: 2000
+              })
+              var token = {
+                token: res.data.data.data.login.token,
+                authorization: res.data.data.data.login.authorization,
+              }
+              wx.setStorageSync("token", JSON.stringify(token))
+              if (!_this.data.onlyLogin) {
+                _this.triggerEvent('changeFLogin', {
+                  loginShow: 3
+                })
+              } else {
+                _this.triggerEvent('changeFLogin', {
+                  loginShow: 0
+                })
+                if (res.data.data.data.user == 0) {
+                  _this.updataInfo()
+                }
+              }
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
+    },
+
+    updataInfo() {
+      var _this = this;
+      var req = this.data.userInfoModel
+      console.log(req)
+      apiServer.post('/app/user/update', req).then(res => {
+        if (getCurrentPages().length != 0) {
+          //刷新当前页面的数据
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+        }
       })
     },
     telLoginHandle() {
@@ -292,10 +404,25 @@ Component({
         _this.setData({
           showLogin: 0
         })
-        _this.triggerEvent('changeFLogin', {
-          loginShow: 0
+        wx.showToast({
+          title: '登录成功',
+          icon: 'loading',
+          duration: 1000
         })
-        _this.goTo()
+        wx.setStorageSync("token", JSON.stringify(res.data.data))
+        if (!_this.data.onlyLogin){
+          _this.triggerEvent('changeFLogin', {
+            loginShow: 3
+          })
+        }else{
+          _this.triggerEvent('changeFLogin', {
+            loginShow: 0
+          })
+          if (getCurrentPages().length != 0) {
+            //刷新当前页面的数据
+            getCurrentPages()[getCurrentPages().length - 1].onLoad()
+          }
+        }
       }).catch(err=>{
         console.log(err)
       })

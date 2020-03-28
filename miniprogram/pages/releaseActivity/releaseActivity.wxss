@@ -4,16 +4,24 @@
 }
 .releaseActivity-content-addView{
   height: 280rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   color: #b3b3b3;
   font-size: 24rpx;
 }
+
+.releaseActivity-content-addView.type1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.releaseActivity-content-addView.type2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .releaseActivity-content-addView-btn{
-  height: 72rpx;
-  width: 72rpx;
+  height: 60rpx;
+  width: 60rpx;
   padding: 20rpx;
   border: 4rpx #d9d9d9 solid;
   margin-bottom: 36rpx;

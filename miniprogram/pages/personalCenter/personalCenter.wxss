@@ -29,9 +29,10 @@
   align-items: center;
   font-size: 28rpx;
   color: #999;
+  max-width: 500rpx;
 }
 .color666{
-  color: #666
+  color: #666;
 }
 .personalCenter-top-view-item.height146{
   height: 120rpx;
@@ -44,9 +45,30 @@
 .popup-changeName{
   background: #f0f0f0;
   height: 100%;
-  padding: 20rpx;
+  position: relative;
+}
+.popup-close-bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.popup-changeName-view{
+  position: relative;
   display: flex;
+  background: #fff;
   justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+}
+.popup-changeName-label{
+  width: 160rpx;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  color: #fe8800;
+  border-right: 1rpx #ccc solid;
 }
 .popup-changeName-text{
   width: 120rpx;
@@ -103,4 +125,25 @@
   border-radius: 10rpx;
   color: #fe8800;
   font-size: 28rpx;
+}
+
+
+.popup-logout{
+
+}
+.popup-logout-title{
+  line-height: 140rpx;
+  text-align: center;
+}
+.popup-logout-choose-View{
+  display: flex;
+}
+.popup-logout-choose-View>view{
+  width: 50%;
+  text-align: center;
+}
+.popup-logout-choose-btn{
+  border-top: 1rpx #999 solid;
+  line-height: 100rpx;
+  text-align: center;
 }

@@ -21,16 +21,49 @@ Page({
     cmt: app.globalData.isIphoneX ? 20 : 24,
     //tabbar
     tabbar: {},
-    identity:2,       //1参与方 2主办方
+    identity:1,       //1参与方 2主办方
     participantInfo: {},
     sponsorInfo: {},
+    loginShow: 0,
+  },
+  changeFLogin: function (e) {
+    // 获取从底部打开登录弹窗
+    this.setData({
+      loginShow: e.detail.loginShow
+    })
+  },
+  openLogin: function (e) {
+    // 获取从底部打开登录弹窗
+    this.setData({
+      loginShow: 4
+    })
   },
   changeIdentity(e){
     var identity = e.currentTarget.dataset.identity
+    var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")):''
     console.log(e)
-    this.setData({
-      identity: identity
-    })
+    if (token == ""){
+      this.openLogin()
+      return
+    }
+    if (!token.token) {
+      wx.showToast({
+        title: '您未开通主办方权限，如需开通主办方权限请点击商务洽谈联系我们。',
+        icon: 'none',
+        duration: 5000
+      })
+      return
+    } else {
+      this.setData({
+        identity: identity
+      })
+    }
+    if (identity==1){
+      this.getParticipantInfo()
+    } else if(identity == 2){
+      this.getSponsorInfo()
+    }
+    
   },
   goToETicket(e) {
     var orderNo = e.currentTarget.dataset.orderno
@@ -40,8 +73,27 @@ Page({
     })
   },
   goToPersonalCenter(e) {
+    var token = wx.getStorageSync('token')?JSON.parse(wx.getStorageSync('token')):'';
+    console.log(token)
+    if (token == ''){
+      this.openLogin()
+    }else{
+      wx.navigateTo({
+        url: `../personalCenter/personalCenter`,
+      })
+    }
+    
+  },
+  goToJoinerManage(e){
+    var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `../personalCenter/personalCenter`,
+      url: `../joinerManage/joinerManage?id=${id}`,
+    })
+  },
+  goToReleaseActivity(e){
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../releaseActivity/releaseActivity?id=${id}`,
     })
   },
   onLoad: function (options) {
@@ -51,13 +103,23 @@ Page({
       backgroundColor: '#fff'
     });
     var _this = this
+    this.getParticipantInfo()
+    this.getSponsorInfo()
+  },
+  getParticipantInfo(){
+    var _this = this
     apiServer.post('/app/my/user/index').then(res => {
-      // console.log(res.data);
+      console.log("user");
+      console.log(res.data);
       _this.setData({
         participantInfo: res.data.data
       })
     })
+  },
+  getSponsorInfo() {
+    var _this = this
     apiServer.post('/app/my/org/index').then(res => {
+      console.log("org");
       console.log(res.data);
       _this.setData({
         sponsorInfo: res.data.data

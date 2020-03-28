@@ -9,10 +9,12 @@
           <text>报名成功</text>
         </view>
         <view class="signUpSuccess-view-middle">
-          <image class="signUpSuccess-view-middle-img" src="../../images/activityDetails.png"></image>
-          <view class="signUpSuccess-view-middle-title">鼎承街舞社·中国超级街舞活动！</view>
-          <view class="signUpSuccess-view-middle-text">时间：2020-03-11 14:00:00</view>
-          <view class="signUpSuccess-view-middle-text">活动方式：线上活动</view>
+          <view class="signUpSuccess-view-middle-imgView">
+            <image class="signUpSuccess-view-middle-img" src="{{orderData.infoDetailList[0].img}}"></image>
+          </view>
+          <view class="signUpSuccess-view-middle-title">{{orderData.infoDetailList[0].name}}</view>
+          <view class="signUpSuccess-view-middle-text">时间：{{orderData.infoDetailList[0].betweenTime}}</view>
+          <view class="signUpSuccess-view-middle-text">活动方式：{{orderData.infoDetailList[0].typeName}}</view>
         </view>
         
         <button class="signUpSuccess-shareToFriend" open-type='share' bindtap="onShareAppMessage">
