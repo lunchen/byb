@@ -29,6 +29,7 @@ Component({
   },
   data: {
     isIphoneX: app.globalData.systemInfo.model.search('iPhone X') != -1 ? true : false,
+    phoneName: app.globalData.systemInfo.model,
     height: '',
     //默认值  默认显示左上角
     navbarData: {

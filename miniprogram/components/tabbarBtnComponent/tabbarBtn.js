@@ -83,7 +83,7 @@ Component({
       this.freeBtn(e)
       if (this.data.needChooseCourse) {
         this.triggerEvent('changeFLogin', {
-          loginShow: 1
+          loginShow: 2
         })
       } else {
         this.triggerEvent('changeFLogin', {

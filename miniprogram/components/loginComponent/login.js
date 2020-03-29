@@ -103,7 +103,6 @@ Component({
     }
   },
   methods: {
-    
     calcMoney(){
       // 计算总价
       var money = 0;
@@ -146,7 +145,8 @@ Component({
       apiServer.post(`/app/activity/select/orgId/${orgId}`).then(res => {
         console.log(res.data);
         _this.setData({
-          activityList: res.data.data.list
+          activityList: res.data.data.list,
+          activeityDefaultOption: res.data.data.list[0],
         })
       })
     },
@@ -230,8 +230,8 @@ Component({
     dtFn(e){
       // 验证码重新获取倒计时
       var _this = this;
-      var dt = this.data.dt;
-      if (dt < 61){
+      var dt = parseInt(this.data.dt);
+      if (dt < 61 && dt > 0){
         setTimeout(function () {
           dt = dt-1;
           _this.setData({
@@ -339,7 +339,7 @@ Component({
         }
       })
     },
-
+    // 微信一键登陆后同步信息到后台
     updataInfo() {
       var _this = this;
       var req = this.data.userInfoModel
@@ -347,7 +347,7 @@ Component({
       apiServer.post('/app/user/update', req).then(res => {
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+          getCurrentPages()[getCurrentPages().length - 1].renews()
         }
       })
     },
@@ -367,6 +367,14 @@ Component({
       // 获取短信验证码
       var _this = this;
       var telephone = this.data.telephone
+      if (telephone == "") {
+        wx.showToast({
+          title: '请输入手机号',
+          icon: 'none',
+          duration: 1000
+        })
+        return
+      }
       apiServer.post(`/app/login/code`, { "telephone":telephone}).then(res => {
         console.log(res.data);
         wx.showToast({
@@ -399,6 +407,14 @@ Component({
         "code": this.data.smsCode,
         "telephone": this.data.telephone,
       }
+      if (data.code == ""){
+        wx.showToast({
+          title: '请输入验证码',
+          icon: 'none',
+          duration: 1000
+        })
+        return
+      }
       apiServer.post(`/app/login/login`, data).then(res => {
         console.log(res.data);
         _this.setData({
@@ -418,9 +434,13 @@ Component({
           _this.triggerEvent('changeFLogin', {
             loginShow: 0
           })
+          console.log(1)
+
           if (getCurrentPages().length != 0) {
+            console.log(2)
+            console.log(getCurrentPages()[getCurrentPages().length - 1])
             //刷新当前页面的数据
-            getCurrentPages()[getCurrentPages().length - 1].onLoad()
+            getCurrentPages()[getCurrentPages().length - 1].renews()
           }
         }
       }).catch(err=>{

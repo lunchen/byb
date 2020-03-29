@@ -115,7 +115,8 @@ Page({
     // 删除图片 暂时做全删除
     var index = this.data.nowIndex;
     var data = this.data.data;
-    data.splice(index, 1)
+    // data.splice(index, 1)
+    data[index].url= ''
     this.setData({ 
       show: false,
       data : data
@@ -149,7 +150,7 @@ Page({
           wx.navigateBack({
             // 返回并执行上一页面方法
             success: function () {
-              beforePage.onLoad({}); // 执行前一个页面的方法
+              // beforePage.onLoad({}); // 执行前一个页面的方法
             }
           });
         },1200)
@@ -174,6 +175,8 @@ Page({
         wx.navigateBack({
           // 返回并执行上一页面方法
           success: function () {
+            console.log("nowData")
+            console.log(nowData)
             beforePage.backFn(nowData); // 执行前一个页面的方法
           }
         });

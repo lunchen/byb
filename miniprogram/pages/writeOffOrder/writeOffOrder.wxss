@@ -42,8 +42,33 @@
   border-radius: 45rpx;
   line-height: 90rpx;
   text-align: center;
-  margin: 100rpx auto;
+  margin: 100rpx auto 0;
   color: #fff;
   font-size: 40rpx;
   box-shadow: 0px 4px 0px 0px #fe8800;
+}
+.subBtn_hover{
+  background: #fe8800;
+  margin: 108rpx auto 0;
+  box-shadow: none;
+}
+
+.popup-logout{
+
+}
+.popup-logout-title{
+  line-height: 140rpx;
+  text-align: center;
+}
+.popup-logout-choose-View{
+  display: flex;
+}
+.popup-logout-choose-View>view{
+  width: 50%;
+  text-align: center;
+}
+.popup-logout-choose-btn{
+  border-top: 1rpx #999 solid;
+  line-height: 100rpx;
+  text-align: center;
 }

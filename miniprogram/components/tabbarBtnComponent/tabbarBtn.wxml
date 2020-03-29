@@ -4,11 +4,11 @@
       
       <view bindtap="showBtn" class="tabbar-service-btnView-left-btn">
         <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_10@2x.png"></image>
-        <text>在线咨询</text>
+        <text>联系我们</text>
       </view>
       <view bindtap="appointFreeBtn" bindtap="appointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn lightThemeBGC">
         <!-- <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_11@2x.png"></image> -->
-        <text>预约试课</text>
+        <text>免费约课</text>
       </view>
     </view>
     <view bindtap="appointBtn" data-freetype='{{false}}' class="tabbar-service-btnView-right">

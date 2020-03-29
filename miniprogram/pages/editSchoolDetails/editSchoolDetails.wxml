@@ -40,7 +40,7 @@
               </view>
             </view>
             
-            <view class="editSchoolDetails-content-toEditList-item" bindtap="editVideoDesc" data-api="/enlist/app/org/info/honor" data-updateapi="/app/org/info/update/honor" data-key="honorList">
+            <view class="editSchoolDetails-content-toEditList-item" bindtap="editVideoDesc" data-api="/app/org/info/honor" data-updateapi="/app/org/info/update/honor" data-key="honorList">
               <view>资质荣誉</view>
               <view class="editSchoolDetails-content-toEditList-item-right">
                 <text class="themeColor">去编辑</text>

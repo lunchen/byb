@@ -12,7 +12,8 @@ Page({
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
       title: '电子票', //导航栏 中间的标题
       white: 'white', // 是就显示白的，不是就显示黑的。
-      address: '../../images/home_8@2x.png', // 加个背景 不加就是没有
+      address: '', // 加个背景 不加就是没有
+      backgroundColor: "#feb707"
     },
 
     // 导航头的高度

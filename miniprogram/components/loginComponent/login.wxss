@@ -111,6 +111,7 @@
   background: #eee;
 }
 .login-telIpt{
+  overflow: hidden;
   height: 50rpx;
   line-height: 50rpx;
   border: 1rpx #fe8800 solid;

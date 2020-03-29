@@ -1,6 +1,6 @@
 <!--eTicket.wxml-->
 <view class="container eTicket">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <navbar navbar-data='{{nvabarData}}' backgroundColor="#feb707"></navbar>
   <view class="">
     <view class="eTicket-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
       <view class="eTicket-view">

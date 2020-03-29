@@ -44,7 +44,7 @@ Page({
       birthShow: false,
       logoutShow: false
     },
-    gender: 1, //1男 0 女
+    gender: 1, //1男 2 女
     nameValue: "",
     birthValue: "",
     storeAddress: "",   //地图页直接设好数据 将需要的地址数据设置到setAddress
@@ -86,6 +86,9 @@ Page({
     var _this = this;
     var req = this.data.participantInfo
     console.log(req)
+    if(req.addr == ""){
+      req.addr = {}
+    }
     apiServer.post('/app/user/update', req).then(res => {
       console.log("user");
       _this.getInfo()
@@ -198,7 +201,8 @@ Page({
     // 打开弹窗 还有赋值操作
     this.setData({
       ["showList." + key]: true,
-      nameValue: ''
+      gender: this.data.req.sex,
+
     })
   },
   chooseGenderHandle(){

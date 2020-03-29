@@ -1,6 +1,7 @@
 // 核销页
 // writeOffOrder.js
-const util = require('../../utils/util.js')
+const util = require('../../utils/util.js');
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -17,17 +18,69 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
-    cmt: app.globalData.isIphoneX ? 20 : 24,
-    //tabbar
-    tabbar: {},
+    confirmShow:false,
+    orderData:'',
+    writeOffOrderNo:''
   },
-  onLoad: function (options) {
-
+  showConfirm() {
+    this.setData({
+      confirmShow: true
+    })
+  },
+  onCloseAll(){
+    this.setData({
+      confirmShow: false
+    })
+  },
+  confirm(){
+    this.writeOff()
+  },
+  onLoad: function (e) {
     var that = this;
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
-    });
+    }); 
+    let orderNo = e.orderNo ? e.orderNo : '';
+    if (orderNo) {
+      console.log(orderNo)
+      apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {
+        console.log(res.data);
+        that.setData({
+          writeOffOrderNo: orderNo,
+          orderData: res.data.data
+        })
+      })
+    }
+  },
+  writeOff(){
+    // 核销订单
+    wx.showToast({
+      title: '订单核销种:',
+      icon: 'loading',
+      duration: 5000
+    })
+    apiServer.post(`/app/my/org/order/off/${this.data.writeOffOrderNo}`).then(res => {
+      console.log(res.data);
+      wx.showToast({
+        title: '核销成功,正在返回首页',
+        icon: 'loading',
+        duration: 2000
+      })
+      setTimeout(()=>{
+        wx.switchTab({
+          url: '../index/index'
+        });
+      },2000)
+    }).catch(err=>{
+      console.log(err)
+      wx.showToast({
+        title: '核销失败：' + err.data.msg,
+        icon: 'none',
+        duration: 4000
+      })
+    })
+    this.onCloseAll()
   },
   onReady: function () {
 

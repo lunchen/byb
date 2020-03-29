@@ -2,17 +2,20 @@
   "pages": [
     "pages/index/index",
     "pages/mine/mine",
+    "pages/writeOffOrder/writeOffOrder",
+    "pages/search/search",
+    "pages/orderDetails/orderDetails",
+    "pages/confirmOrder/confirmOrder",
+    "pages/releaseActivity/releaseActivity",
+    "pages/activityDetails/activityDetails",
+    "pages/reEditActivity/reEditActivity",
+    "pages/joinerManage/joinerManage",
+    "pages/schoolHome/schoolHome",
     "pages/signUpSuccess/signUpSuccess",
     "pages/activityListSearch/activityListSearch",
-    "pages/releaseActivity/releaseActivity",
     "pages/editSchoolDetails/editSchoolDetails",
     "pages/editSchoolHome/editSchoolHome",
-    "pages/orderDetails/orderDetails",
-    "pages/schoolHome/schoolHome",
-    "pages/activityDetails/activityDetails",
-    "pages/confirmOrder/confirmOrder",
     "pages/editActivityDesc/editActivityDesc",
-    "pages/joinerManage/joinerManage",
     "pages/middle/middle",
     "pages/shopMap/shopMap",
     "pages/editVideoDesc/editVideoDesc",
@@ -21,14 +24,12 @@
     
 
     "pages/business/business",
-    "pages/writeOffOrder/writeOffOrder",
     "pages/video-swiper/video-swiper",
     
     "pages/courseDetails/courseDetails",
 
 
     "pages/eTicket/eTicket",
-    "pages/search/search",
     "pages/orgListSearch/orgListSearch",
     "pages/personalCenter/personalCenter",
     "pages/logs/logs"
@@ -46,8 +47,9 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#feb707",
+    "color": "#fff",
+    "selectedColor": "#fff",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/index/index",

@@ -82,7 +82,7 @@
   </van-popup> 
 
 
-  <van-popup show="{{ showList.genderShow }}" custom-style="height: 30%;width:80%;border-radius:10rpx;overflow:hidden;" bind:close="onCloseAll" close-icon="none">
+  <van-popup show="{{ showList.genderShow }}" custom-style="height: 420rpx;width:80%;border-radius:10rpx;overflow:hidden;" bind:close="onCloseAll" close-icon="none">
     <view class="popup-chooseGender">
       <view class="popup-chooseGender-title">请选择</view>
       <view class="popup-chooseGender-choose-View">
@@ -91,8 +91,8 @@
           <image wx:else src="../../images/man.png"></image>
           <view>男</view>
         </view>
-        <view class="{{gender==0?'selected':''}}"  hover-class="selected_hover" data-gender="0" bindtap="chooseGender">
-          <image wx:if="{{gender==0}}" src="../../images/womanselected.png"></image>
+        <view class="{{gender==2?'selected':''}}"  hover-class="selected_hover" data-gender="2" bindtap="chooseGender">
+          <image wx:if="{{gender==2}}" src="../../images/womanselected.png"></image>
           <image wx:else src="../../images/woman.png"></image>
           <view>女</view>
         </view>

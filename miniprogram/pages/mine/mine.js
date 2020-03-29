@@ -65,11 +65,65 @@ Page({
     }
     
   },
+  goToReEditActivity(e) {
+    var id = e.currentTarget.dataset.id
+    var status = e.currentTarget.dataset.status
+    console.log(e)
+    console.log(status)
+    if (status == 1){
+      wx.showToast({
+        title: '正在进行中的活动请下架后再编辑',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    wx.navigateTo({
+      url: `../reEditActivity/reEditActivity?id=${id}`,
+    })
+  },
+  goToActivityDetails(e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../activityDetails/activityDetails?id=${id}`
+    })
+  },
+  goToEditSchoolHome(e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `../editSchoolHome/editSchoolHome?id=${id}`
+    })
+  },
+  goToOrderDetails(e) {
+    var orderNo = e.currentTarget.dataset.orderno;
+    console.log(orderNo);
+    var index = e.currentTarget.dataset.index;
+    if (this.data.participantInfo.orderList[index].statusName == "待支付") {
+      this.goToConfirmOrder(e);
+      return
+    }
+    wx.navigateTo({
+      url: `../orderDetails/orderDetails?orderNo=${orderNo}`,
+    })
+  },
   goToETicket(e) {
     var orderNo = e.currentTarget.dataset.orderno
+    var activityId = e.currentTarget.dataset.actvityid
+    var index = e.currentTarget.dataset.index
+    console.log(e)
+    if (this.data.participantInfo.orderList[index].statusName == "待支付"){
+      this.goToConfirmOrder(e)
+      return
+    }
     console.log(orderNo)
     wx.navigateTo({
-      url: `../eTicket/eTicket?orderNo=${orderNo}`,
+      url: `../eTicket/eTicket?orderNo=${orderNo}&id=${activityId}`,
+    })
+  },
+  goToConfirmOrder(e) {
+    var orderNo = e.currentTarget.dataset.orderno
+    wx.navigateTo({
+      url: `../confirmOrder/confirmOrder?orderNo=${orderNo}`,
     })
   },
   goToPersonalCenter(e) {
@@ -82,7 +136,6 @@ Page({
         url: `../personalCenter/personalCenter`,
       })
     }
-    
   },
   goToJoinerManage(e){
     var id = e.currentTarget.dataset.id
@@ -96,15 +149,21 @@ Page({
       url: `../releaseActivity/releaseActivity?id=${id}`,
     })
   },
+  goToSchoolHome(e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../schoolHome/schoolHome?id=${id}`,
+    })
+  },
+  xiajia(){
+
+  },
   onLoad: function (options) {
     app.editTabbar();
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#fff'
     });
-    var _this = this
-    this.getParticipantInfo()
-    this.getSponsorInfo()
   },
   getParticipantInfo(){
     var _this = this
@@ -124,13 +183,26 @@ Page({
       _this.setData({
         sponsorInfo: res.data.data
       })
+      app.globalData.orgMes = res.data.data
     })
   },
-  onReady: function () {
-
-  },
   onShow: function () {
-    wx.hideTabBar()
+    this.setData({
+      participantInfo: {},
+      sponsorInfo: {}
+    })
+    var _this = this
+    this.getParticipantInfo()
+    this.getSponsorInfo()
+  },
+  renews: function () {
+    this.setData({
+      participantInfo: {},
+      sponsorInfo: {}
+    })
+    var _this = this
+    this.getParticipantInfo()
+    this.getSponsorInfo()
   },
   onHide: function () {
 

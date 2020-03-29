@@ -56,15 +56,15 @@ Page({
       width: 2,
       dottedLine: true
     }],
-
+    showEditBtn: false,   //是否显示学校编辑按钮
     schoolHomeData: {},
   },
   // 滑块
   swiperChange(e) {
-    var that = this;
+    var _this = this;
     if (e.detail.source == 'touch') {
-      wx.createVideoContext('myVideo' + that.data.current).stop()
-      that.setData({
+      wx.createVideoContext('myVideo' + _this.data.current).stop()
+      _this.setData({
         current: e.detail.current
       })
       wx.createVideoContext('myVideo' + e.detail.current).play()
@@ -90,7 +90,7 @@ Page({
   },
   goToEditSchoolDetails(e) {
     wx.navigateTo({
-      url: `../../pages/editSchoolDetails/editSchoolDetails`
+      url: `../editSchoolDetails/editSchoolDetails`
     })
   },
   changeSignUpType: function (e) {
@@ -110,14 +110,14 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    var that = this;
+    var _this = this;
     let id = e.id ? e.id : 1;
     if (id) {
       console.log(id)
       apiServer.post(`/app/org/index/${id}`).then(res => {
         console.log(res.data);
         wx.setStorageSync("aliveData", JSON.stringify(res.data.data))
-        that.setData({
+        _this.setData({
           schoolHomeData: res.data.data,
           markers: [{
             iconPath: "../../images/marker@2x.png",
@@ -132,9 +132,129 @@ Page({
         })
       })
     }
+    var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")).token : '';
+    console.log(token)
+    if(token) {
+      var sponsorId
+      if (app.globalData.orgMes) {
+        sponsorId = app.globalData.orgMes.org.id;
+        if (e.id == sponsorId){
+          _this.setData({
+            showEditBtn : true
+          })
+        }
+      } else {
+        apiServer.post('/app/my/org/index').then(res => {
+          console.log("org");
+          console.log(res.data);
+          app.globalData.orgMes = res.data.data;
+          sponsorId = res.data.data.org.id
+          if (e.id == sponsorId) {
+            _this.setData({
+              showEditBtn: true
+            })
+          }
+        })
+      }
+      
+    }
   },
   onReady: function () {
     // wx.createVideoContext('myVideo' + 0).play();
   },
- 
+  asd(){
+    var _this = this
+    wx.downloadFile({
+      url: app.globalData.userInfo.avatarUrl,
+      success: function (res1) {
+
+        //缓存头像图片
+        _this.setData({
+          portrait_temp: res1.tempFilePath
+        })
+        //缓存canvas绘制小程序二维码
+        wx.downloadFile({
+          url: _this.data.qrcode,
+          success: function (res2) {
+            console.log('二维码：' + res2.tempFilePath)
+            //缓存二维码
+            _this.setData({
+              qrcode_temp: res2.tempFilePath
+            })
+            console.log('开始绘制图片')
+            _this.drawImage();
+            wx.hideLoading();
+            setTimeout(function () {
+              _this.canvasToImage()
+            }, 200)
+          }
+        })
+      }
+    })
+  },
+  drawImage() {
+    //绘制canvas图片
+    var _this = this
+    const ctx = wx.createCanvasContext('myCanvas')
+    var bgPath = '../../../images/share_bg.png'
+    var portraitPath = _this.data.portrait_temp
+    var hostNickname = app.globalData.userInfo.nickName
+
+    var qrPath = _this.data.qrcode_temp
+    var windowWidth = _this.data.windowWidth
+    _this.setData({
+      scale: 1.6
+    })
+    //绘制背景图片
+    ctx.drawImage(bgPath, 0, 0, windowWidth, _this.data.scale * windowWidth)
+
+    //绘制头像
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
+    ctx.clip()
+    ctx.drawImage(portraitPath, 0.7 * windowWidth / 2, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
+    ctx.restore()
+    //绘制第一段文本
+    ctx.setFillStyle('#ffffff')
+    ctx.setFontSize(0.037 * windowWidth)
+    ctx.setTextAlign('center')
+    ctx.fillText(hostNickname + ' 正在参加疯狂红包活动', windowWidth / 2, 0.52 * windowWidth)
+    //绘制第二段文本
+    ctx.setFillStyle('#ffffff')
+    ctx.setFontSize(0.037 * windowWidth)
+    ctx.setTextAlign('center')
+    ctx.fillText('邀请你一起来领券抢红包啦~', windowWidth / 2, 0.57 * windowWidth)
+    //绘制二维码
+    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
+    //绘制第三段文本
+    ctx.setFillStyle('#ffffff')
+    ctx.setFontSize(0.037 * windowWidth)
+    ctx.setTextAlign('center')
+    ctx.fillText('长按二维码领红包', windowWidth / 2, 1.36 * windowWidth)
+    ctx.draw();
+  },
+  canvasToImage() {
+    var _this = this
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: _this.data.windowWidth,
+      height: _this.data.windowWidth * _this.data.scale,
+      destWidth: _this.data.windowWidth * 4,
+      destHeight: _this.data.windowWidth * 4 * _this.data.scale,
+      canvasId: 'myCanvas',
+      success: function (res) {
+        console.log('朋友圈分享图生成成功:' + res.tempFilePath)
+        wx.previewImage({
+          current: res.tempFilePath, // 当前显示图片的http链接
+          urls: [res.tempFilePath] // 需要预览的图片http链接列表
+        })
+      },
+      fail: function (err) {
+        console.log('失败')
+        console.log(err)
+      }
+    })
+  },
 })

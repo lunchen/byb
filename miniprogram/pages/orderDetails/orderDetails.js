@@ -26,10 +26,9 @@ Page({
       backgroundColor: '#fff'
     });
     var that = this;
-    let id = e.id ? e.id : 1;
-    if (id) {
-      console.log(id)
-      apiServer.post(`/app/order/info/id/${id}`).then(res => {
+    let orderNo = e.orderNo ? e.orderNo : 1;
+    if (orderNo) {
+      apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {
         console.log(res.data);
         that.setData({
           orderDetails: res.data.data,
@@ -38,10 +37,10 @@ Page({
     }
   },
   goToETicket(e) {
-    var id = e.currentTarget.dataset.id
-    util.setId(id)
+    console.log(e)
+    var orderNo = e.currentTarget.dataset.orderno
     wx.navigateTo({
-      url: `../eTicket/eTicket?id=${id}`,
+      url: `../eTicket/eTicket?orderNo=${orderNo}`,
     })
   },
   onReady: function () {

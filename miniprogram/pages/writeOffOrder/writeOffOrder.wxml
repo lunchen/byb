@@ -11,15 +11,15 @@
         <view class="writeOffOrder-top-view-text">
           <view class="writeOffOrder-top-view-txt">
             <text class="writeOffOrder-top-view-txt1">活动标题：</text>
-            <text class="writeOffOrder-top-view-txt2">鼎承街舞十周年新手学舞 从0开始</text>
+            <text class="writeOffOrder-top-view-txt2">{{orderData.infoDetailList[0].activity.addr}}</text>
           </view>
           <view class="writeOffOrder-top-view-txt">
             <text class="writeOffOrder-top-view-txt1">活动时间：</text>
-            <text class="writeOffOrder-top-view-txt2">2020-03-18 20:0:00</text>
+            <text class="writeOffOrder-top-view-txt2">{{orderData.infoDetailList[0].activity.betweenTime}}</text>
           </view>
           <view class="writeOffOrder-top-view-txt">
             <text class="writeOffOrder-top-view-txt1">价格：</text>
-            <text class="writeOffOrder-top-view-txt3">¥ 98.9元</text>
+            <text class="writeOffOrder-top-view-txt3">¥ {{orderData.price}}元</text>
           </view>
         </view>
         
@@ -31,18 +31,28 @@
         <view class="writeOffOrder-top-view-text">
           <view class="writeOffOrder-top-view-txt">
             <text class="writeOffOrder-top-view-txt1">姓名：</text>
-            <text class="writeOffOrder-top-view-txt2">王萌萌</text>
+            <text class="writeOffOrder-top-view-txt2">{{orderData.name}}</text>
           </view>
           <view class="writeOffOrder-top-view-txt">
             <text class="writeOffOrder-top-view-txt1">手机号码：</text>
-            <text class="writeOffOrder-top-view-txt2">187****0980</text>
+            <text class="writeOffOrder-top-view-txt2">{{orderData.telephone}}</text>
           </view>
         </view>
         
       </view>
     </view>
 
-    <view class="subBtn">确认核销</view>
+    <view class="subBtn" hover-class="subBtn_hover" bindtap="showConfirm">确认核销</view>
   </view>
- 
+ <van-popup show="{{ confirmShow }}" custom-style="height: 240rpx;width:80%;border-radius:10rpx;overflow:hidden;" bind:close="onCloseAll" close-icon="none">
+    <view class="popup-logout">
+
+      <view class="popup-logout-title">是否确认核销改订单</view>
+      <view class="popup-logout-choose-View">
+        <view class="popup-logout-choose-btn" style="border-right:1rpx #999 solid;" hover-class="btn_hover" bindtap="onCloseAll">取消</view>
+          
+        <view class="popup-logout-choose-btn" hover-class="btn_hover" bindtap="confirm">确定</view>
+      </view>
+    </view>
+  </van-popup>
 </view>

@@ -1,14 +1,14 @@
 <!--index.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <navbar navbar-data='{{nvabarData}}' backgroundColor="#feb707"></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
       <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
         <view class="activityDetailsImg-view">
-          <!-- <view class="activityDetailsImg">
+          <view class="activityDetailsImg">
             <image-video show="{{true}}" src="{{activityListData.img.url}}" type="{{activityListData.img.type}}" height="375" width="690"></image-video>
-          </view> -->
+          </view>
           
           <!-- <image wx:if="{{activityListData.img.type===1}}" class="activityDetailsImg" src="{{activityListData.img}}"></image>
           <video wx:else class="activityDetailsImg" id="{{'myVideo' + index}}" src="{{activityListData.img}}" controls></video> -->
@@ -54,10 +54,10 @@
           <!-- 课程简介 -->
           <view class="activityDetails-content-introduction-title">
             <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
-            <text>课程简介</text>
+            <text>活动简介</text>
           </view>
           <!-- 课程简介课时简介卡 -->
-          <view class="activityDetails-content-introduction-top">
+          <!-- <view class="activityDetails-content-introduction-top">
             <image style="width:180rpx;height:180rpx;border-radius:90rpx;margin-right:40rpx;" src="{{activityListData.course.img}}"></image> 
             <view class="activityDetails-content-introduction-top-textView">
               <view class="activityDetails-content-introduction-top-textView-item">
@@ -79,7 +79,7 @@
                 <text style="margin-left:18rpx;">{{activityListData.course.levelName}}</text>
               </view>
             </view>
-          </view>
+          </view> -->
           <!-- 小三角 -->
           <view class="activityDetails-triangle"></view>
           <!-- 课程简介详细介绍 -->

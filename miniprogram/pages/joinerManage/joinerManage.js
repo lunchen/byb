@@ -92,6 +92,13 @@ Page({
                 console.log(res)
               }
             })
+            wx.saveFile({
+              tempFilePath: res.tempFilePath,
+              success(res) {
+                const savedFilePath = res.savedFilePath
+                console.log(res)
+              }
+            })
           }
           // wx.playVoice({
           //   filePath: res.tempFilePath

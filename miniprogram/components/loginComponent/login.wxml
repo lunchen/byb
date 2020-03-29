@@ -119,11 +119,11 @@
         <view class="login-view-item1">
           <view class="login-view-item-text1">离成功只差登录</view>
           <view class="login-view-item-text3">
-            <text>手机号</text>
+            <text style="white-space:nowrap;">手机号</text>
             <view class="login-telIpt">
               <input value="{{telephone}}" bindinput="loginTelIpt" placeholder="请输入手机号"></input>
             </view>
-            <view wx:if="{{dt==61}}" class="login-getCode" bindtap="getSms" hover-class="login-getCode_hover">
+            <view style="white-space:nowrap;" wx:if="{{dt==61}}" class="login-getCode" bindtap="getSms" hover-class="login-getCode_hover">
               获取验证码
             </view>
             <view wx:else class="login-getCode">

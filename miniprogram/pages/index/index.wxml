@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <navbar navbar-data='{{nvabarData}}' backgroundColor="#feb707"></navbar>
   <view class="search-view" style="position:relative;z-index:2;margin-top:{{height}}px;">
     <view class="search-view-location">
       <text>杭州</text>
@@ -21,7 +21,7 @@
   </view>
       
   <scroll-view bindscrolltoupper="scrolltoupper" bindscroll="scrollY" scroll-y style="position:relative;height: 100%;" scroll-top="{{scrollTop}}px">
-    <view class="scroll-view-item" style='padding-top:1px;background:{{onceToTop?"#feb707":"transpant"}};'>
+    <view class="scroll-view-item" style='padding-top:1px;'>
       <view class="content" style="margin-top:{{cmt}}%;min-height:1000rpx;">
         <!-- <block>
           <view class="content-view">

@@ -48,7 +48,7 @@ Component({
         current: dataset,
         isShow: false
       });
-
+      console.log(dataset)
       // 调用父组件方法，并传参
       this.triggerEvent("change", { ...dataset })
     },
@@ -64,6 +64,7 @@ Component({
         isShow: false
       })
     },
+    // 改变传入值的key 分别为id和name
     changekv(){
       let result = []
       // if (this.data.key !== 'id' || this.data.text !== 'name') { 
@@ -76,10 +77,16 @@ Component({
         let { [this.data.key]: id, [this.data.text]: name } = item
         result.push({ id, name })
       }
+      let { [this.data.key]: id, [this.data.text]: name } = this.data.defaultOption
       this.setData({
-        current: Object.assign({}, this.data.defaultOption),
+        // current: Object.assign({}, this.data.defaultOption),
+        current: { id, name },
         result: result
       })
+      if (this.data.result[0] != undefined) {
+        this.triggerEvent("change", { ...this.data.result[0] })
+      }
+      
     }
   },
 

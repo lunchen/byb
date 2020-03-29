@@ -421,3 +421,7 @@
   border-radius: 8rpx;
 }
 /* 主办方下方列表 */
+
+.disable{
+  color: #666;
+}

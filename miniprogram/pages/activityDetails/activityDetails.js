@@ -50,7 +50,7 @@ Page({
     });
 
     var that = this;
-    let id = e.id ? e.id : 4;
+    let id = e.id ? e.id : '';
     if (id) {
       console.log(id)
       apiServer.post(`/app/activity/info/${id}`).then(res => {

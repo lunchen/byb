@@ -3,7 +3,7 @@
   <navbar navbar-data='{{nvabarData}}'></navbar>
   <view class="search-view" style="position:relative;z-index:2;margin-top:{{height}}px;">
   </view>
-  <view class="middle-content">
+  <view class="middle-content" style="bottom:{{isIphoneX?200:100}}rpx;">
     <view class="middle-content-title">
       您可以发布
     </view>

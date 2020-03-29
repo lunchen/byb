@@ -17,7 +17,7 @@ Page({
     },
     // 导航头的高度
     height: app.globalData.navheight,
-
+    id: "",      //编辑学校的id 
     active: 0,
     schoolHome: {},
     firstkey: '',
@@ -78,8 +78,9 @@ Page({
   },
   addHandle() {
     // 添加空的活动
-    var dataModel = this.data.activityModel
+    var dataModel = JSON.parse(JSON.stringify(this.data.activityModel))
     var data = this.data.schoolHome.activityList;
+    if(data == '') data = []
     data.push(dataModel)
     this.setData({
       "schoolHome.activityList": data
@@ -99,8 +100,9 @@ Page({
   },
   addHandle1() {
     // 添加空的课程
-    var dataModel = this.data.courseModel
+    var dataModel = JSON.parse(JSON.stringify(this.data.courseModel))
     var data = this.data.schoolHome.courseList;
+    if (data == '') data = []
     data.push(dataModel)
     this.setData({
       "schoolHome.courseList": data
@@ -130,6 +132,7 @@ Page({
     this.setData({
       [`schoolHome.${firstkey}[${prevIndex}].${prevkey}`]: prevData
     })
+    console.log("cdata")
     console.log(this.data)
   },
   setAddress(e) {
@@ -184,8 +187,10 @@ Page({
     var data = JSON.stringify({
       key: e.currentTarget.dataset.key,
       index: index,
-      list: this.data.schoolHome[firstkey][index].imgList
+      list: this.data.schoolHome[firstkey][index][e.currentTarget.dataset.key]
     })
+    console.log("gedit")
+    console.log(data)
     wx.setStorageSync("addivList", data)
     wx.navigateTo({
       url: `../editVideoDesc/editVideoDesc`
@@ -349,7 +354,7 @@ Page({
     })
   },
   onWechatChange(e) {
-    // 电话输入
+    // 微信输入
     var index = e.currentTarget.dataset.index
     var value = e.detail
     this.setData({
@@ -368,56 +373,88 @@ Page({
     var _this = this
     console.log(JSON.stringify(data))
     console.log(data)
+      if (data.activityList == "") {
+        data.activityList = []
+      }
+      data.activityList.forEach((item, index) => {
+        if (item.bannerList == "") {
+          data.activityList[index].bannerList = []
+        }
+        if (item.imgList == "") {
+          data.activityList[index].imgList = []
+        }
+        if (item.addr == "") {
+          data.activityList[index].addr = {}
+        }
+      })
+      if (data.courseList == "") {
+        data.courseList = []
+      }
+      data.courseList.forEach((item, index) => {
+        if (item.imgList == "") {
+          data.courseList[index].imgList = []
+        }
+      })
+      if (data.understand == "") {
+        data.understand = {}
+      }
+      if (data.understand.lableList == "") {
+        data.understand.lableList = []
+      }
+      if (data.understand.addr == "") {
+        data.understand.addr = {}
+      }
     apiServer.post(`/app/org/index/update`, data).then(res => {
       console.log(res)
+      wx.showToast({
+        title: '编辑成功',
+        icon: 'loading',
+        duration: 2000
+      })
       // activityList: res.data.data.activityList
     })
   },
   goToSchoolHome(e) {
     wx.navigateTo({
-      url: `../../pages/schoolHome/schoolHome`
+      url: `../schoolHome/schoolHome${this.data.id}`
     })
   },
   goToEditSchoolDetails(e) {
     wx.navigateTo({
-      url: `../../pages/editSchoolDetails/editSchoolDetails`
+      url: `../editSchoolDetails/editSchoolDetails`
     })
   },
   onLoad: function (e) {
    
-    wx.getSetting({
-      success(res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.getUserInfo({
-            success: function (res) {
-              console.log(res)
-            }
-          })
-        }
-      }
-    })
+    // wx.getSetting({
+    //   success(res) {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+    //       wx.getUserInfo({
+    //         success: function (res) {
+    //           console.log(res)
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
     var _this = this;
-    console.log(e)
-    let id = e.id ? e.id : 1;
-    if (id) {
-      apiServer.post(`/app/org/index`).then(res => {
-        console.log(res.data);
-        res.data.data.understand.lable = res.data.data.understand.lableList.join(', ')
-        
-        res.data.data.activityList.map(item =>{
-          item.freeFlg = JSON.stringify(item.freeFlg)
-          item.joinLimitlessFlg = JSON.stringify(item.joinLimitlessFlg)
-        })
-        _this.setData({
-          schoolHome: res.data.data,
-        })
+    apiServer.post(`/app/org/index`).then(res => {
+      console.log(res.data);
+      res.data.data.understand.lable = res.data.data.understand.lableList.join(', ')
+      
+      // res.data.data.activityList.map(item =>{
+      //   item.freeFlg = JSON.stringify(item.freeFlg)
+      //   item.joinLimitlessFlg = JSON.stringify(item.joinLimitlessFlg)
+      // })
+      _this.setData({
+        schoolHome: res.data.data,
       })
-    }
+    })
   },
   getUserInfo: function(e) {
     console.log(e)

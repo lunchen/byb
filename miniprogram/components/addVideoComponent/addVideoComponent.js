@@ -69,13 +69,16 @@ Component({
         camera: 'back',
         compressed: false,
         success(res) {
+          console.log("选择的视频图片")
+          console.log(res)
           let src = res.tempFiles[0],
-              height = res.height,
-              width = res.width,
+              height = src.height,
+              width = src.width,
               type = 1; //type:1 图片  2 视频
           if (res.type === "video") type = 2;
           src.type = type;
           var videoName = src.tempFilePath.split("/")[src.tempFilePath.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi,'');
+          console.log("选择成功")
           wx.uploadFile({
             url: util.apiUrl(`/picture/upload/${videoName}`),
             method: 'post',
@@ -90,6 +93,10 @@ Component({
                 url: JSON.parse(res.data).data.string,
                 type: type
               });
+            },
+            fail(err){
+              console.log("this is err")
+              console.log(err)
             }
           })
         }

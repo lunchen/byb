@@ -63,7 +63,9 @@ App({
       success: function (res) {
         t.globalData.systemInfo = res;
         t.globalData.height = res.statusBarHeight;
-        t.globalData.isIphoneX = res.model.search('iPhone X') != -1 ? true : false; 
+        console.log(res.model)
+        t.globalData.isIphoneX = res.model.search('iPhone X') != -1 ? true : false;
+        t.globalData.phoneName = res.model;
         t.globalData.navheight = t.globalData.isIphoneX ? (t.globalData.height * 1.5 + 20) : (t.globalData.height * 2 + 20);
       }
     });
@@ -90,6 +92,7 @@ App({
     navheight: 0, // 导航栏高度
     systemInfo: null,
     isIphoneX: false,
+    phoneName: '',
     tabBar: {
       "backgroundColor": "#ffffff",
       "color": "#999999",

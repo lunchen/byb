@@ -19,7 +19,7 @@ Page({
     height: app.globalData.navheight,
 
     active: 0,
-    "id": "",
+    id : "",
     "name": "",
     "remark": "", //简介
     "activityListModel": {
@@ -187,6 +187,11 @@ Page({
       [`schoolDetails.activityList[${prevIndex}].${prevkey}`]: prevData
     })
   },
+  goToSchoolHome(e) {
+    wx.navigateTo({
+      url: `../schoolHome/schoolHome${this.data.id}`
+    })
+  },
   submit(){
     // 提交所有数据
     var data = {
@@ -199,9 +204,27 @@ Page({
       duration: 5000
     })
     var _this = this
+    data.recentActivityList.forEach((item, index)=>{
+      if(item.addr==''){
+        data.recentActivityList[index].addr={}
+      }
+      if (item.imgList == '') {
+        data.recentActivityList[index].imgList = []
+      }
+      if (item.remarkList == '') {
+        data.recentActivityList[index].remarkList = []
+      }
+    })
     console.log(JSON.stringify(data))
+    console.log(data)
     apiServer.post(`/app/org/info/update`, data).then(res => {
+      wx.showToast({
+        title: '编辑成功',
+        icon: 'loading',
+        duration: 2000
+      })
       _this.getData()
+      _this.goToSchoolHome()
       // activityList: res.data.data.activityList
     })
   },
@@ -212,6 +235,7 @@ Page({
       wx.hideToast()
       that.setData({
         schoolDetails: res.data.data,
+        id: res.data.data.id
       })
       // activityList: res.data.data.activityList
     })
@@ -223,12 +247,7 @@ Page({
     });
 
     var that = this;
-    util.setId(1)
-    let id = e.id ? e.id : util.getId();
-    console.log(id)
-    if (id) {
-      this.getData()
-    }
+    this.getData()
   },
   
 })

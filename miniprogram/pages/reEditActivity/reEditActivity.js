@@ -11,14 +11,14 @@ Page({
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
-      title: '发活动', //导航栏 中间的标题
+      title: '编辑活动', //导航栏 中间的标题
       white: false, // 是就显示白的，不是就显示黑的。
       address: '', // 加个背景 不加就是没有
     },
     
     // 导航头的高度
     height: app.globalData.navheight,
-    activityModel1:{
+    activityModel:{
       "addr": {
         "addr": "",
         "city": "",
@@ -59,12 +59,10 @@ Page({
       "name": "",
       "price": '',
       "startTime": "",
-      "style": 0,
+      "style": '',
       "totalJoin": ''
     },
-    activityModel:{
-
-    }
+    reEditData:{}
   },
   //事件处理函数
   goToSchoolHome: function() {
@@ -74,16 +72,16 @@ Page({
   },
   getIptMes: function (e) {
     // 获得动态下方编辑的数据
-    var data = this.data.activityModel
+    var data = this.data.reEditData
     this.setData({
-      [`activityModel`]: e.detail.mes,
+      [`reEditData`]: e.detail.mes,
     });
   },
   editVideoDesc: function (e) {
     // 跳转到视频编辑
     var data = JSON.stringify({
       key: e.currentTarget.dataset.key,
-      list: this.data.activityModel.bannerList
+      list: this.data.reEditData.bannerList
     })
     wx.setStorageSync("addivList", data)
     wx.navigateTo({
@@ -99,7 +97,7 @@ Page({
     console.log('发布')
     console.log(getData)
     this.setData({
-      [`activityModel.${prevkey}`]: prevData
+      [`reEditData.${prevkey}`]: prevData
     })
     console.log(this.data)
   },
@@ -108,42 +106,32 @@ Page({
     var address = e.storeAddress
     // 地图页返回并执行的方法
     this.setData({
-      [`activityModel.addr.addr`]: address.addr,
-      [`activityModel.addr.longitude`]: address.longitude,
-      [`activityModel.addr.latitude`]: address.latitude,
-      [`activityModel.addr.name`]: address.title,
-      [`activityModel.addr.district`]: address.district,
-      [`activityModel.addr.city`]: address.city,
-      [`activityModel.addr.place`]: address.province + address.city + address.district,
-      [`activityModel.addr.province`]: address.province
+      [`reEditData.addr.addr`]: address.addr,
+      [`reEditData.addr.longitude`]: address.longitude,
+      [`reEditData.addr.latitude`]: address.latitude,
+      [`reEditData.addr.name`]: address.title,
+      [`reEditData.addr.district`]: address.district,
+      [`reEditData.addr.city`]: address.city,
+      [`reEditData.addr.place`]: address.province + address.city + address.district,
+      [`reEditData.addr.province`]: address.province
     })
   },
   release(){
-    var _this = this
     console.log(this.data)
-    var data = this.data.activityModel
-    apiServer.post(`/app/activity/add`, data).then(res => {
+    var data = this.data.reEditData
+    apiServer.post(`/app/activity/update`, data).then(res => {
       console.log(res)
       wx.showToast({
-        title: '发布成功',
-        icon: 'none',
+        title: '编辑成功',
+        icon: 'loading',
         duration: 2000
       })
-      _this.setData({
-        activityModel: JSON.parse(JSON.stringify(this.data.activityModel1))
-      })
-      setTimeout(()=>{
+
+      setTimeout(() => {
         wx.switchTab({
-          url: '../index/index'
+          url: '../mine/mine'
         })
-      },1000)
-    }).catch(err=>{
-      console.log(err)
-      wx.showToast({
-        title: err.data.msg,
-        icon: 'none',
-        duration: 2000
-      })
+      }, 1000)
     })
   },
   onLoad: function (e) {
@@ -152,9 +140,15 @@ Page({
       backgroundColor: '#fff'
     });
     var that = this;
-    this.setData({
-      activityModel: JSON.parse(JSON.stringify(this.data.activityModel1))
-    })
+    console.log(e)
+    if(e.id){
+      apiServer.post(`/app/activity/add/info/id/${e.id}`).then(res => {
+        console.log(res.data)
+        that.setData({
+          reEditData: res.data.data
+        })
+      })
+    }
   },
   getUserInfo: function(e) {
     console.log(e)

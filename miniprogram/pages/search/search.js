@@ -67,7 +67,7 @@ Page({
   onSearch(event){
     var that = this;
     let keyword = "";
-    apiServer.post('/app/search/search', keyword).then(res => {
+    apiServer.post('/app/search/search', { keyword: keyword }).then(res => {
       console.log(res.data);
       that.setData({
         activityList: res.data.data.activity.list,

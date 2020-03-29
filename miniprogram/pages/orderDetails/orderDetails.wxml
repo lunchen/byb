@@ -42,7 +42,7 @@
                 </view>
               </view>
             
-              <view class="orderDetails-content-ticket" bindtap="goToETicket" data-id="{{item.activity.id}}">
+              <view class="orderDetails-content-ticket" bindtap="goToETicket" data-orderno="{{orderDetails.orderNo}}">
                 <view class="orderDetails-content-ticket-left">
                   <text wx:if="{{item.price>0}}">票价  ¥ {{item.price}}</text>
                   <text wx:else>默认免费票  ¥ 0</text>

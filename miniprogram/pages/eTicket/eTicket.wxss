@@ -52,6 +52,7 @@
 }
 
 .eTicket-view-middle{
+  margin-top: -1rpx;
   padding: 30rpx 0;
   background: #fff;
   text-align: center;
@@ -100,6 +101,7 @@
   border-bottom: 1rpx #999999 dotted; 
 }
 .eTicket-view-bottom{
+  margin-top: -1rpx;
   background: #fff;
   padding: 0 30rpx;
   font-size: 28rpx;

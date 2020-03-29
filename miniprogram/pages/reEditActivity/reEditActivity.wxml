@@ -9,11 +9,11 @@
       <view class="releaseActivity-content">
       
         <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
-          <view class="releaseActivity-content-addView {{activityModel.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
+          <view class="releaseActivity-content-addView {{reEditData.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-index="{{index}}">
             <!-- <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
             <text>添加海报/视频</text> -->
-            <block wx:if="{{activityModel.bannerList.length>0}}">
-              <view wx:for="{{activityModel.bannerList}}" wx:key="id">
+            <block wx:if="{{reEditData.bannerList.length>0}}">
+              <view wx:for="{{reEditData.bannerList}}" wx:key="id">
                 <view style="margin:0 10rpx 0 10rpx;">
                   <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
                 </view>
@@ -38,12 +38,12 @@
           <text>添加活动海报/视频</text>
         </view> -->
         <!-- 下方form表单 -->
-        <view>
-          <iptActivityInfoComponent iptActivityInfoData="{{activityModel}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
+      <view>
+          <iptActivityInfoComponent iptActivityInfoData="{{reEditData}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
         </view>
         <view class="releaseActivity-content-btnView">
           <view class="releaseActivity-content-btn" bindtap="release">
-            发布
+            编辑
           </view>
         </view>
       </view>
