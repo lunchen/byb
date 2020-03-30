@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/video-swiper/video-swiper",
     "pages/index/index",
     "pages/mine/mine",
     "pages/writeOffOrder/writeOffOrder",
@@ -24,7 +25,6 @@
     
 
     "pages/business/business",
-    "pages/video-swiper/video-swiper",
     
     "pages/courseDetails/courseDetails",
 

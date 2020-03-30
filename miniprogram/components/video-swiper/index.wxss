@@ -1,1 +1,19 @@
 .container{width:100%;height:100%}.video-swiper{width:100%;height:100%}.video_item{height:100%;width:100%}
+.byb-view{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.bottom-left-view{
+  position: absolute;
+  right: 0;
+  bottom: 10vh;
+  color: #fff;
+}
+.bottom-right-view{
+  position: absolute;
+  left: 0;
+  bottom: 10vh;
+  color: #fff;
+
+}

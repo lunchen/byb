@@ -187,6 +187,7 @@ Page({
     })
   },
   onShow: function () {
+    wx.hideTabBar()
     this.setData({
       participantInfo: {},
       sponsorInfo: {}

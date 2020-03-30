@@ -43,13 +43,17 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    activeid: 0,    //正在播放的视频
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
+  },
+  onplay(e){
+    console.log(e)
   },
   toScan() {
     var _this = this
@@ -66,6 +70,25 @@ Page({
           })
         }
       }
+    })
+  },
+  videoPlay(){
+    var activeId = wx.getStorageSync("index_activeVideo")
+    this.setData({
+      activeid: activeId
+    })
+  },
+  videoParse() {
+    wx.setStorageSync('index_activeVideo', this.data.activeid)
+    this.setData({
+      activeid: 10000
+    })
+  },
+  goToVideoSwiper(e){
+
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../video-swiper/video-swiper?id=${id}&type=index`,
     })
   },
   goToWriteOffOrder(e) {
@@ -91,6 +114,25 @@ Page({
   },
   scrolltoupper(e){
     console.log(e)
+  },
+  scrollX(e){
+    var activeid = this.data.activeid
+    var left = e.detail.scrollLeft
+    if (left>40){
+      var newActive = parseInt((left - 40) / 140)+1
+      if (activeid != newActive){
+        this.setData({
+          activeid: newActive
+        })
+      }
+    }else{
+      var newActive = 0
+      if (activeid != newActive) {
+        this.setData({
+          activeid: newActive
+        })
+      }
+    }
   },
   scrollY(e) {
     // 滚到上面后隐藏顶部背景
@@ -135,20 +177,17 @@ Page({
     var data = {}
     var strs = decodeURIComponent(options.scene)
     var pages = getCurrentPages()
-    console.log(pages)
     var currentPage = pages[pages.length - 1]
-    console.log(currentPage)
-    console.log(currentPage.options)
   },
   onLoad: function (e) {
     this.comingTo(e)
     var that = this;
+    wx.setStorageSync('index_activeVideo', 0)
     app.editTabbar();
     this.setData({
       tabbar: app.editTabbar()
     })
-
-
+    wx.setStorageSync('activeVideo', 0)
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#fff'
@@ -157,6 +196,7 @@ Page({
   onShow: function () {
     wx.hideTabBar()
     var that = this;
+    this.videoPlay()
     apiServer.post('/app/index/info2').then(res => {
       console.log(res.data);
       that.setData({
@@ -166,4 +206,8 @@ Page({
       })
     })
   },
+  onHide(){
+    this.videoParse()
+    console.log(7878)
+  }
 })

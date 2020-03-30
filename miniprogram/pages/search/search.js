@@ -64,9 +64,16 @@ Page({
       })
     })
   },
+  change(event){
+    console.log(event)
+    this.setData({
+      value: event.detail
+    })
+  },
   onSearch(event){
+
     var that = this;
-    let keyword = "";
+    let keyword = this.data.value;
     apiServer.post('/app/search/search', { keyword: keyword }).then(res => {
       console.log(res.data);
       that.setData({

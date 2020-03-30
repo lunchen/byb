@@ -58,6 +58,7 @@ Page({
     }],
     showEditBtn: false,   //是否显示学校编辑按钮
     schoolHomeData: {},
+    activeid:0
   },
   // 滑块
   swiperChange(e) {
@@ -65,9 +66,9 @@ Page({
     if (e.detail.source == 'touch') {
       wx.createVideoContext('myVideo' + _this.data.current).stop()
       _this.setData({
-        current: e.detail.current
+        current: e.detail.current,
+        activeid: e.detail.current
       })
-      wx.createVideoContext('myVideo' + e.detail.current).play()
     }
   }, 
   // 地图
@@ -106,6 +107,8 @@ Page({
     })
   },
   onLoad: function (e) {
+
+    wx.setStorageSync('schoolHome_activeVideo', 0)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
@@ -257,4 +260,28 @@ Page({
       }
     })
   },
+  goToVideoSwiper(e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../video-swiper/video-swiper?id=${id}&type=course`,
+    })
+  },
+  videoPlay() {
+    var activeId = wx.getStorageSync("schoolHome_activeVideo") ? wx.getStorageSync("schoolHome_activeVideo"):0
+    this.setData({
+      activeid: activeId
+    })
+  },
+  videoParse() {
+    wx.setStorageSync('schoolHome_activeVideo', this.data.activeid)
+    this.setData({
+      activeid: 10000
+    })
+  },
+  onShow() {
+    this.videoPlay()
+  },
+  onHide() {
+    this.videoParse()
+  }
 })

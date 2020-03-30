@@ -16,7 +16,15 @@
                 <!-- <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
                 <video wx:else  style="height:375rpx;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                 <view style="border-radius:20rpx;overflow:hidden;height:375rpx;">
-                  <image-video show="{{true}}" src="{{item.img.url}}" type="{{item.img.type}}" height="375" width="690"></image-video>
+                  <image-video 
+                  show="{{true}}" 
+                  src="{{item.img.url}}" 
+                  type="{{item.img.type}}" 
+                  height="375" 
+                  width="690"
+                  activeid = "{{activeid}}" 
+                  index="{{index}}" 
+                  videoid="{{item.img.imgNo}}" ></image-video>
                 </view>
               </view>
             </swiper-item>
@@ -42,10 +50,13 @@
         <!-- 学校所有课程 -->
         <scroll-view class="schoolHome-scroll-viewX" scroll-x="true" style="width: 100%">
           <view class="schoolHome-content-course">
-            <view class="schoolHome-content-course-item" wx:for="{{schoolHomeData.courseList}}" wx:key="{{id}}">
-              <image style="width:120rpx;height:120rpx;border-radius:50%;margin-bottom:30rpx;" src="{{item.img}}"></image>
-              <text>{{item.name}}</text>
-            </view>
+            <block wx:for="{{schoolHomeData.courseList}}" wx:key="{{id}}">
+              <view class="schoolHome-content-course-item" data-id="{{item.id}}" bindtap="goToVideoSwiper">
+                <image style="width:120rpx;height:120rpx;border-radius:50%;margin-bottom:30rpx;" src="{{item.img}}"></image>
+                <text>{{item.name}}</text>
+              </view>
+            </block>
+            
           </view>
         </scroll-view>
         

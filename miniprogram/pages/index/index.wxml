@@ -45,17 +45,27 @@
               <image src="../../images/home_11@2x.png" style="height:34rpx;width:34rpx;margin: 3rpx 0 0 20rpx;"></image>
             </view>
             <view wx:if="{{false}}" class="content-title-right">
-              <text class="content-title-text2" bindtap="goToActivityListSearch" data-id="123">查看更多</text>
+              <text class="content-title-text2" bindtap="goToActivityListSearch" data-id="1">查看更多</text>
               <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
             </view>
           </view>
-          <scroll-view class="index-scroll-viewX" scroll-x="true" style="width: 100%">
-            <view class="course-videoList">
+          <scroll-view class="index-scroll-viewX" bindscroll="scrollX" scroll-x="true" style="width: 100%">
+            <view class="course-videoList" wx:if="{{banner.bannerVideoList.length>0}}">
               <block wx:for="{{banner.bannerVideoList}}" wx:key="id">
-                <view class="course-videoList-item">
+                <view class="course-videoList-item" bindtap="goToVideoSwiper" data-id="{{item.id}}">
                   <!-- <image wx:if="{{item.type===1}}" style="height:100%;width:100%;border-radius:26rpx;" src="{{item.video}}"></image>
                   <video wx:else  style="height:100%;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.video}}" controls></video> -->
-                  <image-video show="{{true}}" src="{{item.video}}" type="{{2}}" height="220" width="320"></image-video>
+                  <image-video 
+                    bindplay="onplay"
+                    activeid = "{{activeid}}" 
+                    show="{{true}}" 
+                    src="{{item.video}}" 
+                    index="{{index}}" 
+                    videoid="{{item.id}}" 
+                    type="{{2}}" 
+                    height="220" 
+                    width="320"
+                  ></image-video>
                 </view>
               </block>
               

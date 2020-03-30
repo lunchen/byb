@@ -19,7 +19,7 @@ const apiUrl = url => {
 const host = "https://test.byb88.cn/";
 const domian = "enlist";
 const getToken = function(keyName){
-  console.log(wx.getStorageSync("token"))
+  // console.log(wx.getStorageSync("token"))
   var userToken = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token"))[keyName] : '';
   return userToken
 }

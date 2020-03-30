@@ -2,7 +2,8 @@
   "usingComponents": {
     "navbar": "../../components/navbarComponent/navbar",
     "van-tab": "../../miniprogram_npm/@vant/weapp/tab/index",
-    "van-tabs": "../../miniprogram_npm/@vant/weapp/tabs/index"
+    "van-tabs": "../../miniprogram_npm/@vant/weapp/tabs/index",
+    "image-video": "../../components/image-video/index"
   },
   "navigationBarTextStyle": "white"
 }

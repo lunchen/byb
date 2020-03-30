@@ -26,7 +26,14 @@ Page({
     })
   },
   onSearch(){
-    console.log(this.data.value)
+    var that = this;
+    let keyword = this.data.value
+    apiServer.post('/app/org/list/seach', { keyword: keyword }).then(res => {
+      console.log(res.data);
+      that.setData({
+        orgList: res.data.data.list,
+      })
+    })
   },
   comingTo(options) {
     var data = {}

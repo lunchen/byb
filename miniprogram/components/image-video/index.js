@@ -4,7 +4,10 @@ Component({
   properties: {
     src: {
       type: String,
-      value: ''
+      value: '',
+      observer: function (newVal, oldVal) {
+        this.setVideo()
+      }
     },
     type: {
       type: Number,
@@ -22,6 +25,21 @@ Component({
       type: Number,
       value: 0
     },
+    videoid: {      //外部传入的视频id
+      type: Number || String,
+      value: 0
+    },
+    activeid: {     //外部传入的正在播放的第几个视频 用于控制播放列表上第几个视频
+      type: Number,
+      value: 0,
+      observer: function (newVal, oldVal) {
+        this.playCurrent()
+      }
+    },
+    index: {        //外部传入的这是排在第几个
+      type: Number,
+      value: 0
+    },
   },
   data: {
          src1:'https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/wx28653ecae496acb0o6zAJs2g_tkXMXOIOre-Q5OmXMSofLQ896FPt4Ep26d4814714314e91134d1a8192803e5a/2020/03/21/b2411de58655467e8956ca021fe4fb.mp4',
@@ -33,7 +51,7 @@ Component({
       error: true
     }],
     
-
+    _videoContexts:'',
     imageWidth: '', // 背景图片的高度
     imageHeight: '' // 背景图片的长度，通过计算获取
   },
@@ -56,7 +74,17 @@ Component({
       }
     })
   },
+  lifetimes: {
+    attached: function attached() {
+      this.playCurrent()
+    }
+  },
   methods: {
+    setVideo() {
+      this.setData({
+        _videoContexts: wx.createVideoContext('myvideo_' + this.data.videoid, this)
+      })
+    },
     previewImage: function (e) {
       if(!this.data.show) return
       var imgArr = [this.data.src];
@@ -67,10 +95,6 @@ Component({
         fail: function (res) { },
         complete: function (res) { },
       })
-    },
-    dd(){
-      // 阻止视频被点击时穿透
-      console.log(1)
     },
     sendUploadMes(e) {
       this.triggerEvent('getUploadMes', {
@@ -100,6 +124,56 @@ Component({
         imageWidth: dw,
         imageHeight: dh
       })
+    },
+    videoClick(e){
+      
+    },
+
+    playCurrent() {
+      // 阻止视频被点击时穿透
+      if (this.data._videoContexts){
+        if (this.data.index == this.data.activeid) {
+          this.data._videoContexts.play()
+        } else {
+          this.data._videoContexts.pause()
+        }
+      }
+      
+    },
+    onPlay: function onPlay(e) {
+      this.trigger(e, 'play');
+    },
+    onPause: function onPause(e) {
+      this.trigger(e, 'pause');
+    },
+    onEnded: function onEnded(e) {
+      this.setData({
+        autoplay: true
+      })
+      this.playCurrent()
+      this.trigger(e, 'ended');
+    },
+    onError: function onError(e) {
+      this.trigger(e, 'error');
+    },
+    onTimeUpdate: function onTimeUpdate(e) {
+      this.trigger(e, 'timeupdate');
+    },
+    onWaiting: function onWaiting(e) {
+      this.trigger(e, 'wait');
+    },
+    onProgress: function onProgress(e) {
+      this.trigger(e, 'progress');
+    },
+    onLoadedMetaData: function onLoadedMetaData(e) {
+      this.trigger(e, 'loadedmetadata');
+    },
+    trigger: function trigger(e, type) {
+      var ext = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      var detail = e.detail;
+      var activeId = e.target.dataset.id;
+      this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { activeId: activeId }), ext));
     }
   }
 })

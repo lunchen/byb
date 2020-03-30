@@ -85,7 +85,7 @@
 </view> -->
 </view>
 
-<view class="region-box" wx:if="{{chooseCity}}">
+<view class="region-box" wx:if="{{chooseCity}}" style="padding-top:{{height}}px">
   <view class="region-top">
     <view class="region-back iconfont icon-fanhui" bindtap="back2"></view>
     <view class="title">选择城市</view>

@@ -1,15 +1,19 @@
 <view class="container">
   <navbar navbar-data='{{nvabarData}}' background-color="transparent"></navbar>
-  <mp-video-swiper 
-    class="video-swiper" 
-    video-list="{{videoList}}" 
-    bindplay="onPlay"
-    bindpause="onPause"
-    bindtimeupdate="onTimeUpdate"
-    bindended="onEnded"
-    binderror="onError"
-    bindwaiting="onWaiting"
-    bindprogress="onProgress"
-    bindloadedmetadata="onLoadedMetaData"
-  ></mp-video-swiper>
+  <block wx:if="{{videoList.length>0}}">
+    <mp-video-swiper 
+      iptCurrent="{{current}}"
+      class="video-swiper" 
+      video-list="{{videoList}}" 
+      bindplay="onPlay"
+      bindpause="onPause"
+      bindtimeupdate="onTimeUpdate"
+      bindended="onEnded"
+      binderror="onError"
+      bindwaiting="onWaiting"
+      bindprogress="onProgress"
+      bindloadedmetadata="onLoadedMetaData"
+    ></mp-video-swiper>
+  </block>
+  
 </view>

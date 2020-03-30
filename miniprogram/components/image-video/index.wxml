@@ -4,6 +4,27 @@
     </block> -->
   <block wx:if="{{src!=''}}">
     <image class="media-view" wx:if="{{type==1}}" catchtap="previewImage" bindload="imgLoaded" style="width:0rpx;height:0rpx;width:{{imageWidth}}rpx;height:{{imageHeight}}rpx" src="{{src}}"></image>
-    <video class="media-view" wx:else catchtap="dd" style="height:0rpx;width:0rpx;height:{{height}}rpx;width:{{width}}rpx;" src="{{src}}" controls></video>
+    <video 
+      wx:else 
+      id="myvideo_{{videoid}}"
+      data-id="{{videoid}}"
+      data-index="{{index}}"
+      class="media-view"
+      bindtap="videoClick" 
+      object-fit="{{'cover'}}"
+      style="height:0rpx;width:0rpx;height:{{height}}rpx;width:{{width}}rpx;" 
+      src="{{src}}" 
+      show-center-play-btn="{{false}}"
+      controls="{{true}}"
+
+      bindplay="onPlay"
+      bindpause="onPause"
+      bindended="onEnded"
+      binderror="onError"
+      bindtimeupdate="onTimeUpdate"
+      bindwaiting="onWaiting"
+      bindprogress="onProgress"
+      bindloadedmetadata="onLoadedMetaData"
+    ></video>
   </block>
 </view>

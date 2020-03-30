@@ -111,15 +111,22 @@ Component({
             type: Boolean,
             value: true
         },
+        swiperLoop: {
+          type: Boolean,
+          value: false
+        },
         videoList: {
             type: Array,
             value: [],
             observer: function observer() {
                 var newVal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
                 this._videoListChanged(newVal);
             }
-        }
+        },
+        iptCurrent: {
+          type: Number,
+          value: -1
+        },
     },
     data: {
         nextQueue: [],
@@ -130,7 +137,8 @@ Component({
         _change: -1,
         _invalidUp: 0,
         _invalidDown: 0,
-        _videoContexts: []
+        _videoContexts: [],
+        autoplay:false,
     },
     lifetimes: {
         attached: function attached() {
@@ -140,27 +148,47 @@ Component({
     methods: {
         _videoListChanged: function _videoListChanged(newVal) {
             var _this = this;
-
             var data = this.data;
             newVal.forEach(function (item) {
                 data.nextQueue.push(item);
             });
+            // 该组件第一个播放的都是列表的第二个 视频
             if (data.curQueue.length === 0) {
-                this.setData({
-                    curQueue: data.nextQueue.splice(0, 3)
-                }, function () {
-                    _this.playCurrent(1);
-                });
+              var cutdata
+              if(data.iptCurrent != -1){
+                if (data.iptCurrent == 0) {
+                  // 点击第一个视频时把最后一个视频放到前面去
+                  var _data = data.nextQueue.pop()
+                  data.nextQueue.unshift(_data)
+                  cutdata = data.nextQueue.splice(0, 3)
+                } else if (data.iptCurrent == data.nextQueue.length-1){
+                  console.log("sheme")
+                  var _data = data.nextQueue.shift()
+                  data.nextQueue.push(_data)
+                  cutdata = data.nextQueue.splice(data.nextQueue.length - 3, 3)
+                } else {
+                  cutdata = data.nextQueue.splice(data.iptCurrent-1, 3)
+                }
+              }else{
+                cutdata = data.nextQueue.splice(0, 3)
+              }
+
+              this.setData({
+                curQueue: cutdata
+              }, function () {
+                _this.playCurrent(1);
+              });
+              cutdata = null
             }
         },
         animationfinish: function animationfinish(e) {
+          console.log("滑动")
             var _data = this.data,
                 _last = _data._last,
                 _change = _data._change,
                 curQueue = _data.curQueue,
                 prevQueue = _data.prevQueue,
                 nextQueue = _data.nextQueue;
-
             var current = e.detail.current;
             var diff = current - _last;
             if (diff === 0) return;
@@ -213,18 +241,32 @@ Component({
             });
         },
         playCurrent: function playCurrent(current) {
-            this.data._videoContexts.forEach(function (ctx, index) {
-                index !== current ? ctx.pause() : ctx.play();
-            });
+          this.data._videoContexts.forEach(function (ctx, index) {
+              index !== current ? ctx.stop() : ctx.play();
+          });
         },
         onPlay: function onPlay(e) {
-            this.trigger(e, 'play');
+          // 播放开始 关闭swiper轮播
+          console.log("play")
+          if (this.data.swiperLoop){
+            this.setData({
+              autoplay: false
+            })
+          }
+          this.trigger(e, 'play');
         },
         onPause: function onPause(e) {
             this.trigger(e, 'pause');
         },
         onEnded: function onEnded(e) {
-            this.trigger(e, 'ended');
+          // 播放结束后 开启swiper轮播
+          if (this.data.swiperLoop) {
+            this.setData({
+              autoplay: true
+            })
+          }
+          // this.playCurrent()
+          this.trigger(e, 'ended');
         },
         onError: function onError(e) {
             this.trigger(e, 'error');
@@ -247,8 +289,13 @@ Component({
             var detail = e.detail;
             var activeId = e.target.dataset.id;
             this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { activeId: activeId }), ext));
+        },
+        acc() {
+          console.log(66666)
+          console.log(this.data)
         }
-    }
+    },
+  
 });
 
 /***/ })
