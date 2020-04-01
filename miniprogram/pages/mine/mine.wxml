@@ -128,9 +128,14 @@
       <view class="scroll-view" style='padding-top:1px;'>
         <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{300+height}}px">
 
-          <view class="mine-content-title">
-            <view class="cLine"></view>
-            <text>我发布的</text>
+          <view class="mine-content-title flex-between">
+            <view class="mine-content-title-left">
+              <view class="cLine"></view>
+              <text>我发布的</text>
+            </view>
+            <view class="mine-content-title-right" bindtap="goToJoinerManage" data-type="2">
+              报名者管理
+            </view>
           </view>
 
           <view class="sponsorCard">

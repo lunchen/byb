@@ -58,7 +58,8 @@ Page({
     }],
     showEditBtn: false,   //是否显示学校编辑按钮
     schoolHomeData: {},
-    activeid:0
+    activeid: 0,
+    identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1,       //1参与方 2主办方
   },
   // 滑块
   swiperChange(e) {

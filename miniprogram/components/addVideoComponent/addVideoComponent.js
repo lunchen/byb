@@ -11,6 +11,10 @@ Component({
         "totalCount": 0
       }
     },
+    base: {
+      type: String,
+      value: "img"
+    }
   },
   data: {
          src1:'https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/wx28653ecae496acb0o6zAJs2g_tkXMXOIOre-Q5OmXMSofLQ896FPt4Ep26d4814714314e91134d1a8192803e5a/2020/03/21/b2411de58655467e8956ca021fe4fb.mp4',
@@ -69,18 +73,21 @@ Component({
         camera: 'back',
         compressed: false,
         success(res) {
-          console.log("选择的视频图片")
           console.log(res)
+          var url
           let src = res.tempFiles[0],
               height = src.height,
               width = src.width,
               type = 1; //type:1 图片  2 视频
-          if (res.type === "video") type = 2;
+          if (res.type === "video"){
+            type = 2;
+            url = apiServer.apiUrl(`/picture/upload/${that.data.base}/${src.height}/${src.width}/10GB`)
+          } else{
+            url = apiServer.apiUrl(`/picture/upload/${that.data.base}`)
+          }
           src.type = type;
-          var videoName = src.tempFilePath.split("/")[src.tempFilePath.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi,'');
-          console.log("选择成功")
           wx.uploadFile({
-            url: util.apiUrl(`/picture/upload/${videoName}`),
+            url: url,
             method: 'post',
             filePath: src.tempFilePath,
             name: 'file',

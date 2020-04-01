@@ -119,6 +119,6 @@
     </view>
   </scroll-view>
   
-  <login needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
+  <login orgId="{{activityListData.org.id}}" needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
   <tabbarBtn loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
 </view>

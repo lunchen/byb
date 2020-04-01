@@ -43,9 +43,6 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-const apiUrl = url => {
-  return "https://test.byb88.cn/enlist"+url; 
-}
 const setId = id => {
   wx.setStorageSync("id", id)
 }
@@ -64,7 +61,6 @@ const checkLogin = () => {
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
-  apiUrl: apiUrl,
   setId: setId,
   getId: getId,
   checkLogin: checkLogin

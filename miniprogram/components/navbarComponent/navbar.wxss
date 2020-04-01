@@ -37,17 +37,17 @@
 .nav-capsule {
   display: flex;
   align-items: center;
-  margin-left: 30rpx;
   width: 140rpx;
   justify-content: space-between;
   height: 100%;
+  text-align: center;
+  padding-left: 30rpx
 }
 
 .back-pre {
   width: 32rpx;
   height: 36rpx;
   margin-top: 4rpx;
-  padding: 10rpx;
 }
 .nav-capsule {
   width: 36rpx;

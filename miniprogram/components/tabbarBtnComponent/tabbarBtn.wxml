@@ -6,7 +6,7 @@
         <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_10@2x.png"></image>
         <text>联系我们</text>
       </view>
-      <view bindtap="appointFreeBtn" bindtap="appointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn lightThemeBGC">
+      <view bindtap="appointFreeBtn" bindtap="freeAppointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn lightThemeBGC">
         <!-- <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_11@2x.png"></image> -->
         <text>免费约课</text>
       </view>
@@ -24,7 +24,7 @@
         <image bindtap="closeBtn" style="width:30rpx;height:30rpx;" src="./icon/apply_1@2x.png"></image>
       </view>
       <view class="contactUs-view-text">
-        <view class="contactUs-view-text-txt1">
+        <view class="contactUs-view-text-txt1" bindtap="makePhoneCall">
           联系电话：187****0980
         </view>
         <view class="contactUs-view-text-txt2">

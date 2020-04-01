@@ -18,7 +18,7 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
 
-    activityDetails:{},
+    activityListData:{},
     loginShow: 0,
     signUpType: false,
   },

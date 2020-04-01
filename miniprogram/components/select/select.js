@@ -78,6 +78,8 @@ Component({
         result.push({ id, name })
       }
       let { [this.data.key]: id, [this.data.text]: name } = this.data.defaultOption
+      console.log(this.data.defaultOption)
+      console.log({ id, name })
       this.setData({
         // current: Object.assign({}, this.data.defaultOption),
         current: { id, name },

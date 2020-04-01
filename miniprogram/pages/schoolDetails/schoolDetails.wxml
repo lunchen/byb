@@ -42,7 +42,7 @@
               <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
               <text>近期活动</text>
             </view>
-            <view class="more">更多活动</view>
+            <view class="more" wx:if="{{false}}">更多活动</view>
           </view>
           <scroll-view class="schoolDetails-scroll-viewX" scroll-x="true" style="width: 100%">
             <view class="schoolDetails-content-course">

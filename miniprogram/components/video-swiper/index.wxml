@@ -35,11 +35,42 @@
         >
         </video>
 
-        <view class="bottom-left-view" bindtap="acc">
-        123
+        <view class="bottom-left-view">
+          <view class="bottom-left-view-item">
+            <view class="bottom-left-view-item-left">
+              <image style="width:100rpx;height:100rpx;" src="{{item.org.login}}"></image>
+            </view>
+            <view class="bottom-left-view-item-right">
+              <view>{{item.org.name}}</view>
+              <view class="bottom-left-view-item-right-text1" bindtap="goToSchoolHome" data-id="{{item.org.id}}">
+                <text>查看详情</text>
+                <image style="width:30rpx;height:30rpx;margin-top:-2rpx;" src="../../images/more2@2x.png"></image>
+              </view>
+            </view>
+
+          </view>
+          <view class="bottom-left-view-item-text item-ellipsis" >
+            今天的辛苦换来明天的光环今天的辛苦换来明天的光环今天的辛苦换来明天的光环
+          </view>
+          <view class="bottom-left-btn">
+            <text>免费约课</text>
+            <image style="width:30rpx;height:30rpx;margin-top:-2rpx;transform:rotate(-90deg)" src="../../images/home_9@2x.png"></image>
+          </view>
         </view>
         <view class="bottom-right-view">
-        312
+          <view class="bottom-right-view-item">
+            <image class="bottom-right-view-item-imgs" src="../../images/video_1@2x.png"></image>
+            <view>{{item.lookCount}}</view>
+          </view>
+          <view class="bottom-right-view-item" bindtap="likeBtn" data-id="{{item.id}}">
+            <image wx:if="{{item.likeFlg === '1'}}" class="bottom-right-view-item-imgs" src="../../images/video_3@2x.png"></image>
+            <image wx:else class="bottom-right-view-item-imgs" src="../../images/video_2@2x.png"></image>
+            <view>{{item.likeCount}}</view>
+          </view>
+          <view class="bottom-right-view-item">
+            <image class="bottom-right-view-item-imgs" src="../../images/video_4@2x.png"></image>
+            <view>{{item.shareCount}}</view>
+          </view>
         </view>
       </view>
     </swiper-item>

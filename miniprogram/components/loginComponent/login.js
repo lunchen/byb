@@ -4,6 +4,10 @@ const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
+    orgId: {   // 报名类型 true免费 false花钱
+      type: Number | String,
+      value: '',
+    },
     signUpType: {   // 报名类型 true免费 false花钱
       type: Boolean,
       value: false,
@@ -196,7 +200,7 @@ Component({
         icon: 'loading',
         duration: 5000
       })
-
+      console.log(this.data)
       var _this = this
       var url
       if(this.data.signUpType){
@@ -207,6 +211,7 @@ Component({
       var data = {
         "flg": this.data.baseSelected.id,
         "id": this.data.activitySelected.value,
+        "orgId": this.data.orgId,
         "name": this.data.joinName,
         "telephone": this.data.joinTel,
         "count": this.data.stepValue
@@ -225,6 +230,12 @@ Component({
           _this.goToConfirmOrder(res.data.data.orderNo)
         }
         
+      }).catch(err=>{
+        wx.showToast({
+          title: err.data.msg,
+          icon: 'none',
+          duration: 5000
+        })
       })
     },
     dtFn(e){
@@ -281,7 +292,7 @@ Component({
       })
     },
     bindGetUserInfo(e) {
-      // 微信一键登录获取用户信息
+      // 微信一键登录获取用户信息 提示授权
       var _this = this
       _this.setData({
         "userInfoModel.nickName": e.detail.userInfo.nickName,
@@ -315,6 +326,7 @@ Component({
                 icon: 'loading',
                 duration: 2000
               })
+              wx.setStorageSync('identity', 1)
               var token = {
                 token: res.data.data.data.login.token,
                 authorization: res.data.data.data.login.authorization,
@@ -425,6 +437,7 @@ Component({
           icon: 'loading',
           duration: 1000
         })
+        wx.setStorageSync('identity', 1)
         wx.setStorageSync("token", JSON.stringify(res.data.data))
         if (!_this.data.onlyLogin){
           _this.triggerEvent('changeFLogin', {

@@ -135,6 +135,7 @@
             <view class="login-telIpt">
               <input value="{{smsCode}}" bindinput="loginSmscodeIpt" placeholder="请输入验证码"></input>
             </view>
+            <view class="login-getCode"></view>
           </view>
           <view class="login-handle">
             <view class="login-esc" bindtap="loginEsc" hover-class="login-esc_hover">取消</view>

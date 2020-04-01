@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/video-swiper/video-swiper",
     "pages/index/index",
+    "pages/schoolDetails/schoolDetails",
+    "pages/video-swiper/video-swiper",
     "pages/mine/mine",
+    "pages/joinerManage/joinerManage",
     "pages/writeOffOrder/writeOffOrder",
     "pages/search/search",
     "pages/orderDetails/orderDetails",
@@ -10,7 +12,6 @@
     "pages/releaseActivity/releaseActivity",
     "pages/activityDetails/activityDetails",
     "pages/reEditActivity/reEditActivity",
-    "pages/joinerManage/joinerManage",
     "pages/schoolHome/schoolHome",
     "pages/signUpSuccess/signUpSuccess",
     "pages/activityListSearch/activityListSearch",
@@ -21,7 +22,6 @@
     "pages/shopMap/shopMap",
     "pages/editVideoDesc/editVideoDesc",
     
-    "pages/schoolDetails/schoolDetails",
     
 
     "pages/business/business",

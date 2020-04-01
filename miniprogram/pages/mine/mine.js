@@ -10,7 +10,7 @@ Page({
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 0, //是否显示左上角图标   1表示显示    0表示不显示
-      title: '首页', //导航栏 中间的标题
+      title: '我的', //导航栏 中间的标题
       white: true, // 是就显示白的，不是就显示黑的。
       address: '../../images/participant_1@2x.png', // 加个背景 不加就是没有
     },
@@ -21,7 +21,7 @@ Page({
     cmt: app.globalData.isIphoneX ? 20 : 24,
     //tabbar
     tabbar: {},
-    identity:1,       //1参与方 2主办方
+    identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity'):1,       //1参与方 2主办方
     participantInfo: {},
     sponsorInfo: {},
     loginShow: 0,
@@ -57,6 +57,7 @@ Page({
       this.setData({
         identity: identity
       })
+      wx.setStorageSync('identity', identity)
     }
     if (identity==1){
       this.getParticipantInfo()
@@ -139,8 +140,9 @@ Page({
   },
   goToJoinerManage(e){
     var id = e.currentTarget.dataset.id
+    var type = e.currentTarget.dataset.type
     wx.navigateTo({
-      url: `../joinerManage/joinerManage?id=${id}`,
+      url: `../joinerManage/joinerManage?id=${id}&type=${type}`,
     })
   },
   goToReleaseActivity(e){

@@ -93,6 +93,8 @@ module.exports =
 "use strict";
 
 
+const apiServer = require('../../api/request.js');
+
 Component({
     options: {
         addGlobalClass: true,
@@ -290,10 +292,24 @@ Component({
             var activeId = e.target.dataset.id;
             this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { activeId: activeId }), ext));
         },
-        acc() {
+        likeBtn(e) {
           console.log(66666)
-          console.log(this.data)
-        }
+          console.log(e.currentTarget.dataset.id)
+          var id = e.currentTarget.dataset.id;
+          var req = {
+            "id": id,
+            "type": 2
+          }
+          apiServer.post(`/indexVideo/operating`, req).then(res => {
+            console.log(res.data);
+          })
+        },
+        goToSchoolHome(e) {
+          var id = e.currentTarget.dataset.id
+          wx.navigateTo({
+            url: `../../pages/schoolHome/schoolHome?id=${id}`,
+          })
+        },
     },
   
 });

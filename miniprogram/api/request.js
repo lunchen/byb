@@ -12,16 +12,25 @@ wx.getSystemInfo({
   }
 })
 
-const apiUrl = url => {
-  return "https://test.byb88.cn/enlist"+url; 
-}
-
 const host = "https://test.byb88.cn/";
 const domian = "enlist";
+const apiUrl = url => {
+  return host + domian + +url; 
+}
+
 const getToken = function(keyName){
   // console.log(wx.getStorageSync("token"))
   var userToken = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token"))[keyName] : '';
+  if (wx.getStorageSync("identity")){
+    if (wx.getStorageSync("identity") == 1 && keyName == "token"){
+      return ''
+    }
+  }
   return userToken
+}
+const getIdentity = function () {
+  var identity = wx.getStorageSync("identity") ? wx.getStorageSync("identity") : 1;
+  return identity
 }
 const service = {
   get(url, data) {
@@ -56,6 +65,7 @@ const service = {
           "content-type": "application/json",
           "Authorization": getToken("authorization"),
           "token": getToken("token"),
+          "appRole": getIdentity()
         },
         success: (res) => {
           // 调用接口成功
@@ -83,4 +93,5 @@ module.exports = {
     data = data ? data : {};
     return service.post(url, data)
   },
+  apiUrl: apiUrl,
 }

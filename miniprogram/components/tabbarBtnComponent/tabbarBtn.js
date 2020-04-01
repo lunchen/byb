@@ -83,7 +83,7 @@ Component({
       this.freeBtn(e)
       if (this.data.needChooseCourse) {
         this.triggerEvent('changeFLogin', {
-          loginShow: 2
+          loginShow: 1
         })
       } else {
         this.triggerEvent('changeFLogin', {
@@ -91,11 +91,29 @@ Component({
         })
       }
     },
+    freeAppointBtn: function (e) {
+      // 打开触发父组件打开报名弹窗
+      this.freeBtn(e)
+      this.triggerEvent('changeFLogin', {
+        loginShow: 3
+      })
+    },
     freeBtn(e){
       this.triggerEvent('changeSignUpType', {
         signUpType: e.currentTarget.dataset.freetype
       })
-    }
+    },
+    makePhoneCall: function () {
+      wx.makePhoneCall({
+        phoneNumber: "13777822654",
+        success: function () {
+          console.log('拨打成功')
+        },
+        fail: function () {
+          console.log('拨打失败')
+        }
+      })
+    },
     //返回到首页
     // _backhome() {
     //   wx.switchTab({

@@ -27,7 +27,7 @@ Page({
       backgroundColor: '#fff'
     });
     let orderNo = e.orderNo ? e.orderNo : 1;
-    orderNo = "O15852908889622020032700006"    // 无价格0
+    // orderNo = "O15852908889622020032700006"    // 无价格0
     if (orderNo) {
       console.log(orderNo)
       apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {

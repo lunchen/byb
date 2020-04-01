@@ -59,11 +59,11 @@ Page({
     }
 
     // 开发中
-    that.getCourseVideoList()
-    this.setData({
-      type: "course",
-      id: 1
-    })
+    // that.getCourseVideoList()
+    // this.setData({
+    //   type: "course",
+    //   id: 1
+    // })
     // 开发中
   },
   // 获取课程视频流列表
@@ -72,7 +72,6 @@ Page({
     var req = {
       "courseId": this.data.id,
       "nub": this.data.nub,
-      "courseId": 1,
       "size": 6
     }
     apiServer.post(`/indexVideo/org/stream`, req).then(res => {

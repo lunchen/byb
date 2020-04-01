@@ -51,7 +51,7 @@ Page({
       "size": 0,
       "startTime": util.formatDate(new Date().getTime(),"yyyy-MM-dd"),
       "status": 0,
-      "type": 0
+      "type": 0       //1报名 2预约
     },
     count:"--",
     orderList: []
@@ -190,6 +190,7 @@ Page({
     })
     this.setData({
       "req.activityId": e.id,
+      "req.type": e.type,
     })
     this.getOrderList()
   },
