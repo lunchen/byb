@@ -67,7 +67,7 @@
           <text>合计： </text>
           <text style="color:#fe8800;">¥ {{orderData.total}}</text>
         </view>
-        <view class="confirmOrder-bottom-view-btn">马上支付</view>
+        <view class="confirmOrder-bottom-view-btn" bindtap="payBtn">马上支付</view>
       </view>
     </view>
 

@@ -18,9 +18,20 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
 
+    // 视频
+    indicatorDots: true,
+    vertical: false,
+    autoplay: false,
+    interval: 2000,
+    duration: 500,
+    indicatorColor: "#bbb",
+    indicatorActiveColor: "#fff",
+    current: 0,
+
     activityListData:{},
     loginShow: 0,
     signUpType: false,
+    id:'',
   },
   changeSignUpType: function (e) {
     // 底部按钮 true 为免费预约 false 花费
@@ -51,6 +62,9 @@ Page({
 
     var that = this;
     let id = e.id ? e.id : '';
+    this.setData({
+      id: id
+    })
     if (id) {
       console.log(id)
       apiServer.post(`/app/activity/info/${id}`).then(res => {
@@ -74,5 +88,27 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  onShareAppMessage: function (ops) {
+    var json = encodeURIComponent(JSON.stringify({ a: 1 }));
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    return {
+      title: '报一报',
+      path: '/pages/activityDetails/activityDetails?id=' + this.data.id,
+      imageUrl: "",
+      success: function (res) {
+        // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log("转发失败:" + JSON.stringify(res));
+      }
+    }
+
+  },
 })

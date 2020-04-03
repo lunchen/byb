@@ -30,9 +30,6 @@
           <block wx:for="{{activityList}}" wx:key="id">
             <activityItem activityData="{{item}}"></activityItem>
           </block>
-          <block wx:for="{{activityList}}" wx:key="id">
-            <activityItem activityData="{{item}}"></activityItem>
-          </block>
         </view>
       </view>
     </view>

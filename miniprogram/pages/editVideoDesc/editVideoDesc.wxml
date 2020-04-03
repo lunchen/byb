@@ -8,8 +8,8 @@
     <view class="scroll-view-item" style='padding-top:1px'>
       <block wx:for="{{data}}" wx:key='id'>
         <view class="editVideoDesc-textarea">
-          <textarea wx:if="{{!show}}" value="{{item.title}}" bindinput="iptValue" bindfocus="setIndex" auto-height placeholder="标题" data-index="{{index}}" />
-          <text class="textareaReplace" wx:else>{{item.title==''?"标题":item.title}}</text>
+          <textarea wx:if="{{!show}}" value="{{item.title}}" bindinput="iptValue" bindfocus="setIndex" auto-height placeholder="说明文字" data-index="{{index}}" />
+          <text class="textareaReplace" wx:else>{{item.title==''?"说明文字":item.title}}</text>
         </view>
         <view class="editVideoDesc-content">
           <view wx:if="{{item.url!=''}}" class="editVideoDesc-content-showView">
@@ -18,7 +18,7 @@
           </view>
           <view wx:else class="editVideoDesc-content-addView">
             <view class="editVideoDesc-content-addView-btn" data-index="{{index}}" bindtap="setIndex">
-              <addVideoComponent bind:getUploadMes="getUploadMes" ></addVideoComponent>
+              <addVideoComponent base="editVideo" bind:getUploadMes="getUploadMes" ></addVideoComponent>
             </view>
             <text>添加图片/视频</text>
           </view>

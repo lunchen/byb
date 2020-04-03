@@ -21,7 +21,7 @@ Page({
     cmt: app.globalData.isIphoneX ? 20 : 24,
     //tabbar
     tabbar: {},
-    identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity'):1,       //1参与方 2主办方
+    identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1 ,       //1参与方 2主办方
     participantInfo: {},
     sponsorInfo: {},
     loginShow: 0,
@@ -150,11 +150,16 @@ Page({
     wx.navigateTo({
       url: `../releaseActivity/releaseActivity?id=${id}`,
     })
-  },
+  }, 
   goToSchoolHome(e) {
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `../schoolHome/schoolHome?id=${id}`,
+    })
+  },
+  goToBusiness(e) {
+    wx.navigateTo({
+      url: '../business/business'
     })
   },
   xiajia(){
@@ -192,11 +197,11 @@ Page({
     wx.hideTabBar()
     this.setData({
       participantInfo: {},
-      sponsorInfo: {}
+      sponsorInfo: {},
+      identity : wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1
     })
     var _this = this
-    this.getParticipantInfo()
-    this.getSponsorInfo()
+    this.renews()
   },
   renews: function () {
     this.setData({
@@ -204,8 +209,15 @@ Page({
       sponsorInfo: {}
     })
     var _this = this
-    this.getParticipantInfo()
-    this.getSponsorInfo()
+    var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")) : '';
+    console.log(token)
+    var identity = this.data.identity;
+    if (token.authorization && identity == "1"){
+      this.getParticipantInfo()
+    }
+    if (token.token && identity == "2") {
+      this.getSponsorInfo()
+    }
   },
   onHide: function () {
 
@@ -231,7 +243,4 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
 })

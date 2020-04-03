@@ -1,5 +1,7 @@
 // 中间发布按钮跳转页
 // pages/middle/middle.js
+
+const util = require('../../utils/util.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -21,18 +23,33 @@ Page({
     //tabbar
     tabbar: {},
   },
-  goToRelease(e){
+  // 修改函数节流
+  goToRelease: util.throttle(function (e){
     let event = e.currentTarget.dataset.type
-    if (event==1){
+    var identity = wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1;
+    if (event == 1) {
       wx.showToast({
         title: '暂未开发，敬请期待。。。',
         icon: 'none',
         duration: 1000
       })
     } else if (event == 2) {
-      wx.navigateTo({
-        url: '../releaseActivity/releaseActivity'
-      })
+      if (identity == 1) {
+        wx.showToast({
+          title: '暂不支持参与者发布活动',
+          icon: 'none',
+          duration: 1000
+        })
+        setTimeout(() => {
+          wx.navigateTo({
+            url: '../business/business'
+          })
+        }, 1000)
+      } else {
+        wx.navigateTo({
+          url: '../releaseActivity/releaseActivity'
+        })
+      }
     } else if (event == 3) {
       wx.showToast({
         title: '暂未开发，敬请期待。。。',
@@ -40,7 +57,7 @@ Page({
         duration: 1000
       })
     }
-  },
+  }, 1000),
   /**
    * 生命周期函数--监听页面加载
    */
@@ -97,7 +114,4 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
 })

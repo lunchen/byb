@@ -50,7 +50,7 @@
 
           </view>
           <view class="bottom-left-view-item-text item-ellipsis" >
-            今天的辛苦换来明天的光环今天的辛苦换来明天的光环今天的辛苦换来明天的光环
+            {{item.name}}
           </view>
           <view class="bottom-left-btn">
             <text>免费约课</text>

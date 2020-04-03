@@ -103,9 +103,17 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content:space-around; 
+  justify-content:flex-start; 
+}
+.schooleTeachVideo .schoolDetails-tabs-item{
+  margin-right: 20rpx;
+}
+.schooleTeachVideo .schoolDetailsImg-itemView{
+  flex: 0 0 auto;
+  width: 210rpx;  
+  height:210rpx;
 }
 .schooleTeachVideo .schoolDetailsImg-view{
-  flex: 0 0 auto;
   width: 180rpx;  
   height:210rpx;
 }

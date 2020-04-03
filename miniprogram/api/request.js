@@ -12,10 +12,14 @@ wx.getSystemInfo({
   }
 })
 
-const host = "https://test.byb88.cn/";
-const domian = "enlist";
+var host = "https://test.byb88.cn/";
+var domian = "enlist";
+
+
+// var host = "http://192.168.10.101";
+// var domian = ":9088";
 const apiUrl = url => {
-  return host + domian + +url; 
+  return host + domian + url; 
 }
 
 const getToken = function(keyName){
@@ -71,12 +75,22 @@ const service = {
           // 调用接口成功
           if(res.data.code == 200){
             resolve(res)
+          } else if (res.data.code == 401) {
+            wx.showToast({
+              title: "登陆信息已过期，请重新登陆",
+              icon: 'none',
+              duration: 2000
+            })
+            wx.clearStorageSync();
+            reject(res)
           } else {
+            console.log("res报错")
             reject(res)
           }
         },
         fail: (err) => {
           // 调用接口失败
+          console.log("err报错")
           reject(err)
         }
       })

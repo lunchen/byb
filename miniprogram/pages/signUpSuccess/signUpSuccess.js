@@ -40,7 +40,6 @@ Page({
     });
     console.log(e)
     let orderNo = e.orderNo ? e.orderNo : 1;
-    orderNo = "O15852908889622020032700006"    // 无价格0
     if (orderNo) {
       console.log(orderNo)
       apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {
@@ -84,8 +83,6 @@ Page({
 
   onShareAppMessage: function (ops) {
     var json = encodeURIComponent(JSON.stringify({ a: 1 }));
-    console.log(123123)
-    console.log(ops)
     if (ops.from === 'button') {
       // 来自页面内转发按钮
       console.log(ops.target)
@@ -104,13 +101,6 @@ Page({
         console.log("转发失败:" + JSON.stringify(res));
       }
     }
-    // console.log(123)
-    // var options = {
-    //   title:123,
-    //   path:'',
-    //   imageUrl: 'https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/test/2020/03/21/logo.png'
-    // }
-    // wx.onShareAppMessage(options)
 
   },
 })

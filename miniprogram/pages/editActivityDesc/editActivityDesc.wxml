@@ -13,7 +13,7 @@
         <view class="editActivityDesc-content">
           <view class="editActivityDesc-content-addView">
             <view class="editActivityDesc-content-addView-btn">
-              <addVideoComponent bind:getUploadMes="getUploadMes"></addVideoComponent>
+              <addVideoComponent base="activity" bind:getUploadMes="getUploadMes"></addVideoComponent>
             </view>
           </view>
         </view>

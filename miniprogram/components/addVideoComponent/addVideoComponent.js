@@ -13,7 +13,7 @@ Component({
     },
     base: {
       type: String,
-      value: "img"
+      value: "images"
     }
   },
   data: {
@@ -80,8 +80,16 @@ Component({
               width = src.width,
               type = 1; //type:1 图片  2 视频
           if (res.type === "video"){
+            if (src.duration>60){
+              wx.showToast({
+                title: '请选择时长小于1分钟的视频',
+                icon: 'none',
+                duration: 1000
+              })
+              return
+            }
             type = 2;
-            url = apiServer.apiUrl(`/picture/upload/${that.data.base}/${src.height}/${src.width}/10GB`)
+            url = apiServer.apiUrl(`/picture/upload/${that.data.base}/${src.height}/${src.width}`)
           } else{
             url = apiServer.apiUrl(`/picture/upload/${that.data.base}`)
           }

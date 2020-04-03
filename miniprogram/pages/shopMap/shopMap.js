@@ -45,8 +45,11 @@ Page({
     let self =this;
     self.mapCtx = wx.createMapContext('myMap')
     // 实例化API核心类
+
+    // qqmapsdk1: "W57BZ-JDB6X-XPA4H-Z76MI-73FF2-24BT4",
+    //   qqmapsdk: "XIFBZ-MFRC3-LL73N-YT4ZG-ZIPJ6-YZBCG",
     qqmapsdk = new QQMapWX({
-      key: 'W57BZ-JDB6X-XPA4H-Z76MI-73FF2-24BT4'
+        key: 'XIFBZ-MFRC3-LL73N-YT4ZG-ZIPJ6-YZBCG'
     });
     wx.showLoading({
       title: '加载中'

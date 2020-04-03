@@ -13,7 +13,7 @@
           <view class="schoolDetails-content-introduction-title">
             <view class="title">
               <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
-              <text>课程简介</text>
+              <text>学校简介</text>
             </view>
           </view>
          
@@ -73,62 +73,98 @@
             <van-tab title="学校环境">
               <view class="schoolEnv tab-list">
                 <view wx:for="{{schoolDetails.envList}}" wx:key="id" class="schoolDetails-tabs-item">
-                  <view class="schoolDetailsImg-view">
-                    <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
-                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+                  <view class="schoolDetailsImg-view" wx:if="{{item.img.url}}">
+                    <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
+                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
+                    <image-video 
+                      show="{{true}}" 
+                      src="{{item.img.url}}" 
+                      type="{{item.img.type}}" 
+                      height="310" 
+                      width="620"
+                      activeid = "{{activeid}}" 
+                      index="{{index}}" 
+                      videoid="{{item.img.imgNo}}" ></image-video>
                   </view>
                 </view>
 
-                <view class="tab-list-moreBtn">
+                <!-- <view class="tab-list-moreBtn">
                   <text>查看更多</text>
                   <image src="../../images/home_4@2x.png"></image>
-                </view>
+                </view> -->
               </view>
             </van-tab>
             <van-tab title="教学视频">
               <view class="schooleTeachVideo tab-list">
-                <view wx:for="{{schoolDetails.envList}}" wx:key="id" class="schoolDetails-tabs-item">
-                  <view class="schoolDetailsImg-view">
-                    <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
-                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+                <view wx:for="{{schoolDetails.honorList}}" wx:key="id" class="schoolDetails-tabs-item">
+                  <view class="schoolDetailsImg-itemView" wx:if="{{item.img.url}}">
+                      <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
+                      <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
+                        <image-video 
+                          show="{{true}}" 
+                          src="{{item.img.url}}" 
+                          type="{{item.img.type}}" 
+                          height="210" 
+                          width="210"
+                          activeid = "{{activeid}}" 
+                          index="{{index}}" 
+                          videoid="{{item.img.imgNo}}" ></image-video>              
                   </view>
-                  
+                
                 </view>
                 
-                <view class="tab-list-moreBtn">
+                <!-- <view class="tab-list-moreBtn">
                   <text>查看更多</text>
                   <image src="../../images/home_4@2x.png"></image>
-                </view>
+                </view> -->
               </view>
             </van-tab>
             <van-tab title="学员展示">
               <view class="schoolEnv tab-list">
                 <view wx:for="{{schoolDetails.showList}}" wx:key="id" class="schoolDetails-tabs-item">
-                  <view class="schoolDetailsImg-view">
-                    <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
-                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+                  <view class="schoolDetailsImg-view" wx:if="{{item.img.url}}">
+                    <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
+                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
+                    <image-video 
+                      show="{{true}}" 
+                      src="{{item.img.url}}" 
+                      type="{{item.img.type}}" 
+                      height="310" 
+                      width="620"
+                      activeid = "{{activeid}}" 
+                      index="{{index}}" 
+                      videoid="{{item.img.imgNo}}" ></image-video>
                   </view>
                 </view>
 
-                <view class="tab-list-moreBtn">
+                <!-- <view class="tab-list-moreBtn">
                   <text>查看更多</text>
                   <image src="../../images/home_4@2x.png"></image>
-                </view>
+                </view> -->
               </view>
             </van-tab>
             <van-tab title="资质荣誉">
               <view class="schoolEnv tab-list">
                 <view wx:for="{{schoolDetails.honorList}}" wx:key="id" class="schoolDetails-tabs-item">
-                  <view class="schoolDetailsImg-view">
-                    <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
-                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video>
+                  <view class="schoolDetailsImg-view" wx:if="{{item.img.url}}">
+                    <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
+                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
+                    <image-video 
+                      show="{{true}}" 
+                      src="{{item.img.url}}" 
+                      type="{{item.img.type}}" 
+                      height="310" 
+                      width="620"
+                      activeid = "{{activeid}}" 
+                      index="{{index}}" 
+                      videoid="{{item.img.imgNo}}" ></image-video>
                   </view>
                 </view>
 
-                <view class="tab-list-moreBtn">
+                <!-- <view class="tab-list-moreBtn">
                   <text>查看更多</text>
                   <image src="../../images/home_4@2x.png"></image>
-                </view>
+                </view> -->
               </view>
             </van-tab>
           </van-tabs>

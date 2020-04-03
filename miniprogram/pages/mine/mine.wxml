@@ -14,7 +14,7 @@
           
           <view class="mine-top-view-left-text">
             <view style="font-size:36rpx;color:#010101;font-weight:bloder;">{{participantInfo.user?participantInfo.user.nickName:"--"}}</view>
-            <view style="font-size:28rpx;color:#999999;display:flex;align-items:center;">
+            <view style="font-size:28rpx;color:#999999;display:flex;align-items:center;" bindtap="goToBusiness">
               <text>商务洽谈</text>
               <image style="width:28rpx;height:28rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_4@2x.png"></image>
             </view>
@@ -47,7 +47,7 @@
                 </view>
                 <view class="participantCard-content-item-middle" bindtap="goToOrderDetails" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
                   <view>
-                    <image class="participantCard-content-item-middle-left" src="../../images/huodong.png"></image>
+                    <image class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
                   </view>
                   <view class="participantCard-content-item-middle-center">
                     <view class="participantCard-content-item-middle-center-text">
@@ -134,7 +134,7 @@
               <text>我发布的</text>
             </view>
             <view class="mine-content-title-right" bindtap="goToJoinerManage" data-type="2">
-              报名者管理
+              预约者管理
             </view>
           </view>
 
@@ -151,11 +151,11 @@
                   </view>
                   <view class="sponsorCard-content-item-middle" bindtap="goToActivityDetails" data-id="{{item.id}}">
                     <view>
-                      <image class="sponsorCard-content-item-middle-left" src="../../images/huodong.png"></image>
+                      <image class="sponsorCard-content-item-middle-left" src="{{item.img}}"></image>
                     </view>
                     <view class="sponsorCard-content-item-middle-center">
                       <view class="sponsorCard-content-item-middle-center-text">
-                        <text class="sponsorCard-view-text1">{{item.name}}</text>
+                        <text class="sponsorCard-view-text1">{{item.img}}</text>
                         <view class="sponsorCard-view-text2">{{item.remark}}</view> 
                         <view class="sponsorCard-view-text3">时间：{{item.betweenTime}}</view>
                       </view>
@@ -219,7 +219,7 @@
                   </view>
                   <view class="sponsorCard-content-item-middle" bindtap="goToActivityDetails" data-id="{{item.id}}">
                     <view>
-                      <image class="sponsorCard-content-item-middle-left" src="../../images/huodong.png"></image>
+                      <image class="sponsorCard-content-item-middle-left" src="{{item.img}}"></image>
                     </view>
                     <view class="sponsorCard-content-item-middle-center">
                       <view class="sponsorCard-content-item-middle-center-text">

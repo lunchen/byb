@@ -78,8 +78,6 @@ Component({
         result.push({ id, name })
       }
       let { [this.data.key]: id, [this.data.text]: name } = this.data.defaultOption
-      console.log(this.data.defaultOption)
-      console.log({ id, name })
       this.setData({
         // current: Object.assign({}, this.data.defaultOption),
         current: { id, name },
@@ -88,10 +86,8 @@ Component({
       if (this.data.result[0] != undefined) {
         this.triggerEvent("change", { ...this.data.result[0] })
       }
-      
     }
   },
-
   lifetimes: {
     attached() {
       // 属性名称转换, 如果不是 { id: '', name:'' } 格式，则转为 { id: '', name:'' } 格式

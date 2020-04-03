@@ -49,15 +49,15 @@
 
         <view class="editSchoolHome-content-view">
           <view class="editSchoolHome-content-view-title mgb20">
-            精品课程
+            线上体验
           </view>
           <block  wx:for="{{schoolHome.courseList}}" wx:key="id">
             <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle1">删除</view>
             <view class="editSchoolHome-content-form-item">
-              <text class="editSchoolHome-content-form-item-title">课程名称</text>
+              <text class="editSchoolHome-content-form-item-title">标题</text>
               <van-field
                 value="{{ item.name }}"
-                placeholder="活动标题"
+                placeholder="标题"
                 border="{{ false }}"
                 bind:change="onCoursenameChange"
                 data-index="{{index}}"
@@ -65,7 +65,7 @@
             </view>
 
             <view class="editSchoolHome-content-form-item" style="border:none">
-              <text class="editSchoolHome-content-form-item-title">老师头像</text>
+              <text class="editSchoolHome-content-form-item-title">图片</text>
               <view class="upPicBtn" bindtap="uploadTeacherLogo" data-index="{{index}}">
                 <image src="{{item.img}}"></image>
                 <view>上传</view>

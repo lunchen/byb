@@ -140,7 +140,7 @@ Page({
       var data = JSON.stringify({
         key: e.currentTarget.dataset.key,
         index: index,
-        list: this.data.schoolDetails.activityList[index].imgList
+        list: this.data.schoolDetails.activityList[index].imgList ? this.data.schoolDetails.activityList[index].imgList: []
       })
       wx.setStorageSync("addivList", data)
       wx.navigateTo({
@@ -187,9 +187,9 @@ Page({
       [`schoolDetails.activityList[${prevIndex}].${prevkey}`]: prevData
     })
   },
-  goToSchoolHome(e) {
+  goToSchoolDetails(e) {
     wx.navigateTo({
-      url: `../schoolHome/schoolHome${this.data.id}`
+      url: `../schoolDetails/schoolDetails${this.data.id}`
     })
   },
   submit(){
@@ -224,7 +224,7 @@ Page({
         duration: 2000
       })
       _this.getData()
-      _this.goToSchoolHome()
+      _this.goToSchoolDetails()
       // activityList: res.data.data.activityList
     })
   },
@@ -249,5 +249,4 @@ Page({
     var that = this;
     this.getData()
   },
-  
 })

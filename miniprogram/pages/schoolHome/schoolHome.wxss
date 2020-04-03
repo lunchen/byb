@@ -5,17 +5,22 @@
   display: flex;
   flex-direction: column;
   background: #fff;
-  padding: 0rpx 30rpx 200rpx;
+  padding: 0rpx 0rpx 200rpx 0rpx;
 }
 .schoolHome-infoCard{
-  padding: 0 20rpx;
+  padding: 0 50rpx;
 }
 .schoolHome-link{
   height: 2rpx;
   background: #f0f0f0;
   margin: 40rpx 0;
 }
-
+.schoolHome-view_item{
+  padding: 0 30rpx;
+}
+.schoolHome-view_item1{
+  padding: 0 0 0 30rpx;
+}
 .schoolHome-content-title{
   display: flex;
   justify-content: space-between;
@@ -69,7 +74,7 @@
 }
 .schoolHome-content-card-right{
   height: 266rpx;
-  flex: 1 0 auto;
+  /* flex: 1 0 auto; */
   background: #f5f5f5;
   border-top-right-radius: 26rpx;
   border-bottom-right-radius: 26rpx;

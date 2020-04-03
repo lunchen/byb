@@ -215,9 +215,9 @@ Page({
       success(res) {
         console.log(res)
         let src = res.tempFiles[0];
-        var videoName = src.path.split("/")[src.path.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi, '');
+        
         wx.uploadFile({
-          url: util.apiUrl(`/picture/upload/${videoName}`),
+          url: apiServer.apiUrl(`/picture/upload/teachericon`),
           method: 'post',
           filePath: src.path,
           name: 'file',
@@ -244,9 +244,9 @@ Page({
       success(res) {
         console.log(res)
         let src = res.tempFiles[0];
-        var videoName = src.path.split("/")[src.path.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi, '');
+      
         wx.uploadFile({
-          url: util.apiUrl(`/picture/upload/${videoName}`),
+          url: apiServer.apiUrl(`/picture/upload/orgicon`),
           method: 'post',
           filePath: src.path,
           name: 'file',
@@ -273,9 +273,8 @@ Page({
       success(res) {
         console.log(res)
         let src = res.tempFiles[0];
-        var videoName = src.path.split("/")[src.path.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi, '');
         wx.uploadFile({
-          url: util.apiUrl(`/picture/upload/${videoName}`),
+          url: apiServer.apiUrl(`/picture/upload/orglogo`),
           method: 'post',
           filePath: src.path,
           name: 'file',
@@ -302,9 +301,8 @@ Page({
       success(res) {
         console.log(res)
         let src = res.tempFiles[0];
-        var videoName = src.path.split("/")[src.path.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi, '');
         wx.uploadFile({
-          url: util.apiUrl(`/picture/upload/${videoName}`),
+          url: apiServer.apiUrl(`/picture/upload/wxqrcode`),
           method: 'post',
           filePath: src.path,
           name: 'file',
@@ -406,10 +404,17 @@ Page({
       }
     apiServer.post(`/app/org/index/update`, data).then(res => {
       console.log(res)
-      wx.showToast({
+      wx.hideLoading({});
+      wx.showModal({
         title: '编辑成功',
-        icon: 'loading',
-        duration: 2000
+        content: '是否跳转主页查看效果',
+        success: function (res) {
+          if (res.cancel) {
+            _this.goToSchoolHome()
+          } else if (res.confirm) {
+            
+          }
+        }
       })
       // activityList: res.data.data.activityList
     })

@@ -28,6 +28,7 @@ Component({
       type: Number,
       value: 0,
       observer: function (newVal, oldVal) {
+        var _this = this
         if (newVal == 1){
           this.getSelect()
           if (this.data.needChooseCourse){
@@ -46,9 +47,32 @@ Component({
         } else if (newVal == 4) {
           this.setData({
             telephone: '',
-            smsCode: ''
+            smsCode: '',
           })
           this.calcMoney()
+          wx.getSetting({
+            success(res) {
+              if (res.authSetting['scope.userInfo']){
+                _this.setData({
+                  showLogin:1
+                })
+              }else {
+                _this.setData({
+                  showLogin: 0
+                })
+              }
+
+              wx.login({
+                success(res) {
+                  _this.setData({
+                    "wxGetMes.code": res.code
+                  })
+                }
+              })
+            },
+            fail(err){
+            }
+          })
         }
         
       }
@@ -79,6 +103,11 @@ Component({
     telephone1: '13777822654',
     telephone: '',
     smsCode:'',
+    wxGetMes:{      //从微信获取的信息
+      code:'',
+      iv:'',
+      encryptedData:'',
+    },
     dt:61,
     joinTel:'',
     joinName:'',
@@ -266,8 +295,6 @@ Component({
     goToConfirmOrder(e) {
       // 跳转确认订单页
       var orderNo = e
-      orderNo = "O15852908889622020032700006"; //有价格
-      orderNo =  "O15852910547172020032700007"    // 无价格
       wx.navigateTo({
         url: `../confirmOrder/confirmOrder?orderNo=${orderNo}`,
       })
@@ -291,7 +318,7 @@ Component({
         joinTel: e.detail.value
       })
     },
-    bindGetUserInfo(e) {
+    getuserinfo(e){
       // 微信一键登录获取用户信息 提示授权
       var _this = this
       _this.setData({
@@ -302,53 +329,102 @@ Component({
       wx.getSetting({
         success(res) {
           if (res.authSetting['scope.userInfo']) {
-            _this.wxChatLogin()
+            // _this.wxChatLogin()
+            console.log(res)
+            console.log("auth")
+            wx.login({
+              success(res) {
+                console.log(res)
+                _this.setData({
+                  "wxGetMes.code": res.code
+                })
+              }
+            })
+            _this.setData({
+              showLogin: 1
+            })
           }
         }
       })
     },
+    getPhoneNumber(e) {
+      // 授权后 微信获取用户手机号一键登录
+      // console.log(e.detail.errMsg)
+      // console.log(e.detail.iv)
+      // console.log(e.detail.encryptedData)
+      if (e.detail.iv && e.detail.encryptedData){
+        this.setData({
+          "wxGetMes.iv": e.detail.iv,
+          "wxGetMes.encryptedData": e.detail.encryptedData
+        })
+        this.wxChatLogin()
+      }
+    },
     wxChatLogin(){
       // 微信登录
       var _this = this
+
+      var req = {
+        jsCode: this.data.wxGetMes.code,
+        data: this.data.wxGetMes.encryptedData,
+        iv: this.data.wxGetMes.iv,
+        type: 1
+      }
       wx.showToast({
-        title: '微信一键登录中，请稍后',
+        title: '微信登录中',
         icon: 'loading',
         duration: 2000
       })
-       wx.login({
-         success(res) {
-          console.log(res)
-          if (res.code) {
-            apiServer.post(`/wechat/auth/jscode2session/${res.code}`).then(res => {
-              console.log(res.data.data.data)
-              wx.showToast({
-                title: '登录成功',
-                icon: 'loading',
-                duration: 2000
-              })
-              wx.setStorageSync('identity', 1)
-              var token = {
-                token: res.data.data.data.login.token,
-                authorization: res.data.data.data.login.authorization,
-              }
-              wx.setStorageSync("token", JSON.stringify(token))
-              if (!_this.data.onlyLogin) {
-                _this.triggerEvent('changeFLogin', {
-                  loginShow: 3
-                })
-              } else {
-                _this.triggerEvent('changeFLogin', {
-                  loginShow: 0
-                })
-                if (res.data.data.data.user == 0) {
-                  _this.updataInfo()
-                }
-              }
-            })
-          } else {
-            console.log('登录失败！' + res.errMsg)
+      apiServer.post(`/app/login/login`, req).then(res => {
+        console.log(res.data);
+        wx.setStorageSync('identity', 1)
+        var token = {
+          token: res.data.data.token,
+          authorization: res.data.data.authorization,
+        }
+        wx.setStorageSync("token", JSON.stringify(token))
+        wx.setStorageSync("openId", res.data.data.openId)
+        _this.setData({
+          showLogin: 0,
+        })
+        if (res.data.data.update == 1) {
+          wx.showToast({
+            title: '注册登录成功',
+            icon: 'none',
+            duration: 1000
+          })
+          _this.updataInfo()
+        } else {
+          wx.showToast({
+            title: '登录成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        if (!_this.data.onlyLogin) {
+          _this.triggerEvent('changeFLogin', {
+            loginShow: 3
+          })
+        } else {
+          _this.triggerEvent('changeFLogin', {
+            loginShow: 0
+          })
+          console.log(1)
+
+          if (getCurrentPages().length != 0) {
+            console.log(2)
+            console.log(getCurrentPages()[getCurrentPages().length - 1])
+            //刷新当前页面的数据
+            getCurrentPages()[getCurrentPages().length - 1].renews()
           }
         }
+      }).catch(err => {
+        console.log(err)
+        wx.showToast({
+          title: '登陆失败：' + err.data.msg,
+          icon: 'none',
+          duration: 1000
+        })
       })
     },
     // 微信一键登陆后同步信息到后台
@@ -366,7 +442,7 @@ Component({
     telLoginHandle() {
       // 电话注册登录下一步 去填信息
       this.setData({
-        showLogin:1
+        showLogin:2
       })
     },
     loginTelIpt(e) {
@@ -398,6 +474,13 @@ Component({
           dt : 60
         })
         _this.dtFn()
+      }).catch(err => {
+        console.log(err.data)
+        wx.showToast({
+          title: '获取验证码失败：' + err.data.msg,
+          icon: 'none',
+          duration: 1000
+        })
       })
     },
     loginSmscodeIpt(e) {
@@ -409,17 +492,19 @@ Component({
     loginEsc() {
       // 取消电话输入返回上一步
       this.setData({
-        showLogin: 0
+        showLogin: 1
       })
     },
     loginHandle() {
       // 手机号注册登录提交
       var _this = this
-      var data = {
+      var req = {
+        jsCode: this.data.wxGetMes.code,
         "code": this.data.smsCode,
         "telephone": this.data.telephone,
+        "type": 2
       }
-      if (data.code == ""){
+      if (this.data.code == ""){
         wx.showToast({
           title: '请输入验证码',
           icon: 'none',
@@ -427,18 +512,32 @@ Component({
         })
         return
       }
-      apiServer.post(`/app/login/login`, data).then(res => {
+      apiServer.post(`/app/login/login`, req).then(res => {
         console.log(res.data);
+        wx.setStorageSync('identity', 1)
+        var token = {
+          token: res.data.data.token,
+          authorization: res.data.data.authorization,
+        }
+        wx.setStorageSync("token", JSON.stringify(token))
+        wx.setStorageSync("openId", res.data.data.openId)
+
         _this.setData({
           showLogin: 0
         })
-        wx.showToast({
-          title: '登录成功',
-          icon: 'loading',
-          duration: 1000
-        })
-        wx.setStorageSync('identity', 1)
-        wx.setStorageSync("token", JSON.stringify(res.data.data))
+        if (res.data.data.update == 1){
+          wx.showToast({
+            title: '注册登录成功，请尽快完善个人信息',
+            icon: 'none',
+            duration: 1000
+          })
+        }else{
+          wx.showToast({
+            title: '登录成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
         if (!_this.data.onlyLogin){
           _this.triggerEvent('changeFLogin', {
             loginShow: 3
@@ -458,6 +557,11 @@ Component({
         }
       }).catch(err=>{
         console.log(err)
+        wx.showToast({
+          title: '登陆失败：' + err.data.msg,
+          icon: 'none',
+          duration: 1000
+        })
       })
     }
   },

@@ -53,7 +53,7 @@
 
       </view>
       
-      <view class="loginOut-btn" hover-class="btn_hover" bindtap="logout">退出登陆</view>
+      <view class="loginOut-btn" hover-class="btn_hover" bindtap="openLogout">退出登陆</view>
     </view>
     
   </view>

@@ -5,14 +5,33 @@
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
       <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
-        <view class="activityDetailsImg-view">
+        <swiper style="height:375rpx;width:100%;" previous-margin="20rpx" next-margin="20rpx" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" bindchange="swiperChange">
+          <block wx:for="{{activityListData.activityBannerList}}" wx:key="*this">
+            <swiper-item>
+              <view style="padding:0 10rpx;height:375rpx;width:{{750-60}}rpx;border-radius:20rpx;" class="swiper-item {{item}} {{current==index ? 'scaleY1' : 'scaleY0_95'}}">
+                <!-- <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
+                <video wx:else  style="height:375rpx;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
+                <view style="border-radius:20rpx;overflow:hidden;height:375rpx;">
+                  <image-video 
+                  show="{{true}}" 
+                  src="{{item.url}}" 
+                  type="{{item.type}}" 
+                  height="375" 
+                  width="690"
+                  activeid = "{{activeid}}" 
+                  index="{{index}}" 
+                  videoid="{{item.id}}" ></image-video>
+                </view>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+        <!-- <view class="activityDetailsImg-view">
           <view class="activityDetailsImg">
             <image-video show="{{true}}" src="{{activityListData.img.url}}" type="{{activityListData.img.type}}" height="375" width="690"></image-video>
           </view>
-          
-          <!-- <image wx:if="{{activityListData.img.type===1}}" class="activityDetailsImg" src="{{activityListData.img}}"></image>
-          <video wx:else class="activityDetailsImg" id="{{'myVideo' + index}}" src="{{activityListData.img}}" controls></video> -->
-        </view>
+         
+        </view> -->
       </view>
       <view class="activityDetails-content">
         <!-- 卡片信息 -->
@@ -56,35 +75,26 @@
             <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
             <text>活动简介</text>
           </view>
-          <!-- 课程简介课时简介卡 -->
-          <!-- <view class="activityDetails-content-introduction-top">
-            <image style="width:180rpx;height:180rpx;border-radius:90rpx;margin-right:40rpx;" src="{{activityListData.course.img}}"></image> 
-            <view class="activityDetails-content-introduction-top-textView">
-              <view class="activityDetails-content-introduction-top-textView-item">
-                <view class="activityDetails-content-introduction-top-text1">
-                  <text>时长</text>
-                </view>
-                <text style="margin-left:18rpx;">{{activityListData.course.totalCount}}</text>
-              </view>
-              <view class="activityDetails-content-introduction-top-textView-item">
-                <view class="activityDetails-content-introduction-top-text1">
-                  <text>课时</text>
-                </view>
-                <text style="margin-left:18rpx;">{{activityListData.course.totalTime}}</text>
-              </view>
-              <view class="activityDetails-content-introduction-top-textView-item">
-                <view class="activityDetails-content-introduction-top-text1">
-                  <text>难度</text>
-                </view>
-                <text style="margin-left:18rpx;">{{activityListData.course.levelName}}</text>
-              </view>
-            </view>
-          </view> -->
           <!-- 小三角 -->
           <view class="activityDetails-triangle"></view>
           <!-- 课程简介详细介绍 -->
           <view class="activityDetails-content-introduction-info">
-            <view>{{activityListData.course.remark}}</view>
+            <view wx:for="{{activityListData.imgList}}" wx:key="*this">
+              <view class="activityDetails-content-introduction-info-title">
+                <text>{{item.title}}</text>
+              </view>
+              <view class="activityDetails-content-introduction-info-text">
+                <view class="textIndent28">{{item.remark}}</view>
+              </view>
+              <image-video 
+                  wx:if="{{item.url!=''}}"
+                  show="{{true}}" 
+                  src="{{item.url}}" 
+                  type="{{item.type}}" 
+                  width="600"
+                  videoid="{{item.id}}" ></image-video>
+            </view>
+            <view>{{activityListData.imgList.remark}}</view>
            <!-- <block>
             <view class="activityDetails-content-introduction-info-title">
               <text>一：舞蹈课程介绍</text>

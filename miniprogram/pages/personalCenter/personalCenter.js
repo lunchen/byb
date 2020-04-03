@@ -106,7 +106,7 @@ Page({
         let src = res.tempFiles[0];
         var videoName = src.path.split("/")[src.path.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi, '');
         wx.uploadFile({
-          url: util.apiUrl(`/picture/upload/${videoName}`),
+          url: apiServer.apiUrl(`/picture/upload/${videoName}`),
           method: 'post',
           filePath: src.path,
           name: 'file',
@@ -220,12 +220,31 @@ Page({
     });
 
   },
+  openLogout(){
+    this.setData({
+      "showList.logoutShow": true
+    })
+  },
   logout(){
     console.log("退出");
+    var _this = this;
     wx.clearStorageSync()
     this.onCloseAll();
     this.setData({
       participantInfo: this.data.req
+    })
+    wx.showToast({
+      title: '退出成功',
+      icon: 'none',
+      duration: 1000
+    })
+    setTimeout(()=>{
+      _this.goToMine()
+    })
+  },
+  goToMine(e) {
+    wx.switchTab({
+      url: `../mine/mine`,
     })
   },
   onLoad: function (options) {
@@ -267,7 +286,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  
 })

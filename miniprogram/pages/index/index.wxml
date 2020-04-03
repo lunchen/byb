@@ -3,8 +3,8 @@
   <navbar navbar-data='{{nvabarData}}' backgroundColor="#feb707"></navbar>
   <view class="search-view" style="position:relative;z-index:2;margin-top:{{height}}px;">
     <view class="search-view-location">
-      <text>杭州</text>
-      <image style="" src="../../images/home_9@2x.png"></image>
+      <text>{{myLocation}}</text>
+      <!-- <image style="" src="../../images/home_9@2x.png"></image> -->
     </view>
     <view class="search-view-btn" bindtap="goToSearch">
       <van-search

@@ -21,15 +21,6 @@
           <block wx:for="{{orgList}}" wx:key="id">
             <orgItem orgItemData="{{item}}"></orgItem>
           </block>
-          <block wx:for="{{orgList}}" wx:key="id">
-            <orgItem orgItemData="{{item}}"></orgItem>
-          </block>
-          <block wx:for="{{orgList}}" wx:key="id">
-            <orgItem orgItemData="{{item}}"></orgItem>
-          </block>
-          <block wx:for="{{orgList}}" wx:key="id">
-            <orgItem orgItemData="{{item}}"></orgItem>
-          </block>
       </view>
     </view>
   </scroll-view>

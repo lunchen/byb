@@ -21,7 +21,8 @@ Page({
     active: 0,
     schoolDetails: {},
 
-    loginShow: 4
+    loginShow: 4,
+    id:''
   },
   //事件处理函数
   goToSchoolHome: function (e) {
@@ -40,6 +41,9 @@ Page({
     });
     var that = this;
     let id = e.id ? e.id : 1;
+    this.setData({
+      id:id
+    })
     if (id) {
       console.log(id)
       apiServer.post(`/app/org/info/${id}`).then(res => {
@@ -57,5 +61,27 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  onShareAppMessage: function (ops) {
+    var json = encodeURIComponent(JSON.stringify({ a: 1 }));
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    return {
+      title: '报一报',
+      path: '/pages/schoolDetails/schoolDetails?id=' + this.data.id,
+      imageUrl: "",
+      success: function (res) {
+        // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log("转发失败:" + JSON.stringify(res));
+      }
+    }
+
+  },
 })

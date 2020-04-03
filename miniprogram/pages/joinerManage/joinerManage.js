@@ -188,10 +188,18 @@ Page({
         selectList: res.data.data.list,
       })
     })
-    this.setData({
-      "req.activityId": e.id,
-      "req.type": e.type,
-    })
+    console.log(e)
+    if (e.id && e.id != 'undefined'){
+      this.setData({
+        "req.activityId": e.id,
+        "req.type": e.type,
+      })
+    }else{
+      this.setData({
+        "req.type": e.type,
+      })
+    }
+    
     this.getOrderList()
   },
 })

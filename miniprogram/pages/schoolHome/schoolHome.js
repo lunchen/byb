@@ -60,6 +60,7 @@ Page({
     schoolHomeData: {},
     activeid: 0,
     identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1,       //1参与方 2主办方
+    id:''
   },
   // 滑块
   swiperChange(e) {
@@ -116,6 +117,9 @@ Page({
     });
     var _this = this;
     let id = e.id ? e.id : 1;
+    this.setData({
+      id:id
+    })
     if (id) {
       console.log(id)
       apiServer.post(`/app/org/index/${id}`).then(res => {
@@ -138,7 +142,8 @@ Page({
     }
     var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")).token : '';
     console.log(token)
-    if(token) {
+    var identity = wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1;
+    if (token && identity==2) {
       var sponsorId
       if (app.globalData.orgMes) {
         sponsorId = app.globalData.orgMes.org.id;
@@ -284,5 +289,27 @@ Page({
   },
   onHide() {
     this.videoParse()
-  }
+  },
+  onShareAppMessage: function (ops) {
+    var json = encodeURIComponent(JSON.stringify({ a: 1 }));
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    return {
+      title: '报一报',
+      path: '/pages/schoolHome/schoolHome?id=' + this.data.id,
+      imageUrl: "../../images/huodong.png",
+      success: function (res) {
+        // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log("转发失败:" + JSON.stringify(res));
+      }
+    }
+
+  },
 })

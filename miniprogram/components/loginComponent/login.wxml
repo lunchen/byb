@@ -14,9 +14,9 @@
         <view class="ticketChose-view-select">
           <select bind:change="selectChange" key="value" text="label" options="{{activityList}}" defaultOption="{{activeityDefaultOption}}"></select>
         </view>
-        <view class="ticketChose-view-label">选择票种</view>
+        <view class="ticketChose-view-label">费用</view>
         <view class="ticketChose-view-selected">
-          <text>票种1</text>
+          <text>费用</text>
           <text wx:if="{{activitySelected.price!==''}}" style="color:#fe8800;">¥ {{activitySelected.price}}</text>
           <text wx:else style="color:#fe8800;">¥ --{{activitySelected.length}}123</text>
           <image class="ticketChose-view-selected_img" style="width:40rpx;height:40rpx;" src="./icon/apply_7@2x.png"></image>
@@ -105,9 +105,24 @@
             <text>一键登录</text>
           </view> -->
           
-          <button class="login-view-item-text2 wxLoginBtn" style="width:390rpx;" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+          <button class="login-view-item-text2 wxLoginBtn" style="width:390rpx;margin-top:40rpx;" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getuserinfo">
+            <!-- <image src="./icon/login_3@2x.png"></image> -->
+            <text>微信授权用户信息</text>
+          </button>
+         
+        </view>
+      </block>
+      <block wx:if="{{showLogin==1}}">
+        <view class="login-view-item">
+          <view class="login-view-item-text1">离成功只差登录</view>
+          <!-- <view class="login-view-item-text2 wxLoginBtn" bindtap="wxChatLogin">
             <image src="./icon/login_3@2x.png"></image>
             <text>一键登录</text>
+          </view> -->
+          
+          <button class="login-view-item-text2 wxLoginBtn" style="width:390rpx;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+            <image src="./icon/login_3@2x.png"></image>
+            <text>微信登录</text>
           </button>
           <view class="login-view-item-text2 mpLoginBtn" bindtap="telLoginHandle">
             <image src="./icon/login_4@2x.png"></image>
@@ -115,7 +130,7 @@
           </view>
         </view>
       </block>
-      <block wx:else>
+      <block wx:elif="{{showLogin==2}}">
         <view class="login-view-item1">
           <view class="login-view-item-text1">离成功只差登录</view>
           <view class="login-view-item-text3">
@@ -138,7 +153,7 @@
             <view class="login-getCode"></view>
           </view>
           <view class="login-handle">
-            <view class="login-esc" bindtap="loginEsc" hover-class="login-esc_hover">取消</view>
+            <view class="login-esc" bindtap="loginEsc" hover-class="login-esc_hover">返回</view>
             <view class="login-sub" bindtap="loginHandle" hover-class="login-sub_hover">确认提交</view>
           </view>
         </view>

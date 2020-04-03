@@ -113,7 +113,7 @@ Component({
       var data = JSON.stringify({
         key: key,
         index: index,
-        list: this.data.iptActivityInfoData[key]
+        list: this.data.iptActivityInfoData[key] ? this.data.iptActivityInfoData[key]:[]
       })
       wx.setStorageSync("addivList", data)
       wx.navigateTo({

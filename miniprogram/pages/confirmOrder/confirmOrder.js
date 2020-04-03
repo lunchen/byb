@@ -17,7 +17,8 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
-    orderData:{}
+    orderData:{},
+    orderNo:'',
   },
   onLoad: function (e) {
 
@@ -26,8 +27,10 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    let orderNo = e.orderNo ? e.orderNo : 1;
-    // orderNo = "O15852908889622020032700006"    // 无价格0
+    let orderNo = e.orderNo ? e.orderNo : '';
+    that.setData({
+      orderNo: orderNo
+    })
     if (orderNo) {
       console.log(orderNo)
       apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {
@@ -37,6 +40,52 @@ Page({
         })
       })
     }
+  },
+  payBtn() {
+    var _this = this,
+        orderNo = _this.data.orderNo;
+    var req = {
+      "openId": wx.getStorageSync("openId"),
+      "orderNo": orderNo
+    }
+    console.log("去支付");
+    console.log(orderNo);
+    apiServer.post(`/app/order/unifiedorder`,req).then(res => {
+      console.log(res);
+      console.log(res.data.data)
+      wx.requestPayment(
+        {
+          'timeStamp': JSON.stringify(res.data.data.timeStamp),
+          'nonceStr': res.data.data.nonceStr,
+          'package': res.data.data.packages,
+          'signType': res.data.data.signType,
+          'paySign': res.data.data.paySign,
+          'success': function (res) {
+            console.log("success")
+            console.log(res)
+            wx.showToast({
+              title: '支付成功',
+              icon: 'none',
+              duration: 2000
+            })
+            setTimeout(()=>{
+              wx.navigateTo({
+                url: `../../signUpSuccess/signUpSuccess?orderNo=${orderNo}`,
+              })
+            },1500)
+           
+           },
+          'fail': function (res) { 
+            wx.showToast({
+              title: '支付已取消',
+              icon: 'none',
+              duration: 2000
+            })
+          },
+          'complete': function (res) {
+           }
+        })
+    })
   },
   onReady: function () {
 
@@ -65,10 +114,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
