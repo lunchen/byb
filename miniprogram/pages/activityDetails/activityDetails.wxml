@@ -39,7 +39,7 @@
         <!-- 学校卡片 -->
         <view class="activityDetails-content-view2" bindtap="goToSchoolHome" data-id="{{activityListData.org.id}}">
           <view class="activityDetails-content-view2-top">
-            <image style="width:112rpx;height:112rpx;border-radius:56rpx;" src="{{activityListData.org.img}}"></image> 
+            <image  mode="aspectFill" style="width:112rpx;height:112rpx;border-radius:56rpx;" src="{{activityListData.org.img}}"></image> 
             <view class="activityDetails-content-view2-top-textView">
               <view class="activityDetails-content-view2-top-text">
                 <text style="font-size:32rpx;">{{activityListData.org.name}}</text>
@@ -86,13 +86,16 @@
               <view class="activityDetails-content-introduction-info-text">
                 <view class="textIndent28">{{item.remark}}</view>
               </view>
-              <image-video 
+              <view class="activityDetails-content-introduction-info-img">
+                <image-video 
                   wx:if="{{item.url!=''}}"
                   show="{{true}}" 
                   src="{{item.url}}" 
                   type="{{item.type}}" 
                   width="600"
                   videoid="{{item.id}}" ></image-video>
+              </view>
+              
             </view>
             <view>{{activityListData.imgList.remark}}</view>
            <!-- <block>

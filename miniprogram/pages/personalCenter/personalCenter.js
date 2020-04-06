@@ -104,15 +104,19 @@ Page({
       success(res) {
         console.log(res)
         let src = res.tempFiles[0];
-        var videoName = src.path.split("/")[src.path.split("/").length - 1].replace(/\.(mp4|avi|mpeg|mpg|dat|rmvb|mov|asf|wmv|png|jpg|jpeg|)/gi, '');
         wx.uploadFile({
-          url: apiServer.apiUrl(`/picture/upload/${videoName}`),
+          url: apiServer.apiUrl(`/picture/upload/userIcon`),
           method: 'post',
           filePath: src.path,
           name: 'file',
           file: src,
           data: {},
-          header: { 'content-type': 'application/json' },
+          header: {
+            'content-type': 'application/json',
+            "Authorization": apiServer.getToken("authorization"),
+            "token": apiServer.getToken("token"),
+            "appRole": apiServer.getIdentity(),
+          },
           success(res) {
             var data = JSON.parse(res.data)
             that.setData({
@@ -221,8 +225,19 @@ Page({
 
   },
   openLogout(){
-    this.setData({
-      "showList.logoutShow": true
+    // this.setData({
+    //   "showList.logoutShow": true
+    // })
+    var _this = this
+    wx.showModal({
+      title: '请选择',
+      content: '是否确认退出',
+      success: function (res) {
+        if (res.cancel) {
+        } else if (res.confirm) {
+          _this.logout()
+        }
+      }
     })
   },
   logout(){
@@ -240,7 +255,7 @@ Page({
     })
     setTimeout(()=>{
       _this.goToMine()
-    })
+    },500)
   },
   goToMine(e) {
     wx.switchTab({

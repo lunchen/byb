@@ -3,9 +3,10 @@
       <video src="{{src}}" bindload="imgLoaded" class="video"></video>
     </block> -->
   <block wx:if="{{src!=''}}">
-    <image class="media-view" wx:if="{{type==1}}" catchtap="previewImage" bindload="imgLoaded" style="width:0rpx;height:0rpx;width:{{imageWidth}}rpx;height:{{imageHeight}}rpx" src="{{src}}"></image>
+    <image class="media-view" mode="aspectFill" wx:if="{{type==1}}" bindtap="previewImage" bindload="imgLoaded" style="width:0rpx;height:0rpx;width:{{imageWidth}}rpx;height:{{imageHeight}}rpx" src="{{src}}"></image>
     <video 
-      wx:else 
+      wx:else
+      muted="true"
       id="myvideo_{{videoid}}"
       data-id="{{videoid}}"
       data-index="{{index}}"
@@ -16,7 +17,6 @@
       src="{{src}}" 
       show-center-play-btn="{{false}}"
       controls="{{true}}"
-
       bindplay="onPlay"
       bindpause="onPause"
       bindended="onEnded"

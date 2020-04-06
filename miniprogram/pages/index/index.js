@@ -45,6 +45,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     activeid: 0,    //正在播放的视频0
+    identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1, //1参与方 2主办方
     qqmapsdk1: "W57BZ-JDB6X-XPA4H-Z76MI-73FF2-24BT4",
     qqmapsdk: "XIFBZ-MFRC3-LL73N-YT4ZG-ZIPJ6-YZBCG",
     myLocation: "定位中"
@@ -64,7 +65,8 @@ Page({
       success(res) {
         var data = JSON.parse(res.result)
         if(data.pathName == "核销"){
-          _this.goToWriteOffOrder(data)
+          // _this.goToWriteOffOrder(data)
+          _this.getScanOrderData(data)
         }else{
           wx.showToast({
             title: '无法识别该二维码',
@@ -73,6 +75,21 @@ Page({
           })
         }
       }
+    })
+  },
+  getScanOrderData(e){
+    var _this = this
+    var orderNo = e.orderNo
+    apiServer.post(`/app/order/info/qrCode/${orderNo}`).then(res => {
+      console.log(res.data);
+      wx.setStorageSync("scanData", JSON.stringify(res.data.data))
+      _this.goToWriteOffOrder(e)
+    }).catch(err=>{
+      wx.showToast({
+        title: err.data.msg,
+        icon: 'none',
+        duration: 2000
+      })
     })
   },
   videoPlay(){
@@ -89,10 +106,10 @@ Page({
   },
   goToVideoSwiper(e){
 
-    var id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: `../video-swiper/video-swiper?id=${id}&type=index`,
-    })
+    // var id = e.currentTarget.dataset.id
+    // wx.navigateTo({
+    //   url: `../video-swiper/video-swiper?id=${id}&type=index`,
+    // })
   },
   goToWriteOffOrder(e) {
     var orderNo = e.orderNo
@@ -200,7 +217,9 @@ Page({
   },
   onShow: function () {
     var that = this;
-
+    this.setData({
+      identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1
+    })
     wx.hideTabBar()
     var that = this;
     this.videoPlay()

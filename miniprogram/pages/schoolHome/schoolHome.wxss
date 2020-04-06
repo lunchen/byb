@@ -74,7 +74,7 @@
 }
 .schoolHome-content-card-right{
   height: 266rpx;
-  /* flex: 1 0 auto; */
+  flex: 1 1 380rpx;
   background: #f5f5f5;
   border-top-right-radius: 26rpx;
   border-bottom-right-radius: 26rpx;
@@ -132,4 +132,13 @@
 }
 .scaleY1{
   transform:scaleY(1);
+}
+
+.canvas-box{
+   width: 100%;
+   min-height: 200px;
+  position: fixed;
+  left: 0;
+  top: 999999px;
+  background: blue
 }

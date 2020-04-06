@@ -31,7 +31,7 @@ Component({
     },
     activeid: {     //外部传入的正在播放的第几个视频 用于控制播放列表上第几个视频
       type: Number,
-      value: 0,
+      value: 99999,
       observer: function (newVal, oldVal) {
         this.playCurrent()
       }

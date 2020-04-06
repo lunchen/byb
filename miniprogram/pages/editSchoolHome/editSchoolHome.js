@@ -223,7 +223,12 @@ Page({
           name: 'file',
           file: src,
           data: {},
-          header: { 'content-type': 'application/json' },
+          header: { 
+            'content-type': 'application/json',
+            "Authorization": apiServer.getToken("authorization"),
+            "token": apiServer.getToken("token"),
+            "appRole": apiServer.getIdentity(),
+           },
           success(res) {
             var data = JSON.parse(res.data)
             that.setData({
@@ -252,7 +257,12 @@ Page({
           name: 'file',
           file: src,
           data: {},
-          header: { 'content-type': 'application/json' },
+          header: { 
+            'content-type': 'application/json',
+            "Authorization": apiServer.getToken("authorization"),
+            "token": apiServer.getToken("token"),
+            "appRole": apiServer.getIdentity(),
+          },
           success(res) {
             var data = JSON.parse(res.data)
             that.setData({
@@ -280,7 +290,12 @@ Page({
           name: 'file',
           file: src,
           data: {},
-          header: { 'content-type': 'application/json' },
+          header: {
+            'content-type': 'application/json',
+            "Authorization": apiServer.getToken("authorization"),
+            "token": apiServer.getToken("token"),
+            "appRole": apiServer.getIdentity(),
+          },
           success(res) {
             var data = JSON.parse(res.data)
             that.setData({
@@ -308,7 +323,12 @@ Page({
           name: 'file',
           file: src,
           data: {},
-          header: { 'content-type': 'application/json' },
+          header: {
+            'content-type': 'application/json',
+            "Authorization": apiServer.getToken("authorization"),
+            "token": apiServer.getToken("token"),
+            "appRole": apiServer.getIdentity(),
+          },
           success(res) {
             var data = JSON.parse(res.data)
             that.setData({
@@ -404,15 +424,14 @@ Page({
       }
     apiServer.post(`/app/org/index/update`, data).then(res => {
       console.log(res)
-      wx.hideLoading({});
+      wx.hideToast();
       wx.showModal({
         title: '编辑成功',
         content: '是否跳转主页查看效果',
         success: function (res) {
           if (res.cancel) {
-            _this.goToSchoolHome()
           } else if (res.confirm) {
-            
+            _this.goToSchoolHome()
           }
         }
       })
@@ -420,8 +439,9 @@ Page({
     })
   },
   goToSchoolHome(e) {
+    var id = JSON.parse(wx.getStorageSync('myOrgMes')).org.id
     wx.navigateTo({
-      url: `../schoolHome/schoolHome${this.data.id}`
+      url: `../schoolHome/schoolHome?id=${id}`
     })
   },
   goToEditSchoolDetails(e) {

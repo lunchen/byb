@@ -15,7 +15,7 @@
         disabled
       />
     </view>
-    <view hover-class="btnClick" bindtap="toScan">
+    <view hover-class="btnClick" wx:if="{{identity == 2}}" bindtap="toScan">
       <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/home_3@2x.png"></image>
     </view>
   </view>

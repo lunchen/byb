@@ -67,7 +67,7 @@
             <view class="editSchoolHome-content-form-item" style="border:none">
               <text class="editSchoolHome-content-form-item-title">图片</text>
               <view class="upPicBtn" bindtap="uploadTeacherLogo" data-index="{{index}}">
-                <image src="{{item.img}}"></image>
+                <image mode="aspectFill" src="{{item.img}}"></image>
                 <view>上传</view>
               </view>
             </view>
@@ -118,7 +118,7 @@
           <view class="editSchoolHome-content-form-item">
             <text class="editSchoolHome-content-form-item-title">机构logo</text>
             <view class="upPicBtn" bindtap="uploadUsLogo">
-              <image src="{{schoolHome.understand.logo}}"></image>
+              <image mode="aspectFill" src="{{schoolHome.understand.logo}}"></image>
               <view>上传</view>
             </view>
           </view>

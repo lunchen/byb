@@ -46,10 +46,10 @@
                 <text>{{item.name}}</text>
                 <text style="font-size:20rpx;margin-left:20rpx;color:#666666">{{item.telephone}}</text>
               </view>
-              <view class="joinerManage-orderList-item-middle-text1">{{item.remark}}</view>
+              <view class="joinerManage-orderList-item-middle-text1 over_word">{{item.activityName}}</view>
               <view class="joinerManage-orderList-item-middle-text2">
                 <text>金额：</text>
-                <text class="color:#fe8800">¥ {{item.totalPrice}}元</text>
+                <text style="color:#fe8800">¥ {{item.totalPrice}}元</text>
               </view>
               <view class="joinerManage-orderList-item-middle-text2">时间：{{item.createTime}}</view>
             </view>

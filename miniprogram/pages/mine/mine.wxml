@@ -8,7 +8,7 @@
       <view class="mine-top-view">
         <view class="mine-top-view-left">
           <view style="width:148rpx;height:148rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;">
-            <image wx:if="{{participantInfo.user}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{participantInfo.user.heardImg}}" bindtap="goToPersonalCenter"></image>
+            <image  mode="aspectFill" wx:if="{{participantInfo.user}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{participantInfo.user.heardImg}}" bindtap="goToPersonalCenter"></image>
             <view wx:else class="mine-top-view-left-noImg" bindtap="goToPersonalCenter"></view>
           </view>
           
@@ -40,14 +40,14 @@
               <view class="participantCard-content-item">
                 <view class="participantCard-content-item-top">
                   <view class="participantCard-content-item-top-left">
-                    <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                    <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
                     <text>{{item.org.name}}</text>
                   </view>
                   <text>{{item.statusName}}</text>
                 </view>
                 <view class="participantCard-content-item-middle" bindtap="goToOrderDetails" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
                   <view>
-                    <image class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
+                    <image mode="aspectFill" class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
                   </view>
                   <view class="participantCard-content-item-middle-center">
                     <view class="participantCard-content-item-middle-center-text">
@@ -57,7 +57,7 @@
                     </view>
                     <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
                   </view>
-                  <view class="participantCard-content-item-middle-right" catchtap="goToETicket" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}">
+                  <view class="participantCard-content-item-middle-right" catchtap="goToETicket" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}" data-status="{{item.statusName}}">
                     <view class="trapezoidTop"></view>
                     <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
                     <view class="trapezoidBottom"></view>
@@ -89,7 +89,7 @@
       <view class="mine-top-view">
         <view class="mine-top-view-left">
           <view style="width:148rpx;height:148rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;">
-            <image bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" wx:if="{{sponsorInfo.org}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{sponsorInfo.org.logo}}"></image>
+            <image  mode="aspectFill" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" wx:if="{{sponsorInfo.org}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{sponsorInfo.org.logo}}"></image>
             <view wx:else class="mine-top-view-left-noImg"  bindtap="goToPersonalCenter"></view>
           </view>
           <view class="mine-top-view-left-text" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}">
@@ -151,11 +151,11 @@
                   </view>
                   <view class="sponsorCard-content-item-middle" bindtap="goToActivityDetails" data-id="{{item.id}}">
                     <view>
-                      <image class="sponsorCard-content-item-middle-left" src="{{item.img}}"></image>
+                      <image mode="aspectFill" class="sponsorCard-content-item-middle-left" src="{{item.img}}"></image>
                     </view>
                     <view class="sponsorCard-content-item-middle-center">
                       <view class="sponsorCard-content-item-middle-center-text">
-                        <text class="sponsorCard-view-text1">{{item.img}}</text>
+                        <text class="sponsorCard-view-text1">{{item.name}}</text>
                         <view class="sponsorCard-view-text2">{{item.remark}}</view> 
                         <view class="sponsorCard-view-text3">时间：{{item.betweenTime}}</view>
                       </view>
@@ -164,13 +164,13 @@
                   </view>
                   <view class="sponsorCard-content-item-bottom">
                     <view class="sponsorCard-content-item-bottom-view1">
-                      <view bindtap="goToJoinerManage" data-id="{{item.id}}">
+                      <view data-id="{{item.id}}">
                         <image src="../../images/sponsor_6@2x.png"></image>
                         <text>{{item.lookCount?item.lookCount:0}}</text>
                       </view>
-                      <view bindtap="goToJoinerManage" data-id="{{item.id}}">
-                        <image src="../../images/sponsor_7@2x.png"></image>
-                        <text>{{item.joinCount?item.joinCount:0}}</text>
+                      <view bindtap="goToJoinerManage" data-id="{{item.id}}" data-type="{{1}}">
+                        <image src="../../images/baomin@2x.png"></image>
+                        <text style="color:#feb707">{{item.joinCount?item.joinCount:0}}</text>
                       </view>
                       <view>
                         <image src="../../images/sponsor_8@2x.png"></image>
@@ -212,14 +212,14 @@
                 <block>
                   <view class="sponsorCard-content-item-top">
                     <view class="sponsorCard-content-item-top-left">
-                      <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                      <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
                       <text>{{item.org.name}}</text>
                     </view>
                     <text wx:if="{{item.status!=-1}}" bindtap="goToReEditActivity" data-id="{{item.id}}">编辑活动</text>
                   </view>
                   <view class="sponsorCard-content-item-middle" bindtap="goToActivityDetails" data-id="{{item.id}}">
                     <view>
-                      <image class="sponsorCard-content-item-middle-left" src="{{item.img}}"></image>
+                      <image mode="aspectFill" mode="aspectFill" class="sponsorCard-content-item-middle-left" src="{{item.img}}"></image>
                     </view>
                     <view class="sponsorCard-content-item-middle-center">
                       <view class="sponsorCard-content-item-middle-center-text">
@@ -232,13 +232,13 @@
                   </view>
                   <view class="sponsorCard-content-item-bottom">
                     <view class="sponsorCard-content-item-bottom-view1">
-                      <view bindtap="goToJoinerManage" data-id="{{item.id}}">
+                      <view data-id="{{item.id}}">
                         <image src="../../images/sponsor_6@2x.png"></image>
                         <text>{{item.lookCount?item.lookCount:0}}</text>
                       </view>
-                      <view bindtap="goToJoinerManage" data-id="{{item.id}}">
-                        <image src="../../images/sponsor_7@2x.png"></image>
-                        <text>{{item.joinCount?item.joinCount:0}}</text>
+                      <view bindtap="goToJoinerManage" data-id="{{item.id}}" data-type="{{1}}">
+                        <image src="../../images/baomin@2x.png"></image>
+                        <text style="color:#feb707">{{item.joinCount?item.joinCount:0}}</text>
                       </view>
                       <view>
                         <image src="../../images/sponsor_8@2x.png"></image>

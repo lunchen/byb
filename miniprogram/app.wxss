@@ -1,4 +1,6 @@
 /**app.wxss**/
+@import './pages/my_common.wxss';
+
 page {
   height: 100%;
   overflow: hidden;

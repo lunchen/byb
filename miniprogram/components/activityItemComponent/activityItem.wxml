@@ -1,6 +1,6 @@
 <view class="activity-view-item" bindtap="goToActivityDetails" data-id="{{activityData.id}}">
   <view>
-    <image class="activity-view-item-left" src="{{activityData.img}}"></image>
+    <image class="activity-view-item-left" mode="aspectFill" src="{{activityData.img}}"></image>
   </view>
   
   <block>

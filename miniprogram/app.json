@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/signUpSuccess/signUpSuccess",
     "pages/schoolHome/schoolHome",
     "pages/schoolDetails/schoolDetails",
     "pages/confirmOrder/confirmOrder",
@@ -15,7 +16,6 @@
     "pages/releaseActivity/releaseActivity",
     "pages/activityDetails/activityDetails",
     "pages/reEditActivity/reEditActivity",
-    "pages/signUpSuccess/signUpSuccess",
     "pages/activityListSearch/activityListSearch",
     "pages/editActivityDesc/editActivityDesc",
     "pages/middle/middle",

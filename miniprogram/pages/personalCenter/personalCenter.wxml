@@ -9,7 +9,7 @@
             头像
           </view>
           <view class="personalCenter-top-view-right" bindtap="uploadTeacherLogo">
-            <view style="width:120rpx;height:120rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;"><image style="width:120rpx;height:120rpx;border-radius:50%;" src="{{participantInfo.heardImg}}"></image></view>
+            <view style="width:120rpx;height:120rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;"><image mode="aspectFill" style="width:120rpx;height:120rpx;border-radius:50%;" src="{{participantInfo.heardImg}}"></image></view>
             <view><image style="width:36rpx;height:36rpx;margin-left:23rpx;" src="../../images/home_4@2x.png"></image></view>
           </view>
         </view>

@@ -67,6 +67,13 @@ Page({
     })
     if (id) {
       console.log(id)
+      console.log(e)
+      if(e.open==3){
+        this.setData({
+          loginShow: 3,
+          signUpType: true
+        })
+      }
       apiServer.post(`/app/activity/info/${id}`).then(res => {
         console.log(res.data);
         // 设置选中的活动信息用于报名

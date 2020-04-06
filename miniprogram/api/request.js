@@ -16,7 +16,7 @@ var host = "https://test.byb88.cn/";
 var domian = "enlist";
 
 
-// var host = "http://192.168.10.101";
+// var host = "http://192.168.1.121";
 // var domian = ":9088";
 const apiUrl = url => {
   return host + domian + url; 
@@ -82,6 +82,12 @@ const service = {
               duration: 2000
             })
             wx.clearStorageSync();
+            console.log("wocaole")
+            console.log(wx.getStorageSync("identity"))
+            if (!wx.getStorageSync("identity")) {
+              console.log("resetsf")
+              wx.setStorageSync('identity', 1)
+            }
             reject(res)
           } else {
             console.log("res报错")
@@ -108,4 +114,6 @@ module.exports = {
     return service.post(url, data)
   },
   apiUrl: apiUrl,
+  getToken: getToken,
+  getIdentity: getIdentity,
 }

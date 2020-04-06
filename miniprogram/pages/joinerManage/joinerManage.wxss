@@ -102,12 +102,16 @@
   border-radius: 1rpx;
   border: 1rpx #feb707 solid;
 }
+.joinerManage-orderList-item-middle{
+  flex: 1 1 auto;
+}
 .joinerManage-orderList-item-middle-title{
   color: #333333;
   margin-bottom: 10rpx;
   font-size:30rpx;
   display: flex;
   align-items: center;
+  flex: 1 1 auto;
 }
 .joinerManage-orderList-item-middle-text1{
   color: #666666;

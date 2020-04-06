@@ -1,6 +1,6 @@
 <view class="orgItem-view-item" bindtap="goToOrgItemDetails" data-id="{{orgItemData.id}}">
-  <view>
-    <image class="orgItem-view-item-left" src="{{orgItemData.img}}"></image>
+  <view class="orgItem-view-item-left">
+    <image class="" style="height:350rpx;width: 257rpx;" mode="aspectFill" src="{{orgItemData.img}}"></image>
   </view>
   
   <block>
@@ -14,6 +14,10 @@
       <view class="orgItem-view-text3">
         <image style="flex:0 0 auto;width:40rpx;height:40rpx;margin-right:6rpx;margin-top:4rpx;" src="./icon/location1@2x.png"></image>
         <text>{{orgItemData.addr.name}}</text>
+      </view>
+      <view class="orgItem-item-visit">
+        <image style="height:30rpx;width:30rpx;" src="../../images/home_6@2x.png"></image>
+        <text>{{orgItemData.hotsValue}}</text>
       </view>
       <view class="orgItem-view-item-right-bottom">
         <view class="orgItem-view-btn">

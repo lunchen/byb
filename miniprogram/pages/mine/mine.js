@@ -139,6 +139,7 @@ Page({
     }
   },
   goToJoinerManage(e){
+    console.log(e)
     var id = e.currentTarget.dataset.id
     var type = e.currentTarget.dataset.type
     wx.navigateTo({
@@ -180,6 +181,10 @@ Page({
       _this.setData({
         participantInfo: res.data.data
       })
+    }).catch(err=>{
+      _this.setData({
+        identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1
+      })
     })
   },
   getSponsorInfo() {
@@ -190,11 +195,17 @@ Page({
       _this.setData({
         sponsorInfo: res.data.data
       })
-      app.globalData.orgMes = res.data.data
+      wx.setStorageSync("myOrgMes", JSON.stringify(res.data.data))
+    }).catch(err => {
+      _this.setData({
+        identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1
+      })
     })
   },
   onShow: function () {
     wx.hideTabBar()
+    console.log("mineshow")
+    console.log(wx.getStorageSync('identity'))
     this.setData({
       participantInfo: {},
       sponsorInfo: {},

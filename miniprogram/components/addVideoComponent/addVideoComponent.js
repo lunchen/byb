@@ -101,7 +101,12 @@ Component({
             name: 'file',
             file: src,
             data: {},
-            header: {'content-type': 'application/json'},
+            header: {
+              'content-type': 'application/json',
+              "Authorization": apiServer.getToken("authorization"),
+              "token": apiServer.getToken("token"),
+              "appRole": apiServer.getIdentity(),
+            },
             success(res) {
               console.log(JSON.parse(res.data));
               that.sendUploadMes({

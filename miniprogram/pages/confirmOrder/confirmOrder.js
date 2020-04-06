@@ -48,11 +48,8 @@ Page({
       "openId": wx.getStorageSync("openId"),
       "orderNo": orderNo
     }
-    console.log("去支付");
-    console.log(orderNo);
     apiServer.post(`/app/order/unifiedorder`,req).then(res => {
-      console.log(res);
-      console.log(res.data.data)
+      console.log(res.data);
       wx.requestPayment(
         {
           'timeStamp': JSON.stringify(res.data.data.timeStamp),
@@ -70,7 +67,7 @@ Page({
             })
             setTimeout(()=>{
               wx.navigateTo({
-                url: `../../signUpSuccess/signUpSuccess?orderNo=${orderNo}`,
+                url: `../signUpSuccess/signUpSuccess?orderNo=${orderNo}`,
               })
             },1500)
            
@@ -91,7 +88,7 @@ Page({
 
   },
   onShow: function () {
-
+    
   },
   onHide: function () {
 

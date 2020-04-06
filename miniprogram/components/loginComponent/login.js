@@ -4,7 +4,7 @@ const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
-    orgId: {   // 报名类型 true免费 false花钱
+    orgId: {   // 报名的机构id
       type: Number | String,
       value: '',
     },
@@ -158,6 +158,7 @@ Component({
       if (this.data.showType==1){
         var select = this.data.activityList.filter(item => item.value == e.detail.id)[0]
         if (this.data.signUpType) select.price = 0
+        console.log(select)
         this.setData({
           activitySelected: select
         })

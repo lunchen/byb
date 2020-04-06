@@ -43,20 +43,24 @@ Page({
     }); 
     let orderNo = e.orderNo ? e.orderNo : '';
     if (orderNo) {
-      console.log(orderNo)
-      apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {
-        console.log(res.data);
-        that.setData({
-          writeOffOrderNo: orderNo,
-          orderData: res.data.data
-        })
+      that.setData({
+        writeOffOrderNo: orderNo,
+        orderData: JSON.parse(wx.getStorageSync("scanData"))
       })
+      console.log(orderNo)
+      // apiServer.post(`/app/order/info/qrCode/${orderNo}`).then(res => {
+      //   console.log(res.data);
+      //   that.setData({
+      //     writeOffOrderNo: orderNo,
+      //     orderData: res.data.data
+      //   })
+      // })
     }
   },
   writeOff(){
     // 核销订单
     wx.showToast({
-      title: '订单核销种:',
+      title: '订单核销:',
       icon: 'loading',
       duration: 5000
     })
@@ -71,7 +75,7 @@ Page({
         wx.switchTab({
           url: '../index/index'
         });
-      },2000)
+      },1500)
     }).catch(err=>{
       console.log(err)
       wx.showToast({

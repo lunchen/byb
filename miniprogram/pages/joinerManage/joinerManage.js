@@ -45,13 +45,14 @@ Page({
       name: '请选择'
     },
     req:{
-      "activityId": 0,
+      "activityId": '',
       "endTime": "",
       "nub": 0,
       "size": 0,
-      "startTime": util.formatDate(new Date().getTime(),"yyyy-MM-dd"),
-      "status": 0,
-      "type": 0       //1报名 2预约
+      // "startTime": util.formatDate(new Date().getTime(),"yyyy-MM-dd"),
+      "startTime":'',
+      "status": '',
+      "type": ''       //1报名 2预约
     },
     count:"--",
     orderList: []
@@ -123,6 +124,7 @@ Page({
       "req.status": e.detail.id
     })
 
+    console.log("select")
     this.getOrderList()
   },
   onCloseTime() {
@@ -135,10 +137,14 @@ Page({
       timeShow: true
     })
   },
-  confirm(event) {
-    var time = util.formatDate(event.detail, "yyyy-mm-dd");
-    console.log(time)
     // 时间选择确定
+  confirm(event) {
+    var _this = this;
+    var time = util.formatDate(event.detail, "yyyy-MM-dd");
+    this.setData({
+      currentDate: event.detail,
+      [`req.startTime`]: time
+    });
     this.onCloseTime()
     this.getOrderList()
   },
@@ -148,6 +154,7 @@ Page({
     })
   },
   onSearch(event){
+    console.log("onsearch")
     this.getOrderList()
   },
   onCancel() {
@@ -189,17 +196,22 @@ Page({
       })
     })
     console.log(e)
-    if (e.id && e.id != 'undefined'){
+    if (e.id == 'undefined'){
       this.setData({
-        "req.activityId": e.id,
         "req.type": e.type,
       })
-    }else{
+    } else if (e.type == 'undefined'){
+      this.setData({
+        "req.activityId": 16,
+      })
+    } else {
       this.setData({
         "req.type": e.type,
+        "req.activityId": e.id,
       })
     }
-    
+
+    console.log("load")
     this.getOrderList()
   },
 })

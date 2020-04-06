@@ -17,10 +17,12 @@ App({
       this.globalData.share = false
     }
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+    // var logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.setStorageSync('logs', logs)
+    if (!wx.getStorageSync("identity")) {
+      wx.setStorageSync('identity', 1)
+    }
     // 登录
     wx.login({
       success: res => {

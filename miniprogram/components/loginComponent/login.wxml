@@ -12,7 +12,7 @@
       <view class="ticketChose-view">
         <view class="ticketChose-view-label">选择活动</view>
         <view class="ticketChose-view-select">
-          <select bind:change="selectChange" key="value" text="label" options="{{activityList}}" defaultOption="{{activeityDefaultOption}}"></select>
+          <select needchoicefirst="{{true}}" bind:change="selectChange" key="value" text="label" options="{{activityList}}" defaultOption="{{activeityDefaultOption}}"></select>
         </view>
         <view class="ticketChose-view-label">费用</view>
         <view class="ticketChose-view-selected">
@@ -71,7 +71,7 @@
     <view  class="inputMes-container">
       <view class="inputMes-container-title">
         <view style="width:40rpx;height:40rpx;"></view>
-        <text>请填写约课信息</text>
+        <text>{{ signUpType? '请领取您的免费课程' : '请填写约课信息'}}</text>
         <image style="width:40rpx;height:40rpx;" src="./icon/apply_1@2x.png" bindtap="onClose"></image>
       </view>
       <view class="inputMes-view">
@@ -86,7 +86,7 @@
         <view class="inputMes-view-select">
           <select bind:change="selectChange" options="{{baseList}}" defaultOption="{{baseDefaultOption}}"></select>
         </view>
-        <view class="nextBtn"  bindtap="sub">提交</view>
+        <view class="nextBtn"  bindtap="sub">{{ signUpType? '领取' : '提交'}}</view>
       </view>
     </view>
   </block>

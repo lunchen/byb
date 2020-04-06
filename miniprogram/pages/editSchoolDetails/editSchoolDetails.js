@@ -17,7 +17,7 @@ Page({
     },
     // 导航头的高度
     height: app.globalData.navheight,
-
+    hasWork:'',
     active: 0,
     id : "",
     "name": "",
@@ -122,7 +122,7 @@ Page({
     this.setData({
       "schoolDetails.activityList": data
     });
-
+    console.log(this.data)
   },
   methods:{
     
@@ -189,7 +189,7 @@ Page({
   },
   goToSchoolDetails(e) {
     wx.navigateTo({
-      url: `../schoolDetails/schoolDetails${this.data.id}`
+      url: `../schoolDetails/schoolDetails?id=${this.data.id}`
     })
   },
   submit(){
@@ -202,6 +202,9 @@ Page({
       title: '请稍后',
       icon: 'loading',
       duration: 5000
+    })
+    this.setData({
+      hasWork:true
     })
     var _this = this
     data.recentActivityList.forEach((item, index)=>{
@@ -223,9 +226,27 @@ Page({
         icon: 'loading',
         duration: 2000
       })
+      wx.showModal({
+        title: '编辑成功',
+        content: '是否确认跳转学校详情页查看效果，取消前往学校主页',
+        success: function (res) {
+          _this.setData({
+            hasWork: false
+          })
+          if (res.cancel) {
+            _this.goToSchoolHome()
+          } else if (res.confirm) {
+            _this.goToSchoolDetails()
+          }
+        }
+      })
       _this.getData()
-      _this.goToSchoolDetails()
       // activityList: res.data.data.activityList
+    })
+  },
+  goToSchoolHome(e) {
+    wx.navigateTo({
+      url: `../schoolHome/schoolHome?id=${this.data.id}`
     })
   },
   getData(){

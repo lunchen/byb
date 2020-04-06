@@ -1,6 +1,13 @@
 // select下拉 
 Component({
   properties: {
+    needchoicefirst: {
+      type: Boolean,
+      value: false,
+      observer: function (newVal, oldVal) {
+        console.log(111)
+      }
+    },
     customStyle: {
       type: String,
       value: ''
@@ -17,6 +24,7 @@ Component({
         // }
       ],
       observer: function (newVal, oldVal) {
+        console.log(222)
         this.changekv()
       }
     },
@@ -39,7 +47,8 @@ Component({
   data: {
     result: [],
     isShow: false,
-    current: {}
+    current: {},
+    onceSelcet:true,
   },
   methods: {
     optionTap(e) {
@@ -83,8 +92,16 @@ Component({
         current: { id, name },
         result: result
       })
-      if (this.data.result[0] != undefined) {
+      console.log(this.data.result[0])
+      console.log(this.data.needchoicefirst)
+      console.log(this.data.onceSelcet)
+      if (this.data.result[0] != undefined && this.data.needchoicefirst && this.data.onceSelcet) {
+
+        console.log({ ...this.data.result[0] })
         this.triggerEvent("change", { ...this.data.result[0] })
+        this.setData({
+          onceSelcet: false
+        })
       }
     }
   },

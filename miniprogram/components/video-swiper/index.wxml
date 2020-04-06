@@ -52,7 +52,7 @@
           <view class="bottom-left-view-item-text item-ellipsis" >
             {{item.name}}
           </view>
-          <view class="bottom-left-btn">
+          <view class="bottom-left-btn" bindtap="goToGetcourse" data-id="{{item.org.id}}">
             <text>免费约课</text>
             <image style="width:30rpx;height:30rpx;margin-top:-2rpx;transform:rotate(-90deg)" src="../../images/home_9@2x.png"></image>
           </view>

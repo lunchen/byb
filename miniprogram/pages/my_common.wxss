@@ -1,0 +1,4 @@
+.over_word{
+  overflow: hidden;
+  text-overflow:ellipsis;
+}

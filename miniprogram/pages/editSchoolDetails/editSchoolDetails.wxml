@@ -90,9 +90,9 @@
           <view class="editSchoolDetails-moreActivity-btn" bindtap="addHandle">+继续新增</view>
         </view>
       </view>
-      <cover-view class="editSchoolDetails-content-view-confirm">
-        <cover-view bindtap="submit" class="editSchoolDetails-content-view-confirm-btn">确认提交</cover-view>
-      </cover-view>
+      <view wx:if="{{!hasWork}}" class="editSchoolDetails-content-view-confirm">
+        <view bindtap="submit" class="editSchoolDetails-content-view-confirm-btn">确认提交</view>
+      </view>
     </view>
   </scroll-view>
   

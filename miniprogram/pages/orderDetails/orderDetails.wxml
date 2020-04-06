@@ -24,14 +24,14 @@
             
               <view class="orderDetails-content-item-top">
                 <view class="orderDetails-content-item-top-left">
-                  <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                  <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
                   <text>{{item.org.name}}</text>
                 </view>
                 <text wx:if="{{false}}">报名成功</text>
               </view>
               <view class="orderDetails-content-item-middle">
                 <view>
-                  <image class="orderDetails-content-item-middle-left" src="../../images/huodong.png"></image>
+                  <image mode="aspectFill" class="orderDetails-content-item-middle-left" src="{{item.activity.img}}"></image>
                 </view>
                 <view class="orderDetails-content-item-middle-center">
                   <view class="orderDetails-content-item-middle-center-text">

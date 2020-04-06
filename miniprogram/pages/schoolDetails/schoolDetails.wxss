@@ -84,6 +84,22 @@
 .schoolDetails-tabs-item{
   margin-bottom: 37rpx;
 }
+.schoolDetails-tabs-item-title{
+  color: #666666;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.schoolDetails-tabs-item-title1{
+  color: #666666;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .schoolDetailsImg-view{
   width: 620rpx;
   height:310rpx;

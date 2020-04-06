@@ -88,3 +88,14 @@
   height: 64rpx;
   margin-bottom: 20rpx; 
 }
+
+.canvas-box{
+   width: 100%;
+   min-height: 200px;
+  position: fixed;
+  left: 0;
+  top: 10vh;
+  top: 999999px;
+  background: blue;
+  z-index:1000
+}

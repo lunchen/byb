@@ -310,6 +310,13 @@ Component({
             url: `../../pages/schoolHome/schoolHome?id=${id}`,
           })
         },
+      goToGetcourse(e) {
+          var id = e.currentTarget.dataset.id
+          wx.navigateTo({
+            url: `../../pages/schoolHome/schoolHome?id=${id}&open=3`,
+          })
+        },
+      
     },
   
 });

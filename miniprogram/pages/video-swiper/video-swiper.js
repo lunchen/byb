@@ -22,7 +22,8 @@ Page({
     nvabarData: {
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
       title: '', //导航栏 中间的标题
-      white: '', // 是就显示白的，不是就显示黑的。
+      white: 'true', // 是就显示白的，不是就显示黑的。
+      whitecover: 'true',
       address: '', // 加个背景 不加就是没有
     },
     type: '',   //index主页视频流  course课程视频流

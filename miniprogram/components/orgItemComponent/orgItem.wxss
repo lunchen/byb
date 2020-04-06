@@ -13,20 +13,25 @@
   height: 350rpx;
   border-radius: 26rpx;
   flex: 0 0 auto;
+  overflow: hidden;
 }
 .orgItem-view-item-right{
   height: 266rpx;
-  flex: 0 0 390rpx;
+  flex: 1 1 380rpx;
   background: #f5f5f5;
   border-top-right-radius: 26rpx;
   border-bottom-right-radius: 26rpx;
-  padding: 20rpx 25rpx 32rpx 25rpx;
+  padding: 20rpx 25rpx 20rpx 25rpx;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
 }
 .orgItem-view-text1{
   font-size: 28rpx;
   color: #333;
   font-weight: bolder;
+  margin-bottom: 10rpx;
 }
 .orgItem-view-text2{
   margin-right: 30rpx;
@@ -43,6 +48,7 @@
   align-items: center;
   font-size: 28rpx;
   color: #666;
+  margin-bottom: 10rpx;
 }
 .orgItem-view-item-right-bottom{
   display: flex;
@@ -63,7 +69,7 @@
 
 .orgItem-content-card-label{
   display: flex;
-  margin: 20rpx 0 10rpx;
+  margin: 0rpx 0 10rpx;
 }
 .orgItem-content-card-label .label-item{
   margin-right: 20rpx;
@@ -75,4 +81,18 @@
   text-align: center;
   font-size: 20rpx;
   color: #fe8800;
+}
+.orgItem-item-visit{
+  margin-bottom: 10rpx;
+  width: 102rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  border-radius: 6rpx;
+  color: #fff;
+  background: #feb707;
+  font-size: 20rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

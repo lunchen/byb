@@ -60,17 +60,23 @@ Page({
     schoolHomeData: {},
     activeid: 0,
     identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1,       //1参与方 2主办方
-    id:''
+    id:'',
+    activityListData:'',
+    windowWidth: wx.getSystemInfoSync().windowWidth
   },
   // 滑块
   swiperChange(e) {
+    console.log(e)
     var _this = this;
+    var current = e.detail.current
     if (e.detail.source == 'touch') {
       wx.createVideoContext('myVideo' + _this.data.current).stop()
       _this.setData({
         current: e.detail.current,
         activeid: e.detail.current
       })
+
+      _this.getActivityDetailsData(_this.data.schoolHomeData.orgBannerList[this.data.current].id)
     }
   }, 
   // 地图
@@ -84,9 +90,14 @@ Page({
   videoErrorCallback: function (e) {
     console.log('视频错误信息:' + e.detail.errMsg);
   },
+  goToActivityDetails: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../activityDetails/activityDetails?id=${id}`
+    })
+  },
   goToSchoolDetails: function(e) {
     var id = e.currentTarget.dataset.id
-    util.setId(id)
     wx.navigateTo({
       url: `../schoolDetails/schoolDetails?id=${id}`
     })
@@ -108,36 +119,51 @@ Page({
       loginShow: e.detail.loginShow
     })
   },
+  getActivityDetailsData(activityId){
+    var _this = this;
+    apiServer.post(`/app/activity/info/${activityId}`).then(res => {
+      console.log(res.data);
+      _this.setData({
+        "activityListData": res.data.data
+      })
+    })
+  },
+  getSchoolHomeData(id) {
+    var _this = this;
+    apiServer.post(`/app/org/index/${id}`).then(res => {
+      console.log(res.data);
+      wx.setStorageSync("aliveData", JSON.stringify(res.data.data))
+      _this.setData({
+        schoolHomeData: res.data.data,
+        markers: [{
+          iconPath: "../../images/marker@2x.png",
+          id: 0,
+          latitude: res.data.data.addr.latitude,
+          longitude: res.data.data.addr.longitude,
+          width: 20,
+          height: 26
+        }],
+        latitudeCenter: res.data.data.addr.latitude,
+        longitudeCenter: res.data.data.addr.longitude
+      })
+      _this.getActivityDetailsData(res.data.data.orgBannerList[this.data.current].id)
+    })
+  },
   onLoad: function (e) {
-
     wx.setStorageSync('schoolHome_activeVideo', 0)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
     var _this = this;
-    let id = e.id ? e.id : 1;
+    let id = e.id ? e.id : '';
     this.setData({
       id:id
     })
-    if (id) {
-      console.log(id)
-      apiServer.post(`/app/org/index/${id}`).then(res => {
-        console.log(res.data);
-        wx.setStorageSync("aliveData", JSON.stringify(res.data.data))
-        _this.setData({
-          schoolHomeData: res.data.data,
-          markers: [{
-            iconPath: "../../images/marker@2x.png",
-            id: 0,
-            latitude: res.data.data.addr.latitude,
-            longitude: res.data.data.addr.longitude,
-            width: 20,
-            height: 26
-          }],
-          latitudeCenter: res.data.data.addr.latitude,
-          longitudeCenter: res.data.data.addr.longitude
-        })
+    if (e.open == 3) {
+      this.setData({
+        loginShow: 3,
+        signUpType: true
       })
     }
     var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")).token : '';
@@ -145,9 +171,16 @@ Page({
     var identity = wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1;
     if (token && identity==2) {
       var sponsorId
-      if (app.globalData.orgMes) {
-        sponsorId = app.globalData.orgMes.org.id;
+      if (wx.getStorageSync("myOrgMes")) {
+        sponsorId = JSON.parse(wx.getStorageSync("myOrgMes")).org.id;
+
+        console.log("e.id")
+        console.log(wx.getStorageSync("myOrgMes"))
+
+        console.log(e.id)
         if (e.id == sponsorId){
+
+          console.log("sponsorId true")
           _this.setData({
             showEditBtn : true
           })
@@ -170,11 +203,12 @@ Page({
   },
   onReady: function () {
     // wx.createVideoContext('myVideo' + 0).play();
+    // this.asd()
   },
   asd(){
     var _this = this
     wx.downloadFile({
-      url: app.globalData.userInfo.avatarUrl,
+      url: "https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/orgicon/2020/04/03/2b8n56s7OhsOgIIDzk4w2v1-*fGnjw-6h1Wi5vw2sOjycKyZIjE3TfkalPTFmZjbIDN78TVzXqlSFKezQ1JMTA$$.jpg",
       success: function (res1) {
 
         //缓存头像图片
@@ -183,7 +217,7 @@ Page({
         })
         //缓存canvas绘制小程序二维码
         wx.downloadFile({
-          url: _this.data.qrcode,
+          url:  "https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/editVideo/2020/04/04/WlGp4RUYNk5mNaH762KWbTIWnxOspqtOCkxhzj-a1v*tP0N0PKUp54w5cvHilfp9.png",
           success: function (res2) {
             console.log('二维码：' + res2.tempFilePath)
             //缓存二维码
@@ -194,7 +228,7 @@ Page({
             _this.drawImage();
             wx.hideLoading();
             setTimeout(function () {
-              _this.canvasToImage()
+              // _this.canvasToImage()
             }, 200)
           }
         })
@@ -205,24 +239,24 @@ Page({
     //绘制canvas图片
     var _this = this
     const ctx = wx.createCanvasContext('myCanvas')
-    var bgPath = '../../../images/share_bg.png'
+    var bgPath = '../../images/home_1@2x.png'
     var portraitPath = _this.data.portrait_temp
     var hostNickname = app.globalData.userInfo.nickName
 
     var qrPath = _this.data.qrcode_temp
     var windowWidth = _this.data.windowWidth
     _this.setData({
-      scale: 1.6
+      scale: 1
     })
     //绘制背景图片
-    ctx.drawImage(bgPath, 0, 0, windowWidth, _this.data.scale * windowWidth)
+    ctx.drawImage(bgPath, 0, 0, windowWidth,200)
 
     //绘制头像
     ctx.save()
     ctx.beginPath()
-    ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
+    ctx.arc(windowWidth / 2, 100, 60, 0, 2 * Math.PI)
     ctx.clip()
-    ctx.drawImage(portraitPath, 0.7 * windowWidth / 2, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
+    ctx.drawImage(portraitPath,  windowWidth / 2 -60, 200/2-60, 120, 120)
     ctx.restore()
     //绘制第一段文本
     ctx.setFillStyle('#ffffff')
@@ -286,6 +320,11 @@ Page({
   },
   onShow() {
     this.videoPlay()
+    if (this.data.id) {
+      console.log("show")
+      console.log(this.data.id)
+      this.getSchoolHomeData(this.data.id)
+    }
   },
   onHide() {
     this.videoParse()
