@@ -90,6 +90,18 @@ Page({
       url: `../editVideoDesc/editVideoDesc`
     })
   },
+  catchfn(){
+    console.log(666)
+  },
+  addBannerImg(){
+    var that = this
+    util.uploadImg("activityBill").then(res => {
+      console.log(res)
+      that.setData({
+        [`activityModel.img`]: res.data.string
+      })
+    })
+  },
   backFn(e) {
     // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息
     console.log(e)
@@ -156,12 +168,5 @@ Page({
       activityModel: JSON.parse(JSON.stringify(this.data.activityModel1))
     })
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
+ 
 })

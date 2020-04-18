@@ -15,23 +15,35 @@
   box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
 }
 .tabbar-service-btnView-left{
-  width: 66%;
+  width: 46.6%;
   height: 120rpx;
   background: #fff;
-  line-height: 120rpx;
   font-size: 28rpx;
   color: #999;
   display: flex;
+  flex: 0 0 auto;
 }
-.tabbar-service-btnView-left-btn{
-  flex: 1 auto;
+.contact-us{
+  text-align: center;
   display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: center;
+  flex-direction: column
+}
+.flex-mc{
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
+.tabbar-service-btnView-left-btn{
+  flex: 1 0 auto;
+}
 .tabbar-service-btnView-right{
-  width: 34%;
+  width: 53.4%;
+  display: flex;
+}
+.tabbar-service-btnView-right-btn{
+  width: 50%;
   height: 68rpx;
   padding: 26rpx 0;
   background: #fe8800;
@@ -66,7 +78,7 @@
   background: #fff;
   position: absolute;
   bottom: -500rpx;
-  left: 30rpx;
+  left: 144rpx;
   transition: bottom linear 100ms;
 }
 /* 动画 */
@@ -74,14 +86,14 @@
   opacity: 0
 }
 .enter-leave{
-  bottom: 116rpx;
+  bottom: 124rpx;
 }
 
 .contactUs-view::after{
   content: '';
   position: absolute;
   border: 20rpx transparent solid;
-  border-top: 20rpx #ffffff solid;
+  border-top: 30rpx #ffffff solid;
   bottom: -40rpx; 
   left: 70rpx;
 }

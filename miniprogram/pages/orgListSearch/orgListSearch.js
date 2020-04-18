@@ -18,22 +18,26 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
     value: '',
-    orgList: []
+    orgList: [],
+    req :{
+      "keyword": '',
+      "nub": 0,
+      "size": 6
+    }
   },
   onChange(event) {
     this.setData({
-      value: event.detail
+      "req.keyword": event.detail
+    })
+  },
+  renewData(){
+    this.setData({
+      "req.nub": 0,
+      orgList:[]
     })
   },
   onSearch(){
-    var that = this;
-    let keyword = this.data.value
-    apiServer.post('/app/org/list/seach', { keyword: keyword }).then(res => {
-      console.log(res.data);
-      that.setData({
-        orgList: res.data.data.list,
-      })
-    })
+    this.getData()
   },
   comingTo(options) {
     var data = {}
@@ -44,12 +48,16 @@ Page({
   },
   onLoad: function (e) {
     var that = this;
-    this.comingTo(e)
+    // this.comingTo(e)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    apiServer.post('/app/org/list/index/select/0').then(res => {
+    this.getData()
+  },
+  getData(){
+    var that = this
+    apiServer.post('/app/org/list/seach', this.data.req).then(res => {
       console.log(res.data);
       that.setData({
         orgList: res.data.data.list,
@@ -63,9 +71,9 @@ Page({
       console.log(ops.target)
     }
     return {
-      title: '报一报',
+      title: '报1 报',
       path: '/pages/orgListSearch/orgListSearch',
-      imageUrl: "../../images/huodong.png",
+      imageUrl: "",
       success: function (res) {
         // 转发成功
         console.log("转发成功:" + JSON.stringify(res));

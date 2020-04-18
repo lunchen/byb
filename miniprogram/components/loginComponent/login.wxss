@@ -64,7 +64,7 @@
   justify-content: center;
   margin-bottom: 30rpx;
 }
-.login-view-item-text2 image{
+.login-view-item-text2 .login-view-item-text2-img{
   width: 50rpx;
   height: 50rpx;
   margin-right: 20rpx;
@@ -362,7 +362,7 @@
   align-items: center;
   margin-bottom: 30rpx;
 }
-.inputMes-view-ipt image{
+.inputMes-view-ipt .inputMes-view-ipt-img{
   width: 45rpx;
   height: 45rpx;
   margin-right: 30rpx;

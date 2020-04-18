@@ -5,17 +5,25 @@ App({
     this.hideTabBar();
   },
   onLaunch: function (e) {
+    console.log("onLaunch")
     this.hideTabBar();
     this.getSystemInfo();
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    if (e.scene == 1007 || e.scene == 1008) {
-      this.globalData.share = true
-    } else {
-      this.globalData.share = false
-    }
+    console.log("e.scene")
+    console.log(e)
+    // if (e.scene == 1007 || e.scene == 1008 || e.secne == 1047 || e.secne == 1048 || e.secne == 1035 || e.secne == 1058 || e.secne == 1067) {
+    //   if (e.path != 'pages/index/index'){
+    //     this.globalData.share = true
+    //   } else {
+    //     this.globalData.share = false
+    //   }
+      
+    // } else {
+    //   this.globalData.share = false
+    // }
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())

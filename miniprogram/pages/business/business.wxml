@@ -9,24 +9,49 @@
       <view class="business-content">
         <view class="business-content-introduction">
           <view class="business-content-introduction-title">
-            <text>课程简介</text>
+            <text>关于我们</text>
           </view>
           <!-- 小三角 -->
           <view class="business-triangle"></view>
           <!--  -->
           <view class="business-content-introduction-info">
-            <view class="business-content-introduction-info-title">鼎承街舞社</view>
-            <view class="business-content-introduction-info-text">中国第一家专业街舞社研究机构，第一本雇主品牌主办单位，连续13年中国最佳街舞社权威榜单舞蹈教育适合幼儿的发育成长，使之更好地掌握身体，便于有表情地、创造性地使用动作语言，以表达丰富的内心世界。</view>
+            <view class="business-content-introduction-info-title">鼎轩网络科技有限公司</view>
+            <view class="business-content-introduction-info-text">我们长期专注于互联网云计算软件系统研发和应用，旨在赋能行业，帮助行业变革营销、销售和经营方式、提升效率。业务范围包括定制类app、ERP管理系统、小程序、公众号、企业官网等开发及维护工作，并为商家、品牌及企业提供技术设施及营销平台。帮助行业借助新技术力量与用户和客户进行互动，并高效的进行管理和经营。</view>
 
           </view>
         </view>
         <view class="business-line"></view>
         <view class="contactInfo">
           <view class="contactInfo-title">联系我们</view>
-          <view class="contactInfo-text">客服电话：0710-888888</view>
-          <view class="contactInfo-text">微信号：123456789</view>
+          <view class="contactInfo-text">小报电话：{{telephone}}</view>
+          <!-- <view class="contactInfo-text">微信号：123456789</view> -->
+          <view class="contactInfo-text-img">
+            <text style="margin-right:50rpx;">微信二微码</text>
+            <image-video 
+              show="{{true}}" 
+              src="{{wechat}}" 
+              type="{{1}}" 
+              width="140"
+              height="140"
+              ></image-video>
+          </view>
         </view>
+
+        <view class="business-line"></view>
+        <view class="contactInfo">
+          <view class="contactInfo-title">或者留下您的联系方式，小报将尽快和您联系！</view>
+          <view class="ipt-view">
+            <text>姓名</text>
+            <view class="ipt-view-item"><input bindinput="nameIpt" value="{{nameValue}}"></input></view>
+          </view>
+          <view class="ipt-view">
+            <text>手机</text>
+            <view class="ipt-view-item"><input bindinput="telIpt" value="{{telValue}}"></input></view>
+          </view>
+        </view>
+        <view class="sub" bindtap="submit">提交</view>
       </view>
+
     </view>
   </scroll-view>
   <tabbarBtn></tabbarBtn>

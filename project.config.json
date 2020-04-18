@@ -12,6 +12,7 @@
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
+		"uglifyFileName": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -42,13 +43,32 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "schoolHome",
+					"pathName": "pages/schoolHome/schoolHome",
+					"query": "id=3",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "activityDetails",
+					"pathName": "pages/activityDetails/activityDetails",
+					"query": "id=19",
+					"scene": null
 				}
 			]
 		}

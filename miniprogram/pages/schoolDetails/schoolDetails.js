@@ -10,6 +10,7 @@ Page({
     //navbar
     // 导航头组件所需的参数
     nvabarData: {
+      backreload: true, // 该页面返回的上一个页面是否刷新
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
       title: '学校详情', //导航栏 中间的标题
       white: false, // 是就显示白的，不是就显示黑的。
@@ -22,7 +23,14 @@ Page({
     schoolDetails: {},
 
     loginShow: 4,
-    id:''
+    id:'',
+    activeid:"-1"
+  },
+  onPlay(e) {
+    console.log(e)
+    this.setData({
+      activeid: e.detail.activeId
+    })
   },
   //事件处理函数
   goToSchoolHome: function (e) {
@@ -40,19 +48,26 @@ Page({
       backgroundColor: '#fff'
     });
     var that = this;
-    let id = e.id ? e.id : 1;
+    let id = e.id ? e.id : '';
+    if (e.scene) {
+      var strs = decodeURIComponent(e.scene)
+      id = strs.split("=")[1]
+    }
     this.setData({
       id:id
     })
     if (id) {
-      console.log(id)
-      apiServer.post(`/app/org/info/${id}`).then(res => {
-        console.log(res.data);
-        that.setData({
-          schoolDetails: res.data.data,
-        })
-      })
+      this.getData()
     }
+  },
+  getData(){
+    var that = this
+    apiServer.post(`/app/org/info/${this.data.id}`).then(res => {
+      console.log(res.data);
+      that.setData({
+        schoolDetails: res.data.data,
+      })
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -69,7 +84,7 @@ Page({
       console.log(ops.target)
     }
     return {
-      title: '报一报',
+      title: '报1 报',
       path: '/pages/schoolDetails/schoolDetails?id=' + this.data.id,
       imageUrl: "",
       success: function (res) {

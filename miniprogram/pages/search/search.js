@@ -98,9 +98,9 @@ Page({
       console.log(ops.target)
     }
     return {
-      title: '报一报',
+      title: '报1 报',
       path: '/pages/search/search',
-      imageUrl: "../../images/huodong.png",
+      imageUrl: "",
       success: function (res) {
         // 转发成功
         console.log("转发成功:" + JSON.stringify(res));

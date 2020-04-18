@@ -2,18 +2,22 @@
   "pages": [
     "pages/index/index",
     "pages/signUpSuccess/signUpSuccess",
+    "pages/business/business",
+    "pages/releaseActivity/releaseActivity",
+    "pages/mine/mine",
     "pages/schoolHome/schoolHome",
+    "pages/schoolcanvas/schoolcanvas",
+    "pages/editSchoolHome/editSchoolHome",
+    "pages/videoTop/videoTop",
+    "pages/videoFull/videoFull",
+    "pages/video-swiper/video-swiper",
     "pages/schoolDetails/schoolDetails",
     "pages/confirmOrder/confirmOrder",
-    "pages/mine/mine",
     "pages/editSchoolDetails/editSchoolDetails",
-    "pages/editSchoolHome/editSchoolHome",
-    "pages/video-swiper/video-swiper",
     "pages/joinerManage/joinerManage",
     "pages/writeOffOrder/writeOffOrder",
     "pages/search/search",
     "pages/orderDetails/orderDetails",
-    "pages/releaseActivity/releaseActivity",
     "pages/activityDetails/activityDetails",
     "pages/reEditActivity/reEditActivity",
     "pages/activityListSearch/activityListSearch",
@@ -22,12 +26,7 @@
     "pages/shopMap/shopMap",
     "pages/editVideoDesc/editVideoDesc",
     
-    
-
-    "pages/business/business",
-    
     "pages/courseDetails/courseDetails",
-
 
     "pages/eTicket/eTicket",
     "pages/orgListSearch/orgListSearch",
@@ -70,5 +69,11 @@
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "login": "./components/loginComponent/login"
+  },
+  "plugins": {
+    "yzVideoPlugin": {
+      "version": "1.2.6",
+      "provider": "wx9e5eba73bf23a27a"
+    }
   }
 }

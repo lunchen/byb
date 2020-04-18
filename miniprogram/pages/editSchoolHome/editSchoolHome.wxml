@@ -14,24 +14,55 @@
             <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle">删除</view>
             
             <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
-              <view class="editSchoolHome-content-view-addActVideo {{item.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
-                <!-- <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
-                <text>添加海报/视频</text> -->
-                <block wx:if="{{item.bannerList.length>0}}">
-                  <view wx:for="{{item.bannerList}}" wx:key="id">
-                    <view style="margin:0 10rpx 0 10rpx;">
-                      <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+              <view class="editSchoolHome-content-view-addActVideo {{item.img ? 'type2':'type1'}}" bindtap="upActivityBill" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
+                <!-- <view class="editSchoolHome-content-view-addActVideo-btn">
+                  <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                </view>
+                <view>添加海报/视频</view> -->
+                <block wx:if="{{item.img}}">
+                  <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
+                      <image-video show="{{true}}" src="{{item.img}}" type="{{1}}" height="210"></image-video>
                     </view>
-                  </view>
-                  <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                  <!-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
                     <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                  </view>
+                  </view> -->
                 </block>
                 <block wx:else>
-                  <view class="editSchoolHome-content-view-addActVideo-btn">
-                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                  <view>
+                    <view class="editSchoolHome-content-view-addActVideo-btn" style="text-align:center;">
+                      <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/add1@2x.png"></image>
+                    </view>
+                    <view>添加活动封面(建议尺寸：180*240)</view>
                   </view>
-                  <text>添加海报/视频</text>
+                  
+                </block>
+              </view>
+            </scroll-view>
+
+            <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
+              <view class="editSchoolHome-content-view-addActVideo {{item.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
+                <!-- <view class="editSchoolHome-content-view-addActVideo-btn">
+                  <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                </view>
+                <view>添加海报/视频</view> -->
+                <block wx:if="{{item.bannerList.length>0}}">
+                  <view wx:for="{{item.bannerList}}" wx:key="id">
+                    <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
+                      <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" width="{{210/375*690}}" height="210"></image-video>
+                    </view>
+                  </view>
+                  <!-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                  </view> -->
+                </block>
+                <block wx:else>
+                  <view>
+                    <view class="editSchoolHome-content-view-addActVideo-btn" style="text-align:center;">
+                      <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/add1@2x.png"></image>
+                    </view>
+                    <view>添加轮播图片/视频(建议尺寸：690*375)</view>
+                  </view>
+                  
                 </block>
               </view>
             </scroll-view>
@@ -57,7 +88,7 @@
               <text class="editSchoolHome-content-form-item-title">标题</text>
               <van-field
                 value="{{ item.name }}"
-                placeholder="标题"
+                placeholder="建议4个字以内"
                 border="{{ false }}"
                 bind:change="onCoursenameChange"
                 data-index="{{index}}"
@@ -67,7 +98,8 @@
             <view class="editSchoolHome-content-form-item" style="border:none">
               <text class="editSchoolHome-content-form-item-title">图片</text>
               <view class="upPicBtn" bindtap="uploadTeacherLogo" data-index="{{index}}">
-                <image mode="aspectFill" src="{{item.img}}"></image>
+                <image mode="aspectFill" wx:if="{{item.img}}" src="{{item.img}}"></image>
+                <image mode="aspectFill" wx:else src="../../images/default_icon@2x.png"></image>
                 <view>上传</view>
               </view>
             </view>
@@ -78,7 +110,7 @@
                 <text>添加海报/视频</text> -->
                 <block wx:if="{{item.imgList.length>0}}">
                   <view wx:for="{{item.imgList}}" wx:key="id">
-                    <view style="margin:0 10rpx 0 10rpx;">
+                    <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
                       <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
                     </view>
                   </view>
@@ -90,7 +122,7 @@
                   <view class="editSchoolHome-content-view-addActVideo-btn">
                     <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
                   </view>
-                  <text>添加海报/视频</text>
+                  <text>添加视频</text>
                 </block>
               </view>
             </scroll-view>
@@ -107,10 +139,14 @@
             了解我们
           </view>
           <view class="editSchoolHome-content-view-addActVideo type1" bindtap="uploadUsImg">
-            <image-video wx:if="{{schoolHome.understand.img!=''}}" show="{{true}}" src="{{schoolHome.understand.img}}" type="{{1}}" height="200"></image-video>
+            <image-video wx:if="{{schoolHome.understand.img}}" show="{{true}}" src="{{schoolHome.understand.img}}" type="{{1}}" height="200"></image-video>
             <block wx:else>
-              <image style="width:60rpx;height:60rpx;margin-right:4rpx;" src="../../images/add1@2x.png"></image>
-              <text>添加机构封面</text>
+                <view>
+                  <view class="editSchoolHome-content-view-addActVideo-btn" style="text-align:center;">
+                    <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/add1@2x.png"></image>
+                  </view>
+                  <view>添加机构封面(建议封面尺寸：260*350)</view>
+                </view>
             </block>
             
           </view>
@@ -118,7 +154,8 @@
           <view class="editSchoolHome-content-form-item">
             <text class="editSchoolHome-content-form-item-title">机构logo</text>
             <view class="upPicBtn" bindtap="uploadUsLogo">
-              <image mode="aspectFill" src="{{schoolHome.understand.logo}}"></image>
+              <image mode="aspectFill" wx:if="{{schoolHome.understand.logo}}" src="{{schoolHome.understand.logo}}"></image>
+              <image mode="aspectFill" wx:else src="../../images/default_icon@2x.png"></image>
               <view>上传</view>
             </view>
           </view>
@@ -135,9 +172,9 @@
             <text class="editSchoolHome-content-form-item-title">热门标签</text>
             <van-field
               value="{{ schoolHome.understand.lable }}"
-              placeholder="爵士，瑜伽，现代舞"
+              placeholder="示例：爵士，瑜伽，现代舞"
               border="{{ false }}"
-              bind:change="onLabelChange"
+              bind:change="onLableChange"
             />
           </view>
           <view class="editSchoolHome-content-form-item item1" bindtap="toMap" data-firstkey="understand">
@@ -178,7 +215,7 @@
             <view class="editSchoolHome-content-iptContact-item">
               <view class="editSchoolHome-content-iptContact-item-left">微信二维码</view>
               <view class="editSchoolHome-content-iptContact-item-right_Img" bindtap="uploadQRcode">
-                <image-video wx:if="{{schoolHome.understand.wechatQrcode!=''}}" show="{{true}}" src="{{schoolHome.understand.wechatQrcode}}" type="{{1}}" height="80" width="80"></image-video>
+                <image-video wx:if="{{schoolHome.understand.wechatQrcode!=''}}" show="{{false}}" src="{{schoolHome.understand.wechatQrcode}}" type="{{1}}" height="80" width="80"></image-video>
               </view>
             </view>
           </view>

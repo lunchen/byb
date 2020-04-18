@@ -1,15 +1,17 @@
 <!--pages/mine/mine.wxml-->
 <!--index.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}' backgroundColor="#FE8800"></navbar>
+  <navbar need-top='{{fasle}}' navbar-data='{{nvabarData}}' backgroundColor="#FE8800"></navbar>
   <view class="participant"  wx:if="{{identity==1}}" >
   <!-- 参与方 -->
     <view class="mine-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
       <view class="mine-top-view">
         <view class="mine-top-view-left">
           <view style="width:148rpx;height:148rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;">
-            <image  mode="aspectFill" wx:if="{{participantInfo.user}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{participantInfo.user.heardImg}}" bindtap="goToPersonalCenter"></image>
-            <view wx:else class="mine-top-view-left-noImg" bindtap="goToPersonalCenter"></view>
+            <image  mode="aspectFill" wx:if="{{participantInfo.user.heardImg}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{participantInfo.user.heardImg}}" bindtap="goToPersonalCenter"></image>
+            <view wx:else class="mine-top-view-left-noImg" bindtap="goToPersonalCenter">
+              <image mode="aspectFill" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="../../images/default_icon@2x.png"></image>
+            </view>
           </view>
           
           <view class="mine-top-view-left-text">
@@ -38,41 +40,54 @@
           <view class="participantCard">
             <block wx:for="{{participantInfo.orderList}}" wx:key="id">
               <view class="participantCard-content-item">
-                <view class="participantCard-content-item-top">
-                  <view class="participantCard-content-item-top-left">
-                    <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
-                    <text>{{item.org.name}}</text>
-                  </view>
-                  <text>{{item.statusName}}</text>
-                </view>
-                <view class="participantCard-content-item-middle" bindtap="goToOrderDetails" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
-                  <view>
-                    <image mode="aspectFill" class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
-                  </view>
-                  <view class="participantCard-content-item-middle-center">
-                    <view class="participantCard-content-item-middle-center-text">
-                      <text class="participantCard-view-text1">{{item.activity.name}}</text>
-                      <view class="participantCard-view-text2">时间：{{item.activity.startTime}}开始</view>
-                      <view class="participantCard-view-text2">地点：{{item.activity.addr}}</view> 
+                <block>
+                  <view class="participantCard-content-item-top">
+                    <view class="participantCard-content-item-top-left">
+                      <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                      <text>{{item.org.name}}</text>
                     </view>
-                    <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
+                    <text>{{item.statusName}}</text>
                   </view>
-                  <view class="participantCard-content-item-middle-right" catchtap="goToETicket" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}" data-status="{{item.statusName}}">
-                    <view class="trapezoidTop"></view>
-                    <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
-                    <view class="trapezoidBottom"></view>
+                  <view class="participantCard-content-item-middle" bindtap="goToOrderDetails" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
+                    <view>
+                      <image mode="aspectFill" class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
+                    </view>
+                    <view class="participantCard-content-item-middle-center">
+                      <view class="participantCard-content-item-middle-center-text">
+                        <text class="participantCard-view-text1">{{item.activity.name}}</text>
+                        <view class="participantCard-view-text2">时间：{{item.activity.startTime}}开始</view>
+                        <view class="participantCard-view-text2">地点：{{item.activity.addr}}</view> 
+                      </view>
+                      <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
+                    </view>
+                    <view class="participantCard-content-item-middle-right" catchtap="goToETicket" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}" data-status="{{item.statusName}}">
+                      <view class="trapezoidTop"></view>
+                      <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
+                      <view class="trapezoidBottom"></view>
+                    </view>
                   </view>
-                </view>
-                <view class="participantCard-content-item-bottom">
-                  <view class="participantCard-content-item-bottom-view1">
-                    <text>票种1</text>
-                    <text style="font-size:26rpx">X{{item.count}}</text>
-                    <text>¥ {{item.price}}</text>
+                  <view class="participantCard-content-item-bottom">
+                    <view class="participantCard-content-item-bottom-view1">
+                      <text>票种1</text>
+                      <text style="font-size:26rpx">X{{item.count}}</text>
+                      <text>¥ {{item.price}}</text>
+                    </view>
+                    <view class="participantCard-content-item-bottom-view2">
+                      <text>共一订单 合计：</text>
+                      <text style="color:#fe8800">¥ {{item.totalPrice}}</text>
+                    </view>
                   </view>
-                  <view class="participantCard-content-item-bottom-view2">
-                    <text>共一订单 合计：</text>
-                    <text style="color:#fe8800">¥ {{item.totalPrice}}</text>
+                </block>
+                <view class="sponsorCard-isEnd" wx:if="{{item.activity.status==3}}">
+                  <view  class="sponsorCard-isEnd-bg"></view>
+                  <view class="sponsorCard-isEnd-top">
                   </view>
+                  <view class="sponsorCard-isEnd-middle">
+                    <view>已完成</view>
+                  </view>
+                  <view class="sponsorCard-isEnd-bottom">
+                  </view>
+
                 </view>
               </view>
             </block>
@@ -89,8 +104,10 @@
       <view class="mine-top-view">
         <view class="mine-top-view-left">
           <view style="width:148rpx;height:148rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;">
-            <image  mode="aspectFill" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" wx:if="{{sponsorInfo.org}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{sponsorInfo.org.logo}}"></image>
-            <view wx:else class="mine-top-view-left-noImg"  bindtap="goToPersonalCenter"></view>
+            <image  mode="aspectFill" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" wx:if="{{sponsorInfo.org.logo}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{sponsorInfo.org.logo}}"></image>
+            <view wx:else class="mine-top-view-left-noImg">
+              <image  mode="aspectFill" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="../../images/default_icon@2x.png"></image>
+            </view>
           </view>
           <view class="mine-top-view-left-text" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}">
             <view style="font-size:36rpx;color:#010101;font-weight:bloder;white-space:nowrap;">{{sponsorInfo.org.name}}</view>
@@ -140,14 +157,14 @@
 
           <view class="sponsorCard">
             <block wx:for="{{sponsorInfo.activityList}}" wx:key="id">
-              <view class="sponsorCard-content-item" wx:if="{{item.status!=-1}}">
+              <view class="sponsorCard-content-item" wx:if="{{item.status!=-1&&item.status!=-2}}">
                 <block>
                   <view class="sponsorCard-content-item-top">
                     <view class="sponsorCard-content-item-top-left">
                       <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
                       <text>{{item.org.name}}</text>
                     </view>
-                    <text wx:if="{{item.status!=-1}}" bindtap="goToReEditActivity" class="{{item.status==1?'disable':''}}" data-id="{{item.id}}" data-status="{{item.status}}">编辑活动</text>
+                    <text wx:if="{{item.status!=-1||item.status!=-2}}" bindtap="goToReEditActivity" class="{{item.status==1?'disable':''}}" data-id="{{item.id}}" data-status="{{item.status}}">编辑活动</text>
                   </view>
                   <view class="sponsorCard-content-item-middle" bindtap="goToActivityDetails" data-id="{{item.id}}">
                     <view>
@@ -159,7 +176,7 @@
                         <view class="sponsorCard-view-text2">{{item.remark}}</view> 
                         <view class="sponsorCard-view-text3">时间：{{item.betweenTime}}</view>
                       </view>
-                      <view class="sponsorCard-view-status {{item.status==-1?'statusEnd':'statusIng'}}">{{item.statusName}}</view>
+                      <view class="sponsorCard-view-status {{item.status==-1 || item.status==-2?'statusEnd':'statusIng'}}">{{item.statusName}}</view>
                     </view>
                   </view>
                   <view class="sponsorCard-content-item-bottom">
@@ -176,22 +193,22 @@
                         <image src="../../images/sponsor_8@2x.png"></image>
                         <text>{{item.shareCount?item.shareCount:0}}</text>
                       </view>
-                      <view bindtap="xiajia" data-id="{{item.id}}">
+                      <view bindtap="xiajia" data-id="{{item.id}}" bindtap="publishBtn" data-publishflg="0">
                         <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
                         <text>下架</text>
                       </view>
                     </view>
                   </view>
                 </block>
-                <view class="sponsorCard-isEnd" wx:if="{{item.status==-1}}">
+                <view class="sponsorCard-isEnd" wx:if="{{item.status==-1||item.status==-2}}">
                   <view  class="sponsorCard-isEnd-bg"></view>
                   <view class="sponsorCard-isEnd-top" bindtap="goToReEditActivity" data-id="{{item.id}}" >
                     编辑活动
                   </view>
                   <view class="sponsorCard-isEnd-middle">
-                    <view>已下架</view>
+                    <view>{{item.statusName}}</view>
                   </view>
-                  <view class="sponsorCard-isEnd-bottom">
+                  <view class="sponsorCard-isEnd-bottom" data-id="{{item.id}}" bindtap="publishBtn" data-publishflg="1">
                     <view class="sponsorCard-isEnd-bottom-btn">重新上架</view>
                   </view>
 
@@ -208,14 +225,14 @@
 
           <view class="sponsorCard" style="padding-bottom:{{isIphoneX?100:100}}rpx">
             <block wx:for="{{sponsorInfo.activityList}}" wx:key="id">
-              <view class="sponsorCard-content-item" wx:if="{{item.status==-1}}">
+              <view class="sponsorCard-content-item" wx:if="{{item.status==-1||item.status==-2}}">
                 <block>
                   <view class="sponsorCard-content-item-top">
                     <view class="sponsorCard-content-item-top-left">
                       <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
                       <text>{{item.org.name}}</text>
                     </view>
-                    <text wx:if="{{item.status!=-1}}" bindtap="goToReEditActivity" data-id="{{item.id}}">编辑活动</text>
+                    <text wx:if="{{item.status!=-1&&item.status!=-2}}" bindtap="goToReEditActivity" data-id="{{item.id}}">编辑活动</text>
                   </view>
                   <view class="sponsorCard-content-item-middle" bindtap="goToActivityDetails" data-id="{{item.id}}">
                     <view>
@@ -227,7 +244,7 @@
                         <view class="sponsorCard-view-text2">{{item.remark}}</view> 
                         <view class="sponsorCard-view-text3">时间：{{item.betweenTime}}</view>
                       </view>
-                      <view class="sponsorCard-view-status {{item.status==-1?'statusEnd':'statusIng'}}">{{item.statusName}}</view>
+                      <view class="sponsorCard-view-status {{item.status==-1 || item.status==-2?'statusEnd':'statusIng'}}">{{item.statusName}}</view>
                     </view>
                   </view>
                   <view class="sponsorCard-content-item-bottom">
@@ -244,22 +261,22 @@
                         <image src="../../images/sponsor_8@2x.png"></image>
                         <text>{{item.shareCount?item.shareCount:0}}</text>
                       </view>
-                      <view>
+                      <view data-id="{{item.id}}" bindtap="publishBtn" data-publishflg="0">
                         <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
                         <text>下架</text>
                       </view>
                     </view>
                   </view>
                 </block>
-                <view class="sponsorCard-isEnd" wx:if="{{item.status==-1}}">
+                <view class="sponsorCard-isEnd" wx:if="{{item.status==-1||item.status==-2}}">
                   <view  class="sponsorCard-isEnd-bg"></view>
                   <view class="sponsorCard-isEnd-top" bindtap="goToReEditActivity" data-id="{{item.id}}">
                     编辑活动
                   </view>
                   <view class="sponsorCard-isEnd-middle">
-                    <view>已下架</view>
+                    <view>{{item.statusName}}</view>
                   </view>
-                  <view class="sponsorCard-isEnd-bottom">
+                  <view class="sponsorCard-isEnd-bottom" data-id="{{item.id}}" bindtap="publishBtn" data-publishflg="1" data-id="{{item.id}}">
                     <view class="sponsorCard-isEnd-bottom-btn">重新上架</view>
                   </view>
 

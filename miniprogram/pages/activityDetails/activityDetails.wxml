@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}' backgroundColor="#feb707"></navbar>
+  <navbar navbar-data='{{nvabarData}}' backgroundColor="#ffcf1b"></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
@@ -13,6 +13,7 @@
                 <video wx:else  style="height:375rpx;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                 <view style="border-radius:20rpx;overflow:hidden;height:375rpx;">
                   <image-video 
+                  muted="{{false}}"
                   show="{{true}}" 
                   src="{{item.url}}" 
                   type="{{item.type}}" 
@@ -20,7 +21,8 @@
                   width="690"
                   activeid = "{{activeid}}" 
                   index="{{index}}" 
-                  videoid="{{item.id}}" ></image-video>
+                  videoid="{{item.id}}" 
+                  bind:play="onPlay"></image-video>
                 </view>
               </view>
             </swiper-item>
@@ -35,7 +37,10 @@
       </view>
       <view class="activityDetails-content">
         <!-- 卡片信息 -->
-        <infoCard infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCard>
+        <view class="activityDetails-infoCard" id="card">
+          <infoCard infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCard>
+        </view>
+        
         <!-- 学校卡片 -->
         <view class="activityDetails-content-view2" bindtap="goToSchoolHome" data-id="{{activityListData.org.id}}">
           <view class="activityDetails-content-view2-top">
@@ -48,7 +53,7 @@
             <view style="margin-top:14rpx;" class="activityDetails-content-view2-top-text">
               <text style="font-size:30rpx;">{{activityListData.org.activityCount}}活动</text>
               <text style="margin-left:16rpx;">|</text>
-              <text style="margin-left:16rpx;">{{activityListData.org.courseCount}}课程</text>
+              <text style="margin-left:16rpx;">{{activityListData.org.joinCount}}总报名人数</text>
             </view>
             </view>
           </view>
@@ -81,19 +86,24 @@
           <view class="activityDetails-content-introduction-info">
             <view wx:for="{{activityListData.imgList}}" wx:key="*this">
               <view class="activityDetails-content-introduction-info-title">
-                <text>{{item.title}}</text>
+                {{item.title}}
               </view>
               <view class="activityDetails-content-introduction-info-text">
                 <view class="textIndent28">{{item.remark}}</view>
               </view>
-              <view class="activityDetails-content-introduction-info-img">
+              <view class="activityDetails-content-introduction-info-img" wx:if="{{item.url!=''}}">
                 <image-video 
-                  wx:if="{{item.url!=''}}"
+                  scpb="{{true}}" 
                   show="{{true}}" 
                   src="{{item.url}}" 
                   type="{{item.type}}" 
+                  muted="{{false}}"
                   width="600"
-                  videoid="{{item.id}}" ></image-video>
+                  height="300"
+                  activeid = "{{activeid}}"
+                  videoid="{{item.id}}" 
+                  bind:play="onPlay"
+                  ></image-video>
               </view>
               
             </view>
@@ -133,5 +143,30 @@
   </scroll-view>
   
   <login orgId="{{activityListData.org.id}}" needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
-  <tabbarBtn loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
+  <tabbarBtn telephone="{{activityListData.org.telephone}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
+
+
+  <view class="canvas-box">
+    <image bindload="imgLoaded" src="{{activityListData.img.url}}"> </image>
+    <canvas canvas-id="myCanvas" style="width:800px;height:1040px;"></canvas>
+  </view>
+  <view class="canvasImg" wx:if="{{canvasImgShow}}">
+    <view class="canvasImg-bg" bindtap="closeCanvasImgShow"></view>
+    <view class="canvasImg-view">
+      
+      <view class="canvasImg-view-top">
+        <view style="border:4rpx solid #f0f0f0;font-size:0;">
+          <image mode="aspectFill" bindtap="previewImage" style="width:62vw;height:{{62/80*104}}vw;" src="{{canvasImg}}"></image>
+        </view>
+        <view style="text-align:center;" bindtap="saveToPhoto">
+          <image style="width:80rpx;height:80rpx;margin-top:30rpx" src="../../images/save@2x.png"></image>
+          <view>存到相册随时分享</view>
+        </view>
+      </view>
+      <view class="canvasImg-exc" bindtap="closeCanvasImgShow">
+        取消
+      </view>
+    </view>
+  </view>
+
 </view>

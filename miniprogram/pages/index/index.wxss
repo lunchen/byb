@@ -1,12 +1,26 @@
 /**index.wxss**/
+.index .default-bg{
+  background: #f2f2f2;
+  width: 100%;
+  height: 100%;
+}
+.index .default-bg-img{
+  width: 120rpx;
+  height: 120rpx;
+}
+.flex-middle-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 page {
   height: 100%;
   overflow: hidden;
-  background: #feb707;
+  background: rgb(255, 207, 27);
 }
 .content {
   position: relative;
-  margin-top: 24%;
+  margin-top: 30rpx;
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -49,6 +63,24 @@ page {
   border-radius:20rpx;
   overflow:hidden;
   margin-right: 30rpx;
+  position: relative;
+}
+.play_btn_view{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -40rpx;
+  margin-top: -40rpx;
+  width: 80rpx;
+  height: 80rpx;
+  background: rgba(100, 100, 100, 0.5);
+  border-radius: 50%;
+}
+.play_btn{
+  margin-top: 20rpx;
+  margin-left: 28rpx;
+  border: 20rpx solid transparent;
+  border-left: 30rpx solid #fff;
 }
 
 .content-view{
@@ -85,5 +117,5 @@ page {
 }
 /* tab */
 .tabs-item{
-  padding: 30rpx 30rpx 0;
+  padding: 30rpx 30rpx 10rpx;
 }

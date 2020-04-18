@@ -5,6 +5,7 @@
       iptCurrent="{{current}}"
       class="video-swiper" 
       video-list="{{videoList}}" 
+      bindchange="onChange"
       bindplay="onPlay"
       bindpause="onPause"
       bindtimeupdate="onTimeUpdate"
@@ -13,6 +14,7 @@
       bindwaiting="onWaiting"
       bindprogress="onProgress"
       bindloadedmetadata="onLoadedMetaData"
+      type="type"
     ></mp-video-swiper>
   </block>
   

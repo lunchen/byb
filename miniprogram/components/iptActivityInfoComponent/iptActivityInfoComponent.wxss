@@ -17,7 +17,6 @@
   padding-right: 30rpx;
 }
 .item2{
-  padding-bottom: 100rpx;
   padding-top: 30rpx;
   align-items: flex-start;
 }

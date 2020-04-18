@@ -163,8 +163,52 @@ Page({
       url: '../business/business'
     })
   },
-  xiajia(){
+  publishBtn(e){
+    var _this = this
+    var id = e.currentTarget.dataset.id
+    var publishFlg = e.currentTarget.dataset.publishflg
+    var title,content
 
+    if (publishFlg == 1){
+      title = "是否重新上架活动"
+      content = "重新上架前请确认活动时间"
+    }else{
+      title = "提示"
+      content = "是否确认下架活动"
+    }
+    wx.showModal({
+      title: title,
+      content: content,
+      success: function (res) {
+        if (res.cancel) {
+        } else if (res.confirm) {
+          _this.publishApi({ id, publishFlg})
+        }
+      }
+    })
+  },
+  publishApi(req){
+    var _this = this,
+        toast
+    if (req.publishFlg==1){
+      toast = "上架成功"
+    }else {
+      toast = "下架成功"
+    }
+    apiServer.post('/app/activity/publish',req).then(res => {
+      wx.showToast({
+        title: toast,
+        icon: 'none',
+        duration: 1000
+      })
+      _this.renews()
+    }).catch(err => {
+      wx.showToast({
+        title: "操作失败",
+        icon: 'none',
+        duration: 1000
+      })
+    })
   },
   onLoad: function (options) {
     app.editTabbar();

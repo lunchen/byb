@@ -1,0 +1,8 @@
+<!--business.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view style="position:relative;z-index:2;margin-top:{{height}}px;">
+  </view>
+  <!-- <web-view width="100px" height="100px" src="https://www.baidu.com/"></web-view> -->
+  
+</view>

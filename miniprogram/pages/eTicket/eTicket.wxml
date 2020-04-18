@@ -37,6 +37,11 @@
             <text>主办方：  {{eTicketData.orgName}}</text>
           </view>
         </view>
+        <view class="eTicket-view-cover" wx:if="{{eTicketData.status==3}}">
+          <view class="eTicket-view-cover-bg">
+            
+          </view>
+        </view>
       </view>
       
     </view>

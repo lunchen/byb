@@ -1,6 +1,6 @@
 <!--index.wxml-->
-<view class="container">
-  <navbar navbar-data='{{nvabarData}}' backgroundColor="#feb707"></navbar>
+<view class="container index">
+  <navbar navbar-data='{{nvabarData}}' backgroundColor="#ffcf1b"></navbar>
   <view class="search-view" style="position:relative;z-index:2;margin-top:{{height}}px;">
     <view class="search-view-location">
       <text>{{myLocation}}</text>
@@ -22,27 +22,15 @@
       
   <scroll-view bindscrolltoupper="scrolltoupper" bindscroll="scrollY" scroll-y style="position:relative;height: 100%;" scroll-top="{{scrollTop}}px">
     <view class="scroll-view-item" style='padding-top:1px;'>
-      <view class="content" style="margin-top:{{cmt}}%;min-height:1000rpx;">
-        <!-- <block>
-          <view class="content-view">
-            <view class="content-title">
-              <text class="content-title-text1">育儿资讯</text>
-              <view wx:if="{{true}}" class="content-title-right">
-                <text class="content-title-text2" bindtap="goToChildListSearch">查看更多</text>
-                <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
-              </view>
-            </view>
-            <block wx:for="{{informationListData}}" wx:key="id">
-              <childItem informationData="{{item}}"></childItem>
-            </block>
-          </view>
-        </block> -->
-        
+        <view style="margin-top:{{cmt}}%;text-align:center">
+          <image style="height:80.4rpx;width:256.8rpx" src="../../images/title-text.png"></image>
+        </view>
+      <view class="content" style="min-height:1000rpx;">
         <view class="content-view">
           <view class="content-title">
             <view class="content-title-text1">
               <text>{{banner.title}}</text>
-              <image src="../../images/home_11@2x.png" style="height:34rpx;width:34rpx;margin: 3rpx 0 0 20rpx;"></image>
+              <image src="../../images/home_11@2x.png" style="height:40rpx;width:40rpx;margin: 3rpx 0 0 20rpx;"></image>
             </view>
             <view wx:if="{{false}}" class="content-title-right">
               <text class="content-title-text2" bindtap="goToActivityListSearch" data-id="1">查看更多</text>
@@ -53,19 +41,26 @@
             <view class="course-videoList" wx:if="{{banner.bannerVideoList.length>0}}">
               <block wx:for="{{banner.bannerVideoList}}" wx:key="id">
                 <view class="course-videoList-item" bindtap="goToVideoSwiper" data-id="{{item.id}}">
-                  <!-- <image wx:if="{{item.type===1}}" style="height:100%;width:100%;border-radius:26rpx;" src="{{item.video}}"></image>
-                  <video wx:else  style="height:100%;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.video}}" controls></video> -->
-                  <image-video 
-                    bindplay="onplay"
-                    activeid = "{{activeid}}" 
-                    show="{{true}}" 
-                    src="{{item.video}}" 
-                    index="{{index}}" 
-                    videoid="{{item.id}}" 
-                    type="{{2}}" 
-                    height="220" 
-                    width="320"
-                  ></image-video>
+                <!-- vv -->
+                  <block wx:if="{{item.cover}}">
+                    <image-video 
+                      bindplay="onplay"
+                      activeid = "{{activeid}}" 
+                      show="{{false}}" 
+                      src="{{item.cover}}" 
+                      index="{{index}}" 
+                      videoid="{{item.id}}" 
+                      type="{{1}}" 
+                      height="220" 
+                      width="320"
+                    ></image-video>
+                  </block>
+                  <view class="default-bg flex-middle-center" wx:else>
+                    <image class="default-bg-img" src="../../images/default_bill@2x.png"></image>
+                  </view>
+                  <view class="play_btn_view">
+                    <view class="play_btn"></view>
+                  </view>
                 </view>
               </block>
               
@@ -84,16 +79,7 @@
             </view>
           </view>
           <van-tabs active="{{ active }}" bind:click="orgListClick">
-            <!-- <van-tab title="优惠">
-              <view class="tabs-item">
-                <view wx:for="{{activityListData}}" wx:key="id">
-                  <activityItem activityData="{{item}}"></activityItem>
-                </view>
-              </view>
-            </van-tab>
-            <van-tab title="免费试课">内容 2</van-tab>
-            <van-tab title="附近机构">内容 3</van-tab>
-            <van-tab title="活跃机构">内容 3</van-tab> -->
+         
             <block wx:for="{{orgList.selectList}}" wx:key="value">
               <van-tab title="{{item.label}}">
                 <view class="tabs-item">
@@ -118,16 +104,7 @@
             </view>
           </view>
           <van-tabs active="{{ active }}" bind:click="activityClick">
-            <!-- <van-tab title="优惠">
-              <view class="tabs-item">
-                <view wx:for="{{activityList}}" wx:key="id">
-                  <activityItem activityData="{{item}}"></activityItem>
-                </view>
-              </view>
-            </van-tab>
-            <van-tab title="免费试课">内容 2</van-tab>
-            <van-tab title="附近机构">内容 3</van-tab>
-            <van-tab title="活跃机构">内容 3</van-tab> -->
+          
             <block wx:for="{{activityList.selectList}}" wx:key="value">
               <!-- 无法传入name -->
               <van-tab title="{{item.label}}">

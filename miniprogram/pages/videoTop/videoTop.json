@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mp-video-top": "../../components/video-top/index",
+    "navbar": "../../components/navbarComponent/navbar",
+    "yz-video": "plugin://yzVideoPlugin/video"
+  }
+}

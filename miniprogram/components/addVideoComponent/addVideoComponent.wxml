@@ -2,5 +2,6 @@
     <!-- <block wx:if="{{src != ''}}">
       <video src="{{src}}" bindload="imgLoaded" class="video"></video>
     </block> -->
-  <image bindtap="asd" style="width:100%;height:100%" src="../../images/add1@2x.png"></image>
+  <image wx:if="{{firstkey=='courseList'}}" bindtap="asdV" style="width:100%;height:100%" src="../../images/add1@2x.png"></image>
+  <image wx:else bindtap="asd" style="width:100%;height:100%" src="../../images/add1@2x.png"></image>
 </view>

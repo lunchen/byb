@@ -28,6 +28,7 @@ Page({
     },
     type: '',   //index主页视频流  course课程视频流
     id:'',      //主页的视频id  或者课程的id
+    activeId:'' //正在播放的视频id
   },
   onLoad(e) {
     var that = this;
@@ -36,11 +37,13 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    let id = e.id ? e.id : 1;
+    let id = e.id ? e.id : '';
     this.setData({
       type:e.type,
-      id: e.id
+      id: e.id,
+      videoId: e.videoId
     })
+    console.log(this.data)
     var getVideoList = []
     if (id && e.type=="index") {
       console.log(id)
@@ -68,13 +71,19 @@ Page({
     // 开发中
   },
   // 获取课程视频流列表
-  getCourseVideoList(){
+  getCourseVideoList() {
+    console.log(this.data)
     var that = this
     var req = {
       "courseId": this.data.id,
       "nub": this.data.nub,
-      "size": 6
+      "size": 20
     }
+    if(this.videoId){
+      req.id = this.data.videoId
+    }
+    console.log("req")
+    console.log(req)
     apiServer.post(`/indexVideo/org/stream`, req).then(res => {
       res.data.data.list.forEach((item, index) => {
         item.url = item.video
@@ -160,9 +169,30 @@ Page({
     })
     return data
   },
+  onChange(e){
+    console.log('77852633')
+    console.log(e)
+    console.log('play', e.detail.activeId)
+    this.setData({
+      activeId: e.detail.activeId
+    })
+  },
   onPlay(e) {
     var that = this
+    console.log('852633')
+    console.log(e)
     console.log('play', e.detail.activeId)
+    if(this.data.type== "index"){
+      this.setData({
+        activeId: e.detail.activeId
+      })
+    }
+    if(this.data.type == "course"){
+      this.setData({
+        id: e.detail.courseId,
+        activeId: e.detail.activeId
+      })
+    }
     // 当视频放到最后几个的时候从接口获取后续视频
     var videoList = this.data.videoList
     if (e.detail.activeId == videoList[videoList.length - 2].id || e.detail.activeId == videoList[videoList.length - 1].id){
@@ -195,5 +225,40 @@ Page({
 
   onLoadedMetaData(e) {
     console.log('LoadedMetaData', e)
-  }
+  },
+
+  onShareAppMessage: function (ops) {
+    var json = encodeURIComponent(JSON.stringify({ a: 1 }));
+    var id
+    if (this.data.type == "index"){
+      id = this.data.activeId
+    }else{
+      id = this.data.id
+    }
+    var path = '/pages/video-swiper/video-swiper?id=' + id + '&type=' + this.data.type
+    if (this.data.type == "course") {
+      path += '&videoId=' + this.data.activeId
+    }
+    console.log(path)
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    if (this.data.type)
+      return {
+        title: '报1 报',
+        path: path,
+        imageUrl: "",
+        success: function (res) {
+          // 转发成功
+          console.log("转发成功:" + JSON.stringify(res));
+
+        },
+        fail: function (res) {
+          // 转发失败
+          console.log("转发失败:" + JSON.stringify(res));
+        }
+      }
+
+  },
 })

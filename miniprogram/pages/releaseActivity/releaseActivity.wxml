@@ -7,29 +7,61 @@
       <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid">
       </view>
       <view class="releaseActivity-content">
-      
+
         <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
-          <view class="releaseActivity-content-addView {{activityModel.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
+          <view class="releaseActivity-content-addView {{activityModel.img ? 'type1':'type1'}}" bindtap="addBannerImg" data-key="bannerList" data-firstkey="editVideoDesc" data-index="{{index}}">
             <!-- <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
             <text>添加海报/视频</text> -->
-            <block wx:if="{{activityModel.bannerList.length>0}}">
-              <view wx:for="{{activityModel.bannerList}}" wx:key="id">
-                <view style="margin:0 10rpx 0 10rpx;">
-                  <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+            <block wx:if="{{activityModel.img}}">
+              <view style="margin:0 10rpx 0 10rpx;">
+                  <image-video show="{{true}}" src="{{activityModel.img}}" type="{{1}}" height="280" width="{{280/375*690}}"></image-video>
                 </view>
-              </view>
-              <view style="width:210rpx;height:210rpx;background:#e5e5e5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+              <!-- <view wx:for="{{activityModel.bannerList}}" wx:key="id">
+                <view style="margin:0 10rpx 0 10rpx;">
+                  <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
+                </view>
+              </view> -->
+              <!-- <view style="width:210rpx;height:210rpx;background:#e5e5e5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
                 <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-              </view>
+              </view> -->
             </block>
             <block wx:else>
               <view class="releaseActivity-content-addView-btn">
                 <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
               </view>
-              <text>添加海报/视频</text>
+              <text>添加活动封面(建议尺寸：180*240)</text>
             </block>
           </view>
         </scroll-view>
+
+        <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
+          <view style="border-top:1rpx #ddd solid;" class="releaseActivity-content-addView {{activityModel.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
+            <!-- <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
+            <text>添加海报/视频</text> -->
+            <block wx:if="{{activityModel.bannerList.length>0}}">
+              <view wx:for="{{activityModel.bannerList}}" wx:key="id">
+                <view style="margin:0 10rpx 0 10rpx;">
+                  <view catchtap="catchfn">
+                    <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
+                  </view>
+                  
+                </view>
+              </view>
+              <!-- <view style="width:210rpx;height:210rpx;background:#e5e5e5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+              </view> -->
+            </block>
+            <block wx:else>
+              <view class="releaseActivity-content-addView-btn">
+                <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+              </view>
+              <text>添加轮播图片/视频(建议尺寸：690*375)</text>
+            </block>
+          </view>
+        </scroll-view>
+
+        
+          
         <!-- <view class="releaseActivity-content-addView">
           <view class="releaseActivity-content-addView-btn">
           

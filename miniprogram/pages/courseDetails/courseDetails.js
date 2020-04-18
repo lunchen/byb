@@ -52,9 +52,9 @@ Page({
       console.log(ops.target)
     }
     return {
-      title: '分享卡片',
+      title: '报1 报',
       path: '/pages/signUpSuccess/signUpSuccess?share=' + json,
-      imageUrl: "../../images/huodong.png",
+      imageUrl: "",
       success: function (res) {
         // 转发成功
         console.log("转发成功:" + JSON.stringify(res));

@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="byb-view">
+    <video 
+      id="video_0" 
+      class="video_item" 
+      loop="{{loop}}" 
+      enable-play-gesture 
+      enable-progress-gesture 
+      show-center-play-btn="{{false}}"
+      controls="{{false}}"
+      src="{{videoUrl.url}}" 
+      data-id="{{videoUrl.id}}"
+      object-fit="{{videoUrl.objectFit || 'contain'}}"
+      data-index="{{index}}"
+      bindplay="onPlay"
+      bindpause="onPause"
+      bindended="onEnded"
+      binderror="onError"
+      bindtimeupdate="onTimeUpdate"
+      bindwaiting="onWaiting"
+      bindprogress="onProgress"
+      bindloadedmetadata="onLoadedMetaData"
+    >
+    </video>
+  </view>
+</view>
+

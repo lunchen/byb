@@ -1,6 +1,9 @@
 <view class="activity-view-item" bindtap="goToActivityDetails" data-id="{{activityData.id}}">
   <view>
-    <image class="activity-view-item-left" mode="aspectFill" src="{{activityData.img}}"></image>
+    <image wx:if="{{activityData.img}}" class="activity-view-item-left" mode="aspectFill" src="{{activityData.img}}"></image>
+    <view class="default-bg flex-middle-center" wx:else>
+      <image class="default-bg-img" src="../../images/default_bill@2x.png"></image>
+    </view>
   </view>
   
   <block>
@@ -9,11 +12,21 @@
       <view class="activity-view-text2">{{activityData.remark}}</view>
       <view class="activity-view-item-right-bottom">
         <view class="activity-view-item-right-bottom-text">
-          <view class="activity-item-visit">
-          <image style="height:30rpx;width:30rpx;" src="../../images/home_6@2x.png"></image>
-          <text>{{activityData.hotsValue}}</text>
+          <view style="display:flex;margin-bottom:20rpx;">
+            <view class="activity-item-visit">
+              <image style="height:30rpx;width:30rpx;margin-left:-4rpx;margin-top:2rpx;" src="../../images/home_6@2x.png"></image>
+              <text>{{activityData.hotsValue}}</text>
+            </view>
+            <view class="activity-item-visit" style="margin-left:10rpx;">
+              <image style="height:30rpx;width:30rpx;margin-left:-4rpx;margin-top:-2rpx;" src="../../images/home_61@2x.png"></image>
+              <text>{{activityData.joinCount}}</text>
+            </view>
           </view>
-          <text class="activity-view-text3">{{activityData.levelName}}课程共{{activityData.totalCount}}节</text>
+          
+          <view class="activity-view-text3 activity-view-text-logo">
+            <image style="height:40rpx;width:40rpx;margin-right:20rpx; border-radius:50%;" src="{{activityData.org.logo}}"></image>
+            <text>{{activityData.org.name}}</text>
+          </view>
         </view>
         <view class="activity-view-btn">
           立即查看

@@ -22,7 +22,8 @@
           controls="{{false}}"
           src="{{item.url}}" 
           data-id="{{item.id}}"
-          object-fit="{{item.objectFit || 'cover'}}"
+          data-courseid="{{item.courseId}}"
+          object-fit="{{item.objectFit || 'contain'}}"
           data-index="{{index}}"
           bindplay="onPlay"
           bindpause="onPause"
@@ -38,7 +39,7 @@
         <view class="bottom-left-view">
           <view class="bottom-left-view-item">
             <view class="bottom-left-view-item-left">
-              <image style="width:100rpx;height:100rpx;" src="{{item.org.login}}"></image>
+              <image style="width:100rpx;height:100rpx;border-radius:50%" src="{{item.org.logo}}"></image>
             </view>
             <view class="bottom-left-view-item-right">
               <view>{{item.org.name}}</view>
@@ -49,7 +50,7 @@
             </view>
 
           </view>
-          <view class="bottom-left-view-item-text item-ellipsis" >
+          <view class="bottom-left-view-item-text item-ellipsis">
             {{item.name}}
           </view>
           <view class="bottom-left-btn" bindtap="goToGetcourse" data-id="{{item.org.id}}">
@@ -62,15 +63,18 @@
             <image class="bottom-right-view-item-imgs" src="../../images/video_1@2x.png"></image>
             <view>{{item.lookCount}}</view>
           </view>
-          <view class="bottom-right-view-item" bindtap="likeBtn" data-id="{{item.id}}">
-            <image wx:if="{{item.likeFlg === '1'}}" class="bottom-right-view-item-imgs" src="../../images/video_3@2x.png"></image>
+          <!-- <view class="bottom-right-view-item" bindtap="likeBtn" data-id="{{item.id}}">
+            <image wx:if="{{item.likeFlg == 1}}" class="bottom-right-view-item-imgs" src="../../images/video_3@2x.png"></image>
             <image wx:else class="bottom-right-view-item-imgs" src="../../images/video_2@2x.png"></image>
             <view>{{item.likeCount}}</view>
+          </view> -->
+          <view class="bottom-right-view-item" >
+            <button class="bottom-right-view-item1"  open-type="share" hover-class='none'>
+              <image class="bottom-right-view-item-imgs" src="../../images/video_4@2x.png"></image>
+              <view>{{item.shareCount}}</view>
+            </button>
           </view>
-          <view class="bottom-right-view-item">
-            <image class="bottom-right-view-item-imgs" src="../../images/video_4@2x.png"></image>
-            <view>{{item.shareCount}}</view>
-          </view>
+          
         </view>
       </view>
     </swiper-item>

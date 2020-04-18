@@ -1,0 +1,126 @@
+@import '../common.wxss';
+
+page{
+    height: 100%;
+}
+.videoTop{
+  background: #f5f5f5;
+}
+mp-video-full {
+    width: 100%;
+    height: 300rpx;
+}
+.ggg{
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+}
+
+.byb-view{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.video-bottom{
+  margin-top: 30rpx;
+}
+.bottom-left-view{
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+}
+.bottom-right-view{
+  color: #333;
+  display: flex;
+  padding-left: 30rpx;
+  margin-top: 30rpx;
+  flex-direction: row;
+  justify-items: flex-start;
+}
+.bottom-right-view-item{
+  line-height: 1;
+  text-align: center;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  margin-right: 30rpx;
+  margin-bottom: 50rpx;
+  font-size: 28rpx;
+  color: #666;
+  width: 100rpx;
+}
+button.bottom-right-view-item1{
+  line-height: 1;
+  text-align: center;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  margin-right: 30rpx;
+  margin-bottom: 50rpx;
+  font-size: 28rpx;
+  color: #666;
+  width: 100rpx;
+}
+.videoTop button:not([size='mini']) {
+  width: 100rpx;
+}
+.bottom-right-view-item-imgs{
+  width:72rpx;
+  height: 72rpx;
+}
+.bottom-left-view-item{
+  display: flex;
+  font-size: 30rpx;
+  margin-bottom: 40rpx;
+}
+.bottom-left-view-item-text{
+  font-size: 30rpx;
+  margin-top: 10rpx;
+}
+.item-ellipsis{
+  max-width: 360rpx;
+  max-height: 60rpx;
+  line-height: 30rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+.bottom-left-view-item-left{
+  margin-right: 20rpx;
+}
+.bottom-left-view-item-right-text1{
+  background: rgba(255, 255, 255, .5);
+  color: #fe8800;
+  font-size: 26rpx;
+  display: inline-block;
+  padding: 0 10rpx; 
+  line-height: 40rpx;
+  border-radius: 8rpx;
+}
+.bottom-left-view-item-right-text1 image{
+  display: inline-block;
+  vertical-align: middle;
+}
+.bottom-left-view-item-right-text1 text{
+  display: inline-block;
+  vertical-align: middle;
+}
+.bottom-left-btn{
+  color: #fff;
+  background: #feb707;
+  padding: 10rpx 20rpx;
+  border-radius: 8rpx;
+}
+.bottom-left-btn image{
+  display: inline-block;
+  vertical-align: middle;
+}
+.bottom-left-btn text{
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}

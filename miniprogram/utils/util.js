@@ -1,3 +1,5 @@
+const apiServer = require('../api/request.js');
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -37,8 +39,6 @@ function padLeftZero(str) {
   return ('00' + str).substr(str.length)
 }
 
-
-
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -76,7 +76,7 @@ const throttle = function (fn, gapTime) {
   }
 }
 
-  function getAuthStatus(scopeName) {
+const getAuthStatus = function (scopeName) {
     return new Promise((resolve, reject) => {
       wx.getSetting({
         success(res) {
@@ -94,6 +94,63 @@ const throttle = function (fn, gapTime) {
     });
   }
 
+const uploadImg = function(fileName){
+  return new Promise((resolve, reject) => {
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success(res) {
+        console.log(res)
+        let src = res.tempFiles[0];
+        wx.showToast({
+          title: '上传中',
+          icon: 'loading',
+          duration: 10000
+        })
+        wx.uploadFile({
+          url: apiServer.apiUrl(`/picture/upload/${fileName}`),
+          method: 'post',
+          filePath: src.path,
+          name: 'file',
+          file: src,
+          data: {},
+          header: {
+            'content-type': 'application/json',
+            "Authorization": apiServer.getToken("authorization"),
+            "token": apiServer.getToken("token"),
+            "appRole": apiServer.getIdentity(),
+          },
+          success(res) {
+            var data = JSON.parse(res.data)
+            if (data.success == true) {
+              wx.showToast({
+                title: '上传成功',
+                icon: 'none',
+                duration: 1500
+              })
+              resolve(data)
+            } else {
+              wx.showToast({
+                title: '上传失败',
+                icon: 'none',
+                duration: 1500
+              })
+              reject(data)
+            }
+          },
+          fail(err) {
+            wx.showToast({
+              title: '上传失败',
+              icon: 'none',
+              duration: 1500
+            })
+            reject(err)
+          }
+        })
+      }
+    })
+  })
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -103,4 +160,5 @@ module.exports = {
   checkLogin: checkLogin,
   throttle: throttle,
   getAuthStatus: getAuthStatus,
+  uploadImg: uploadImg
 }

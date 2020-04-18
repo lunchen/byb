@@ -12,8 +12,8 @@ wx.getSystemInfo({
   }
 })
 
-var host = "https://test.byb88.cn/";
-var domian = "enlist";
+var host = "https://www.byb88.cn/";
+var domian = "enlist2";
 
 
 // var host = "http://192.168.1.121";
@@ -36,6 +36,33 @@ const getIdentity = function () {
   var identity = wx.getStorageSync("identity") ? wx.getStorageSync("identity") : 1;
   return identity
 }
+var theLocation = function(){
+  var that = this 
+  this.latitude = '';
+  this.longitude = '';
+  console.log(this.latitude)
+  console.log(this.longitude)
+  this.getLocation = function () {
+    wx.getLocation({
+      type: 'wgs84',
+      success(res) {
+        console.log(res)
+        const lati = res.latitude
+        const long = res.longitude
+        const speed = res.speed
+        const accuracy = res.accuracy
+        that.latitude = lati
+        that.longitude = long
+      },
+      fail(err) {
+        that.latitude = ''
+        that.longitude = ''
+      }
+    })
+  }
+}
+var nowLocation = new theLocation()
+
 const service = {
   get(url, data) {
     return new Promise((resolve, reject) => {
@@ -69,7 +96,9 @@ const service = {
           "content-type": "application/json",
           "Authorization": getToken("authorization"),
           "token": getToken("token"),
-          "appRole": getIdentity()
+          "appRole": getIdentity(),
+          longitude: nowLocation.longitude,
+          latitude: nowLocation.latitude
         },
         success: (res) => {
           // 调用接口成功
@@ -82,15 +111,18 @@ const service = {
               duration: 2000
             })
             wx.clearStorageSync();
-            console.log("wocaole")
-            console.log(wx.getStorageSync("identity"))
             if (!wx.getStorageSync("identity")) {
-              console.log("resetsf")
               wx.setStorageSync('identity', 1)
             }
             reject(res)
           } else {
             console.log("res报错")
+            console.log(res)
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 2000
+            })
             reject(res)
           }
         },
@@ -116,4 +148,5 @@ module.exports = {
   apiUrl: apiUrl,
   getToken: getToken,
   getIdentity: getIdentity,
+  nowLocation: nowLocation
 }

@@ -19,7 +19,6 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
-    qrCodeUrl: "",  //要改成线上图片
     eTicketData:{}
   },
 
@@ -27,7 +26,8 @@ Page({
     this.setData({ show: false });
   },
   previewImg: function (e) {
-    var imgArr = [this.data.qrCodeUrl];
+    console.log(this.data)
+    var imgArr = [this.data.eTicketData.qrcode];
     console.log(imgArr)
     wx.previewImage({
       current: imgArr[0],     //当前图片地址

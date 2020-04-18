@@ -76,11 +76,11 @@
       </view>
       <view class="inputMes-view">
         <view class="inputMes-view-ipt">
-          <image src="./icon/apply_3@2x.png"></image>
+          <image class="inputMes-view-ipt-img" src="./icon/apply_3@2x.png"></image>
           <input value="{{joinName}}" bindinput="joinNameIpt" placeholder="请输入您的姓名"></input>
         </view>
         <view class="inputMes-view-ipt">
-          <image src="./icon/apply_4@2x.png"></image>
+          <image class="inputMes-view-ipt-img" src="./icon/apply_4@2x.png"></image>
           <input value="{{joinTel}}" bindinput="joinTelIpt" placeholder="请输入您的手机号"></input>
         </view>
         <view class="inputMes-view-select">
@@ -101,7 +101,7 @@
         <view class="login-view-item">
           <view class="login-view-item-text1">离成功只差登录</view>
           <!-- <view class="login-view-item-text2 wxLoginBtn" bindtap="wxChatLogin">
-            <image src="./icon/login_3@2x.png"></image>
+            <image class="login-view-item-text2-img" src="./icon/login_3@2x.png"></image>
             <text>一键登录</text>
           </view> -->
           
@@ -120,14 +120,14 @@
             <text>一键登录</text>
           </view> -->
           
-          <button class="login-view-item-text2 wxLoginBtn" style="width:390rpx;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
-            <image src="./icon/login_3@2x.png"></image>
+          <button class="login-view-item-text2 wxLoginBtn" style="width:390rpx;margin-top:40rpx" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+            <image class="login-view-item-text2-img" src="./icon/login_3@2x.png"></image>
             <text>微信登录</text>
           </button>
-          <view class="login-view-item-text2 mpLoginBtn" bindtap="telLoginHandle">
-            <image src="./icon/login_4@2x.png"></image>
+          <!-- <view class="login-view-item-text2 mpLoginBtn" bindtap="telLoginHandle">
+            <image class="login-view-item-text2-img" src="./icon/login_4@2x.png"></image>
             <text>手机号登录</text>
-          </view>
+          </view> -->
         </view>
       </block>
       <block wx:elif="{{showLogin==2}}">

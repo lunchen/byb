@@ -79,14 +79,17 @@
                     <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                     <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                     <image-video 
+                      scpb="{{true}}" 
+                      muted="{{false}}"
                       show="{{true}}" 
                       src="{{item.img.url}}" 
                       type="{{item.img.type}}" 
                       height="310" 
                       width="620"
-                      activeid = "{{activeid}}" 
+                      activeid = "{{activeid}}"
                       index="{{index}}" 
-                      videoid="{{item.img.imgNo}}" ></image-video>
+                      videoid="{{item.id}}" 
+                      bind:play="onPlay" ></image-video> 
                   </view>
                 </view>
 
@@ -97,22 +100,26 @@
               </view>
             </van-tab>
             <van-tab title="教学视频">
-              <view class="schooleTeachVideo tab-list">
-                <view wx:for="{{schoolDetails.honorList}}" wx:key="id" class="schoolDetails-tabs-item">
-                  <view class="schoolDetailsImg-itemView" wx:if="{{item.img.url}}">
+              <view class="schoolEnv tab-list">
+                <view wx:for="{{schoolDetails.teachVideoList}}" wx:key="id" class="schoolDetails-tabs-item">
+                
+                  <view class="schoolDetails-tabs-item-title">{{item.img.title}}</view>
+                  <view class="schoolDetailsImg-view" wx:if="{{item.img.url}}">
                       <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                       <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                         <image-video 
+                          scpb="{{true}}" 
+                          muted="{{false}}"
                           show="{{true}}" 
                           src="{{item.img.url}}" 
                           type="{{item.img.type}}" 
-                          height="210" 
-                          width="210"
-                          activeid = "{{activeid}}" 
+                          height="310" 
+                          width="620"
+                          activeid = "{{activeid}}"
                           index="{{index}}" 
-                          videoid="{{item.img.imgNo}}" ></image-video>              
+                          videoid="{{item.id}}"
+                          bind:play="onPlay" ></image-video>              
                   </view>
-                  <view class="schoolDetails-tabs-item-title1">{{item.img.title}}</view>
                 </view>
                 
                 <!-- <view class="tab-list-moreBtn">
@@ -130,14 +137,17 @@
                     <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                     <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                     <image-video 
-                      show="{{true}}" 
+                      scpb="{{true}}" 
+                      show="{{true}}"
+                      muted="{{false}}" 
                       src="{{item.img.url}}" 
                       type="{{item.img.type}}" 
                       height="310" 
                       width="620"
-                      activeid = "{{activeid}}" 
+                      activeid = "{{activeid}}"
                       index="{{index}}" 
-                      videoid="{{item.img.imgNo}}" ></image-video>
+                      videoid="{{item.id}}"
+                      bind:play="onPlay" ></image-video> 
                   </view>
                 </view>
 
@@ -156,14 +166,17 @@
                     <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                     <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                     <image-video 
+                      scpb="{{true}}" 
                       show="{{true}}" 
+                      muted="{{false}}"
                       src="{{item.img.url}}" 
                       type="{{item.img.type}}" 
                       height="310" 
                       width="620"
-                      activeid = "{{activeid}}" 
+                      activeid = "{{activeid}}"
                       index="{{index}}" 
-                      videoid="{{item.img.imgNo}}" ></image-video>
+                      videoid="{{item.id}}"
+                      bind:play="onPlay" ></image-video> 
                   </view>
                 </view>
 

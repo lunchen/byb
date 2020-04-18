@@ -80,6 +80,7 @@ Page({
     // 添加空的活动
     var dataModel = JSON.parse(JSON.stringify(this.data.activityModel))
     var data = this.data.schoolHome.activityList;
+    console.log(this.data.schoolHome)
     if(data == '') data = []
     data.push(dataModel)
     this.setData({
@@ -112,7 +113,7 @@ Page({
     // 删除课程
     var index = e.currentTarget.dataset.index;
     var data = this.data.schoolHome.courseList;
-    data.splice(index, 1)
+    data.splice(index, 1) 
     this.setData({
       "schoolHome.courseList": data
     });
@@ -187,10 +188,9 @@ Page({
     var data = JSON.stringify({
       key: e.currentTarget.dataset.key,
       index: index,
+      firstkey: firstkey,
       list: this.data.schoolHome[firstkey][index][e.currentTarget.dataset.key]
     })
-    console.log("gedit")
-    console.log(data)
     wx.setStorageSync("addivList", data)
     wx.navigateTo({
       url: `../editVideoDesc/editVideoDesc`
@@ -205,138 +205,62 @@ Page({
       nowIndex: index
     });
   },
+  catchfn(){
+    console.log(666)
+  },
+  upActivityBill(e){
+    var that = this,
+        index = e.currentTarget.dataset.index;
+    util.uploadImg("activityBill").then(res=>{
+      
+      that.setData({
+        [`schoolHome.activityList[${index}].img`]: res.data.string
+      })
+    })
+  },
   uploadTeacherLogo(e) {
     // 教师头像上传
+
     var index = e.currentTarget.dataset.index;
     var that = this;
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success(res) {
-        console.log(res)
-        let src = res.tempFiles[0];
-        
-        wx.uploadFile({
-          url: apiServer.apiUrl(`/picture/upload/teachericon`),
-          method: 'post',
-          filePath: src.path,
-          name: 'file',
-          file: src,
-          data: {},
-          header: { 
-            'content-type': 'application/json',
-            "Authorization": apiServer.getToken("authorization"),
-            "token": apiServer.getToken("token"),
-            "appRole": apiServer.getIdentity(),
-           },
-          success(res) {
-            var data = JSON.parse(res.data)
-            that.setData({
-              [`schoolHome.courseList[${index}].img`]: data.data.string
-            });
-          }
-        })
-      }
+    util.uploadImg("teacherLogo").then(res => {
+      console.log(res)
+      that.setData({
+        [`schoolHome.courseList[${index}].img`]: res.data.string
+      })
     })
   },
   uploadUsImg(e) {
     // 机构封面上传
     var index = e.currentTarget.dataset.index;
     var that = this;
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success(res) {
-        console.log(res)
-        let src = res.tempFiles[0];
-      
-        wx.uploadFile({
-          url: apiServer.apiUrl(`/picture/upload/orgicon`),
-          method: 'post',
-          filePath: src.path,
-          name: 'file',
-          file: src,
-          data: {},
-          header: { 
-            'content-type': 'application/json',
-            "Authorization": apiServer.getToken("authorization"),
-            "token": apiServer.getToken("token"),
-            "appRole": apiServer.getIdentity(),
-          },
-          success(res) {
-            var data = JSON.parse(res.data)
-            that.setData({
-              [`schoolHome.understand.img`]: data.data.string
-            });
-          }
-        })
-      }
+    util.uploadImg("orgicon").then(res => {
+      console.log(res)
+      that.setData({
+        [`schoolHome.understand.img`]: res.data.string
+      })
     })
   },
   uploadUsLogo(e) {
     // 机构logo上传
     var index = e.currentTarget.dataset.index;
     var that = this;
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success(res) {
-        console.log(res)
-        let src = res.tempFiles[0];
-        wx.uploadFile({
-          url: apiServer.apiUrl(`/picture/upload/orglogo`),
-          method: 'post',
-          filePath: src.path,
-          name: 'file',
-          file: src,
-          data: {},
-          header: {
-            'content-type': 'application/json',
-            "Authorization": apiServer.getToken("authorization"),
-            "token": apiServer.getToken("token"),
-            "appRole": apiServer.getIdentity(),
-          },
-          success(res) {
-            var data = JSON.parse(res.data)
-            that.setData({
-              [`schoolHome.understand.logo`]: data.data.string
-            });
-          }
-        })
-      }
+    util.uploadImg("orglogo").then(res => {
+      console.log(res)
+      that.setData({
+        [`schoolHome.understand.logo`]: res.data.string
+      })
     })
   },
   uploadQRcode(e) {
     // 微信二维码上传
     var index = e.currentTarget.dataset.index;
     var that = this;
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success(res) {
-        console.log(res)
-        let src = res.tempFiles[0];
-        wx.uploadFile({
-          url: apiServer.apiUrl(`/picture/upload/wxqrcode`),
-          method: 'post',
-          filePath: src.path,
-          name: 'file',
-          file: src,
-          data: {},
-          header: {
-            'content-type': 'application/json',
-            "Authorization": apiServer.getToken("authorization"),
-            "token": apiServer.getToken("token"),
-            "appRole": apiServer.getIdentity(),
-          },
-          success(res) {
-            var data = JSON.parse(res.data)
-            that.setData({
-              [`schoolHome.understand.wechatQrcode`]: data.data.string
-            });
-          }
-        })
-      }
+    util.uploadImg("orglogo").then(res => {
+      console.log(res)
+      that.setData({
+        [`schoolHome.understand.wechatQrcode`]: res.data.string
+      })
     })
   },
   onCoursenameChange(e){
@@ -355,12 +279,12 @@ Page({
       [`schoolHome.understand.name`]: value,
     })
   },
-  onLabelChange(e) {
+  onLableChange(e) {
     // 热门标签输入  后续提交要处理成数组格式
     var index = e.currentTarget.dataset.index
     var value = e.detail
     this.setData({
-      [`schoolHome.understand.label`]: value,
+      [`schoolHome.understand.lable`]: value,
     })
   },
   onTelChange(e) {
@@ -388,7 +312,7 @@ Page({
       icon: 'loading',
       duration: 5000
     })
-    var _this = this
+    var that = this
     console.log(JSON.stringify(data))
     console.log(data)
       if (data.activityList == "") {
@@ -422,6 +346,9 @@ Page({
       if (data.understand.addr == "") {
         data.understand.addr = {}
       }
+      if (data.understand.lable != "") {
+        data.understand.lableList = [...data.understand.lable.split("，")]
+      }
     apiServer.post(`/app/org/index/update`, data).then(res => {
       console.log(res)
       wx.hideToast();
@@ -431,7 +358,7 @@ Page({
         success: function (res) {
           if (res.cancel) {
           } else if (res.confirm) {
-            _this.goToSchoolHome()
+            that.goToSchoolHome()
           }
         }
       })
@@ -449,37 +376,28 @@ Page({
       url: `../editSchoolDetails/editSchoolDetails`
     })
   },
-  onLoad: function (e) {
-   
-    // wx.getSetting({
-    //   success(res) {
-    //     if (res.authSetting['scope.userInfo']) {
-    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-    //       wx.getUserInfo({
-    //         success: function (res) {
-    //           console.log(res)
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
-    wx.setNavigationBarColor({
-      frontColor: '#000000',
-      backgroundColor: '#fff'
-    });
-    var _this = this;
+  getData(){
+    var that = this;
     apiServer.post(`/app/org/index`).then(res => {
       console.log(res.data);
       res.data.data.understand.lable = res.data.data.understand.lableList.join(', ')
-      
+
       // res.data.data.activityList.map(item =>{
       //   item.freeFlg = JSON.stringify(item.freeFlg)
       //   item.joinLimitlessFlg = JSON.stringify(item.joinLimitlessFlg)
       // })
-      _this.setData({
+      that.setData({
         schoolHome: res.data.data,
       })
     })
+  },
+  onLoad: function (e) {
+   
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#fff'
+    });
+    this.getData()
   },
   getUserInfo: function(e) {
     console.log(e)

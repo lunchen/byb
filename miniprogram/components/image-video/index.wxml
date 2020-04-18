@@ -6,16 +6,18 @@
     <image class="media-view" mode="aspectFill" wx:if="{{type==1}}" bindtap="previewImage" bindload="imgLoaded" style="width:0rpx;height:0rpx;width:{{imageWidth}}rpx;height:{{imageHeight}}rpx" src="{{src}}"></image>
     <video 
       wx:else
-      muted="true"
+      muted="{{muted}}"
       id="myvideo_{{videoid}}"
       data-id="{{videoid}}"
       data-index="{{index}}"
+      autoplay="{{false}}"
       class="media-view"
       bindtap="videoClick" 
-      object-fit="{{'cover'}}"
+      object-fit="{{objectFit || 'cover'}}"
       style="height:0rpx;width:0rpx;height:{{height}}rpx;width:{{width}}rpx;" 
       src="{{src}}" 
-      show-center-play-btn="{{false}}"
+      show-center-play-btn="{{scpb}}"
+      enable-progress-gesture="{{false}}"
       controls="{{true}}"
       bindplay="onPlay"
       bindpause="onPause"

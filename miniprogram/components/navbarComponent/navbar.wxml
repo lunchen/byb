@@ -1,6 +1,6 @@
 <cover-view class='nav-wrap {{navbarData.whitecover? "white_back_bg":""}}' style='background:{{backgroundColor}};height: {{isIphoneX ? (height*1.5 + 20):(height*2 + 20)}}px;'>
   <!-- 导航栏背景图片 -->
-  <cover-image class="backgroundimg" wx:if="{{navbarData.address!=''}}" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px;margin-top:{{isIphoneX?(phoneName == 'iPhone X'?60:30):0}}rpx" />
+  <cover-image class="backgroundimg" wx:if="{{navbarData.address!=''}}" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px;margin-top:{{needTop?(isIphoneX?(phoneName == 'iPhone X'?140:120):95):0}}rpx" />
   <!-- // 导航栏 中间的标题 -->
   <cover-view class='nav-title' wx:if='{{!navbarData.white}}' style='line-height: {{height*2 + 44}}px;'>
     {{navbarData.title}}
@@ -15,7 +15,10 @@
       <!-- //左上角的返回按钮，wx:if='{{!share}}'空制返回按钮显示 -->
       <!-- //从分享进入小程序时 返回上一级按钮不应该存在 -->
       <!-- navbarData.white是控制按钮颜色的，因为背景有深浅色,返回按钮自己找图片 -->
-      <block  wx:if='{{!share&&navbarData.white}}'>
+      <block wx:if='{{share}}'>
+        <cover-view  style="font-size:28rpx;color:{{navbarData.white?'#fff':'#333'}};">首页</cover-view>
+      </block>
+      <block  wx:elif='{{!share&&navbarData.white}}'>
         <cover-image src='./icon/back1@2x.png' mode='aspectFit' class='back-pre'></cover-image>
       </block>
       <block wx:else='{{!share}}'>
@@ -25,4 +28,4 @@
   </cover-view>
 </cover-view>
 <!-- 导航栏下面的背景图片 -->
-<image wx:if="{{imageHeight}}" class="backgroundimg" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px;margin-top:{{isIphoneX?(phoneName == 'iPhone X'?60:30):0}}rpx" />
+<image wx:if="{{imageHeight}}" class="backgroundimg" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px;margin-top:{{needTop?(isIphoneX?(phoneName == 'iPhone X'?140:120):95):0}}rpx" />

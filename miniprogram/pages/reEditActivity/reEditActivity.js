@@ -70,6 +70,15 @@ Page({
       url: '../schoolHome/schoolHome'
     })
   },
+  addBannerImg() {
+    var that = this
+    util.uploadImg("activityBill").then(res => {
+      console.log(res)
+      that.setData({
+        [`reEditData.img`]: res.data.string
+      })
+    })
+  },
   getIptMes: function (e) {
     // 获得动态下方编辑的数据
     var data = this.data.reEditData
@@ -87,6 +96,10 @@ Page({
     wx.navigateTo({
       url: `../editVideoDesc/editVideoDesc`
     })
+  },
+
+  catchfn() {
+    console.log(666)
   },
   backFn(e) {
     // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息

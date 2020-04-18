@@ -1,0 +1,79 @@
+<view class="container videoTop">
+  <navbar navbar-data='{{nvabarData}}' background-color="transparent"></navbar>
+  <view class="search-view" style="position:relative;z-index:2;padding-top:{{height}}px;">
+  
+  </view>
+  <view style="min-height:200rpx;background:black;" wx:if="{{inputVideo.url}}">
+    <yz-video
+        app-id="{{ appId }}"
+        shop-id="{{ shopId }}"
+        open-id="{{ openId }}"
+        source-from="{{ 2 }}"
+        custom-url="{{ inputVideo.url }}"
+        style="width:100%"
+        autoplay="{{true}}"
+        loop="{{loop}}" 
+    ></yz-video>
+    <!-- <mp-video-top
+      iptCurrent="{{current}}"
+      class="video-swiper" 
+      video-url="{{inputVideo}}" 
+      bindplay="onPlay"
+      bindpause="onPause"
+      bindtimeupdate="onTimeUpdate"
+      bindended="onEnded"
+      binderror="onError"
+      bindwaiting="onWaiting"
+      bindprogress="onProgress"
+      bindloadedmetadata="onLoadedMetaData"
+    ></mp-video-top> -->
+  </view>
+  
+  <view class="video-bottom">
+    <view class="bottom-left-view">
+      <view class="bottom-left-view-item">
+        <view class="bottom-left-view-item-left">
+          <image style="width:100rpx;height:100rpx;border-radius:50%" src="{{inputVideo.org.logo}}"></image>
+        </view>
+        <view class="bottom-left-view-item-right">
+          <view>{{inputVideo.org.name}}</view>
+          <view class="bottom-left-view-item-right-text1" bindtap="goToSchoolHome" data-id="{{inputVideo.org.id}}">
+            <text>查看详情</text>
+            <image style="width:30rpx;height:30rpx;margin-top:-2rpx;" src="../../images/more2@2x.png"></image>
+          </view>
+          
+          <view class="bottom-left-view-item-text item-ellipsis">
+            {{inputVideo.name}}
+          </view>
+        </view>
+
+      </view>
+      <view class="bottom-left-btn" bindtap="goToGetcourse" data-id="{{inputVideo.org.id}}">
+        <text>免费约课</text>
+        <image style="width:30rpx;height:30rpx;margin-top:-2rpx;transform:rotate(-90deg)" src="../../images/home_9@2x.png"></image>
+      </view>
+    </view>
+    <view class="bottom-right-view">
+      <view class="bottom-right-view-item">
+        <image class="bottom-right-view-item-imgs" src="../../images/video_1@2x.png"></image>
+        <view>{{inputVideo.lookCount}}</view>
+      </view>
+      <!-- <view class="bottom-right-view-item" bindtap="likeBtn" data-id="{{inputVideo.id}}">
+        <image wx:if="{{inputVideo.likeFlg == 1}}" class="bottom-right-view-item-imgs" src="../../images/video_3@2x.png"></image>
+        <image wx:else class="bottom-right-view-item-imgs" src="../../images/video_2@2x.png"></image>
+        <view>{{inputVideo.likeCount}}</view>
+      </view> -->
+      <view class="bottom-right-view-item" >
+        <button class="bottom-right-view-item1"  open-type="share" hover-class='none'>
+          <image class="bottom-right-view-item-imgs" src="../../images/video_4@2x.png"></image>
+          <view>{{inputVideo.shareCount}}</view>
+        </button>
+      </view>
+      
+      <!-- <view class="bottom-right-view-item" bindtap="onShareAppMessage">
+        <image class="bottom-right-view-item-imgs" src="../../images/video_4@2x.png"></image>
+        <view>{{inputVideo.shareCount}}</view>
+      </view> -->
+    </view>
+  </view>
+</view>

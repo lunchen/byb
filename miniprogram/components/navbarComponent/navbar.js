@@ -26,6 +26,12 @@ Component({
       value: false,
       observer: function (newVal, oldVal) { }
     },
+    needTop: {
+      //navbarData   由父页面传递的数据，变量名字自命名
+      type: Boolean,
+      value: true,
+      observer: function (newVal, oldVal) { }
+    },
   },
   data: {
     isIphoneX: app.globalData.systemInfo.model.search('iPhone X') != -1 ? true : false,
@@ -40,9 +46,19 @@ Component({
   },
   attached: function () {
     // 获取是否是通过分享进入的小程序
-    this.setData({
-      share: app.globalData.share
-    })
+    
+    let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+    const currentPage = pages[pages.length - 1]
+    if (pages.length == 1 && currentPage.route != "/pages/index/index" && currentPage.route != "/pages/mine/mine") {
+      this.setData({
+        share: true
+      })
+    }else{
+      this.setData({
+        share: false
+      })
+    }
+  
     // 定义导航栏的高度   方便对齐
     this.setData({
       height: app.globalData.height
@@ -51,6 +67,13 @@ Component({
   methods: {
     // 返回上一页面
     _navback() {
+      if(this.data.share){
+        app.globalData.share = false
+        wx.switchTab({
+          url: '/pages/index/index',
+        })
+        return
+      }
       var hasShowValue = false;
       var data =this.data.hasShow;
       var showTrueList = []
@@ -60,17 +83,18 @@ Component({
           showTrueList.push(i)
         }
       }
-      console.log(hasShowValue)
-      console.log(data)
-      console.log(showTrueList)
-      if (hasShowValue){
+      if (hasShowValue) {
+        console.log("顶部返回111")
         this.triggerEvent('checkShow', {
           hasShowValue: hasShowValue,
           showTrueList: showTrueList
         })
       }else{
-        
-        if(this.data.prevReload){
+
+        console.log("顶部返回222")
+        console.log(this.data.navbarData.backreload)
+        if (this.data.navbarData.backreload) {
+          console.log("返回onload")
           let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
           let prevPage = pages[pages.length - 2];
           wx.navigateBack({
@@ -83,6 +107,7 @@ Component({
           wx.navigateBack()
         }
       }
+
      
     },
     // 计算图片高度

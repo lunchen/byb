@@ -1,0 +1,19 @@
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}' background-color="transparent"></navbar>
+  <block wx:if="{{inputVideo.url!=''}}">
+    <mp-video-full 
+      iptCurrent="{{current}}"
+      class="video-swiper" 
+      video-url="{{inputVideo}}" 
+      bindplay="onPlay"
+      bindpause="onPause"
+      bindtimeupdate="onTimeUpdate"
+      bindended="onEnded"
+      binderror="onError"
+      bindwaiting="onWaiting"
+      bindprogress="onProgress"
+      bindloadedmetadata="onLoadedMetaData"
+    ></mp-video-full>
+  </block>
+  
+</view>

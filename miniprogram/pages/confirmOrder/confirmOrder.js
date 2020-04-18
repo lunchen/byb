@@ -44,6 +44,19 @@ Page({
   payBtn() {
     var _this = this,
         orderNo = _this.data.orderNo;
+    if (this.data.orderData.price==0){
+      wx.showToast({
+        title: '',
+        icon: 'loading',
+        duration: 1000
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: `../signUpSuccess/signUpSuccess?orderNo=${orderNo}`,
+        })
+      }, 1500)
+      return
+    }
     var req = {
       "openId": wx.getStorageSync("openId"),
       "orderNo": orderNo

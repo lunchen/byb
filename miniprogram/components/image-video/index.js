@@ -2,6 +2,12 @@
 const app = getApp()
 Component({
   properties: {
+    objectFit: {
+      type: String,
+      value: '',
+      observer: function (newVal, oldVal) {
+      }
+    },
     src: {
       type: String,
       value: '',
@@ -12,6 +18,14 @@ Component({
     type: {
       type: Number,
       value: 1    //1图片 2视频 视频必须传入宽高
+    },
+    scpb: {
+      type: Boolean,
+      value: false    //中间控制按钮是否显示
+    },
+    muted: {
+      type: Boolean,
+      value: true    //true可以点击查看 false不能点击查看
     },
     show: {
       type: Boolean,
@@ -31,7 +45,7 @@ Component({
     },
     activeid: {     //外部传入的正在播放的第几个视频 用于控制播放列表上第几个视频
       type: Number,
-      value: 99999,
+      value: -1,
       observer: function (newVal, oldVal) {
         this.playCurrent()
       }
@@ -132,7 +146,7 @@ Component({
     playCurrent() {
       // 阻止视频被点击时穿透
       if (this.data._videoContexts){
-        if (this.data.index == this.data.activeid) {
+        if (this.data.videoid == this.data.activeid) {
           this.data._videoContexts.play()
         } else {
           this.data._videoContexts.pause()

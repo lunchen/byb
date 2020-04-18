@@ -1,18 +1,24 @@
 <view class="tabbarBtn-box">
   <view class="tabbar-service-btnView">
     <view class="tabbar-service-btnView-left">
-      
-      <view bindtap="showBtn" class="tabbar-service-btnView-left-btn">
-        <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_10@2x.png"></image>
-        <text>联系我们</text>
+      <view bindtap="shareFriend" class="tabbar-service-btnView-left-btn contact-us" style="width:40%">
+          <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_12@2x.png"></image>
+          <view style="line-heig">分享</view>
       </view>
-      <view bindtap="appointFreeBtn" bindtap="freeAppointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn lightThemeBGC">
+      <view bindtap="showBtn" class="tabbar-service-btnView-left-btn contact-us" style="width:60%">
+          <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_10@2x.png"></image>
+          <view style="line-heig">联系我们</view>
+      </view>
+      
+    </view>
+    <view class="tabbar-service-btnView-right">
+      <view bindtap="appointFreeBtn" bindtap="freeAppointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn flex-mc lightThemeBGC">
         <!-- <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_11@2x.png"></image> -->
         <text>免费约课</text>
       </view>
-    </view>
-    <view bindtap="appointBtn" data-freetype='{{false}}' class="tabbar-service-btnView-right">
-      立即报名
+      <view bindtap="appointBtn" data-freetype='{{false}}' class="tabbar-service-btnView-right-btn">
+        立即报名
+      </view>
     </view>
   </view>
   <view class="contactUs" style="{{ display ? '' : 'display: none;'}}">
@@ -25,11 +31,12 @@
       </view>
       <view class="contactUs-view-text">
         <view class="contactUs-view-text-txt1" bindtap="makePhoneCall">
-          联系电话：187****0980
+          <text>一键呼叫：</text>
+          <image style="width:60rpx;height:60rpx;" src="../../images/call@2x.png"></image>
         </view>
         <view class="contactUs-view-text-txt2">
           <view>微信二维码：</view>
-          <image bindtap='previewImg' style="width:100rpx;height:100rpx;margin-left:10rpx" src="{{qrCodeUrl}}"></image>
+          <image bindtap='previewImg' style="width:100rpx;height:100rpx;margin-left:10rpx" src="{{wxqecode}}"></image>
         </view>
       </view>
       

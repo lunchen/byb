@@ -1,6 +1,7 @@
 // 商务洽谈页
 //business.js
 const util = require('../../utils/util.js')
+const apiServer = require('../../api/request.js');
 //获取应用实例
 const app = getApp()
 
@@ -26,7 +27,11 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     
-    activityDetails:{}
+    activityDetails:{},
+    telephone:'',
+    wechat: "",
+    nameValue: '',
+    telValue: ''
   },
   //事件处理函数
   goToSchoolHome: function() {
@@ -40,6 +45,38 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
+    apiServer.post(`/app/call/me`).then(res => {
+      console.log(res.data);
+      that.setData({
+        telephone: res.data.data.telephone,
+        wechat: res.data.data.wechat,
+      })
+    })
+  },
+  nameIpt(e){
+    console.log(e)
+    this.setData({
+      nameValue: e.detail.value
+    })
+  },
+  telIpt(e) {
+    this.setData({
+      telValue: e.detail.value
+    })
+  },
+  submit(){
+    var req = {
+      telephone: this.data.telValue,
+      name: this.data.nameValue,
+    }
+    apiServer.post(`/businessOrder/add`, req).then(res => {
+      console.log(res.data);
+      wx.showToast({
+        title: '提交成功',
+        icon: 'none',
+        duration: 1000
+      })
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -56,7 +93,7 @@ Page({
       console.log(ops.target)
     }
     return {
-      title: '报一报',
+      title: '报1 报',
       path: '/pages/business/business',
       imageUrl: "",
       success: function (res) {

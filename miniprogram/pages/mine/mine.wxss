@@ -18,7 +18,7 @@
 }
 .participant .mine-top-view{
   position: relative;
-  box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.1);
 }
 .sponsor .mine-top-view{
   position: relative;
@@ -29,7 +29,7 @@
   margin: 0 auto 0;
   background: #fff;
   border-radius: 18rpx;
-  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -104,6 +104,7 @@
 /* 参与方下方列表 */
 .participantCard-content-item{
   border-bottom: 20rpx #f0f0f0 solid;
+  position: relative;
 }
 .participantCard-content-item-top{
   display: flex;
@@ -222,6 +223,63 @@
   font-size: 28rpx;
   font-weight: bolder;
 }
+
+.participantCard-isEnd{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.participantCard-isEnd-bg{
+  background: #eee;
+  opacity: 0.4;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.participantCard-isEnd-top{
+  padding: 40rpx 30rpx;
+  font-size: 28rpx;
+  color: #fe8800;
+  font-weight: bolder;
+  text-align: right;
+  position: relative;
+  z-index: 2;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.participantCard-isEnd-middle{
+  height: 240rpx;
+  padding: 1rpx 30rpx;
+  position: relative;
+  z-index: 2;
+}
+.participantCard-isEnd-middle view{
+  height: 110rpx;
+  line-height: 110rpx;
+  width: 110rpx;
+  border-radius: 50%;
+  background: #6e6d68;
+  text-align: center;
+  color: #ffffff;
+  font-size: 28rpx;
+  margin: 64rpx 39rpx;
+}
+.participantCard-isEnd-bottom{
+  height: 50rpx;
+  margin-top: 20rpx;
+  padding: 12.5rpx 40rpx;
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+  z-index: 2;
+}
+
 /* 参与方下方列表 */
 
 

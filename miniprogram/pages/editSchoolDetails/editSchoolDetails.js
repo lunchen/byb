@@ -77,6 +77,7 @@ Page({
       name:"",
       remark:''
     },
+    // 示例数据
     activityList: [{
       "addr": {
         "addr": "",
@@ -95,6 +96,9 @@ Page({
     }],
     nowIndex:0,
     storeAddress: ""   //地图页直接设好数据 将需要的地址数据设置到setAddress
+  },
+  hasEdit(e){
+    console.log()
   },
   //事件处理函数
   textareaIpt(e){
@@ -116,7 +120,7 @@ Page({
   },
   addHandle() {
     // 添加空的动态
-    var dataModel = this.data.activityListModel
+    var dataModel = Object.assign({}, this.data.activityListModel)
     var data = this.data.schoolDetails.activityList;
     data.push(dataModel)
     this.setData({
@@ -126,6 +130,27 @@ Page({
   },
   methods:{
     
+  },
+  upDynamicBill(e){
+    var that = this,
+      index = e.currentTarget.dataset.index;
+    util.uploadImg("dynamicBill").then(res => {
+      console.log(res)
+      var data = [{
+        "id": '',
+        "imgNo": "",
+        "remark": "",
+        "title": "",
+        "type": 1,
+        "url": res.data.string
+      }]
+      that.setData({
+        [`schoolDetails.activityList[${index}].imgList`]: data
+      })
+    })
+  },
+  catchfn() {
+    console.log(666)
   },
   editVideoDesc: function (e) {
     // 跳转到学校环境等的视频编辑
@@ -221,14 +246,12 @@ Page({
     console.log(JSON.stringify(data))
     console.log(data)
     apiServer.post(`/app/org/info/update`, data).then(res => {
-      wx.showToast({
-        title: '编辑成功',
-        icon: 'loading',
-        duration: 2000
-      })
+      wx.hideToast();
       wx.showModal({
-        title: '编辑成功',
-        content: '是否确认跳转学校详情页查看效果，取消前往学校主页',
+        title: '提交成功',
+        content: '您可以前往以下页面预览效果',
+        cancelText: '学校首页',
+        confirmText: '学校详情',
         success: function (res) {
           _this.setData({
             hasWork: false
@@ -240,8 +263,13 @@ Page({
           }
         }
       })
-      _this.getData()
+      // _this.getData()
       // activityList: res.data.data.activityList
+    }).catch(err=>{
+      wx.hideToast();
+      _this.setData({
+        hasWork: false
+      })
     })
   },
   goToSchoolHome(e) {

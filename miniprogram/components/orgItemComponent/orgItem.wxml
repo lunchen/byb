@@ -1,6 +1,9 @@
 <view class="orgItem-view-item" bindtap="goToOrgItemDetails" data-id="{{orgItemData.id}}">
   <view class="orgItem-view-item-left">
-    <image class="" style="height:350rpx;width: 257rpx;" mode="aspectFill" src="{{orgItemData.img}}"></image>
+    <image wx:if="{{orgItemData.logo}}" class="" style="height:350rpx;width: 257rpx;" mode="aspectFill" src="{{orgItemData.logo}}"></image>
+    <view class="default-bg flex-middle-center" wx:else>
+      <image class="default-bg-img" src="../../images/default_bill@2x.png"></image>
+    </view>
   </view>
   
   <block>
@@ -13,10 +16,10 @@
       
       <view class="orgItem-view-text3">
         <image style="flex:0 0 auto;width:40rpx;height:40rpx;margin-right:6rpx;margin-top:4rpx;" src="./icon/location1@2x.png"></image>
-        <text>{{orgItemData.addr.name}}</text>
+        <text class="overwhite">{{orgItemData.addr.addr}}</text>
       </view>
       <view class="orgItem-item-visit">
-        <image style="height:30rpx;width:30rpx;" src="../../images/home_6@2x.png"></image>
+        <image style="height:30rpx;width:30rpx;margin-left:-4rpx;margin-top:2rpx;" src="../../images/home_6@2x.png"></image>
         <text>{{orgItemData.hotsValue}}</text>
       </view>
       <view class="orgItem-view-item-right-bottom">

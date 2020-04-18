@@ -32,7 +32,8 @@ Page({
     api: '',          //获取数据接口
     updateapi: '',      //更新数据接口
     prevIndex: '',       //上一个页面的跳转过来的下标 在动态编辑添加图片用到
-    prevKey: ''       //上一个页面的跳转过来的列表取值key
+    prevKey: '',       //上一个页面的跳转过来的列表取值key
+    firstkey: ''       //上一个页面的跳转过来的列表取值key
   },
   onLoad: function (e) {
     console.log(e)
@@ -62,12 +63,15 @@ Page({
       let prevIndex = getData.index;
       let prevkey = getData.key
       let prevData = getData.list
+      let firstkey = getData.firstkey
       console.log("getData")
       console.log(getData)
       that.setData({
         prevIndex: prevIndex,
         data: prevData,
-        prevKey: prevkey
+        prevKey: prevkey,
+        firstkey: firstkey,
+        
       })
       console.log(that.data)
       console.log(5555)
@@ -76,10 +80,13 @@ Page({
 
   setIndex(e){
     // 设置下标 用于操作某一层图片
+    console.log(e)
     var index = e.currentTarget.dataset.index
     this.setData({
       nowIndex: index,
     })
+    // var addVideo = this.selectComponent("#addvideo_" + index);
+    // addVideo.asd()
   },
   addNew(){
     // 添加空的编辑
@@ -106,7 +113,8 @@ Page({
     var index = this.data.nowIndex;
     var data = this.data.data
     data[index].url = e.detail.mes.url;
-    data[index].type = e.detail.mes.type
+    data[index].type = e.detail.mes.type;
+    data[index].cover = e.detail.mes.cover;
     this.setData({
       data : data
     });
@@ -150,7 +158,7 @@ Page({
           wx.navigateBack({
             // 返回并执行上一页面方法
             success: function () {
-              // beforePage.onLoad({}); // 执行前一个页面的方法
+              // beforePage.hasEdit({ name: updateapi}); // 执行前一个页面的方法
             }
           });
         },1200)

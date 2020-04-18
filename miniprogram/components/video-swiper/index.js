@@ -100,7 +100,11 @@ Component({
         addGlobalClass: true,
         pureDataPattern: /^_/
     },
-    properties: {
+  properties: {
+        type: {
+          type: String,
+          value: "index"
+        },
         duration: {
             type: Number,
             value: 500
@@ -141,6 +145,7 @@ Component({
         _invalidDown: 0,
         _videoContexts: [],
         autoplay:false,
+        activeId:'',
     },
     lifetimes: {
         attached: function attached() {
@@ -196,7 +201,7 @@ Component({
             if (diff === 0) return;
             this.data._last = current;
             this.playCurrent(current);
-            this.triggerEvent('change', { activeId: curQueue[current].id });
+          this.triggerEvent('change', { activeId: curQueue[current].id, courseId: curQueue[current].courseId });
             var direction = diff === 1 || diff === -2 ? 'up' : 'down';
             if (direction === 'up') {
                 if (this.data._invalidDown === 0) {
@@ -274,28 +279,40 @@ Component({
             this.trigger(e, 'error');
         },
         onTimeUpdate: function onTimeUpdate(e) {
-            this.trigger(e, 'timeupdate');
+          // this.trigger(e, 'timeupdate');
         },
-        onWaiting: function onWaiting(e) {
-            this.trigger(e, 'wait');
+      onWaiting: function onWaiting(e) {
+            // this.trigger(e, 'wait');
         },
         onProgress: function onProgress(e) {
-            this.trigger(e, 'progress');
+            // this.trigger(e, 'progress');
         },
         onLoadedMetaData: function onLoadedMetaData(e) {
-            this.trigger(e, 'loadedmetadata');
+            // this.trigger(e, 'loadedmetadata');
         },
         trigger: function trigger(e, type) {
             var ext = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
             var detail = e.detail;
             var activeId = e.target.dataset.id;
-            this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { activeId: activeId }), ext));
+            var courseId = e.target.dataset.courseid;
+          console.log("courseId", courseId)
+            this.setData({
+              activeId: activeId,
+              courseId: courseId
+            })
+          this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { activeId: activeId, courseId: courseId }), ext));
         },
         likeBtn(e) {
           console.log(66666)
           console.log(e.currentTarget.dataset.id)
           var id = e.currentTarget.dataset.id;
+          console.log(this.data.videoList)
+          this.data.videoList.map(item=>{
+            if(item.id == id){
+              item.likeFlg = 1
+            }
+          })
           var req = {
             "id": id,
             "type": 2
@@ -318,7 +335,36 @@ Component({
         },
       
     },
-  
+
+  onShareAppMessage: function (ops) {
+    var json = encodeURIComponent(JSON.stringify({ a: 1 }));
+    if (this.data.type == "index") {
+      var path = '/pages/video-swiper/video-swiper?id=' + this.data.activeId + '&type=' + this.data.type
+    }else {
+      var path = '/pages/video-swiper/video-swiper?id=' + this.data.courseId + '&type=' + this.data.type + '&videoId=' + this.data.activeId
+    }
+    console.log(path)
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    if (this.data.type)
+      return {
+        title: '报1 报',
+        path: path,
+        imageUrl: "",
+        success: function (res) {
+          // 转发成功
+          console.log("转发成功:" + JSON.stringify(res));
+
+        },
+        fail: function (res) {
+          // 转发失败
+          console.log("转发失败:" + JSON.stringify(res));
+        }
+      }
+
+  },
 });
 
 /***/ })

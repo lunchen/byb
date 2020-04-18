@@ -12,7 +12,17 @@ Component({
       //loginShow  预约课程弹窗状态  1选课程 2不用选课程
       type: Number,
       value: 0,
-    }
+    },
+    wxqecode:{
+      //loginShow  预约课程弹窗状态  1选课程 2不用选课程
+      type: String,
+      value: '',
+    },
+    telephone:{
+      //loginShow  预约课程弹窗状态  1选课程 2不用选课程
+      type: String,
+      value: '',
+    },
   },
   data: {
     qrCodeUrl: "./icon/qrCode.png",  //要改成线上图片
@@ -78,6 +88,9 @@ Component({
         })
       }, 20);
     },
+    shareFriend:function(e){
+      this.triggerEvent('shareFriend', {})
+    },
     appointBtn:function(e) {
       // 打开触发父组件打开报名弹窗
       this.freeBtn(e)
@@ -104,8 +117,9 @@ Component({
       })
     },
     makePhoneCall: function () {
+      var that = this
       wx.makePhoneCall({
-        phoneNumber: "13777822654",
+        phoneNumber: that.data.telephone,
         success: function () {
           console.log('拨打成功')
         },

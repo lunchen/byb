@@ -22,21 +22,19 @@ Page({
     activityList: [
 
     ],
+    req:{
+      "keyword": "",
+      "nub": 0,
+      "size": 6
+    }
   },
   onChange(event) {
     this.setData({
-      value: event.detail
+      "req.keyword": event.detail
     })
   },
   onSearch() {
-    var that = this;
-    let keyword = this.data.value
-    apiServer.post('/app/activity/list', { keyword: keyword}).then(res => {
-      console.log(res.data);
-      that.setData({
-        activityList: res.data.data.list,
-      })
-    })
+    this.getData()
   },
   onLoad: function () {
     var that = this;
@@ -44,7 +42,11 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    apiServer.post('/app/activity/list').then(res => {
+    this.getData()
+  },
+  getData(){
+    var that = this
+    apiServer.post('/app/activity/list',this.data.req).then(res => {
       console.log(res.data);
       that.setData({
         activityList: res.data.data.list,
@@ -58,7 +60,7 @@ Page({
       console.log(ops.target)
     }
     return {
-      title: '报一报',
+      title: '报1 报',
       path: '/pages/activityListSearch/activityListSearch',
       imageUrl: "",
       success: function (res) {

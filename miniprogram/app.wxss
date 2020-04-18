@@ -65,3 +65,14 @@ page {
 .confirm-esc{
   border-right: 1rpx #999999 solid;
 }
+button{
+  line-height: 1;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+button:not([size='mini']) {
+  width: 100rpx;
+}
+
+

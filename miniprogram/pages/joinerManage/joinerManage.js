@@ -44,20 +44,20 @@ Page({
       id: '',
       name: '请选择'
     },
-    req:{
+    req: {
       "activityId": '',
       "endTime": "",
       "nub": 0,
       "size": 0,
       // "startTime": util.formatDate(new Date().getTime(),"yyyy-MM-dd"),
-      "startTime":'',
+      "startTime": '',
       "status": '',
       "type": ''       //1报名 2预约
     },
-    count:"--",
+    count: "--",
     orderList: []
   },
-  exportExcelHandle(){
+  exportExcelHandle() {
     var that = this;
     let req = this.data.req;
     wx.showToast({
@@ -73,7 +73,23 @@ Page({
       //   title: '导出数据中，请稍后',
       //   icon: 'loading'
       // })
+      wx.setClipboardData({
+        data: durl,
+        success(res) {
+          wx.hideToast()
+          wx.getClipboardData({
+            success(res) {
+              wx.showModal({
+                title: '提示',
+                content: '链接已复制到剪贴板',
+                showCancel: false
+              })
+            }
+          })
+        }
+      })
 
+      return
       wx.showToast({
         title: '导出成功',
         icon: 'none',
@@ -82,11 +98,11 @@ Page({
       const downloadTask = wx.downloadFile({
         url: durl, //仅为示例，并非真实的资源
         success(res) {
-          if (res.statusCode == 200){
+          if (res.statusCode == 200) {
             console.log("tempFilePath" + res.tempFilePath)
             wx.openDocument({
               filePath: res.tempFilePath,
-              success(res){
+              success(res) {
                 console.log(res)
               },
               fail(res) {
@@ -117,7 +133,7 @@ Page({
       })
     })
   },
-  selectChange(e){
+  selectChange(e) {
     // 由于select内部转换过key 所以取值时候 value->id label->name
     console.log(e.detail)
     this.setData({
@@ -137,7 +153,7 @@ Page({
       timeShow: true
     })
   },
-    // 时间选择确定
+  // 时间选择确定
   confirm(event) {
     var _this = this;
     var time = util.formatDate(event.detail, "yyyy-MM-dd");
@@ -148,19 +164,19 @@ Page({
     this.onCloseTime()
     this.getOrderList()
   },
-  searchChange(event){
+  searchChange(event) {
     this.setData({
       searchValue: event.detail
     })
   },
-  onSearch(event){
+  onSearch(event) {
     console.log("onsearch")
     this.getOrderList()
   },
   onCancel() {
     wx.navigateBack()
   },
-  selectHandle(e){
+  selectHandle(e) {
     var index = e.currentTarget.dataset.index;
     this.setData({
       [`orderList[${index}].select`]: !this.data.orderList[index].select
@@ -169,12 +185,12 @@ Page({
   getOrderList() {
     var that = this;
     let req = this.data.req;
-    if (req.startTime){
+    if (req.startTime) {
       req.startTime = new Date(req.startTime).getTime()
     }
     apiServer.post(`/app/my/org/order`, req).then(res => {
       console.log(res.data);
-      res.data.data.list.forEach(item =>{
+      res.data.data.list.forEach(item => {
         item.select = false;
       })
       that.setData({
@@ -184,6 +200,15 @@ Page({
     })
   },
   onLoad: function (e) {
+    if (e.type == 2) {
+      this.setData({
+        "nvabarData.title": "预约者管理"
+      })
+    } else if (e.type == 1) {
+      this.setData({
+        "nvabarData.title": "报名者管理"
+      })
+    }
     var that = this;
     wx.setNavigationBarColor({
       frontColor: '#000000',
@@ -196,13 +221,13 @@ Page({
       })
     })
     console.log(e)
-    if (e.id == 'undefined'){
+    if (e.id == 'undefined') {
       this.setData({
         "req.type": e.type,
       })
-    } else if (e.type == 'undefined'){
+    } else if (e.type == 'undefined') {
       this.setData({
-        "req.activityId": 16,
+        "req.activityId": e.id,
       })
     } else {
       this.setData({

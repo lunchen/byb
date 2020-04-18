@@ -7,8 +7,11 @@ Component({
       type: Object,
       value: {},
       observer: function (newVal, oldVal) {
+
+        var _this = this
         this.setData({
-          iptActivityInfo: newVal
+          iptActivityInfo: newVal,
+          showList: newVal[_this.data.listKeyName]
         })
       }
     },
@@ -28,7 +31,9 @@ Component({
       // 默认类型为动态类型  1为发布活动类型
       type: String,
       value: "imgList",
-      observer: function (newVal, oldVal) { }
+      observer: function (newVal, oldVal) {
+       
+      }
     }, 
   },
   data: {
@@ -97,13 +102,17 @@ Component({
       "id": 0,
       "name": "",
       "statusName": ""
-    }
+    },
     // 活动数据模板
+    showList:[],
   },
   attached() {
     // 每次组件进入页面时执行
     // console.log(789)
     // console.log(this.data.iptActivityInfo)
+  },
+  catchfn(){
+    console.log(666)
   },
   methods: {
     editVideoDesc: function (e) {

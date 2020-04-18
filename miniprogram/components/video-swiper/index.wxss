@@ -65,9 +65,10 @@
 }
 .bottom-left-btn{
   background: #feb707;
-  padding: 10rpx 20rpx;
+  padding: 14rpx 20rpx;
   border-radius: 8rpx;
-  display: inline-block;
+  line-height: 1;
+  display: inline-block
 }
 .bottom-left-btn image{
   display: inline-block;
@@ -77,4 +78,19 @@
   display: inline-block;
   vertical-align: middle;
   line-height: 1;
+}
+
+
+button.bottom-right-view-item1{
+  line-height: 1;
+  text-align: center;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 28rpx;
+  color: #fff;
+  width: 100rpx;
+}
+.videoTop button:not([size='mini']) {
+  width: 60rpx;
 }

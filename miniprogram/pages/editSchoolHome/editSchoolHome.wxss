@@ -23,8 +23,9 @@
 }
 .editSchoolHome-content-view-addActVideo.type1{
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .editSchoolHome-content-view-addActVideo.type2{
   display: flex;
