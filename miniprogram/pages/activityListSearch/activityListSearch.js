@@ -22,11 +22,14 @@ Page({
     activityList: [
 
     ],
-    req:{
+    req: {
       "keyword": "",
-      "nub": 0,
+      "nub": 1,
       "size": 6
-    }
+    },
+    refresherTriggered: false,
+    loadingMore: false,
+    loadingMoreText: "加载中..."
   },
   onChange(event) {
     this.setData({
@@ -36,13 +39,49 @@ Page({
   onSearch() {
     this.getData()
   },
+  getMore() {
+    var that = this
+    this.setData({
+      "req.nub": this.data.req.nub + 1,
+      loadingMore: true
+    })
+    apiServer.post('/app/activity/list', this.data.req).then(res => {
+      console.log(res.data);
+      var newList = that.data.activityList
+      if (res.data.data.list.length > 0) {
+        newList.push(...res.data.data.list)
+        that.setData({
+          activityList: newList,
+          loadingMore: false,
+          loadingMoreText: "加载中..."
+        })
+      } else {
+        that.setData({
+          loadingMoreText: "已经到底了"
+        })
+      }
+    })
+    console.log("刷新")
+  },
+  renewData(){
+    this.setData({
+      "req.nub": 1,
+      activityList: [],
+      loadingMore: false
+    })
+    setTimeout(()=>{
+      this.getData()
+    },1000)
+  },
   onLoad: function () {
     var that = this;
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    this.getData()
+    if (this.data.req.nub == 1) {
+      this.getData()
+    }
   },
   getData(){
     var that = this
@@ -50,6 +89,7 @@ Page({
       console.log(res.data);
       that.setData({
         activityList: res.data.data.list,
+        refresherTriggered: false
       })
     })
   },

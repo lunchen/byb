@@ -21,20 +21,51 @@ Page({
     orgList: [],
     req :{
       "keyword": '',
-      "nub": 0,
+      "nub": 1,
       "size": 6
-    }
+    },
+    refresherTriggered: false,
+    loadingMore: false,
+    loadingMoreText: "加载中...",
   },
   onChange(event) {
     this.setData({
       "req.keyword": event.detail
     })
   },
+  getMore(){
+    var that = this
+    this.setData({
+      "req.nub": this.data.req.nub + 1,
+      loadingMore: true
+    })
+    apiServer.post('/app/org/list/seach', this.data.req).then(res => {
+      console.log(res.data);
+      var newList = that.data.orgList
+      if (res.data.data.list.length>0){
+        newList.push(...res.data.data.list)
+        that.setData({
+          orgList: newList,
+          loadingMore: false,
+          loadingMoreText: "加载中..."
+        })
+      }else{
+        that.setData({
+          loadingMoreText: "已经到底了"
+        })
+      }
+    })
+    console.log("刷新")
+  },
   renewData(){
     this.setData({
-      "req.nub": 0,
-      orgList:[]
+      "req.nub": 1,
+      orgList: [],
+      loadingMore: false
     })
+    setTimeout(() => {
+      this.getData()
+    }, 1000)
   },
   onSearch(){
     this.getData()
@@ -53,7 +84,9 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    this.getData()
+    if(this.data.req.nub == 1){
+      this.getData()
+    }
   },
   getData(){
     var that = this
@@ -61,6 +94,7 @@ Page({
       console.log(res.data);
       that.setData({
         orgList: res.data.data.list,
+        refresherTriggered: false
       })
     })
   },

@@ -8,6 +8,7 @@ const app = getApp()
 Page({
   data: {
     //navbar
+    navbarShow: true,
     // 导航头组件所需的参数
     nvabarData: {
       backreload: true, // 该页面返回的上一个页面是否刷新
@@ -131,7 +132,7 @@ Page({
     console.log(e)
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `../video-swiper/video-swiper?id=${id}&type=course`,
+      url: `../my-video-swiper/video-swiper?id=${id}&type=course`,
     })
   },
   goToVideoFull(e) {
@@ -209,6 +210,7 @@ Page({
     })
   },
   onLoad: function (e) {
+    var that = this
     console.log(99999)
     console.log(e)
     wx.setStorageSync('schoolHome_activeVideo', 0)
@@ -269,7 +271,11 @@ Page({
   },
   onReady: function () {
   },
-  
+  onBindfullscreenchange(e) {
+    this.setData({
+      navbarShow: !this.data.navbarShow
+    })
+  },
   videoPlay() {
     // 页面返回时自动部分上一次播放视频
     var activeId = wx.getStorageSync("schoolHome_activeVideo") ? wx.getStorageSync("schoolHome_activeVideo"):0

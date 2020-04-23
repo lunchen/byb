@@ -103,7 +103,7 @@ const uploadImg = function(fileName){
         console.log(res)
         let src = res.tempFiles[0];
         wx.showToast({
-          title: '上传中',
+          title: '努力上传中~',
           icon: 'loading',
           duration: 10000
         })

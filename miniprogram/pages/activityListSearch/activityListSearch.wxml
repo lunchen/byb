@@ -14,13 +14,18 @@
       </van-search>
      </view>
       
-  <scroll-view scroll-y style="position:relative;height: 100%;">
+  <scroll-view scroll-y refresher-triggered="{{refresherTriggered}}" style="position:relative;height: 100%;"
+refresher-enabled="{{true}}" refresher-threshold="50" refresher-default-style="black" bindrefresherrefresh="renewData" bindscrolltolower="getMore">
     <view class="activityListSearch-content">
       <view class="activity-view">
         <!-- 活动列表组件 -->
         <block wx:for="{{activityList}}" wx:key="id">
           <activityItem activityData="{{item}}"></activityItem>
         </block>
+      </view>
+      
+      <view class="loading-bottom-tips" wx:if="{{loadingMore}}"> 
+        {{loadingMoreText}}
       </view>
     </view>
   </scroll-view>

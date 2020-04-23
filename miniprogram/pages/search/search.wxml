@@ -13,7 +13,8 @@
         />
     </view>
     
-  <scroll-view scroll-y style="position:relative;height: 100%;">
+  <scroll-view scroll-y refresher-triggered="{{refresherTriggered}}" style="position:relative;height: 100%;"
+refresher-enabled="{{true}}" refresher-threshold="50" refresher-default-style="black" bindrefresherrefresh="renewData" bindscrolltolower="getMore">
     <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{2*height}}px;'>
       <view wx:if="{{activityList.length<1}}">
         <view class="search-title">热门搜索</view>
@@ -31,6 +32,10 @@
             <activityItem activityData="{{item}}"></activityItem>
           </block>
         </view>
+        
+      <view class="loading-bottom-tips" wx:if="{{loadingMore}}"> 
+        {{loadingMoreText}}
+      </view>
       </view>
     </view>
     

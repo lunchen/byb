@@ -1,6 +1,6 @@
 <!--releaseActivity.wxml-->
 <view class="container releaseActivity">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
@@ -20,7 +20,7 @@
               <view class="releaseActivity-content-addView-btn">
                 <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
               </view>
-              <text>添加轮播图片/视频(建议尺寸：690*375)</text>
+              <text>添加活动封面(建议尺寸：180*240)</text>
             </block>
           </view>
         </scroll-view>
@@ -31,7 +31,7 @@
             <block wx:if="{{reEditData.bannerList.length>0}}">
               <view wx:for="{{reEditData.bannerList}}" wx:key="id">
                 <view style="margin:0 10rpx 0 10rpx;flex:0 0 auto;" catchtap="catchfn">
-                  <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
+                  <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
                 </view>
               </view>
               <!-- <view style="width:210rpx;height:210rpx;background:#e5e5e5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
@@ -55,7 +55,7 @@
         </view> -->
         <!-- 下方form表单 -->
       <view>
-          <iptActivityInfoComponent iptActivityInfoData="{{reEditData}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
+          <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{reEditData}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
         </view>
         <view class="releaseActivity-content-btnView">
           <view class="releaseActivity-content-btn" bindtap="release">

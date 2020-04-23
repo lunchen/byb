@@ -8,6 +8,7 @@ const app = getApp()
 Page({
   data: {
     //navbar
+    navbarShow: true,
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
@@ -77,7 +78,11 @@ Page({
       console.log(5555)
     }
   },
-
+  onBindfullscreenchange(e) {
+    this.setData({
+      navbarShow: !this.data.navbarShow
+    })
+  },
   setIndex(e){
     // 设置下标 用于操作某一层图片
     console.log(e)

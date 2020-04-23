@@ -1,6 +1,6 @@
 <!--schoolHome.wxml-->
 <view class="container schoolHome">
-  <navbar need-top='{{fasle}}' navbar-data='{{nvabarData}}' backgroundColor="#ffcf1b"></navbar>
+  <navbar wx:if="{{navbarShow}}" need-top='{{fasle}}' navbar-data='{{nvabarData}}' backgroundColor="#ffcf1b"></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
@@ -26,6 +26,7 @@
                     width="690"
                     activeid = "{{activeid}}" 
                     index="{{index}}" 
+                    bind:bindfullscreenchange = "onBindfullscreenchange" 
                     videoid="{{item.id}}" ></image-video>
                   </block>
                   <block  wx:else>
@@ -94,7 +95,7 @@
             </view>
             <block>
               <view class="schoolHome-content-card-right">
-                <text class="schoolHome-content-card-title">{{schoolHomeData.name}}</text>
+                <text class="schoolHome-content-card-title" style="text-overflow:ellipsis;overflow: hidden;max-height:76rpx">{{schoolHomeData.name}}</text>
                 <view class="schoolHome-content-card-label">
                   <view wx:for="{{schoolHomeData.labelList}}" wx:key="*this" class="label-item">{{item}}</view>
                 </view>

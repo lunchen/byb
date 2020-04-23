@@ -8,6 +8,7 @@ const app = getApp()
 Page({
   data: {
     //navbar
+    navbarShow: true,
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
@@ -96,6 +97,11 @@ Page({
     }],
     nowIndex:0,
     storeAddress: ""   //地图页直接设好数据 将需要的地址数据设置到setAddress
+  },
+  onBindfullscreenchange(e) {
+    this.setData({
+      navbarShow: !this.data.navbarShow
+    })
   },
   hasEdit(e){
     console.log()

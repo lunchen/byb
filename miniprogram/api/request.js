@@ -15,6 +15,8 @@ wx.getSystemInfo({
 var host = "https://www.byb88.cn/";
 var domian = "enlist2";
 
+var host = "http://192.168.10.112:";
+var domian = "9099";
 
 // var host = "http://192.168.1.121";
 // var domian = ":9088";

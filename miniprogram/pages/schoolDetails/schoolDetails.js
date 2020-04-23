@@ -8,6 +8,7 @@ const app = getApp()
 Page({
   data: {
     //navbar
+    navbarShow: true,
     // 导航头组件所需的参数
     nvabarData: {
       backreload: true, // 该页面返回的上一个页面是否刷新
@@ -30,6 +31,11 @@ Page({
     console.log(e)
     this.setData({
       activeid: e.detail.activeId
+    })
+  },
+  onBindfullscreenchange(e) {
+    this.setData({
+      navbarShow: !this.data.navbarShow
     })
   },
   //事件处理函数

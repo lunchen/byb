@@ -32,7 +32,7 @@
 }
 .editVideoDesc-btnView{
   width: 100%;
-  position: fixed;
+  position: absolute;
   bottom: 50rpx;
   left: 0;
 }

@@ -1,0 +1,19 @@
+@import '../common.wxss';
+
+page{
+    background-color: #FFFFFF;
+    height: 100%;
+}
+
+mp-video-swiper {
+    width: 100%;
+    height: 100%;
+}
+.ggg{
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+}

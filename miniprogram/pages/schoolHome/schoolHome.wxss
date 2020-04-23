@@ -79,7 +79,6 @@
 .schoolHome-content-course-item-text{
   overflow: hidden;
   white-space: nowrap;
-  
   text-overflow:ellipsis;
 }
 
@@ -99,23 +98,32 @@
 }
 .schoolHome-content-card-right{
   height: 250rpx;
-  flex: 1 1 380rpx;
+  max-width: 380rpx;
+  flex: 0 1 380rpx;
   background: #f5f5f5;
   border-top-right-radius: 26rpx;
   border-bottom-right-radius: 26rpx;
   padding: 32rpx 25rpx 32rpx 35rpx;
-  margin-left: -1px
+  margin-left: -1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .schoolHome-content-card-title{
   font-size: 30rpx;
   color: #333333;
   font-weight: bolder;
+  line-height: 34rpx;
 }
 .schoolHome-content-card-label{
+  max-width: 380rpx;
+  overflow: hidden;
   display: flex;
-  margin: 20rpx 0 29rpx;
+  flex-wrap: nowrap;
+  margin: 5rpx 0 5rpx;
 }
 .schoolHome-content-card-label .label-item{
+  flex: 0 0 100rpx;
   margin-right: 20rpx;
   padding: 0 16rpx;
   height: 34rpx;
@@ -125,9 +133,12 @@
   text-align: center;
   font-size: 20rpx;
   color: #fe8800;
+  max-width: 80rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .schoolHome-content-card-text{
-  max-height: 118rpx;
+  max-height: 110rpx;
   overflow: hidden;
   font-size: 28rpx;
   color: #666;

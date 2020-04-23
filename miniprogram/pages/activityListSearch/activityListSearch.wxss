@@ -10,3 +10,10 @@
 .activityListSearch-content-view{
   padding: 0 40rpx;
 }
+
+.loading-bottom-tips{
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #999;
+  text-align: center
+}

@@ -48,8 +48,15 @@ Page({
         value: 5,
         name: "桃李杯"
       }],
-    activityList:[],
-  
+    activityList: [],
+    req: {
+      "keyword": "",
+      "nub": 1,
+      "size": 6
+    },
+    refresherTriggered: false,
+    loadingMore: false,
+    loadingMoreText: "加载中...",
   },
   hotSearch(event) {
     var that = this;
@@ -70,11 +77,49 @@ Page({
       value: event.detail
     })
   },
+
+  getMore() {
+    var that = this
+    this.setData({
+      "req.nub": this.data.req.nub + 1,
+      loadingMore: true
+    })
+    apiServer.post('/app/search/search', this.data.req).then(res => {
+      console.log(res.data);
+      var newList = that.data.activityList
+      if (res.data.data.activity.list.length > 0) {
+        newList.push(...res.data.data.activity.list)
+        that.setData({
+          activityList: newList,
+          loadingMore: false,
+          loadingMoreText: "加载中..."
+        })
+      } else {
+        that.setData({
+          loadingMoreText: "已经到底了"
+        })
+      }
+    })
+    console.log("刷新")
+  },
+  renewData() {
+    this.setData({
+      "req.nub": 1,
+      activityList: [],
+      loadingMore: false
+    })
+    setTimeout(() => {
+      this.onSearch()
+    }, 1000)
+  },
   onSearch(event){
 
     var that = this;
-    let keyword = this.data.value;
-    apiServer.post('/app/search/search', { keyword: keyword }).then(res => {
+    this.setData({
+      'req.keyword': this.data.value,
+      refresherTriggered: false
+    })
+    apiServer.post('/app/search/search', this.data.req).then(res => {
       console.log(res.data);
       that.setData({
         activityList: res.data.data.activity.list,

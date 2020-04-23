@@ -1,17 +1,17 @@
-<view class="container">
+<view class="container my-video-swiper">
   <swiper
     class="video-swiper" 
     circular="{{circular}}" 
     easing-function="{{easingFunction}}" 
     vertical 
-    current="1"
+    current="{{swiperCurrent}}"
     autoplay="{{autoplay}}"
     duration="{{duration}}"
     interval="{{600}}"
     bindanimationfinish="animationfinish">
     <!-- curQueue 循环会导致video重新插入，objectFit 不可变更 -->
-    <swiper-item wx:for="{{curQueue}}" wx:key="*this" >
-      <view class="byb-view" bindtap="vchange" data-vindex="index">
+    <swiper-item wx:for="{{curQueue}}" wx:key="index">
+      <view class="byb-view"  bindtap="vchange" data-vindex="{{index}}">
         <video 
           id="video_{{index}}" 
           class="video_item" 
@@ -19,6 +19,8 @@
           enable-play-gesture 
           enable-progress-gesture 
           show-center-play-btn="{{false}}"
+          show-fullscreen-btn="{{false}}"
+          show-play-btn="{{true}}"
           controls="{{false}}"
           src="{{item.url}}" 
           data-id="{{item.id}}"
@@ -36,6 +38,10 @@
         >
         </video>
 
+        <view class="playCover {{showpause==true?'hideCover':''}}">
+          <image style="width:120rpx;height:120rpx" src="{{showpause==true?'':'../../images/play.png'}}"></image>
+        </view>
+
         <view class="bottom-left-view">
           <view class="bottom-left-view-item">
             <view class="bottom-left-view-item-left">
@@ -43,7 +49,7 @@
             </view>
             <view class="bottom-left-view-item-right">
               <view>{{item.org.name}}</view>
-              <view class="bottom-left-view-item-right-text1" bindtap="goToSchoolHome" data-id="{{item.org.id}}">
+              <view class="bottom-left-view-item-right-text1" catchtap="goToSchoolHome" data-id="{{item.org.id}}">
                 <text>查看详情</text>
                 <image style="width:30rpx;height:30rpx;margin-top:-2rpx;" src="../../images/more2@2x.png"></image>
               </view>
@@ -53,7 +59,7 @@
           <view class="bottom-left-view-item-text item-ellipsis">
             {{item.name}}
           </view>
-          <view class="bottom-left-btn" bindtap="goToGetcourse" data-id="{{item.org.id}}">
+          <view class="bottom-left-btn" catchtap="goToGetcourse" data-id="{{item.org.id}}">
             <text>免费约课</text>
             <image style="width:30rpx;height:30rpx;margin-top:-2rpx;transform:rotate(-90deg)" src="../../images/home_9@2x.png"></image>
           </view>

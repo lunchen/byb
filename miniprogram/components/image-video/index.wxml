@@ -4,29 +4,39 @@
     </block> -->
   <block wx:if="{{src!=''}}">
     <image class="media-view" mode="aspectFill" wx:if="{{type==1}}" bindtap="previewImage" bindload="imgLoaded" style="width:0rpx;height:0rpx;width:{{imageWidth}}rpx;height:{{imageHeight}}rpx" src="{{src}}"></image>
-    <video 
-      wx:else
-      muted="{{muted}}"
-      id="myvideo_{{videoid}}"
-      data-id="{{videoid}}"
-      data-index="{{index}}"
-      autoplay="{{false}}"
-      class="media-view"
-      bindtap="videoClick" 
-      object-fit="{{objectFit || 'cover'}}"
-      style="height:0rpx;width:0rpx;height:{{height}}rpx;width:{{width}}rpx;" 
-      src="{{src}}" 
-      show-center-play-btn="{{scpb}}"
-      enable-progress-gesture="{{false}}"
-      controls="{{true}}"
-      bindplay="onPlay"
-      bindpause="onPause"
-      bindended="onEnded"
-      binderror="onError"
-      bindtimeupdate="onTimeUpdate"
-      bindwaiting="onWaiting"
-      bindprogress="onProgress"
-      bindloadedmetadata="onLoadedMetaData"
-    ></video>
+    <view class="media-view" wx:else>
+      <view bindtap="playbtn" wx:if="{{ !playing && cover }}" class="media-view-cover" style="height:0rpx;width:0rpx;height:{{height}}rpx;width:{{width}}rpx;">
+        <image mode="aspectFill" bindtap="playbtn" src="{{cover}}" style="height:0rpx;width:0rpx;height:{{height}}rpx;width:{{width}}rpx;"></image>
+        <view class="play_btn_view">
+          <view class="play_btn"></view>
+        </view>
+      </view>
+      <video 
+        wx:else
+        muted="{{muted}}"
+        id="myvideo_{{videoid}}"
+        data-id="{{videoid}}"
+        data-index="{{index}}"
+        autoplay="{{false}}"
+        class="media-view"
+        bindtap="videoClick" 
+        object-fit="{{objectFit || 'cover'}}"
+        style="height:0rpx;width:0rpx;height:{{height}}rpx;width:{{width}}rpx;" 
+        src="{{src}}" 
+        show-center-play-btn="{{scpb}}"
+        enable-progress-gesture="{{false}}"
+        controls="{{true}}"
+        bindplay="onPlay"
+        bindpause="onPause"
+        bindended="onEnded"
+        binderror="onError"
+        bindtimeupdate="onTimeUpdate"
+        bindwaiting="onWaiting"
+        bindprogress="onProgress"
+        bindloadedmetadata="onLoadedMetaData"
+        bindfullscreenchange="onBindfullscreenchange"
+      ></video>
+    </view>
+    
   </block>
 </view>

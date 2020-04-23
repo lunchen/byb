@@ -8,6 +8,7 @@ const app = getApp()
 Page({
   data: {
     //navbar
+    navbarShow: true,
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
@@ -72,6 +73,12 @@ Page({
       "name": ""
     },
     canIUse: wx.canIUse('button.open-type.getUserInfo')
+  },
+  onBindfullscreenchange(e) {
+    console.log(987987)
+    this.setData({
+      navbarShow: !this.data.navbarShow
+    })
   },
   bindGetUserInfo(e) {
     console.log(e.detail.userInfo)
@@ -318,17 +325,18 @@ Page({
       if (data.activityList == "") {
         data.activityList = []
       }
-      data.activityList.forEach((item, index) => {
-        if (item.bannerList == "") {
-          data.activityList[index].bannerList = []
-        }
-        if (item.imgList == "") {
-          data.activityList[index].imgList = []
-        }
-        if (item.addr == "") {
-          data.activityList[index].addr = {}
-        }
-      })
+      // 去除活动发布
+      // data.activityList.forEach((item, index) => {
+      //   if (item.bannerList == "") {
+      //     data.activityList[index].bannerList = []
+      //   }
+      //   if (item.imgList == "") {
+      //     data.activityList[index].imgList = []
+      //   }
+      //   if (item.addr == "") {
+      //     data.activityList[index].addr = {}
+      //   }
+      // })
       if (data.courseList == "") {
         data.courseList = []
       }
@@ -346,9 +354,11 @@ Page({
       if (data.understand.addr == "") {
         data.understand.addr = {}
       }
-      if (data.understand.lable != "") {
-        data.understand.lableList = [...data.understand.lable.split("，")]
-      }
+    if (data.understand.lable != "") {
+      var reg = new RegExp(',', "g")
+      var a = data.understand.lable.replace(reg, "，")
+      data.understand.lableList = [...a.split("，")]
+    }
     apiServer.post(`/app/org/index/update`, data).then(res => {
       console.log(res)
       wx.hideToast();
@@ -379,8 +389,9 @@ Page({
   getData(){
     var that = this;
     apiServer.post(`/app/org/index`).then(res => {
+      console.log("res.data");
       console.log(res.data);
-      res.data.data.understand.lable = res.data.data.understand.lableList.join(', ')
+      res.data.data.understand.lable = res.data.data.understand.lableList.join('，')
 
       // res.data.data.activityList.map(item =>{
       //   item.freeFlg = JSON.stringify(item.freeFlg)

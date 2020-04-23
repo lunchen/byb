@@ -14,12 +14,12 @@ Component({
       value: 0,
     },
     wxqecode:{
-      //loginShow  预约课程弹窗状态  1选课程 2不用选课程
+      //wxqecode  微信图片
       type: String,
       value: '',
     },
     telephone:{
-      //loginShow  预约课程弹窗状态  1选课程 2不用选课程
+      //telephone  联系的手机号
       type: String,
       value: '',
     },
@@ -62,11 +62,11 @@ Component({
        }, 300);
     },
     previewImg: function (e) {
-      var imgArr = [this.data.qrCodeUrl];
+      var imgArr = [this.data.wxqecode];
       wx.previewImage({
         current: imgArr[0],     //当前图片地址
         urls: imgArr,               //所有要预览的图片的地址集合 数组形式
-        success: function (res) { },
+        success: function (res) { }, 
         fail: function (res) { },
         complete: function (res) { },
       })

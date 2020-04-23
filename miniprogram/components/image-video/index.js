@@ -15,6 +15,12 @@ Component({
         this.setVideo()
       }
     },
+    cover: {
+      type: String,
+      value: '',
+      observer: function (newVal, oldVal) {
+      }
+    },
     type: {
       type: Number,
       value: 1    //1图片 2视频 视频必须传入宽高
@@ -64,7 +70,7 @@ Component({
     }, {
       error: true
     }],
-    
+    playing: false,
     _videoContexts:'',
     imageWidth: '', // 背景图片的高度
     imageHeight: '' // 背景图片的长度，通过计算获取
@@ -142,11 +148,23 @@ Component({
     videoClick(e){
       
     },
-
+    playbtn(){
+      console.log(856)
+      console.log(this.data._videoContexts)
+      console.log(this.data.videoid)
+      this.setData({
+        playing: true
+      },function(){
+        this.data._videoContexts.play()
+      })
+    },
     playCurrent() {
       // 阻止视频被点击时穿透
       if (this.data._videoContexts){
         if (this.data.videoid == this.data.activeid) {
+          this.setData({
+            playing: true
+          })
           this.data._videoContexts.play()
         } else {
           this.data._videoContexts.pause()
@@ -155,12 +173,21 @@ Component({
       
     },
     onPlay: function onPlay(e) {
+      this.setData({
+        playing: true
+      })
       this.trigger(e, 'play');
     },
     onPause: function onPause(e) {
+      this.setData({
+        playing: false
+      })
       this.trigger(e, 'pause');
     },
     onEnded: function onEnded(e) {
+      this.setData({
+        playing: false
+      })
       this.setData({
         autoplay: true
       })
@@ -168,6 +195,9 @@ Component({
       this.trigger(e, 'ended');
     },
     onError: function onError(e) {
+      this.setData({
+        playing: false
+      })
       this.trigger(e, 'error');
     },
     onTimeUpdate: function onTimeUpdate(e) {
@@ -181,6 +211,9 @@ Component({
     },
     onLoadedMetaData: function onLoadedMetaData(e) {
       this.trigger(e, 'loadedmetadata');
+    },
+    onBindfullscreenchange: function onLoadedMetaData(e) {
+      this.trigger(e, 'bindfullscreenchange');
     },
     trigger: function trigger(e, type) {
       var ext = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};

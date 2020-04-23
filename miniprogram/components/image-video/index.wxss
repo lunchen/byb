@@ -7,3 +7,27 @@
 .media-view{
   border-radius: 10rpx;
 }
+.video-view{
+
+}
+.media-view-cover{
+  position: relative;
+  background: #f0f0f0;
+}
+.play_btn_view{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -40rpx;
+  margin-top: -40rpx;
+  width: 80rpx;
+  height: 80rpx;
+  background: rgba(100, 100, 100, 0.5);
+  border-radius: 50%;
+}
+.play_btn{
+  margin-top: 20rpx;
+  margin-left: 28rpx;
+  border: 20rpx solid transparent;
+  border-left: 30rpx solid #fff;
+}

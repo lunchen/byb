@@ -1,12 +1,12 @@
 <!--editSchoolHome.wxml-->
 <view class="container editSchoolHome">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
   <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid;">
   </view>
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{height}}px;'>
       <view class="editSchoolHome-content">
-        <view class="editSchoolHome-content-view">
+        <!-- 去除活动发布 <view class="editSchoolHome-content-view">
           <view class="editSchoolHome-content-view-title">
             添加活动
           </view>
@@ -15,17 +15,17 @@
             
             <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
               <view class="editSchoolHome-content-view-addActVideo {{item.img ? 'type2':'type1'}}" bindtap="upActivityBill" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
-                <!-- <view class="editSchoolHome-content-view-addActVideo-btn">
+                !-- <view class="editSchoolHome-content-view-addActVideo-btn">
                   <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
                 </view>
-                <view>添加海报/视频</view> -->
+                <view>添加海报/视频</view> --
                 <block wx:if="{{item.img}}">
                   <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
                       <image-video show="{{true}}" src="{{item.img}}" type="{{1}}" height="210"></image-video>
                     </view>
-                  <!-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                  !-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
                     <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                  </view> -->
+                  </view> --
                 </block>
                 <block wx:else>
                   <view>
@@ -41,19 +41,19 @@
 
             <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
               <view class="editSchoolHome-content-view-addActVideo {{item.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
-                <!-- <view class="editSchoolHome-content-view-addActVideo-btn">
+                !-- <view class="editSchoolHome-content-view-addActVideo-btn">
                   <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
                 </view>
-                <view>添加海报/视频</view> -->
+                <view>添加海报/视频</view> --
                 <block wx:if="{{item.bannerList.length>0}}">
                   <view wx:for="{{item.bannerList}}" wx:key="id">
                     <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
-                      <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" width="{{210/375*690}}" height="210"></image-video>
+                      <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" width="{{210/375*690}}" height="210"></image-video>
                     </view>
                   </view>
-                  <!-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                  !-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
                     <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                  </view> -->
+                  </view> --
                 </block>
                 <block wx:else>
                   <view>
@@ -67,16 +67,16 @@
               </view>
             </scroll-view>
             <block>
-              <!-- 下方活动form表单 -->
+              !-- 下方活动form表单 --
               <view bindtap="setFirstKey" data-firstkey="activityList" >
-                <iptActivityInfoComponent iptActivityInfoData="{{item}}" viewIndex="{{index}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
+                <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{item}}" viewIndex="{{index}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
               </view>
             </block>
           </view>
           <view class="editSchoolHome-moreActivity-btn" bindtap="addHandle">+继续新增</view>
-        </view>
+        </view> -->
 
-        <view class="editSchoolHome-line"></view>
+        <!-- <view class="editSchoolHome-line"></view> -->
 
         <view class="editSchoolHome-content-view">
           <view class="editSchoolHome-content-view-title mgb20">
@@ -111,7 +111,7 @@
                 <block wx:if="{{item.imgList.length>0}}">
                   <view wx:for="{{item.imgList}}" wx:key="id">
                     <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
-                      <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+                      <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
                     </view>
                   </view>
                   <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">

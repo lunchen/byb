@@ -163,6 +163,33 @@ Page({
       url: '../business/business'
     })
   },
+  removeBtn(e){
+    var id = e.currentTarget.dataset.id
+    var _this = this
+    wx.showModal({
+      title: '提示',
+      content: '是否否删除该活动',
+      success: function (res) {
+        if (res.cancel) {
+        } else if (res.confirm) {
+          apiServer.post(`/app/my/org/activity/remove/${id}`).then(res => {
+            wx.showToast({
+              title: '活动删除成功',
+              icon: 'none',
+              duration: 1000
+            })
+            _this.renews()
+          }).catch(err => {
+            wx.showToast({
+              title: "操作失败",
+              icon: 'none',
+              duration: 1000
+            })
+          })
+        }
+      }
+    })
+  },
   publishBtn(e){
     var _this = this
     var id = e.currentTarget.dataset.id

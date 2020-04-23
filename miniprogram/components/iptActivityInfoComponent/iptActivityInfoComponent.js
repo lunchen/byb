@@ -111,10 +111,13 @@ Component({
     // console.log(789)
     // console.log(this.data.iptActivityInfo)
   },
-  catchfn(){
-    console.log(666)
-  },
   methods: {
+    onBindfullscreenchange(e) {
+      this.triggerEvent("bindfullscreenchange", '');
+    },
+    catchfn() {
+      console.log(666)
+    },
     editVideoDesc: function (e) {
       // 跳转到学校环境等的视频编辑
       var key= e.currentTarget.dataset.key;

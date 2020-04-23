@@ -1,6 +1,6 @@
 <!-- editVideoDesc.wxml-->
 <view class="container editVideoDesc">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
   <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid">
     
   </view>
@@ -13,7 +13,7 @@
         </view>
         <view class="editVideoDesc-content">
           <view wx:if="{{item.url!=''}}" class="editVideoDesc-content-showView">
-            <image-video src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?460:460}}" width="{{item.type==1?0:690}}"></image-video>
+            <image-video bind:bindfullscreenchange = "onBindfullscreenchange" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?460:460}}" width="{{item.type==1?0:690}}"></image-video>
             <image src="../../images/del@2x.png" class="delBtn" bindtap="onClickShow" data-index="{{index}}"></image>
           </view>
           <view wx:else class="editVideoDesc-content-addView">
@@ -52,9 +52,9 @@
       </block>
     </view>
   </scroll-view>
-  <cover-view class="editVideoDesc-btnView">
-    <cover-view class="editVideoDesc-btn" bindtap="submit">确认提交</cover-view>
-  </cover-view>
+  <view class="editVideoDesc-btnView">
+    <view class="editVideoDesc-btn" bindtap="submit">确认提交</view>
+  </view>
 
   <van-overlay show="{{ show }}" bind:click="onClickHide">
     <cover-view class="confirm-overlay">

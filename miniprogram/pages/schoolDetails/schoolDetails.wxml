@@ -1,6 +1,6 @@
 <!--schoolDetails.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
@@ -79,16 +79,19 @@
                     <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                     <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                     <image-video 
-                      scpb="{{true}}" 
+                      scpb="{{false}}" 
                       muted="{{false}}"
                       show="{{true}}" 
                       src="{{item.img.url}}" 
+                      cover="{{item.img.cover}}"
+                      cover="{{item.img.cover}}" 
                       type="{{item.img.type}}" 
                       height="310" 
                       width="620"
                       activeid = "{{activeid}}"
                       index="{{index}}" 
                       videoid="{{item.id}}" 
+                      bind:bindfullscreenchange = "onBindfullscreenchange" 
                       bind:play="onPlay" ></image-video> 
                   </view>
                 </view>
@@ -108,17 +111,19 @@
                       <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                       <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                         <image-video 
-                          scpb="{{true}}" 
+                          scpb="{{false}}" 
                           muted="{{false}}"
                           show="{{true}}" 
                           src="{{item.img.url}}" 
+                          cover="{{item.img.cover}}"
                           type="{{item.img.type}}" 
                           height="310" 
                           width="620"
                           activeid = "{{activeid}}"
                           index="{{index}}" 
                           videoid="{{item.id}}"
-                          bind:play="onPlay" ></image-video>              
+                          bind:bindfullscreenchange = "onBindfullscreenchange" 
+                          bind:play="onPlay"></image-video>            
                   </view>
                 </view>
                 
@@ -137,16 +142,18 @@
                     <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                     <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                     <image-video 
-                      scpb="{{true}}" 
+                      scpb="{{false}}" 
                       show="{{true}}"
                       muted="{{false}}" 
                       src="{{item.img.url}}" 
+                      cover="{{item.img.cover}}"
                       type="{{item.img.type}}" 
                       height="310" 
                       width="620"
                       activeid = "{{activeid}}"
                       index="{{index}}" 
                       videoid="{{item.id}}"
+                      bind:bindfullscreenchange = "onBindfullscreenchange" 
                       bind:play="onPlay" ></image-video> 
                   </view>
                 </view>
@@ -166,16 +173,18 @@
                     <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                     <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                     <image-video 
-                      scpb="{{true}}" 
+                      scpb="{{false}}" 
                       show="{{true}}" 
                       muted="{{false}}"
                       src="{{item.img.url}}" 
+                      cover="{{item.img.cover}}"
                       type="{{item.img.type}}" 
                       height="310" 
                       width="620"
                       activeid = "{{activeid}}"
                       index="{{index}}" 
                       videoid="{{item.id}}"
+                      bind:bindfullscreenchange = "onBindfullscreenchange" 
                       bind:play="onPlay" ></image-video> 
                   </view>
                 </view>

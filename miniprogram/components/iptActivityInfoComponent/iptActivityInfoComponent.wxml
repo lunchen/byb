@@ -54,7 +54,7 @@
         <scroll-view scroll-y style="position:relative;max-height: 280rpx;width:100%;">
           <view wx:for="{{showList}}">
             <view catchtap="catchfn">
-              <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+              <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
             </view>
           </view>
         </scroll-view>

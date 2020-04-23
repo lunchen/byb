@@ -77,7 +77,7 @@ Component({
         success(res) {
           console.log(res)
           wx.showToast({
-            title: '上传中',
+            title: '努力上传中~',
             icon: 'loading',
             duration: 100000
           })
@@ -161,7 +161,7 @@ Component({
         success(res) {
           console.log(res)
           wx.showToast({
-            title: '上传中',
+            title: '努力上传中~',
             icon: 'loading',
             duration: 100000
           })

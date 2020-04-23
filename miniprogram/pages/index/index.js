@@ -101,7 +101,7 @@ Page({
 
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `../video-swiper/video-swiper?id=${id}&type=index`,
+      url: `../my-video-swiper/video-swiper?id=${id}&type=index`,
     })
   },
   goToVideoTop(e) {
@@ -199,7 +199,7 @@ Page({
         apiServer.nowLocation.getLocation()
         setTimeout(()=>{
           that.getSelect(select)
-        },1000)
+        },100)
         
       })
     }else{

@@ -153,6 +153,7 @@ Component({
         }
     },
     methods: {
+     
         _videoListChanged: function _videoListChanged(newVal) {
             var _this = this;
             var data = this.data;
@@ -169,7 +170,6 @@ Component({
                   data.nextQueue.unshift(_data)
                   cutdata = data.nextQueue.splice(0, 3)
                 } else if (data.iptCurrent == data.nextQueue.length-1){
-                  console.log("sheme")
                   var _data = data.nextQueue.shift()
                   data.nextQueue.push(_data)
                   cutdata = data.nextQueue.splice(data.nextQueue.length - 3, 3)
@@ -296,7 +296,6 @@ Component({
             var detail = e.detail;
             var activeId = e.target.dataset.id;
             var courseId = e.target.dataset.courseid;
-          console.log("courseId", courseId)
             this.setData({
               activeId: activeId,
               courseId: courseId
@@ -304,10 +303,7 @@ Component({
           this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { activeId: activeId, courseId: courseId }), ext));
         },
         likeBtn(e) {
-          console.log(66666)
-          console.log(e.currentTarget.dataset.id)
           var id = e.currentTarget.dataset.id;
-          console.log(this.data.videoList)
           this.data.videoList.map(item=>{
             if(item.id == id){
               item.likeFlg = 1
@@ -343,10 +339,8 @@ Component({
     }else {
       var path = '/pages/video-swiper/video-swiper?id=' + this.data.courseId + '&type=' + this.data.type + '&videoId=' + this.data.activeId
     }
-    console.log(path)
     if (ops.from === 'button') {
       // 来自页面内转发按钮
-      console.log(ops.target)
     }
     if (this.data.type)
       return {
