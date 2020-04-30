@@ -397,17 +397,20 @@
   font-size: 28rpx;
   font-weight: bolder;
 }
-.sponsorCard-content-item-bottom-view1 view{
+.sponsorCard-content-item-bottom-view1-item{
+  color: #999;
+  font-size: 28rpx;
+  font-weight: bolder;
   display: flex;
   align-items: center;
 }
-.sponsorCard-content-item-bottom-view1 view image{
+.sponsorCard-content-item-bottom-view1-item image{
   width:40rpx;
   height:40rpx;
   margin-top:2rpx;
   margin-right: 6rpx;
 }
-.sponsorCard-content-item-bottom-view1 view image.bigimage{
+.sponsorCard-content-item-bottom-view1-item image.bigimage{
   width:50rpx;
   height:50rpx;
 }
@@ -470,13 +473,17 @@
   margin: 64rpx 39rpx;
 }
 .sponsorCard-isEnd-bottom{
-  height: 50rpx;
+  height: 75rpx;
   margin-top: 20rpx;
-  padding: 12.5rpx 40rpx;
   display: flex;
-  flex-direction: row-reverse;
-  position: relative;
+  flex-direction: row;
   z-index: 2;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 .sponsorCard-isEnd-bottom-btn{
   margin-top: 6rpx;
@@ -494,4 +501,7 @@
 
 .disable{
   color: #666;
+}
+.opacityHide{
+  opacity: 0;
 }

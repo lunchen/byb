@@ -12,11 +12,11 @@
       
     </view>
     <view class="tabbar-service-btnView-right">
-      <view bindtap="appointFreeBtn" bindtap="freeAppointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn flex-mc lightThemeBGC">
+      <view wx:if="{{type!=2}}" bindtap="appointFreeBtn" bindtap="freeAppointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn flex-mc lightThemeBGC">
         <!-- <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_11@2x.png"></image> -->
         <text>免费约课</text>
       </view>
-      <view bindtap="appointBtn" data-freetype='{{false}}' class="tabbar-service-btnView-right-btn">
+      <view bindtap="appointBtn" data-freetype='{{false}}' class="tabbar-service-btnView-right-btn {{type!=2?'':'wd100'}}">
         立即报名
       </view>
     </view>

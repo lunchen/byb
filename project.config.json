@@ -2,7 +2,7 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
@@ -64,10 +64,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "activityDetails",
 					"pathName": "pages/activityDetails/activityDetails",
-					"query": "id=19",
+					"query": "id=327722",
 					"scene": null
 				},
 				{
@@ -81,6 +81,14 @@
 					"id": 4,
 					"name": "my-video-swiper",
 					"pathName": "pages/my-video-swiper/video-swiper",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
+					"query": "id=327718",
 					"scene": null
 				}
 			]

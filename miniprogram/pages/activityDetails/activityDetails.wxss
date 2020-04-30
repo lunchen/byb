@@ -29,7 +29,7 @@
 .activityDetails-content-view2{
   margin-top: 60rpx;
   background: #feb707;
-  padding: 50rpx 0 36rpx 20rpx;
+  padding: 50rpx 0 36rpx;
   border-radius: 26rpx;
 }
 .activityDetails-content-view2-top{
@@ -53,6 +53,9 @@
   font-size: 26rpx;
   line-height: 40rpx;
   color: #333;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 .activityDetails-content-view2-bottom{
   display: flex;

@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "van-stepper": "../../miniprogram_npm/@vant/weapp/stepper/index",
-    "select": "../select/select"
+    "select": "../select/select",
+    "image-video": "../image-video/index"
   }
 }

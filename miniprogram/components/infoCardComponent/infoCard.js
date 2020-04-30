@@ -5,7 +5,8 @@ Component({
     infoCardrData: {
       type: Object,
       value: {},
-      observer: function (newVal, oldVal) { }
+      observer: function (newVal, oldVal) { 
+      }
     },
     infoCardType: {
       type: Number,

@@ -13,7 +13,7 @@
         </view>
         <view class="editVideoDesc-content">
           <view wx:if="{{item.url!=''}}" class="editVideoDesc-content-showView">
-            <image-video bind:bindfullscreenchange = "onBindfullscreenchange" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?460:460}}" width="{{item.type==1?0:690}}"></image-video>
+            <image-video bind:bindfullscreenchange = "onBindfullscreenchange" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?460:460}}" width="{{item.type==1?0:690}}"></image-video>
             <image src="../../images/del@2x.png" class="delBtn" bindtap="onClickShow" data-index="{{index}}"></image>
           </view>
           <view wx:else class="editVideoDesc-content-addView">
@@ -56,7 +56,7 @@
     <view class="editVideoDesc-btn" bindtap="submit">确认提交</view>
   </view>
 
-  <van-overlay show="{{ show }}" bind:click="onClickHide">
+  <!-- <van-overlay show="{{ show }}" bind:click="onClickHide">
     <cover-view class="confirm-overlay">
       <cover-view class="confirm-view">
         <cover-view class="confirm-title">是否确认</cover-view>
@@ -66,5 +66,5 @@
         </cover-view>
       </cover-view>
     </cover-view>
-  </van-overlay>
+  </van-overlay> -->
 </view>

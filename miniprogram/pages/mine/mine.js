@@ -66,6 +66,11 @@ Page({
     }
     
   },
+  goToOutCash(){
+    wx.navigateTo({
+      url: `../cash-out/cash-out`
+    })
+  },
   goToReEditActivity(e) {
     var id = e.currentTarget.dataset.id
     var status = e.currentTarget.dataset.status
@@ -99,7 +104,7 @@ Page({
     var orderNo = e.currentTarget.dataset.orderno;
     console.log(orderNo);
     var index = e.currentTarget.dataset.index;
-    if (this.data.participantInfo.orderList[index].statusName == "待支付") {
+    if (this.data.participantInfo.orderList[index].statusName == "待支付" || this.data.participantInfo.orderList[index].statusName == "支付中") {
       this.goToConfirmOrder(e);
       return
     }
@@ -112,7 +117,7 @@ Page({
     var activityId = e.currentTarget.dataset.actvityid
     var index = e.currentTarget.dataset.index
     console.log(e)
-    if (this.data.participantInfo.orderList[index].statusName == "待支付"){
+    if (this.data.participantInfo.orderList[index].statusName == "待支付" || this.data.participantInfo.orderList[index].statusName == "支付中"){
       this.goToConfirmOrder(e)
       return
     }

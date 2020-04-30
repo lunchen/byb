@@ -127,10 +127,16 @@ Page({
           label: res.data.data.info.name
         }
         wx.setStorageSync("activitySelected", JSON.stringify(activitySelected))
-        that.setData({
-          "activityListData": res.data.data,
-          activeid: res.data.data.activityBannerList[0].id
-        })
+        if (res.data.data.activityBannerList.length>0){
+          that.setData({
+            "activityListData": res.data.data,
+            activeid: res.data.data.activityBannerList[0].id
+          })
+        }else{
+          that.setData({
+            "activityListData": res.data.data,
+          })
+        }
       })
     }
   },

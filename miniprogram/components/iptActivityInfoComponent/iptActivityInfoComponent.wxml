@@ -34,7 +34,7 @@
           readonly="true"
         />
       </view>
-      <view class="iptActivityInfo-content-form-item item1" bindtap="toMap">
+      <view class="iptActivityInfo-content-form-item item1" bindtap="toMap" wx:if="{{type != 2}}">
         <text class="iptActivityInfo-content-form-item-title">地点</text>
         <view class="iptActivityInfo-content-form-item-right">
           <text style="color:#666;" wx:if="{{iptActivityInfo.addr.addr}}">{{iptActivityInfo.addr.addr}}</text>
@@ -54,7 +54,7 @@
         <scroll-view scroll-y style="position:relative;max-height: 280rpx;width:100%;">
           <view wx:for="{{showList}}">
             <view catchtap="catchfn">
-              <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+              <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
             </view>
           </view>
         </scroll-view>

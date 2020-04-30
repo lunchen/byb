@@ -4,6 +4,10 @@ const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
+    type: {   // 1线下活动 2线上活动
+      type: Number | String,
+      value: 1,
+    },
     orgId: {   // 报名的机构id
       type: Number | String,
       value: '',
@@ -133,7 +137,8 @@ Component({
       "sex": 0,
       "sexName": "",
       "userNo": ""
-    }
+    },
+    userImg:'',
   },
   methods: {
     calcMoney(){
@@ -205,8 +210,17 @@ Component({
     sub() {
       // 提交结果 调用生成订单
       var hasLogin = util.checkLogin()
-      if (this.data.showType == 3) {
+      if (this.data.showType == 3 && this.data.type != 2) {
         if (this.data.baseSelected == '' || this.data.joinName == '' || this.data.joinTel == '') {
+          wx.showToast({
+            title: '请输入完整信息后再提交',
+            icon: 'none',
+            duration: 2000
+          })
+          return
+        }
+      } else if (this.data.showType == 3 && this.data.type == 2){
+        if (this.data.userImg == '' || this.data.joinName == '' || this.data.joinTel == '') {
           wx.showToast({
             title: '请输入完整信息后再提交',
             icon: 'none',
@@ -216,7 +230,11 @@ Component({
         }
       }
       if (hasLogin) {
-        this.generateOrder()
+        if(this.data.type == 1){
+          this.generateOrder()
+        }else{
+          this.generateOrder1()
+        }
       } else {
         this.triggerEvent('changeFLogin', {
           loginShow: 4
@@ -261,6 +279,53 @@ Component({
         }
         
       }).catch(err=>{
+        wx.showToast({
+          title: err.data.msg,
+          icon: 'none',
+          duration: 5000
+        })
+      })
+    },
+
+    generateOrder1() {
+      // 生成订单 线上活动订单
+      if (this.data.userImg == ''){
+        wx.showToast({
+          title: '请上传参与者海报',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+      wx.showToast({
+        title: '',
+        icon: 'loading',
+        duration: 5000
+      })
+      console.log(this.data)
+      var _this = this
+      var url = "/app/activity/join/online"
+     
+      var data = {
+        "id": this.data.activitySelected.value,
+        "name": this.data.joinName,
+        "telephone": this.data.joinTel,
+        "img": this.data.userImg
+      }
+      apiServer.post(url, data).then(res => {
+        console.log(res.data);
+        _this.setData({
+          orderNo: res.data.data.orderNo
+        })
+        wx.hideToast();
+        _this.onClose()
+        if (_this.data.signUpType) {
+          _this.goToSignUpSuccess(res.data.data.orderNo)
+        } else {
+          _this.goToConfirmOrder(res.data.data.orderNo)
+        }
+
+      }).catch(err => {
         wx.showToast({
           title: err.data.msg,
           icon: 'none',
@@ -562,6 +627,14 @@ Component({
           title: '登陆失败：' + err.data.msg,
           icon: 'none',
           duration: 1000
+        })
+      })
+    },
+    addImg(){
+      var that = this;
+      util.uploadImg("lineBill").then(res => {
+        that.setData({
+          userImg: res.data.string
         })
       })
     }

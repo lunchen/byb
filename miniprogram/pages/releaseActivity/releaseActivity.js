@@ -65,7 +65,8 @@ Page({
     },
     activityModel:{
 
-    }
+    },
+    type:1,
   },
   onBindfullscreenchange(e) {
     this.setData({
@@ -140,6 +141,7 @@ Page({
     var _this = this
     console.log(this.data)
     var data = this.data.activityModel
+    data.type = this.data.type
     apiServer.post(`/app/activity/add`, data).then(res => {
       console.log(res)
       wx.showToast({
@@ -173,6 +175,16 @@ Page({
     this.setData({
       activityModel: JSON.parse(JSON.stringify(this.data.activityModel1))
     })
+    // 线上为type 2  线下为1
+    let type = e.type ? e.type : 1;
+    this.setData({
+      type: type
+    })
+    if(type == 2){
+      this.setData({
+        "nvabarData.title": "发布线上活动"
+      })
+    }
   },
  
 })

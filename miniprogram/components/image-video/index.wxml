@@ -30,7 +30,6 @@
         bindpause="onPause"
         bindended="onEnded"
         binderror="onError"
-        bindtimeupdate="onTimeUpdate"
         bindwaiting="onWaiting"
         bindprogress="onProgress"
         bindloadedmetadata="onLoadedMetaData"

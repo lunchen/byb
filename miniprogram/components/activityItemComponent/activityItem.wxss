@@ -46,11 +46,15 @@
   font-size: 28rpx;
   color: #333;
   font-weight: bolder;
+  max-width: 450rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 }
 .activity-view-text2{
   font-size: 24rpx;
   color: #666;
-
+  max-width: 450rpx;
   height: 40rpx;
   line-height: 40rpx;
   max-height: 40rpx;
@@ -103,4 +107,10 @@
 .activity-view-text-logo{
   display: flex;
   align-items: center;
+}
+.activity-view-text-logo text{
+  max-width: 250rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 }

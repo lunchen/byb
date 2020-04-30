@@ -27,6 +27,14 @@ Component({
       value: 0,
       observer: function (newVal, oldVal) { }
     }, 
+
+    type: {
+      // 默认类型为动态类型  1为发布活动类型
+      type: Number,
+      value: 0,
+      observer: function (newVal, oldVal) { }
+    }, 
+    
     listKeyName: {
       // 默认类型为动态类型  1为发布活动类型
       type: String,

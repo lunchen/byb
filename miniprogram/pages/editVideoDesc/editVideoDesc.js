@@ -140,6 +140,19 @@ Page({
     // 显示 删除是否确认的提示
     this.setData({ show: true });
     this.setIndex(e);
+    var _this = this
+    wx.showModal({
+      title: '提示',
+      content: '是否确认删除',
+      cancelText: '取消',
+      confirmText: '确定',
+      success: function (res) {
+        if (res.cancel) {
+        } else if (res.confirm) {
+          _this.del()
+        }
+      }
+    })
   },
   onClickHide() {
     // 隐藏 删除是否确认的提示

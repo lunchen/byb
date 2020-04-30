@@ -42,7 +42,7 @@
               <view wx:for="{{activityModel.bannerList}}" wx:key="id">
                 <view style="margin:0 10rpx 0 10rpx;">
                   <view catchtap="catchfn">
-                    <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
+                    <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
                   </view>
                   
                 </view>
@@ -71,7 +71,7 @@
         </view> -->
         <!-- 下方form表单 -->
         <view>
-          <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{activityModel}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
+          <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{activityModel}}" bind:getIptMes="getIptMes" activityType="{{1}}" type="{{type}}"></iptActivityInfoComponent>
         </view>
         <view class="releaseActivity-content-btnView">
           <view class="releaseActivity-content-btn" bindtap="release">

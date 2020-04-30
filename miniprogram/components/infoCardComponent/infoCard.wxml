@@ -7,7 +7,7 @@
     <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_2@2x.png"></image>
     <text>{{infoCardrData.betweenTime}}</text>
   </view>
-  <view class="infocard-content-text" id="info-p2">
+  <view class="infocard-content-text" id="info-p2" wx:if="{{infoCardrData.type!=2}}">
     <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_3@2x.png"></image>
     <text>{{infoCardrData.addr.addr}}</text>
   </view>

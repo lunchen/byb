@@ -3,6 +3,10 @@ const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
+    type: {   // 1线下活动 2线上活动
+      type: Number | String,
+      value: 1,
+    },
     needChooseCourse: {
       //是否需要选择课程  true 表示父组件为学校主页需要选 false 表示父组件为活动详情不用选
       type: Boolean,

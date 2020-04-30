@@ -47,15 +47,19 @@ Page({
     req: {
       "activityId": '',
       "endTime": "",
-      "nub": 0,
-      "size": 0,
+      "nub": 1,
+      "size": 6,
       // "startTime": util.formatDate(new Date().getTime(),"yyyy-MM-dd"),
       "startTime": '',
       "status": '',
       "type": ''       //1报名 2预约
     },
     count: "--",
-    orderList: []
+    orderList: [],
+
+    refresherTriggered: false,
+    loadingMore: false,
+    loadingMoreText: "加载中..."
   },
   exportExcelHandle() {
     var that = this;
@@ -137,7 +141,8 @@ Page({
     // 由于select内部转换过key 所以取值时候 value->id label->name
     console.log(e.detail)
     this.setData({
-      "req.status": e.detail.id
+      "req.status": e.detail.id,
+      "req.nub": 1
     })
 
     console.log("select")
@@ -159,7 +164,8 @@ Page({
     var time = util.formatDate(event.detail, "yyyy-MM-dd");
     this.setData({
       currentDate: event.detail,
-      [`req.startTime`]: time
+      [`req.startTime`]: time,
+      "req.nub": 1
     });
     this.onCloseTime()
     this.getOrderList()
@@ -182,6 +188,40 @@ Page({
       [`orderList[${index}].select`]: !this.data.orderList[index].select
     })
   },
+  renewData() {
+    this.setData({
+      "req.nub": 1,
+      orderList: [],
+      loadingMore: false
+    })
+    setTimeout(() => {
+      this.getOrderList()
+    }, 1000)
+  },
+  getMore() {
+    var that = this
+    this.setData({
+      "req.nub": this.data.req.nub + 1,
+      loadingMore: true
+    })
+    apiServer.post('/app/my/org/order', this.data.req).then(res => {
+      console.log(res.data);
+      var newList = that.data.orderList
+      if (res.data.data.list.length > 0) {
+        newList.push(...res.data.data.list)
+        that.setData({
+          orderList: newList,
+          loadingMore: false,
+          loadingMoreText: "加载中..."
+        })
+      } else {
+        that.setData({
+          loadingMoreText: "已经到底了"
+        })
+      }
+    })
+    console.log("刷新")
+  },
   getOrderList() {
     var that = this;
     let req = this.data.req;
@@ -195,7 +235,9 @@ Page({
       })
       that.setData({
         orderList: res.data.data.list,
-        count: res.data.data.count
+        count: res.data.data.count,
+
+        refresherTriggered: false
       })
     })
   },

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/cash-out/cash-out",
     "pages/my-video-swiper/video-swiper",
     "pages/signUpSuccess/signUpSuccess",
     "pages/business/business",

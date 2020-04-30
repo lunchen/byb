@@ -111,7 +111,7 @@
                 <block wx:if="{{item.imgList.length>0}}">
                   <view wx:for="{{item.imgList}}" wx:key="id">
                     <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
-                      <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+                      <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
                     </view>
                   </view>
                   <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">

@@ -50,7 +50,7 @@
                   <text>{{orderDetails.telephone}}</text>
                 </view>
                 <view class="orderDetails-content-ticket-center">
-                  待使用
+                  {{item.statusName}}
                 </view>
                 <view class="orderDetails-content-ticket-cLine">
                   <view class="orderDetails-content-ticket-cLine-dotted"></view>

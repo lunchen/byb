@@ -32,7 +32,8 @@
     <view class="joinerManage-total">
       总共：{{count}}条数据
     </view>
-  <scroll-view scroll-y style="position:relative;height: 100%;">
+  <scroll-view scroll-y refresher-triggered="{{refresherTriggered}}" style="position:relative;height: 100%;"
+refresher-enabled="{{true}}" refresher-threshold="50" refresher-default-style="black" bindrefresherrefresh="renewData" bindscrolltolower="getMore">
     <view class="scroll-view-item" style='padding-top:1px;padding-bottom:400rpx;'>
       <view class="joinerManage-orderList">
         <block wx:for="{{orderList}}" wx:key="*this">
@@ -60,8 +61,10 @@
           </view>
         </block>  
       </view>
+      <view class="loading-bottom-tips" wx:if="{{loadingMore && orderList.length>4}}"> 
+        {{loadingMoreText}}
+      </view>
     </view>
-    
   </scroll-view>
   <view class="exportExcel" bindtap="exportExcelHandle">
     导出名单

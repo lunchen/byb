@@ -122,3 +122,6 @@
   display: flex;
   align-items: center;
 }
+.wd100{
+  width: 100%;
+}

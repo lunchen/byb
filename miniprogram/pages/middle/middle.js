@@ -25,15 +25,8 @@ Page({
   },
   // 修改函数节流
   goToRelease: util.throttle(function (e){
-    let event = e.currentTarget.dataset.type
+    let type = e.currentTarget.dataset.type
     var identity = wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1;
-    if (event == 1) {
-      wx.showToast({
-        title: '暂未开发，敬请期待。。。',
-        icon: 'none',
-        duration: 1000
-      })
-    } else if (event == 2) {
       if (identity == 1) {
         wx.showToast({
           title: '暂不支持参与者发布活动',
@@ -47,16 +40,9 @@ Page({
         }, 1000)
       } else {
         wx.navigateTo({
-          url: '../releaseActivity/releaseActivity'
+          url: `../releaseActivity/releaseActivity?type=${type}`
         })
       }
-    } else if (event == 3) {
-      wx.showToast({
-        title: '暂未开发，敬请期待。。。',
-        icon: 'none',
-        duration: 1000
-      })
-    }
   }, 1000),
   /**
    * 生命周期函数--监听页面加载

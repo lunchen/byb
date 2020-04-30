@@ -44,11 +44,11 @@
         <!-- 学校卡片 -->
         <view class="activityDetails-content-view2" bindtap="goToSchoolHome" data-id="{{activityListData.org.id}}">
           <view class="activityDetails-content-view2-top">
-            <image  mode="aspectFill" style="width:112rpx;height:112rpx;border-radius:56rpx;" src="{{activityListData.org.img}}"></image> 
+            <image  mode="aspectFill" style="width:112rpx;height:112rpx;flex:0 0 112rpx;border-radius:56rpx;" src="{{activityListData.org.img}}"></image> 
             <view class="activityDetails-content-view2-top-textView">
               <view class="activityDetails-content-view2-top-text">
                 <text style="font-size:32rpx;">{{activityListData.org.name}}</text>
-                <image style="width:32rpx;height:32rpx;margin-left:16rpx;" src="../../images/detail_6@2x.png"></image>
+                <image style="width:32rpx;height:32rpx;flex:0 0 32rpx;margin-left:16rpx;" src="../../images/detail_6@2x.png"></image>
               </view>
             <view style="margin-top:14rpx;" class="activityDetails-content-view2-top-text">
               <text style="font-size:30rpx;">{{activityListData.org.activityCount}}活动</text>
@@ -58,7 +58,7 @@
             </view>
           </view>
           <view class="activityDetails-content-view2-middle">
-            <text>{{activityListData.org.remark}}</text>
+            {{activityListData.org.remark}}
           </view>
           <view class="activityDetails-content-view2-bottom">
             <view class="activityDetails-content-view2-bottom-item">
@@ -95,6 +95,7 @@
                 <image-video 
                   scpb="{{true}}" 
                   show="{{true}}" 
+                  cover="{{item.cover}}" 
                   src="{{item.url}}" 
                   type="{{item.type}}" 
                   muted="{{false}}"
@@ -142,8 +143,8 @@
     </view>
   </scroll-view>
   
-  <login orgId="{{activityListData.org.id}}" needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
-  <tabbarBtn telephone="{{activityListData.org.telephone}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
+  <login orgId="{{activityListData.org.id}}" type="{{activityListData.info.type}}" needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
+  <tabbarBtn telephone="{{activityListData.org.telephone}}" type="{{activityListData.info.type}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
 
 
   <view class="canvas-box">

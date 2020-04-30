@@ -51,10 +51,10 @@
           <text style="color:#fe8800;">¥{{totalMoney}}</text>
           <image class="ticket-view-selected_img" style="width:40rpx;height:40rpx;" src="./icon/apply_7@2x.png"></image>
         </view>
-        <view class="ticket-view-label">选择数量</view>
+        <view class="ticket-view-label" wx:if="{{type!=2}}">选择数量</view>
         <view class="ticket-view-totalPrice">
           <view class="ticket-view-totalPrice-left">
-            <van-stepper value="{{ stepValue }}" bind:change="stepperChange" integer />
+            <van-stepper wx:if="{{type!=2}}" value="{{ stepValue }}" bind:change="stepperChange" integer />
             <view wx:if="{{signUpType}}" class="ticketChose-view-totalPrice-left_hide"></view>
           </view>
           <view class="ticket-view-totalPrice-left">
@@ -71,7 +71,8 @@
     <view  class="inputMes-container">
       <view class="inputMes-container-title">
         <view style="width:40rpx;height:40rpx;"></view>
-        <text>{{ signUpType? '请领取您的免费课程' : '请填写约课信息'}}</text>
+        <text wx:if="{{type==2}}">请填写信息</text>
+        <text wx:else>{{ signUpType? '请领取您的免费课程' : '请填写约课信息'}}</text>
         <image style="width:40rpx;height:40rpx;" src="./icon/apply_1@2x.png" bindtap="onClose"></image>
       </view>
       <view class="inputMes-view">
@@ -83,7 +84,22 @@
           <image class="inputMes-view-ipt-img" src="./icon/apply_4@2x.png"></image>
           <input value="{{joinTel}}" bindinput="joinTelIpt" placeholder="请输入您的手机号"></input>
         </view>
-        <view class="inputMes-view-select">
+        
+        <view class="login-addView" bindtap="addImg" wx:if="{{type==2}}">
+          <block wx:if="{{userImg}}">
+            <view style="margin:0 10rpx 0 10rpx;">
+                <image-video show="{{true}}" src="{{userImg}}" type="{{1}}" height="{{405}}" width="{{248}}"></image-video>
+              </view>
+          </block>
+          <block wx:else>
+            <view class="login-addView-btn">
+              <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+            </view>
+            <text style="margin:0 10rpx;font-size:26rpx;text:align:center">添加参与者海报(建议尺寸：153*248)</text>
+          </block>
+        </view>
+
+        <view class="inputMes-view-select" wx:else>
           <select bind:change="selectChange" options="{{baseList}}" defaultOption="{{baseDefaultOption}}"></select>
         </view>
         <view class="nextBtn"  bindtap="sub">{{ signUpType? '领取' : '提交'}}</view>

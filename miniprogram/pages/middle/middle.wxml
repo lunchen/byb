@@ -7,7 +7,7 @@
     <view class="middle-content-title">
       您可以发布
     </view>
-    <!-- <view class="middle-content-item item1" bindtap="goToRelease" data-type="1">
+    <view class="middle-content-item item1" bindtap="goToRelease" data-type="{{2}}">
       <image class="middle-content-item-left" src="../../images/issue_1@2x.png"></image>
       <view class="middle-content-item-right">
         <view class="middle-content-item-text1">
@@ -16,8 +16,8 @@
         </view>
         <view class="middle-content-item-text2">通过网络工具举办的线上教学</view>
       </view>
-    </view> -->
-    <view class="middle-content-item item2" bindtap="goToRelease" data-type="2">
+    </view>
+    <view class="middle-content-item item2" bindtap="goToRelease" data-type="{{1}}">
       <image class="middle-content-item-left" src="../../images/issue_2@2x.png"></image>
       <view class="middle-content-item-right">
         <view class="middle-content-item-text1">

@@ -31,7 +31,7 @@
             <block wx:if="{{reEditData.bannerList.length>0}}">
               <view wx:for="{{reEditData.bannerList}}" wx:key="id">
                 <view style="margin:0 10rpx 0 10rpx;flex:0 0 auto;" catchtap="catchfn">
-                  <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
+                  <image-video bind:bindfullscreenchange = "onBindfullscreenchange" cover="{{cover}}" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
                 </view>
               </view>
               <!-- <view style="width:210rpx;height:210rpx;background:#e5e5e5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
