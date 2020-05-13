@@ -398,10 +398,10 @@ Page({
 
         // const canvasWidth = wx.getSystemInfoSync().windowWidth;
         const canvasWidth = 800;
-        const canvasHeight = 1040 / ratio;
+        const canvasHeight = 1600 / ratio;
         ctx.setFillStyle("#ffffff");
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-        var topHeight = 400 / ratio
+        var topHeight = 960 / ratio
         // 画bill
         if (that.data.imageHeight / that.data.imageWidth > topHeight / canvasWidth) {
           console.log(1)
@@ -580,7 +580,7 @@ Page({
   },
 
   // 画图绘制到canvas
-  _drawCanvas({ canvasWidth = 400, canvasHeight = 520, ctx }) {
+  _drawCanvas({ canvasWidth = 400, canvasHeight = 800, ctx }) {
     console.log("绘制到canvas")
     var that = this
     return new Promise((resolve, reject) => {

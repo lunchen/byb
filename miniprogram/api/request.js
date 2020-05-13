@@ -16,8 +16,8 @@ var host = "https://www.byb88.cn/";
 var domian = "enlist2";
 
 
-// var host = "http://192.168.10.108";
-// var domian = ":9099";
+var host = "http://192.168.10.103";
+var domian = ":9099";
 const apiUrl = url => {
   return host + domian + url; 
 }
@@ -127,6 +127,7 @@ const service = {
           }
         },
         fail: (err) => {
+          console.log(err)
           // 调用接口失败
           console.log("err报错")
           reject(err)

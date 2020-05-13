@@ -230,10 +230,10 @@ Component({
         }
       }
       if (hasLogin) {
-        if(this.data.type == 1){
-          this.generateOrder()
-        }else{
+        if(this.data.type == 2){
           this.generateOrder1()
+        }else{
+          this.generateOrder()
         }
       } else {
         this.triggerEvent('changeFLogin', {

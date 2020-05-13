@@ -363,10 +363,10 @@ Page({
 
         // const canvasWidth = wx.getSystemInfoSync().windowWidth;
         const canvasWidth = 800;
-        const canvasHeight = 1040 / ratio;
+        const canvasHeight = 1600 / ratio;
         ctx.setFillStyle("#ffffff");
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-        var topHeight = 400 / ratio
+        var topHeight = 960 / ratio
         // 画bill
         if (that.data.imageHeight / that.data.imageWidth > topHeight / canvasWidth) {
           console.log(1)
@@ -551,7 +551,7 @@ Page({
     return Promise.all([
       that._getLocalSrc(that.data.schoolHomeData.img),
       that._getLocalSrc(that.data.schoolHomeData.logo),
-      that._getLocalSrc("https://enlist-prod.oss-cn-hangzho0u.aliyuncs.com/png/detail_3@3x.png"),
+      that._getLocalSrc("https://enlist-prod.oss-cn-hangzhou.aliyuncs.com/png/detail_3@3x.png"),
       that._getLocalSrc("https://enlist-prod.oss-cn-hangzhou.aliyuncs.com/png/school_4@3x.png"),
       that._getLocalSrc(`https://enlist2-prod.oss-cn-hangzhou.aliyuncs.com/wechatorgqrcpde/${that.data.id}.jpg`),
     ]);
@@ -580,7 +580,7 @@ Page({
         });
         console.log("开始画画");
 
-        const ctx = wx.createCanvasContext("myCanvas");
+        const ctx = wx.createCanvasContext("myCanvas1");
 
         /**
          * r：获取到的dom节点的位置大小信息
@@ -749,7 +749,7 @@ Page({
     });
   },
   // 画图绘制到canvas
-  _drawCanvas({ canvasWidth = 400, canvasHeight = 520, ctx }) {
+  _drawCanvas({ canvasWidth = 400, canvasHeight = 800, ctx }) {
     console.log("绘制到canvas")
     var that = this
     return new Promise((resolve, reject) => {

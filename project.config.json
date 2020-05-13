@@ -2,7 +2,7 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
@@ -67,7 +67,7 @@
 					"id": 2,
 					"name": "activityDetails",
 					"pathName": "pages/activityDetails/activityDetails",
-					"query": "id=327722",
+					"query": "id= 327691",
 					"scene": null
 				},
 				{
@@ -89,6 +89,13 @@
 					"name": "pages/mine/mine",
 					"pathName": "pages/mine/mine",
 					"query": "id=327718",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/signUpSuccess/signUpSuccess",
+					"pathName": "pages/signUpSuccess/signUpSuccess",
+					"query": "orderNo=O20200507158884982666500003",
 					"scene": null
 				}
 			]

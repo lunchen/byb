@@ -76,6 +76,14 @@ Component({
         compressed: false,
         success(res) {
           console.log(res)
+          if (JSON.stringify(res).indexOf('413') != -1) {
+            wx.showToast({
+              title: '文件太大请选择的文件不要大于50MB',
+              icon: 'loading',
+              duration: 1500
+            })
+            return
+          }
           wx.showToast({
             title: '努力上传中~',
             icon: 'loading',
@@ -160,6 +168,14 @@ Component({
         compressed: false,
         success(res) {
           console.log(res)
+          if (JSON.stringify(res).indexOf('413') !=-1){
+            wx.showToast({
+              title: '文件太大请选择的文件不要大于50MB',
+              icon: 'loading',
+              duration: 1500
+            })
+            return
+          }
           wx.showToast({
             title: '努力上传中~',
             icon: 'loading',
@@ -223,6 +239,7 @@ Component({
               
             },
             fail(err) {
+
               wx.showToast({
                 title: '上传失败',
                 icon: 'none',
