@@ -142,6 +142,16 @@ Page({
     console.log(this.data)
     var data = this.data.activityModel
     data.type = this.data.type
+    if(data.img){
+
+    }else{
+      wx.showToast({
+        title: '请上传活动封面',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
     apiServer.post(`/app/activity/add`, data).then(res => {
       console.log(res)
       wx.showToast({

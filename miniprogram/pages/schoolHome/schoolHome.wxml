@@ -45,6 +45,7 @@
         <!-- 卡片信息 -->
         <view class="schoolHome-infoCard" id="card" wx:if="{{schoolHomeData.orgBannerList.length>0}}" bindtap="goToActivityDetails" data-id="{{activityListData.info.id}}">
           <infoCard infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCard>
+          <image class="guideGif" src="../../images/tip.gif"></image>
         </view>
 
         <view class="schoolHome-view_item" wx:if="{{schoolHomeData.orgBannerList.length>0}}">
@@ -100,6 +101,7 @@
                   <view wx:for="{{schoolHomeData.labelList}}" wx:key="*this" class="label-item">{{item}}</view>
                 </view>
                 <view class="schoolHome-content-card-text">{{schoolHomeData.remark}}</view>
+                <view class="schoolHome-content-card-text getMore">了解更多>></view>
                 
               </view>
             </block>

@@ -26,11 +26,13 @@ Page({
       activityList:[],
       selectList:[]
     },
+    activityListIndex: 0,
     // 机构
     orgList: {
       orgList:[],
       selectList:[]
     },
+    orgListIndex:0,
     // 导航头的高度
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
@@ -182,7 +184,12 @@ Page({
   },
   activityClick(event) {
     var that = this;
-    var select = this.data.activityList.selectList[event.detail.index].value
+    if (event && event.detail.index>=0){
+      that.setData({
+        "activityListIndex": event.detail.index
+      })
+    }
+    var select = this.data.activityList.selectList[this.data.activityListIndex].value
     apiServer.post(`/app/activity/list/index/select/${select}`).then(res => {
       console.log(res.data);
       that.setData({
@@ -192,9 +199,14 @@ Page({
   },
   orgListClick(event) {
     var that = this;
-    var select = this.data.orgList.selectList[event.detail.index].value
+    if (event && event.detail.index >= 0) {
+      that.setData({
+        "orgListIndex": event.detail.index
+      })
+    }
+    var select = this.data.orgList.selectList[this.data.orgListIndex].value
     console.log(event)
-    if (event.detail.title == "附近机构"){
+    if (event && event.detail.title == "附近机构"){
       that.getUserLocation().then((res)=>{
         apiServer.nowLocation.getLocation()
         setTimeout(()=>{
@@ -251,9 +263,11 @@ Page({
       console.log(res.data);
       that.setData({
         banner: res.data.data.banner,
-        activityList: res.data.data.activityList,
-        orgList: res.data.data.orgList,
+        'activityList.selectList': res.data.data.activityList.selectList,
+        'orgList.selectList': res.data.data.orgList.selectList,
       })
+      that.orgListClick() 
+      that.activityClick()
     }) 
 
   },

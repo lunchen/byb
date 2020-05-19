@@ -18,36 +18,36 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
     value: '',
-    searchTheme: [
-      {
-        value:0,
-        name: "古典舞"
+    searchTheme: [],
+      // {
+      //   value:0,
+      //   name: "古典舞"
 
-      },
-      {
-        value: 1,
-        name: "桥边姑娘"
+      // },
+      // {
+      //   value: 1,
+      //   name: "桥边姑娘"
 
-      },
-      {
-        value: 2,
-        name: "左手指月"
+      // },
+      // {
+      //   value: 2,
+      //   name: "左手指月"
 
-      },
-      {
-        value: 3,
-        name: "独舞"
+      // },
+      // {
+      //   value: 3,
+      //   name: "独舞"
 
-      },
-      {
-        value: 4,
-        name: "下山"
+      // },
+      // {
+      //   value: 4,
+      //   name: "下山"
 
-      },
-      {
-        value: 5,
-        name: "桃李杯"
-      }],
+      // },
+      // {
+      //   value: 5,
+      //   name: "桃李杯"
+      // }],
     activityList: [],
     req: {
       "keyword": "",
@@ -57,6 +57,15 @@ Page({
     refresherTriggered: false,
     loadingMore: false,
     loadingMoreText: "加载中...",
+  },
+  getHot(){
+    var that = this
+    apiServer.post('/app/search/hot').then(res => {
+      console.log(res.data);
+      that.setData({
+        searchTheme: res.data.data.list
+      })
+    })
   },
   hotSearch(event) {
     var that = this;
@@ -135,6 +144,7 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
+    this.getHot()
   },
   onShareAppMessage: function (ops) {
     var json = encodeURIComponent(JSON.stringify({ a: 1 }));

@@ -121,6 +121,9 @@ Page({
       this.goToConfirmOrder(e)
       return
     }
+    if (this.data.participantInfo.orderList[index].statusName == "支付超时") {
+      return
+    }
     console.log(orderNo)
     wx.navigateTo({
       url: `../eTicket/eTicket?orderNo=${orderNo}&id=${activityId}`,

@@ -138,6 +138,7 @@ Page({
   release(){
     console.log(this.data)
     var data = this.data.reEditData
+  
     apiServer.post(`/app/activity/update`, data).then(res => {
       console.log(res)
       wx.showToast({
