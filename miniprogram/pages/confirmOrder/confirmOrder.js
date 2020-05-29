@@ -27,7 +27,7 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    let orderNo = e.orderNo ? e.orderNo : '';
+    let orderNo = e ? e.orderNo : '';
     that.setData({
       orderNo: orderNo
     })

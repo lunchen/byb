@@ -61,7 +61,7 @@ Page({
       backgroundColor: '#ffffff'
     });
     console.log(e)
-    let orderNo = e.orderNo ? e.orderNo : "";
+    let orderNo = e ? e.orderNo : "";
     if (orderNo) {
       console.log(orderNo)
       apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {

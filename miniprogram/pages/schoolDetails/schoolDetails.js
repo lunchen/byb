@@ -54,7 +54,7 @@ Page({
       backgroundColor: '#fff'
     });
     var that = this;
-    let id = e.id ? e.id : '';
+    let id = e ? e.id : '';
     if (e.scene) {
       var strs = decodeURIComponent(e.scene)
       id = strs.split("=")[1]

@@ -222,12 +222,17 @@ Page({
     this.setData({
       mapCtx : wx.createMapContext('myMap')
     })
-    let id = e.id ? e.id : '';
+    let id = e ? e.id : '';
+    if(e){
 
-    if (e.scene){
-      var strs = decodeURIComponent(e.scene)
-      id = strs.split("=")[1]
+      if (e.scene) {
+        var strs = decodeURIComponent(e.scene)
+        id = strs.split("=")[1]
+      }
+    }else{
+      id = wx.getStorageSync('schoolHomeId')
     }
+    wx.setStorageSync('schoolHomeId', id)
 
     if(id){
       this.setData({
@@ -236,7 +241,7 @@ Page({
     }
 
     // 直接打开预约
-    if (e.open == 3) {
+    if (e && e.open == 3) {
       this.setData({
         loginShow: 3,
         signUpType: true
@@ -249,7 +254,7 @@ Page({
       var sponsorId
       if (wx.getStorageSync("myOrgMes")) {
         sponsorId = JSON.parse(wx.getStorageSync("myOrgMes")).org.id;
-        if (e.id == sponsorId){
+        if (e && e.id == sponsorId){
           that.setData({
             showEditBtn : true
           })
@@ -259,7 +264,7 @@ Page({
           console.log(res.data);
           app.globalData.orgMes = res.data.data;
           sponsorId = res.data.data.org.id
-          if (e.id == sponsorId) {
+          if (e && e.id == sponsorId) {
             that.setData({
               showEditBtn: true
             })

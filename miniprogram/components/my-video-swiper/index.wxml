@@ -38,17 +38,17 @@
         </video>
 
         <view class="playCover {{showpause==true?'hideCover':''}}">
-          <image style="width:120rpx;height:120rpx" src="{{showpause==true?'':'../../images/play.png'}}"></image>
+          <image style="width:120rpx;height:120rpx" wx:if="showpause==true" src="../../images/play.png"></image>
         </view>
 
         <view class="bottom-left-view">
-          <view class="bottom-left-view-item">
+          <view class="bottom-left-view-item" catchtap="goToSchoolHome" data-id="{{item.org.id}}">
             <view class="bottom-left-view-item-left">
               <image style="width:100rpx;height:100rpx;border-radius:50%" src="{{item.org.logo}}"></image>
             </view>
             <view class="bottom-left-view-item-right">
               <view>{{item.org.name}}</view>
-              <view class="bottom-left-view-item-right-text1" catchtap="goToSchoolHome" data-id="{{item.org.id}}">
+              <view class="bottom-left-view-item-right-text1" >
                 <text>查看详情</text>
                 <image style="width:30rpx;height:30rpx;margin-top:-2rpx;" src="../../images/more2@2x.png"></image>
               </view>

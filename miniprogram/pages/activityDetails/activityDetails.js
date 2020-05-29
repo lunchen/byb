@@ -101,8 +101,8 @@ Page({
     });
 
     var that = this;
-    let id = e.id ? e.id : '';
-    if (e.scene) {
+    let id = e ? e.id : '';
+    if (e && e.scene) {
       var strs = decodeURIComponent(e.scene)
       id = strs.split("=")[1]
     }
@@ -112,7 +112,7 @@ Page({
     if (id) {
       console.log(id)
       console.log(e)
-      if(e.open==3){
+      if(e && e.open==3){
         this.setData({
           loginShow: 3,
           signUpType: true

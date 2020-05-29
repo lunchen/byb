@@ -172,7 +172,7 @@ Page({
       backgroundColor: '#fff'
     });
     var _this = this;
-    let id = e.id ? e.id : '1';
+    let id = e ? e.id : '1';
     this.setData({
       id:id
     })

@@ -38,7 +38,6 @@ Page({
   },
   onLoad(e) {
     var that = this;
-    console.log(e)
     if (wx.getStorageSync("openId")){
       this.setData({
         openId: wx.getStorageSync("openId")

@@ -32,34 +32,35 @@ Page({
   },
   onLoad(e) {
     var that = this;
-    console.log(e)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    let id = e.id ? e.id : '';
-    this.setData({
-      type:e.type,
-      id: e.id,
-      videoId: e.videoId
-    })
-    console.log(this.data)
-    var getVideoList = []
-    if (id && e.type=="index") {
-      console.log(id)
-      // 获取主页点击的视频的信息
-      apiServer.post(`/indexVideo/info/id/${id}`).then(res => {
-        var data = res.data.data
-        that.setData({
-          inputVideo: data,
-        })
-        that.firstGetIndexVideoList()
+    if(e){
+      let id = e ? e.id : '';
+      this.setData({
+        type: e.type,
+        id: e.id,
+        videoId: e.videoId
       })
-    }
 
-    if (id && e.type == "course") {
-      // 获取精品课程的视频
-      that.getCourseVideoList()
+      var getVideoList = []
+      if (id && e.type == "index") {
+        console.log(id)
+        // 获取主页点击的视频的信息
+        apiServer.post(`/indexVideo/info/id/${id}`).then(res => {
+          var data = res.data.data
+          that.setData({
+            inputVideo: data,
+          })
+          that.firstGetIndexVideoList()
+        })
+      }
+
+      if (id && e.type == "course") {
+        // 获取精品课程的视频
+        that.getCourseVideoList()
+      }
     }
 
   },
@@ -71,7 +72,8 @@ Page({
       "nub": this.data.nub,
       "size": 20
     }
-    if(this.videoId){
+    if (this.data.videoId) {
+      console.log("vv")
       req.id = this.data.videoId
     }
     console.log("req")

@@ -37,7 +37,7 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    let id = e.id ? e.id : '';
+    let id = e ? e.id : '';
     this.setData({
       type:e.type,
       id: e.id,

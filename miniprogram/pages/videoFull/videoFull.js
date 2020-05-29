@@ -31,7 +31,6 @@ Page({
   },
   onLoad(e) {
     var that = this;
-    console.log(e)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'

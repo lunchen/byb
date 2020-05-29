@@ -44,7 +44,7 @@ Page({
     });
     var _this = this;
     console.log(e)
-    let orderNo = e.orderNo ? e.orderNo : 1;
+    let orderNo = e ? e.orderNo : 1;
     if (orderNo) {
       apiServer.post(`/app/my/user/qrCode/orderNo/${orderNo}`).then(res => {
         console.log(res.data);

@@ -191,8 +191,10 @@ module.exports =
               
               // 该组件第一个播放的都是列表的第二个 视频
               if (data.curQueue.length === 0) {
-
+                console.log("iptCurrent")
+                console.log(this.data.iptCurrent)
                 if(this.data.iptCurrent == 0){
+                  console.log("iptCurrent1")
                   this.setData({
                     curQueue: data.nextQueue.splice(0,3),
                     swiperCurrent: 0,
@@ -201,6 +203,8 @@ module.exports =
                     _this.playCurrent(0);
                   });
                 }else{
+                  console.log("iptCurrent2")
+
                   this.setData({
                     prevQueue: data.nextQueue.splice(0, data.iptCurrent-1),
                     curQueue: data.nextQueue.splice(0, 3),
@@ -393,6 +397,7 @@ module.exports =
                 success: function (res) {
                   // 转发成功
                   console.log("转发成功:" + JSON.stringify(res));
+                  console.log("转发成功:" + path);
 
                 },
                 fail: function (res) {
