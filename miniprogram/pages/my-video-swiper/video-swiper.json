@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "my-video-swiper": "../../components/my-video-swiper/index",
-    "navbar": "../../components/navbarComponent/navbar"
-  }
-}
