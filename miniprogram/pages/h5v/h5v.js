@@ -1,5 +1,4 @@
-// 商务洽谈页
-//business.js
+//h5v.js
 const util = require('../../utils/util.js')
 //获取应用实例
 const app = getApp()
@@ -10,7 +9,7 @@ Page({
     // 导航头组件所需的参数
     nvabarData: {
       showCapsule: 1, //是否显示左上角图标   1表示显示    0表示不显示
-      title: '商务洽谈', //导航栏 中间的标题
+      title: 'h5', //导航栏 中间的标题
       white: false, // 是就显示白的，不是就显示黑的。
       address: '' // 加个背景 不加就是没有
     },
@@ -26,7 +25,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     
-    activityDetails:{}
+    id:'',
   },
   //事件处理函数
   goToSchoolHome: function() {
@@ -40,9 +39,21 @@ Page({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
+    let id = e ? e.id : '';
+    if (e) {
+      if (e.scene) {
+        var strs = decodeURIComponent(e.scene)
+        id = strs.split("=")[1]
+      }
+    } 
+
+    if (id) {
+      this.setData({
+        id: id
+      })
+    }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -55,9 +66,10 @@ Page({
       // 来自页面内转发按钮
       console.log(ops.target)
     }
+    var id = this.data.id
     return {
       title: '报1 报',
-      path: '/pages/business/business',
+      path: `/pages/h5v/h5v?id=${id}`,
       imageUrl: "",
       success: function (res) {
         // 转发成功

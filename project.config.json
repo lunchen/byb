@@ -2,7 +2,7 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
@@ -57,45 +57,87 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "schoolHome",
+					"id": 1,
+					"name": "pages/schoolHome/schoolHome",
 					"pathName": "pages/schoolHome/schoolHome",
-					"query": "id=3",
-					"scene": null
-				},
-				{
-					"id": 2,
-					"name": "activityDetails",
-					"pathName": "pages/activityDetails/activityDetails",
-					"query": "id= 327691",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/mine/mine",
-					"pathName": "pages/reEditActivity/reEditActivity",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 4,
-					"name": "my-video-swiper",
-					"pathName": "pages/my-video-swiper/video-swiper",
-					"query": "",
+					"query": "id=458744",
 					"scene": null
 				},
 				{
 					"id": -1,
 					"name": "pages/mine/mine",
 					"pathName": "pages/mine/mine",
-					"query": "id=327718",
+					"query": "",
 					"scene": null
 				},
 				{
-					"id": 6,
+					"id": -1,
+					"name": "pages/editCenter/editCenter",
+					"pathName": "pages/editCenter/editCenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/edit-schoolHome/edit-schoolHome",
+					"pathName": "pages/edit-schoolHome/edit-schoolHome",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/activityDetails/activityDetails",
+					"pathName": "pages/activityDetails/activityDetails",
+					"query": "id=327732",
+					"scene": null
+				},
+				{
+					"id": -1,
 					"name": "pages/signUpSuccess/signUpSuccess",
 					"pathName": "pages/signUpSuccess/signUpSuccess",
-					"query": "orderNo=O20200507158884982666500003",
+					"query": "orderNo=O20200702159368578074300002",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/signUpSuccess/signUpSuccess",
+					"pathName": "pages/signUpSuccess/signUpSuccess",
+					"query": "orderNo=O20200702159368642130500003",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/business/business",
+					"pathName": "pages/business/business",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/edit-onlineExperienceList/edit-onlineExperienceList",
+					"pathName": "pages/edit-onlineExperienceList/edit-onlineExperienceList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/edit-onlineExperience/edit-onlineExperience",
+					"pathName": "pages/edit-onlineExperience/edit-onlineExperience",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/h5v/h5v",
+					"pathName": "pages/h5v/h5v",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 12,
+					"name": "pages/myVideoSwiper/myVideoSwiper",
+					"pathName": "pages/myVideoSwiper/myVideoSwiper",
+					"query": "scene=id%3D317%3Dindex",
 					"scene": null
 				}
 			]

@@ -13,10 +13,6 @@
           <view class="eTicket-view-title-decorate-right"></view>
         </view>
         <view class="eTicket-view-middle">
-          <!-- <image class="eTicket-view-middle-barCode" src="../../images/activityDetails.png"></image>
-          <view class="eTicket-view-middle-barCode-text">
-            2822 ****** 查看数字
-          </view> -->
           <image bindtap='previewImg' class="eTicket-view-middle-QRCode" src="{{eTicketData.qrcode}}"></image>
         </view>
         <view class="eTicket-view-middle-line">

@@ -25,7 +25,7 @@
           
           <view class="activity-view-text3 activity-view-text-logo">
             <image style="height:40rpx;width:40rpx;margin-right:20rpx; border-radius:50%;" src="{{activityData.org.logo}}"></image>
-            <text>{{activityData.org.name}}</text>
+            <text class="activity-view-text-logo-text">{{activityData.org.name}}</text>
           </view>
         </view>
         <view class="activity-view-btn">

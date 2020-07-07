@@ -1,7 +1,8 @@
-<view class="addVideoComponent">
-    <!-- <block wx:if="{{src != ''}}">
-      <video src="{{src}}" bindload="imgLoaded" class="video"></video>
-    </block> -->
-  <image wx:if="{{firstkey=='courseList'}}" bindtap="asdV" style="width:100%;height:100%" src="../../images/add1@2x.png"></image>
-  <image wx:else bindtap="asd" style="width:100%;height:100%" src="../../images/add1@2x.png"></image>
-</view>
+<view class="addVideoComponent" bindtap="clickHandle" style="{{mystyle}}">
+  <view class="addVideoComponent-view" wx:if="{{!hasSlot}}">
+    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+  </view>
+  <slot name="img">
+  </slot>
+  
+</view> 

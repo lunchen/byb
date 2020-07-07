@@ -1,0 +1,222 @@
+/**editSchoolHome.wxss**/
+.container{
+  height: 100%;
+}
+.editSchoolHome-content-view{
+  padding: 50rpx 0;
+}
+.editSchoolHome-content-view-title{
+  font-size: 30rpx;
+  border-left: 6rpx #fe8800 solid;
+  margin: 0 0 10rpx 30rpx;
+  padding-left: 15rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+.editSchoolHome-content-view-addActVideo{
+  margin: 0 30rpx;
+  border-top: 1rpx #d9d9d9 dotted; 
+  border-bottom: 1rpx #d9d9d9 dotted; 
+  min-height: 200rpx;
+  font-size: 28rpx;
+  color: #999999;
+}
+.editSchoolHome-content-view-addActVideo.type1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 19rpx 0;
+}
+.editSchoolHome-content-view-addActVideo.type2{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: 400rpx;
+}
+.editSchoolHome-content-view-addActVideo.type3{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 19rpx 0;
+}
+.editSchoolHome-content-view-addActVideo-orgBanner{
+  display: flex;
+}
+.editSchoolHome-content-view-addActVideo-orgBanner-text{
+  margin: 23rpx 20rpx 0 0;
+  color: #666666;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.editSchoolHome-content-view-addActVideo-suggest{
+  flex: 1;
+  text-align: center;
+  color: #b3b3b3;
+  font-size: 24rpx;
+}
+.editSchoolHome-content-view-addActVideo-orgBanner-view{
+  width: 155rpx;
+  height: 208rpx;
+  background: #eaeaea;
+  border: 1rpx solid #b3b3b3;
+  border-radius: 10rpx;
+  overflow: hidden;
+  text-align: center;
+}
+.editSchoolHome-content-view-addActVideo-btn{
+  margin-right: 30rpx;
+}
+.editSchoolHome-save-btn{
+  font-size: 28rpx;
+  color: #feb707;
+  text-align: right;
+  margin-top: 30rpx;
+  padding: 0 30rpx;
+}
+.editSchoolHome-line{
+  height: 10rpx;
+  background: #f0f0f0; 
+}
+
+.mgb20{
+  margin-bottom: 20rpx;
+}
+.editSchoolHome-content-form-item{
+  display: flex;
+  margin-left: 30rpx;
+  min-height: 100rpx;
+  align-items: center;
+  border-bottom: 1rpx #f0f0f0 solid;
+  padding: 1rpx 0;
+  overflow: hidden;
+}
+.item1{
+  justify-content: space-between;
+  /* padding-right: 30rpx; */
+}
+.item2{
+  padding-bottom: 100rpx;
+}
+.editSchoolHome-content-form-item-title{
+  font-size: 30rpx;
+  color: #666666;
+  flex: 0 0 auto;
+  font-weight: bold;
+}
+.editSchoolHome-content-form-item-title.withTitle{
+  width: 180rpx;
+}
+.editSchoolHome-content-form-item-right{
+  color: #cccccc;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+.van-field__input--textarea{
+}
+.teacherLogo{
+  font-size: 24rpx;
+  color: #feb707;
+  margin-left: 74rpx;
+  text-align: center;
+  height: 120rpx;
+  width: 120rpx;
+  flex: 0 0 120rpx;
+  background: #eaeaea;
+  border: 1rpx solid #b3b3b3;
+  margin: 20rpx 0 20rpx 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.editSchoolHome-content-iptContact{
+  margin-left: 30rpx;
+  padding-top: 40rpx;
+  font-size: 30rpx;
+  color: #666666;
+  font-weight: bold;
+}
+.editSchoolHome-content-iptContact-item{
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+}
+.editSchoolHome-content-iptContact-item-left{
+  width: 140rpx;
+  text-align: right;
+  margin-right: 20rpx;
+  white-space: nowrap;
+}
+.editSchoolHome-content-iptContact-item-right{
+  padding: 1rpx 10rpx;
+  border: 1rpx #e5e5e5 solid; 
+}
+.editSchoolHome-content-iptContact-item-right_Img{
+  width: 80rpx;
+  height: 80rpx;
+  background: #e6e6e6;
+}
+.editSchoolHome-content-view-confirm{
+  padding: 80rpx 30rpx 70rpx;
+}
+.editSchoolHome-content-view-confirm-btn1{
+  background: #fe8800;
+  text-align: center;
+  color: #fff;
+  font-size: 40rpx;
+  border-radius: 10rpx;
+  width: 70%;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin-top: 40rpx;
+  margin: 40rpx auto;
+}
+
+.editSchoolHome-content-view-confirm-warn{
+  color: #333333;
+  font-size: 30rpx;
+  line-height: 44rpx;
+  display: flex;
+  align-items: flex-start;
+  font-weight: bold;
+  margin-top: 70rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx #f0f0f0 solid;
+}
+.editSchoolHome-content-view-confirm-warn image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+  margin-top: 6rpx;
+}
+.editSchoolHome-content-view-confirm-toOtherPage{
+  padding: 30rpx 20rpx 70rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.editSchoolHome-content-view-confirm-toOtherPage>view{
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+}
+.editSchoolHome-content-view-confirm-toOtherPage>view image{
+  width: 42rpx;
+  height: 42rpx;
+}
+.editSchoolHome-content-view-confirm-toOtherPage-left{
+  color: #fe8800;
+}
+.editSchoolHome-content-view-confirm-toOtherPage-right{
+  background: #fe8800;
+  color: #ffffff;
+  height: 60rpx;
+  padding: 0 20rpx;
+  border-radius: 8rpx;
+}
+.editSchoolHome .deleteBtn{
+  color: #ff0101;
+  text-align: right;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
+}

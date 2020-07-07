@@ -27,15 +27,15 @@ Component({
     },
     scpb: {
       type: Boolean,
-      value: false    //中间控制按钮是否显示
+      value: false    //视频中间控制按钮是否显示
     },
     muted: {
       type: Boolean,
-      value: true    //true可以点击查看 false不能点击查看
+      value: true    //视频是否静音播放
     },
     show: {
       type: Boolean,
-      value: true    //true可以点击查看 false不能点击查看
+      value: true    //图片是否点击放大查看
     },
     height: {
       type: Number,
@@ -61,8 +61,7 @@ Component({
       value: 0
     },
   },
-  data: {
-         src1:'https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/wx28653ecae496acb0o6zAJs2g_tkXMXOIOre-Q5OmXMSofLQ896FPt4Ep26d4814714314e91134d1a8192803e5a/2020/03/21/b2411de58655467e8956ca021fe4fb.mp4',
+  data: {     src1:'https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/wx28653ecae496acb0o6zAJs2g_tkXMXOIOre-Q5OmXMSofLQ896FPt4Ep26d4814714314e91134d1a8192803e5a/2020/03/21/b2411de58655467e8956ca021fe4fb.mp4',
     files: [{
       url: 'http://mmbiz.qpic.cn/mmbiz_png/VUIF3v9blLsicfV8ysC76e9fZzWgy8YJ2bQO58p43Lib8ncGXmuyibLY7O3hia8sWv25KCibQb7MbJW3Q7xibNzfRN7A/0',
     }, {
@@ -149,9 +148,6 @@ Component({
       
     },
     playbtn(){
-      console.log(856)
-      console.log(this.data._videoContexts)
-      console.log(this.data.videoid)
       this.setData({
         playing: true
       },function(){

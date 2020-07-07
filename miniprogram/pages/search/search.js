@@ -19,35 +19,7 @@ Page({
     height: app.globalData.navheight,
     value: '',
     searchTheme: [],
-      // {
-      //   value:0,
-      //   name: "古典舞"
-
-      // },
-      // {
-      //   value: 1,
-      //   name: "桥边姑娘"
-
-      // },
-      // {
-      //   value: 2,
-      //   name: "左手指月"
-
-      // },
-      // {
-      //   value: 3,
-      //   name: "独舞"
-
-      // },
-      // {
-      //   value: 4,
-      //   name: "下山"
-
-      // },
-      // {
-      //   value: 5,
-      //   name: "桃李杯"
-      // }],
+    
     activityList: [],
     req: {
       "keyword": "",
@@ -61,7 +33,6 @@ Page({
   getHot(){
     var that = this
     apiServer.post('/app/search/hot').then(res => {
-      console.log(res.data);
       that.setData({
         searchTheme: res.data.data.list
       })
@@ -74,14 +45,12 @@ Page({
       value: keyword
     })
     apiServer.post('/app/search/search', {keyword: keyword}).then(res => {
-      console.log(res.data);
       that.setData({
         activityList: res.data.data.activity.list,
       })
     })
   },
   change(event){
-    console.log(event)
     this.setData({
       value: event.detail
     })
@@ -94,7 +63,6 @@ Page({
       loadingMore: true
     })
     apiServer.post('/app/search/search', this.data.req).then(res => {
-      console.log(res.data);
       var newList = that.data.activityList
       if (res.data.data.activity.list.length > 0) {
         newList.push(...res.data.data.activity.list)
@@ -126,10 +94,10 @@ Page({
     var that = this;
     this.setData({
       'req.keyword': this.data.value,
+      'req.nub':1,
       refresherTriggered: false
     })
     apiServer.post('/app/search/search', this.data.req).then(res => {
-      console.log(res.data);
       that.setData({
         activityList: res.data.data.activity.list,
       })

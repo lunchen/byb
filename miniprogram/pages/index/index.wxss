@@ -16,7 +16,7 @@
 page {
   height: 100%;
   overflow: hidden;
-  background: rgb(255, 207, 27);
+  background: rgb(255, 230, 0);
 }
 .content {
   position: relative;
@@ -54,7 +54,7 @@ page {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  padding-left: 40rpx;
+  padding-left: 2vw;
 }
 .course-videoList-item{
   flex: 0 0 320rpx;
@@ -84,7 +84,7 @@ page {
 }
 
 .content-view{
-  padding: 40rpx 0;
+  padding: 40rpx 0 20rpx;
 }
 .content-title{
   display: flex;
@@ -117,5 +117,11 @@ page {
 }
 /* tab */
 .tabs-item{
-  padding: 30rpx 30rpx 10rpx;
+  padding: 30rpx 20rpx 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 240rpx;
+}
+.tabs-item-i{
+  margin: 0 10rpx;
 }

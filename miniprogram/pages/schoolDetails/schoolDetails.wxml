@@ -75,19 +75,18 @@
                 <view wx:for="{{schoolDetails.envList}}" wx:key="id" class="schoolDetails-tabs-item">
                 
                   <view class="schoolDetails-tabs-item-title">{{item.img.title}}</view>
-                  <view class="schoolDetailsImg-view" wx:if="{{item.img.url}}">
+                  <view class="schoolDetailsImg-view" data-showimg="{{item}}" data-showimglist="{{schoolDetails.envList}}" bindtap="showList" wx:if="{{item.img.url}}">
                     <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                     <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                     <image-video 
                       scpb="{{false}}" 
                       muted="{{false}}"
-                      show="{{true}}" 
+                      show="{{false}}" 
                       src="{{item.img.url}}" 
-                      cover="{{item.img.cover}}"
                       cover="{{item.img.cover}}" 
                       type="{{item.img.type}}" 
-                      height="310" 
-                      width="620"
+                      height="{{item.img.type==2?345: 0}}" 
+                      width="690"
                       activeid = "{{activeid}}"
                       index="{{index}}" 
                       videoid="{{item.id}}" 
@@ -107,18 +106,18 @@
                 <view wx:for="{{schoolDetails.teachVideoList}}" wx:key="id" class="schoolDetails-tabs-item">
                 
                   <view class="schoolDetails-tabs-item-title">{{item.img.title}}</view>
-                  <view class="schoolDetailsImg-view" wx:if="{{item.img.url}}">
+                  <view class="schoolDetailsImg-view" data-showimg="{{item}}" data-showimglist="{{schoolDetails.teachVideoList}}" bindtap="showList" wx:if="{{item.img.url}}">
                       <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                       <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                         <image-video 
                           scpb="{{false}}" 
                           muted="{{false}}"
-                          show="{{true}}" 
+                          show="{{false}}" 
                           src="{{item.img.url}}" 
                           cover="{{item.img.cover}}"
                           type="{{item.img.type}}" 
-                          height="310" 
-                          width="620"
+                          height="{{item.img.type==2?345: 0}}" 
+                          width="690"
                           activeid = "{{activeid}}"
                           index="{{index}}" 
                           videoid="{{item.id}}"
@@ -138,18 +137,18 @@
                 <view wx:for="{{schoolDetails.showList}}" wx:key="id" class="schoolDetails-tabs-item">
                 
                   <view class="schoolDetails-tabs-item-title">{{item.img.title}}</view>
-                  <view class="schoolDetailsImg-view" wx:if="{{item.img.url}}">
+                  <view class="schoolDetailsImg-view" data-showimg="{{item}}" data-showimglist="{{schoolDetails.showList}}" bindtap="showList" wx:if="{{item.img.url}}">
                     <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
                     <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                     <image-video 
                       scpb="{{false}}" 
-                      show="{{true}}"
+                      show="{{false}}"
                       muted="{{false}}" 
                       src="{{item.img.url}}" 
                       cover="{{item.img.cover}}"
                       type="{{item.img.type}}" 
-                      height="310" 
-                      width="620"
+                      height="{{item.img.type==2?345: 0}}" 
+                      width="690"
                       activeid = "{{activeid}}"
                       index="{{index}}" 
                       videoid="{{item.id}}"
@@ -169,20 +168,19 @@
                 <view wx:for="{{schoolDetails.honorList}}" wx:key="id" class="schoolDetails-tabs-item">
                 
                   <view class="schoolDetails-tabs-item-title">{{item.img.title}}</view>
-                  <view class="schoolDetailsImg-view" wx:if="{{item.img.url}}">
-                    <!-- <image wx:if="{{item.img.type===1}}" class="schoolDetailsImg" src="{{item.img.url}}"></image>
-                    <video wx:else="{{item.img.type===2}}" class="schoolDetailsImg" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
+                  <view class="schoolDetailsImg-view" data-showimg="{{item}}" data-showimglist="{{schoolDetails.honorList}}" bindtap="showList" wx:if="{{item.img.url}}">
+                   
                     <image-video 
                       scpb="{{false}}" 
-                      show="{{true}}" 
+                      show="{{false}}" 
                       muted="{{false}}"
                       src="{{item.img.url}}" 
                       cover="{{item.img.cover}}"
                       type="{{item.img.type}}" 
-                      height="310" 
-                      width="620"
+                      height="{{item.img.type==2?345: 0}}" 
+                      width="690"
                       activeid = "{{activeid}}"
-                      index="{{index}}" 
+                      index="{{index}}"  
                       videoid="{{item.id}}"
                       bind:bindfullscreenchange = "onBindfullscreenchange" 
                       bind:play="onPlay" ></image-video> 
@@ -197,29 +195,6 @@
             </van-tab>
           </van-tabs>
         </view>
-
-        <!-- <view class="schoolDetails-link"></view>
-  
-        <view class="schoolDetails-content-introduction">
-           教学视频 
-          <view class="schoolDetails-content-introduction-title">
-            <view class="title">
-              <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
-              <text>教学视频</text>
-            </view>
-            <view class="more">更多视频</view>
-          </view>
-          <view class="schoolDetails-content-teachView">
-            <view class="schoolDetails-content-teachView-item">
-              <video style="width:100%;height:310rpx;" id="myVideo" src="https://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
-              <view class="schoolDetails-content-teachView-item-text">
-                <view style="font-size:32rpx;color:#333;">BlackPink  Lisa《cravin》</view>
-                <view style="font-size:24rpx;color:#666;">老师：May</view>
-              </view>
-            </view>
-          </view>
-        </view> -->
-
       </view>
     </view>
   </scroll-view>

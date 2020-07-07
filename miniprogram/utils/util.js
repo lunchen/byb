@@ -151,6 +151,47 @@ const uploadImg = function(fileName){
     })
   })
 }
+const getAddrNo = function(e){
+  var that = this;
+  var req = e
+  delete req.id
+  return new Promise((resolve, reject) => {
+    apiServer.post(`/app/addr/add`, req).then(res => {
+      resolve(res.data.data.string)
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}
+const _getLocalSrc = function(url) {
+  return new Promise((resolve, reject) => {
+    // 保存网络图片到本地缓存
+    if (url) {
+      wx.downloadFile({
+        url,
+        success(res) {
+          console.log("下载的东西")
+          if (res.statusCode !== 200) {
+            wx.showToast({
+              title: "保存二维码到本地失败",
+              icon: "none"
+            });
+            reject(res);
+          } else {
+            console.log("下载成功")
+            resolve(res.tempFilePath);
+          }
+        },
+        fail(e) {
+          reject(e);
+        }
+      });
+    } else {
+      resolve('');
+    }
+
+  });
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -160,5 +201,7 @@ module.exports = {
   checkLogin: checkLogin,
   throttle: throttle,
   getAuthStatus: getAuthStatus,
-  uploadImg: uploadImg
+  uploadImg: uploadImg,
+  _getLocalSrc: _getLocalSrc,
+  getAddrNo: getAddrNo
 }

@@ -18,7 +18,7 @@
         data-id="{{videoid}}"
         data-index="{{index}}"
         autoplay="{{false}}"
-        class="media-view"
+        class="media-view videoRadio"
         bindtap="videoClick" 
         object-fit="{{objectFit || 'cover'}}"
         style="height:0rpx;width:0rpx;height:{{height}}rpx;width:{{width}}rpx;" 

@@ -1,11 +1,4 @@
 /**schoolDetails.wxss**/
-.schoolDetailsImg-view{
-  width: 620rpx;
-  height:375rpx;
-  border-radius:20rpx;
-  box-shadow: 0px 10px 6px #bebebe;
-  margin: 0 auto;
-}
 
 .schoolDetails-content {
   position: relative;
@@ -88,21 +81,15 @@
   color: #666666;
   font-size: 28rpx;
   margin-bottom: 20rpx;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .schoolDetails-tabs-item-title1{
   color: #666666;
   font-size: 28rpx;
   margin-top: 20rpx;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .schoolDetailsImg-view{
-  width: 620rpx;
-  height:310rpx;
+  width: 690rpx;
+  height:auto;
   border-radius:20rpx;
   box-shadow: 0px 4px 6px #ccc;
   margin: 0 auto;
@@ -127,10 +114,6 @@
 .schooleTeachVideo .schoolDetailsImg-itemView{
   flex: 0 0 auto;
   width: 210rpx;  
-  height:210rpx;
-}
-.schooleTeachVideo .schoolDetailsImg-view{
-  width: 180rpx;  
   height:210rpx;
 }
 .schooleTeachVideo .schoolDetailsImg{

@@ -14,32 +14,34 @@
         <view class="editVideoDesc-content">
           <view wx:if="{{item.url!=''}}" class="editVideoDesc-content-showView">
             <image-video bind:bindfullscreenchange = "onBindfullscreenchange" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?460:460}}" width="{{item.type==1?0:690}}"></image-video>
-            <image src="../../images/del@2x.png" class="delBtn" bindtap="onClickShow" data-index="{{index}}"></image>
-          </view>
-          <view wx:else class="editVideoDesc-content-addView">
-            <view class="editVideoDesc-content-addView-btn" data-index="{{index}}" bindtap="setIndex">
-              <addVideoComponent firstkey="{{firstkey}}" id="{{'addVideo_' + index}}" base="editVideo" bind:getUploadMes="getUploadMes" ></addVideoComponent>
+            <view class="delBtn" bindtap="onClickdelImg" data-index="{{index}}">
+              <image class="delBtnImg" src="../../images/del1@2x.png"></image>
             </view>
-            <text>添加图片/视频</text>
           </view>
+          <view wx:else class="editVideoDesc-content-addView" bindtap="addHandle">
+            <view class="editVideoDesc-content-addView-btn" data-index="{{index}}" bindtap="setIndex">
+              <addVideoComponent hasSlot="{{true}}" firstkey="{{firstkey}}" id="{{'addVideo_' + index}}" base="editVideo" bind:getUploadMes="getUploadMes" >
+              <view slot='img' class="addVideo">
+                <image style="width:60rpx;height:60rpx;margin-right:20rpx;" src="../../images/add1@2x.png"></image>
+                <text>添加图片/视频</text>
+              </view>
+                
+              </addVideoComponent>
+            </view>
+            
+          </view>
+        </view>
+        <view class="editVideoDesc-delRow" bindtap="onClickDelRow" data-index="{{index}}">
+          <view class="editVideoDesc-delRow-btn">删除</view>
         </view>
       </view>
-      <!-- <block data-index="new">
-        <view class="editVideoDesc-textarea">
-          <textarea value="{{value}}" wx:if="{{!show}}" auto-height placeholder="标题" auto-focus />
-          <text class="textareaReplace" wx:else>{{value==''?"标题":value}}</text>
-        </view>
-        <view class="editVideoDesc-content">
-          <view class="editVideoDesc-content-addView">
-            <view class="editVideoDesc-content-addView-btn">
-              <addVideoComponent bind:getUploadMes="getUploadMes"></addVideoComponent>
-            </view>
-            <text>添加图片/视频</text>
-          </view>
-        </view>
-      </block> -->
+     
       <block data-index="new">
-        <view class="editVideoDesc-textarea">
+        <!-- <view class="editVideoDesc-textarea">
+          <textarea wx:if="{{!show}}" value="{{defaultTitle}}" bindinput="defaultIptValue" bindfocus="defaultSetIndex" auto-height placeholder="说明文字"/>
+          <text class="textareaReplace" wx:else>{{defaultTitle==''?"说明文字":defaultTitle}}</text>
+        </view> -->
+        <view class="editVideoDesc-textareaAddnew" bindtap="addNew">
           <text class="textareaReplace">点击添加</text>
         </view>
         <view class="editVideoDesc-content">

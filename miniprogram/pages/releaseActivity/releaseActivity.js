@@ -32,6 +32,7 @@ Page({
         "placeNo": "",
         "province": ""
       },
+      "addrVoList": [],
       "bannerList": [
         // {
         //   "activityId": 0,
@@ -67,6 +68,18 @@ Page({
 
     },
     type:1,
+    newAddr: {
+        "addr": "",
+        "city": "",
+        "district": "",
+        "id": '',
+        "latitude": '',
+        "longitude": '',
+        "name": "",
+        "place": "",
+        "placeNo": "",
+        "province": ""
+      }, //选择地址后赋值传入组件
   },
   onBindfullscreenchange(e) {
     this.setData({
@@ -111,37 +124,48 @@ Page({
   },
   backFn(e) {
     // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息
-    console.log(e)
     let getData = JSON.parse(wx.getStorageSync("addivList"));
     let prevData = getData.list;
     let prevkey = getData.key;
-    console.log('发布')
-    console.log(getData)
     this.setData({
       [`activityModel.${prevkey}`]: prevData
     })
-    console.log(this.data)
   },
   setAddress(e) {
     console.log(e)
+    var index = e.index
+    var addrNo = e.addrNo
     var address = e.storeAddress
-    // 地图页返回并执行的方法
     this.setData({
-      [`activityModel.addr.addr`]: address.addr,
-      [`activityModel.addr.longitude`]: address.longitude,
-      [`activityModel.addr.latitude`]: address.latitude,
-      [`activityModel.addr.name`]: address.title,
-      [`activityModel.addr.district`]: address.district,
-      [`activityModel.addr.city`]: address.city,
-      [`activityModel.addr.place`]: address.province + address.city + address.district,
-      [`activityModel.addr.province`]: address.province
+      [`newAddr.addr`]: address.addr,
+      [`newAddr.addrNo`]: addrNo,
+      [`.newAddr.city`]: address.city,
+      [`.newAddr.district`]: address.district,
+      [`.newAddr.longitude`]: address.longitude,
+      [`.newAddr.latitude`]: address.latitude,
+      [`.newAddr.name`]: address.title,
+      [`.newAddr.place`]: address.province + address.city + address.district,
+      [`.newAddr.province`]: address.province,
     })
   },
-  release(){
-    var _this = this
-    console.log(this.data)
+  
+  release: util.throttle(function () {
+    var that = this
+    wx.showToast({
+      mask: true,
+      icon: 'loading',
+      duration: 100000
+    })
+    if (app.globalData.isLinking) {
+      console.log("loading")
+      setTimeout(() => {
+        that.release()
+      }, 500)
+      return
+    }
     var data = this.data.activityModel
     data.type = this.data.type
+
     if(data.img){
 
     }else{
@@ -151,15 +175,19 @@ Page({
         duration: 2000
       })
       return
-    }
+    } 
+    data.addrList = []
+    data.addrVoList.forEach(item => {
+      data.addrList.push(item.addrNo)
+    })
+    delete data.addrVoList
     apiServer.post(`/app/activity/add`, data).then(res => {
-      console.log(res)
       wx.showToast({
         title: '发布成功',
         icon: 'none',
         duration: 2000
       })
-      _this.setData({
+      that.setData({
         activityModel: JSON.parse(JSON.stringify(this.data.activityModel1))
       })
       setTimeout(()=>{
@@ -175,7 +203,7 @@ Page({
         duration: 2000
       })
     })
-  },
+  }),
   onLoad: function (e) {
     wx.setNavigationBarColor({
       frontColor: '#000000',

@@ -6,7 +6,7 @@
     <view class="scroll-view-item" style='padding-top:1px'>
       <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
         <view class="courseDetailsImg-view">
-          <image class="courseDetailsImg" src="../../images/activityDetails.png"></image>
+          <image class="courseDetailsImg" src="../../images/add1@2x.png"></image>
         </view>
       </view>
       <view class="courseDetails-content">
@@ -23,7 +23,7 @@
           </view>
           <!-- 课程简介课时简介卡 -->
           <view class="courseDetails-content-introduction-top">
-            <image style="width:180rpx;height:180rpx;border-radius:90rpx;margin-right:40rpx;" src="../../images/huodong.png"></image> 
+            <image style="width:180rpx;height:180rpx;border-radius:90rpx;margin-right:40rpx;" src="../../images/add1@2x.png"></image> 
             <view class="courseDetails-content-introduction-top-textView">
               <view class="courseDetails-content-introduction-top-textView-item">
                 <view class="courseDetails-content-introduction-top-text1">
@@ -70,10 +70,10 @@
           </view>
           <view class="courseDetails-ul">
             <view class="courseDetails-ul-li">
-              <image class="courseDetails-ul-li-img" src="../../images/activityDetails.png"></image>
+              <image class="courseDetails-ul-li-img" src="../../images/add1@2x.png"></image>
             </view>
             <view class="courseDetails-ul-li">
-              <image class="courseDetails-ul-li-img" src="../../images/activityDetails.png"></image>
+              <image class="courseDetails-ul-li-img" src="../../images/add1@2x.png"></image>
             </view>
           </view>
         </view>

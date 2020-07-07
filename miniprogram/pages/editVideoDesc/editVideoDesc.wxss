@@ -2,8 +2,25 @@
 .scroll-view-item{
   padding-bottom: 400rpx;
 }
+.editVideoDesc-delRow{
+  color: #ff0000;
+  text-align: right;
+  font-size: 30rpx;
+  padding-right: 30rpx;
+  margin-top: 10rpx;
+}
+.editVideoDesc-delRow-btn{
+  padding: 6rpx 30rpx;
+  border: 1rpx solid #ff0000;
+  display: inline-block;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+}
 .editVideoDesc-textarea{
-  padding: 50rpx 30rpx 40rpx;
+  padding: 40rpx 30rpx 40rpx;
+}
+.editVideoDesc-textareaAddnew{
+  padding: 20rpx 30rpx 40rpx;
 }
 .editVideoDesc-textarea textarea{
   width: 100%;
@@ -16,19 +33,22 @@
 }
 .editVideoDesc-content-addView{
   margin: 0 30rpx;
-  display: flex;
   border-top: 1rpx #d9d9d9 dotted;
   border-bottom: 1rpx #d9d9d9 dotted;
   min-height: 200rpx;
   color: #999999;
   font-size: 28rpx;
-  align-items: center;
-  justify-content: center;
 }
 .editVideoDesc-content-addView-btn{
-  height: 60rpx;
-  width: 60rpx;
-  margin-right: 30rpx;
+  height: 100%;
+  width: 100%;
+}
+.editVideoDesc-content-addView-btn .addVideo{
+  width: 100%;
+  height: 200rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .editVideoDesc-btnView{
   width: 100%;
@@ -64,6 +84,12 @@
   position: absolute;
   top: 20rpx;
   right: 20rpx;
+  box-shadow: 0px 0px 8px 0rpx #ddd;
+  background: #ddd;
+}
+.editVideoDesc-content-showView .delBtn .delBtnImg{
+  width: 57rpx;
+  height: 57rpx;
 }
 .editVideoDesc-content-addnewView{
   padding-left: 30rpx;

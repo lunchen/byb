@@ -9,10 +9,41 @@ Component({
       observer: function (newVal, oldVal) {
 
         var _this = this
-        this.setData({
-          iptActivityInfo: newVal,
-          showList: newVal[_this.data.listKeyName]
-        })
+        console.log("newVal111")
+        console.log(newVal)
+        
+        if (newVal) {
+          if (!newVal.addrVoList) {
+            console.log("newVal000")
+            newVal.addrVoList = []
+          }
+          if (newVal.addrVoList && newVal.addrVoList.length < 1) {
+            console.log("newVal222")
+            newVal.addrVoList.push(this.data.addrModel)
+          }
+          this.setData({
+            iptActivityInfo: newVal,
+            showList: newVal[_this.data.listKeyName]
+          })
+        }
+        
+      }
+    },
+    newAddr: {
+      type: Object,
+      value: {},
+      observer: function (newVal, oldVal) {
+        var _this = this
+        console.log(999)
+        console.log(newVal)
+        if (newVal && newVal.addr){
+          let data = this.data.iptActivityInfo
+          data.addrVoList[this.data.index0] = newVal
+          this.setData({
+            iptActivityInfo: data
+          })
+          this.sendIptMes()
+        }
       }
     },
     activityType: {
@@ -43,6 +74,14 @@ Component({
        
       }
     }, 
+    addrmore: {
+      // 默认类型为动态类型  1为发布活动类型
+      type: Boolean,
+      value: true,
+      observer: function (newVal, oldVal) {
+
+      }
+    },
   },
   data: {
     // 时间选择
@@ -63,6 +102,15 @@ Component({
     radio3Value: '',
     storeAddress:'',
     // 动态数据模板
+    addrModel: {
+      "addr": "",
+      "id": 0,
+      "latitude": 0,
+      "longitude": 0,
+      "name": "",
+      "place": "",
+      "placeNo": ""
+    },
     dataModel: {
       "addr": {
         "addr": "",
@@ -73,6 +121,7 @@ Component({
         "place": "",
         "placeNo": ""
       },
+      addrVoList:[],
       "imgList": [
         {
           "imgNo": "",
@@ -97,6 +146,7 @@ Component({
         "place": "",
         "placeNo": ""
       },
+      addrVoList:[],
       "imgList": [
         {
           "imgNo": "",
@@ -113,13 +163,52 @@ Component({
     },
     // 活动数据模板
     showList:[],
+    index0:0,
+    locationEditIndex:0
   },
   attached() {
     // 每次组件进入页面时执行
-    // console.log(789)
-    // console.log(this.data.iptActivityInfo)
+    console.log("this.data.iptActivityInfo")
+    console.log(this.data.iptActivityInfoData)
   },
   methods: {
+    addAddress(){
+      var data = this.data.iptActivityInfo
+      data.addrVoList.push(this.data.addrModel)
+      console.log(data)
+      this.setData({
+        iptActivityInfo: data
+      })
+    },
+    cutAddr(e){
+      var index0 = e.currentTarget.dataset.index0
+      var data = this.data.iptActivityInfo
+      data.addrVoList.splice(index0,1)
+      this.setData({
+        "iptActivityInfo": data
+      })
+      this.sendIptMes()
+    },
+    onLocationChange(e) {
+      // 详细地址名称输入
+      var index0 = e.currentTarget.dataset.index0
+      var value = e.detail.value
+      app.globalData.isLinking = true
+      this.setData({
+        [`iptActivityInfo.addrVoList[${index0}].addr`]: value,
+        locationEditIndex: this.data.index0,
+      })
+    },
+    async onLocationBlur() {
+      let index0 = this.data.locationEditIndex
+      let req = this.data.iptActivityInfo.addrVoList[index0]
+      let addrNo = await util.getAddrNo(req)
+      app.globalData.isLinking = false
+      this.setData({
+        [`iptActivityInfo.addrVoList[${index0}].addrNo`]: addrNo,
+      })
+      this.sendIptMes()
+    },
     onBindfullscreenchange(e) {
       this.triggerEvent("bindfullscreenchange", '');
     },
@@ -140,31 +229,36 @@ Component({
         url: `../editVideoDesc/editVideoDesc`
       })
     },
-    toMap() {
-      var index = this.data.viewIndex
+    toMap(e) {
+      this.setindex0(e)
+      var index0 = this.data.index0
+      console.log("getIndex0")
+      console.log(index0)
       wx.navigateTo({
-        url: `../../pages/shopMap/shopMap?index=${index}`
+        url: `../../pages/shopMap/shopMap?index=${index0}`
+      })
+    },
+    setindex0(e) {
+      var index0 = e.currentTarget.dataset.index0
+      console.log("setIndex0")
+      console.log(index0)
+      this.setData({
+        index0: index0
       })
     },
     sendIptMes(e) {
       var _this = this
-      console.log("send")
-      console.log(_this.data.iptActivityInfo)
-      console.log(_this.data.viewIndex)
-      console.log("send")
       this.triggerEvent('getIptMes', {
         mes: _this.data.iptActivityInfo,
         index: _this.data.viewIndex
       })
     },
     getTime: function (event) {
-      console.log(this.data.iptActivityInfo)
       var d = event.target.dataset.timename
       this.setData({
         show: true,
         picker: event.target.dataset.timename
       });
-      console.log(this.data.picker)
     },
     onClose: function () {
       this.setData({
@@ -224,7 +318,6 @@ Component({
       this.sendIptMes();
     },
     onRadio2iptChange(event){
-      console.log(event.detial)
       this.setData({
         "iptActivityInfo.price": event.detail
       });
@@ -243,7 +336,6 @@ Component({
       this.sendIptMes();
     },
     onRadio3iptChange(event) {
-      console.log(event.detial)
       this.setData({
         "iptActivityInfo.totalJoin": event.detail
       });

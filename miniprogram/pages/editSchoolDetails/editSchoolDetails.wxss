@@ -30,7 +30,7 @@
   font-size: 30rpx;
 }
 .editSchoolDetails-content-toEditList{
-  margin-top: 40rpx;
+  /* margin-top: 40rpx; */
 }
 .editSchoolDetails-content-toEditList-item{
   font-size: 32rpx;

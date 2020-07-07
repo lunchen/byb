@@ -1,141 +1,254 @@
 <!--pages/mine/mine.wxml-->
 <!--index.wxml-->
 <view class="container">
-  <navbar need-top='{{fasle}}' navbar-data='{{nvabarData}}' backgroundColor="#FE8800"></navbar>
+  <navbar need-top='{{fasle}}' navbar-data='{{nvabarData}}'></navbar>
   <view class="participant"  wx:if="{{identity==1}}" >
   <!-- 参与方 -->
-    <view class="mine-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
+    <view class="mine-top" style="position:relative;z-index:2;margin-top:{{20+height}}px;">
       <view class="mine-top-view">
         <view class="mine-top-view-left">
-          <view style="width:148rpx;height:148rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;">
-            <image  mode="aspectFill" wx:if="{{participantInfo.user.heardImg}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{participantInfo.user.heardImg}}" bindtap="goToPersonalCenter"></image>
+          <view class="mine-top-avatar" >
+            <view wx:if="{{participantInfo.user.heardImg}}" class="mine-top-view-left-noImg">
+              <image  mode="aspectFill" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{participantInfo.user.heardImg}}" bindtap="goToPersonalCenter"></image>
+            </view>
             <view wx:else class="mine-top-view-left-noImg" bindtap="goToPersonalCenter">
               <image mode="aspectFill" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="../../images/default_icon@2x.png"></image>
             </view>
           </view>
           
           <view class="mine-top-view-left-text">
-            <view style="font-size:36rpx;color:#010101;font-weight:bloder;">{{participantInfo.user?participantInfo.user.nickName:"--"}}</view>
-            <view style="font-size:28rpx;color:#999999;display:flex;align-items:center;" bindtap="goToBusiness">
+            <view style="font-size:36rpx;color:#010101;font-weight:bloder;white-space:nowrap;max-width:330rpx;overflow:hidden;text-overflow:ellipsis;">{{participantInfo.user?participantInfo.user.nickName:"--"}}</view>
+            <!-- <view style="font-size:38rpx;color:#656565;display:flex;align-items:center;margin-top:10rpx;" bindtap="goToBusiness">
               <text>商务洽谈</text>
               <image style="width:28rpx;height:28rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_4@2x.png"></image>
+            </view> -->
+          </view>
+        </view>
+        <view class="mine-top-view-right">
+          <view style="text-align:right;font-size:30rpx;color:#656565;">我是参与方</view>
+          <view class="mine-top-view-right-view" bindtap="changeIdentity" data-identity="2">
+            <image style="width:40rpx;height:40rpx;margin-top:4rpx;" src="../../images/participant_2@2x.png"></image>
+            <text>切换为主办方</text>
+          </view>
+        </view>
+        
+      </view>
+    </view>
+    <view class="tab_list participant_tab_list">
+      <view class="tab_list_item {{active==index?'active':''}}" data-index="{{index}}"  bindtap="tabChange" wx:for="{{participant.selectList}}" wx:key="item">
+        <view class="cLine"></view>
+        <view>{{item.label}}</view>
+      </view>
+    </view>
+    <block wx:if="{{active == 0}}">
+      <scroll-view scroll-y style="position:relative;height: 100.0%;">
+        <view class="scroll-view" style='padding-top:1px;'>
+          <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{300+height}}px">
+            <view class="mine-content-title" style="padding:0;">
+              <!-- <view class="cLine"></view>
+              <text>全部订单</text> -->
+            </view>
+            <view class="participantCard">
+              <block wx:for="{{participantInfo.orderList}}" wx:key="id">
+              
+                <van-swipe-cell id="{{'swipe-cell' + index}}" right-width="{{ item.activity.status==3?0:0 }}" async-close bind:close="onClose">
+                  <van-cell-group>
+                    <view class="participantCard-content-item">
+                      <block>
+                        <view class="participantCard-content-item-top">
+                          <view class="participantCard-content-item-top-left">
+                            <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                            <text>{{item.org.name}}</text>
+                          </view>
+                          <text>{{item.statusName}}</text>
+                        </view>
+                        <view class="participantCard-content-item-middle" bindtap="goToOrderDetails" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
+                          <view>
+                            <image mode="aspectFill" class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
+                          </view>
+                          <view class="participantCard-content-item-middle-center">
+                            <view class="participantCard-content-item-middle-center-text">
+                              <text class="participantCard-view-text1">{{item.activity.name}}</text>
+                              <view class="participantCard-view-text2">时间：{{item.activity.startTime}}</view>
+                              <view class="participantCard-view-text2">地点：{{item.activity.addr}}</view> 
+                            </view>
+                            <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
+                          </view>
+                          <view class="participantCard-content-item-middle-right" catchtap="goToETicket" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}" data-status="{{item.statusName}}">
+                            <view class="trapezoidTop"></view>
+                            <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
+                            <view class="trapezoidBottom"></view>
+                          </view>
+                        </view>
+                        <view class="participantCard-content-item-bottom">
+                          <view class="participantCard-content-item-bottom-view1">
+                            <text>{{item.typeName}}</text>
+                            <text style="font-size:26rpx">X{{item.count}}</text>
+                            <text>¥ {{item.price}}</text>
+                          </view>
+                          <view class="participantCard-content-item-bottom-view2">
+                            <text>共一订单 合计：</text>
+                            <text style="color:#fe8800">¥ {{item.totalPrice}}</text>
+                          </view>
+                        </view>
+                      </block>
+                      <view class="sponsorCard-isEnd" wx:if="{{item.activity.status==3}}">
+                        <view  class="sponsorCard-isEnd-bg"></view>
+                        <view class="sponsorCard-isEnd-top">
+                        </view>
+                        <view class="sponsorCard-isEnd-middle">
+                          <view>已完成</view>
+                        </view>
+                        <view class="sponsorCard-isEnd-bottom">
+                        </view>
+
+                      </view>
+                    </view>
+                  </van-cell-group>
+                  <view bindtap="removeBtn" data-id="{{item.id}}" style="display:flex;align-items:center;justify-content:center;height:100%;width:65px;color:#fff;background:red;" class="" slot="right">
+                    <text>
+                    删除
+                    </text>
+                  </view>
+                </van-swipe-cell>
+              </block>
+              
             </view>
           </view>
         </view>
-        <view class="mine-top-view-right" bindtap="changeIdentity" data-identity="2">
-          <image style="width:40rpx;height:40rpx;margin-top:4rpx;" src="../../images/participant_2@2x.png"></image>
-          <text>切换为主办方</text>
-        </view>
-      </view>
-    </view>
-        
-    <scroll-view scroll-y style="position:relative;height: 100%;">
-      <view class="scroll-view" style='padding-top:1px;'>
-        <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{300+height}}px">
-
-          <view class="mine-content-title">
-            <view class="cLine"></view>
-            <text>全部订单</text>
-          </view>
-          <view class="participantCard">
-            <block wx:for="{{participantInfo.orderList}}" wx:key="id">
-            
-              <van-swipe-cell id="{{'swipe-cell' + index}}" right-width="{{ item.activity.status==3?0:0 }}" async-close bind:close="onClose">
-                <van-cell-group>
-                  <view class="participantCard-content-item">
-                    <block>
-                      <view class="participantCard-content-item-top">
-                        <view class="participantCard-content-item-top-left">
-                          <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
-                          <text>{{item.org.name}}</text>
-                        </view>
-                        <text>{{item.statusName}}</text>
-                      </view>
-                      <view class="participantCard-content-item-middle" bindtap="goToOrderDetails" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
-                        <view>
-                          <image mode="aspectFill" class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
-                        </view>
-                        <view class="participantCard-content-item-middle-center">
-                          <view class="participantCard-content-item-middle-center-text">
-                            <text class="participantCard-view-text1">{{item.activity.name}}</text>
-                            <view class="participantCard-view-text2">时间：{{item.activity.startTime}}开始</view>
-                            <view class="participantCard-view-text2">地点：{{item.activity.addr}}</view> 
+      </scroll-view>
+    </block>
+    <block wx:else>
+      <scroll-view scroll-y style="position:relative;height: 100%;">
+        <view class="scroll-view" style='padding-top:1px;'>
+          <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{300+height}}px">
+            <view class="mine-content-title" style="padding:0;">
+              <!-- <view class="cLine"></view>
+              <text>分销订单</text> -->
+            </view>
+            <view class="participantCard">
+              <block wx:for="{{fenxiao}}" wx:key="id">
+              
+                <van-swipe-cell id="{{'swipe-cell' + index}}" right-width="{{ item.activity.status==3?0:0 }}" async-close bind:close="onClose">
+                  <van-cell-group>
+                    <view class="participantCard-content-item">
+                      <block>
+                        <view class="participantCard-content-item-top">
+                          <view class="participantCard-content-item-top-left">
+                            <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                            <text>{{item.org.name}}</text>
                           </view>
-                          <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
+                          <!-- <text>{{item.statusName}}</text> -->
                         </view>
-                        <view class="participantCard-content-item-middle-right" catchtap="goToETicket" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}" data-status="{{item.statusName}}">
-                          <view class="trapezoidTop"></view>
-                          <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
-                          <view class="trapezoidBottom"></view>
+                        <view class="participantCard-content-item-middle" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
+                          <view>
+                            <image mode="aspectFill" class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
+                          </view>
+                          <view class="participantCard-content-item-middle-center">
+                            <view class="participantCard-content-item-middle-center-text">
+                              <text class="participantCard-view-text1">{{item.activity.name}}</text>
+                              <view class="participantCard-view-text2">下单时间：{{item.createTime}}</view>
+                              <view class="participantCard-view-text2">购买者：{{item.name}}</view> 
+                            </view>
+                            <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
+                          </view>
+                          <view class="participantCard-content-item-middle-right" style="opacity:0" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}" data-status="{{item.statusName}}">
+                            <view class="trapezoidTop"></view>
+                            <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
+                            <view class="trapezoidBottom"></view>
+                          </view>
                         </view>
-                      </view>
-                      <view class="participantCard-content-item-bottom">
-                        <view class="participantCard-content-item-bottom-view1">
-                          <text>票种1</text>
-                          <text style="font-size:26rpx">X{{item.count}}</text>
-                          <text>¥ {{item.price}}</text>
+                        <!-- <view class="participantCard-content-item-bottom">
+                          <view class="participantCard-content-item-bottom-view1">
+                            <text>{{item.typeName}}</text>
+                            <text style="font-size:26rpx">X{{item.count}}</text>
+                            <text>¥ {{item.price}}</text>
+                          </view>
+                          <view class="participantCard-content-item-bottom-view2">
+                            <text>共一订单 合计：</text>
+                            <text style="color:#fe8800">¥ {{item.totalPrice}}</text>
+                          </view>
+                        </view> -->
+                      </block>
+                      <view class="sponsorCard-isEnd" wx:if="{{item.activity.status==3}}">
+                        <view  class="sponsorCard-isEnd-bg"></view>
+                        <view class="sponsorCard-isEnd-top">
                         </view>
-                        <view class="participantCard-content-item-bottom-view2">
-                          <text>共一订单 合计：</text>
-                          <text style="color:#fe8800">¥ {{item.totalPrice}}</text>
+                        <view class="sponsorCard-isEnd-middle">
+                          <view>已完成</view>
                         </view>
-                      </view>
-                    </block>
-                    <view class="sponsorCard-isEnd" wx:if="{{item.activity.status==3}}">
-                      <view  class="sponsorCard-isEnd-bg"></view>
-                      <view class="sponsorCard-isEnd-top">
-                      </view>
-                      <view class="sponsorCard-isEnd-middle">
-                        <view>已完成</view>
-                      </view>
-                      <view class="sponsorCard-isEnd-bottom">
-                      </view>
+                        <view class="sponsorCard-isEnd-bottom">
+                        </view>
 
+                      </view>
                     </view>
+                  </van-cell-group>
+                  <view bindtap="removeBtn" data-id="{{item.id}}" style="display:flex;align-items:center;justify-content:center;height:100%;width:65px;color:#fff;background:red;" class="" slot="right">
+                    <text>
+                    删除
+                    </text>
                   </view>
-                </van-cell-group>
-                <view bindtap="removeBtn" data-id="{{item.id}}" style="display:flex;align-items:center;justify-content:center;height:100%;width:65px;color:#fff;background:red;" class="" slot="right">
-                  <text>
-                   删除
-                  </text>
-                </view>
-              </van-swipe-cell>
-            </block>
-            
+                </van-swipe-cell>
+              </block>
+              
+            </view>
           </view>
         </view>
-      </view>
-    </scroll-view>
+      </scroll-view>
+    </block>
   </view>
 
   <view class="sponsor" wx:if="{{identity==2}}">
   <!-- 主办方 -->
-    <view class="mine-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
-      <view class="mine-top-view">
-        <view class="mine-top-view-left">
-          <view style="width:148rpx;height:148rpx;overflow:hidden;border-radius:50%;background: #ddd;margin-top:4rpx;">
-            <image  mode="aspectFill" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" wx:if="{{sponsorInfo.org.logo}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{sponsorInfo.org.logo}}"></image>
-            <view wx:else class="mine-top-view-left-noImg">
-              <image  mode="aspectFill" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="../../images/default_icon@2x.png"></image>
+    <view class="sponsor-top" style="position:relative;z-index:2;margin-top:{{40+height}}px;">
+      <view class="sponsor-top-view">
+        <view class="sponsor-top-view-bg">
+          <image style="width:100%;height:100%" src="../../images/sponsorTopBg.png"></image>
+        </view>
+        <view class="sponsor-top-view-content">
+          <view class="mine-top-view-left">
+            <view class="mine-top-avatar">
+              <view wx:if="{{sponsorInfo.org.logo}}" class="mine-top-view-left-noImg">
+                <image mode="aspectFill" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="{{sponsorInfo.org.logo}}"></image>
+              </view>
+              <view wx:else class="mine-top-view-left-noImg">
+                <image  mode="aspectFill" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}" class="mine-top-view-left-img" style="width:148rpx;height:148rpx;border-radius:74rpx;" src="../../images/default_icon@2x.png"></image>
+              </view>
+            </view>
+            <view class="mine-top-view-left-text" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}">
+              <view style="font-size:36rpx;color:#010101;font-weight:bloder;white-space:nowrap;max-width:400rpx;overflow:hidden;text-overflow:ellipsis;">{{sponsorInfo.org.name?sponsorInfo.org.name:'--'}}</view>
+              <!-- <view style="font-size:28rpx;color:#999999;display:flex;align-items:center;">
+                <text>学校主页</text>
+                <image style="width:28rpx;height:28rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_4@2x.png"></image>
+              </view> -->
+            </view>
+            
+          </view>
+
+          <view class="mine-top-view-right sponsor-top-view-right">
+            <view style="text-align:right;font-size:30rpx;color:#ffffff;">我是主办方</view>
+            <view class="mine-top-view-right-view" bindtap="changeIdentity" data-identity="1">
+              <image style="width:40rpx;height:40rpx;margin-top:4rpx;" src="../../images/participant_2@2x.png"></image>
+              <text>切换为参与方</text>
             </view>
           </view>
-          <view class="mine-top-view-left-text" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}">
-            <view style="font-size:36rpx;color:#010101;font-weight:bloder;white-space:nowrap;max-width:400rpx;overflow:hidden;text-overflow:ellipsis;">{{sponsorInfo.org.name}}</view>
-            <view style="font-size:28rpx;color:#999999;display:flex;align-items:center;">
+          <view class="sponsor-top-view-bottom">
+            <view class="sponsor-top-view-bottom-item first">
+              <view>{{sponsorInfo.org.endTime}}</view>
+              <view style="color:#fff;font-size:18rpx;">到期时间</view>
+            </view>
+            <view class="sponsor-top-view-bottom-item" bindtap="goToSchoolHome" data-id="{{sponsorInfo.org.id}}">
               <text>学校主页</text>
-              <image style="width:28rpx;height:28rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_4@2x.png"></image>
+              <image style="width:28rpx;height:28rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_5@2x.png"></image>
+            </view>
+            <view class="sponsor-top-view-bottom-item" bindtap="goToEditSchoolHome" data-id="{{sponsorInfo.org.id}}">
+              <text>编辑资料</text>
+              <image style="width:28rpx;height:28rpx;margin:2rpx 0 0 6rpx;" src="../../images/home_5@2x.png"></image>
             </view>
           </view>
-          
-        </view>
-        <view class="mine-top-view-right" bindtap="changeIdentity" data-identity="1">
-          <image style="width:40rpx;height:40rpx;margin-top:4rpx;" src="../../images/participant_2@2x.png"></image>
-          <text>切换为参与方</text>
         </view>
       </view>
-      <view class="sponsor-edit">
-        <view class="sponsor-edit-btn" bindtap="goToEditSchoolHome" data-id="{{sponsorInfo.org.id}}">编辑学校主页</view>
-      </view>
+      
       <view class="mine-top-capital">
         <view>
           <image style="width:50rpx;height:50rpx;margin-right:14rpx;" src="../../images/sponsor_4@2x.png"></image>
@@ -153,7 +266,7 @@
         
     <scroll-view scroll-y style="position:relative;height: 100%;">
       <view class="scroll-view" style='padding-top:1px;'>
-        <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{300+height}}px">
+        <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{350+height}}px">
 
           <view class="mine-content-title flex-between">
             <view class="mine-content-title-left">
@@ -234,7 +347,7 @@
             <text>已下架</text>
           </view>
 
-          <view class="sponsorCard" style="padding-bottom:{{isIphoneX?100:100}}rpx">
+          <view class="sponsorCard" style="padding-bottom:{{isIphoneX?160:100}}rpx">
             <block wx:for="{{sponsorInfo.activityList}}" wx:key="id">
               <van-swipe-cell id="{{'swipe-cell' + index}}" right-width="{{ 65 }}" async-close bind:close="onClose">
                 <van-cell-group>
@@ -283,7 +396,7 @@
                     </block>
                     <view class="sponsorCard-isEnd" wx:if="{{item.status==-1||item.status==-2}}">
                       <view  class="sponsorCard-isEnd-bg"></view>
-                      <view class="sponsorCard-isEnd-top" bindtap="goToReEditActivity" data-id="{{item.id}}">
+                      <view class="sponsorCard-isEnd-top" wx:if="{{item.statusName!='已结束'}}" bindtap="goToReEditActivity" data-id="{{item.id}}">
                         编辑活动
                       </view>
                       <view class="sponsorCard-isEnd-middle">
@@ -302,7 +415,7 @@
                             <image src="../../images/sponsor_8@2x.png"></image>
                             <text>{{item.shareCount?item.shareCount:0}}</text>
                           </view>
-                        <view class="sponsorCard-isEnd-bottom-btn" bindtap="publishBtn" data-publishflg="1" data-id="{{item.id}}">重新上架</view>
+                        <view class="sponsorCard-isEnd-bottom-btn" wx:if="{{item.statusName!='已结束'}}" bindtap="publishBtn" data-publishflg="1" data-id="{{item.id}}">重新上架</view>
                       </view>
 
                     </view>
@@ -323,6 +436,6 @@
     </scroll-view>
   </view>
  
-  <login showType="{{loginShow}}" onlyLogin="{{true}}" bind:changeFLogin="changeFLogin"></login>
+  <!-- <login showType="{{loginShow}}" onlyLogin="{{true}}" bind:changeFLogin="changeFLogin"></login> -->
   <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>

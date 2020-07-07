@@ -23,12 +23,29 @@ Page({
     active: 0,
     schoolDetails: {},
 
-    loginShow: 4,
     id:'',
     activeid:"-1"
   },
+
+  showList(e) {
+    var img = e.currentTarget.dataset.showimg.img
+    if (img.type != 1) { return }
+    var imgArr = e.currentTarget.dataset.showimglist
+    var delList = []
+    imgArr.forEach(item => {
+      if (item.img.type == 1) {
+        delList.push(item.img.url)
+      }
+    })
+    wx.previewImage({
+      current: img.url,     //当前图片地址
+      urls: delList,               //所有要预览的图片的地址集合 数组形式
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
   onPlay(e) {
-    console.log(e)
     this.setData({
       activeid: e.detail.activeId
     })
@@ -69,14 +86,12 @@ Page({
   getData(){
     var that = this
     apiServer.post(`/app/org/info/${this.data.id}`).then(res => {
-      console.log(res.data);
       that.setData({
         schoolDetails: res.data.data,
       })
     })
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -87,7 +102,6 @@ Page({
     var json = encodeURIComponent(JSON.stringify({ a: 1 }));
     if (ops.from === 'button') {
       // 来自页面内转发按钮
-      console.log(ops.target)
     }
     return {
       title: '报1 报',

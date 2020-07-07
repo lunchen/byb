@@ -63,7 +63,19 @@ Page({
       "style": '',
       "totalJoin": ''
     },
-    reEditData:{}
+    reEditData: {},
+    newAddr: {
+      "addr": "",
+      "city": "",
+      "district": "",
+      "id": '',
+      "latitude": '',
+      "longitude": '',
+      "name": "",
+      "place": "",
+      "placeNo": "",
+      "province": ""
+    }, //选择地址后赋值传入组件
   },
   onBindfullscreenchange(e) {
     this.setData({
@@ -79,7 +91,6 @@ Page({
   addBannerImg() {
     var that = this
     util.uploadImg("activityBill").then(res => {
-      console.log(res)
       that.setData({
         [`reEditData.img`]: res.data.string
       })
@@ -109,38 +120,69 @@ Page({
   },
   backFn(e) {
     // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息
-    console.log(e)
     let getData = JSON.parse(wx.getStorageSync("addivList"));
     let prevData = getData.list;
     let prevkey = getData.key;
-    console.log('发布')
-    console.log(getData)
     this.setData({
       [`reEditData.${prevkey}`]: prevData
     })
-    console.log(this.data)
   },
   setAddress(e) {
     console.log(e)
+    var index = e.index
+    var addrNo = e.addrNo
     var address = e.storeAddress
     // 地图页返回并执行的方法
     this.setData({
-      [`reEditData.addr.addr`]: address.addr,
-      [`reEditData.addr.longitude`]: address.longitude,
-      [`reEditData.addr.latitude`]: address.latitude,
-      [`reEditData.addr.name`]: address.title,
-      [`reEditData.addr.district`]: address.district,
-      [`reEditData.addr.city`]: address.city,
-      [`reEditData.addr.place`]: address.province + address.city + address.district,
-      [`reEditData.addr.province`]: address.province
+      [`newAddr.addr`]: address.addr,
+      [`newAddr.addrNo`]: addrNo,
+      [`.newAddr.city`]: address.city,
+      [`.newAddr.district`]: address.district,
+      [`.newAddr.longitude`]: address.longitude,
+      [`.newAddr.latitude`]: address.latitude,
+      [`.newAddr.name`]: address.title,
+      [`.newAddr.place`]: address.province + address.city + address.district,
+      [`.newAddr.province`]: address.province,
     })
+    // this.setData({
+    //   [`reEditData.addr.addr`]: address.addr,
+    //   [`reEditData.addr.longitude`]: address.longitude,
+    //   [`reEditData.addr.latitude`]: address.latitude,
+    //   [`reEditData.addr.name`]: address.title,
+    //   [`reEditData.addr.district`]: address.district,
+    //   [`reEditData.addr.city`]: address.city,
+    //   [`reEditData.addr.place`]: address.province + address.city + address.district,
+    //   [`reEditData.addr.province`]: address.province
+    // })
   },
-  release(){
-    console.log(this.data)
+  release: util.throttle(function () {
+    var that = this
+    wx.showToast({
+      mask: true,
+      icon: 'loading',
+      duration: 100000
+    })
+    if (app.globalData.isLinking) {
+      console.log("loading")
+      setTimeout(() => {
+        that.release()
+      }, 500)
+      return
+    }
     var data = this.data.reEditData
-  
+    data.addrList = []
+    data.addrVoList.forEach(item => {
+      if (item.addrNo){
+        data.addrList.push(item.addrNo)
+      }else{
+        data.addrList.push(item.placeNo)
+      }
+    })
+    delete data.addrVoList
+    if(data.imgList==''){
+      data.imgList = []
+    }
     apiServer.post(`/app/activity/update`, data).then(res => {
-      console.log(res)
       wx.showToast({
         title: '编辑成功',
         icon: 'loading',
@@ -153,7 +195,7 @@ Page({
         })
       }, 1000)
     })
-  },
+  }),
   onLoad: function (e) {
     wx.setNavigationBarColor({
       frontColor: '#000000',
@@ -163,7 +205,6 @@ Page({
     console.log(e)
     if(e.id){
       apiServer.post(`/app/activity/add/info/id/${e.id}`).then(res => {
-        console.log(res.data)
         that.setData({
           reEditData: res.data.data
         })
@@ -171,7 +212,6 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

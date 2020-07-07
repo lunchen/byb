@@ -1,23 +1,23 @@
 <!-- orderDetails.wxml-->
 <view class="container orderDetails">
   <navbar navbar-data='{{nvabarData}}'></navbar>
-  <view class="">
-    <view class="orderDetails-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
-      <view class="orderDetails-top-view">
-        <view class="orderDetails-top-view-item">
-          <text>报名人姓名</text>
-          <text>{{orderDetails.name}}</text>
-        </view>
-        <view class="orderDetails-top-view-item">
-          <text>手机号码</text>
-          <text>{{orderDetails.telephone}}</text>
-        </view>
+  <view class="orderDetails-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
+    <view class="orderDetails-top-view">
+      <view class="orderDetails-top-view-item">
+        <text>报名人姓名</text>
+        <text>{{orderDetails.name}}</text>
       </view>
-      
+      <view class="orderDetails-top-view-item">
+        <text>手机号码</text>
+        <text>{{orderDetails.telephone}}</text>
+      </view>
     </view>
+    
+  </view>
         
-    <scroll-view scroll-y style="position:relative;height: 100%;">
-      <view class="scroll-view" style='padding-top:1px;'>
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view" style='padding-top:1px;'>
+      <view style="padding-bottom:350rpx;">
         <view class="orderDetails-content">
           <block wx:for="{{orderDetails.infoDetailList}}" wx:key='*this'>
             <view class="orderDetails-content-item">
@@ -42,7 +42,7 @@
                 </view>
               </view>
             
-              <view class="orderDetails-content-ticket" bindtap="goToETicket" data-orderno="{{orderDetails.orderNo}}">
+              <view class="orderDetails-content-ticket" bindtap="goToETicket" wx:if="{{orderDetails.infoDetailList[0].status == 2 || orderDetails.infoDetailList[0].status == 5}}" data-orderno="{{orderDetails.orderNo}}">
                 <view class="orderDetails-content-ticket-left">
                   <text wx:if="{{item.price>0}}">票价  ¥ {{item.price}}</text>
                   <text wx:else>默认免费票  ¥ 0</text>
@@ -78,6 +78,20 @@
             <text style="color:fe8800;">¥ {{orderDetails.price}}</text>
           </view>
         </view>
+
+        <view class="orderDetails-bottom-view1" wx:if="{{orderDetails.group}}">
+          <view class="orderDetails-bottom-view1-title">
+            团成员
+          </view>
+          <view class="orderDetails-bottom-view1-imgList">
+            <view wx:for="{{orderDetails.group.group}}" wx:key="*this" class="orderDetails-bottom-view1-imgList-item {{item.flg==1?'first':''}}">
+              <image  class="orderDetails-bottom-view1-img" mode="aspectFill" style="" src="{{item.img}}"></image>
+            </view>
+            
+            
+          </view>
+        </view>
+
         <view class="orderDetails-bottom-view">
           <view>
             <text>订单编号：{{orderDetails.orderNo}}</text>
@@ -86,10 +100,15 @@
             <text>创建时间：{{orderDetails.createTime}}</text>
           </view>
         </view>
-      </view>
-    </scroll-view>
-   
 
-  </view>
+        <view class="orderDetails-bottom-view2" wx:if="{{orderDetails.group}}">
+          <view class="orderDetails-bottom-view2-text1">还差<text class="txt1">{{orderDetails.group.groupCount}}</text>人成团哦！</view>
+          <view class="orderDetails-bottom-view2-text2">剩余 <text class="txt2">{{showTime}}</text></view>
+          <view class="orderDetails-bottom-view2-btn" bindtap="copy" wx:if="{{orderDetails.group.millisecond>0 && orderDetails.group.groupCount>0}}">立即邀请好友</view>
+          <view class="orderDetails-bottom-view2-btn fail" wx:elif="{{orderDetails.group.millisecond<=0 &&orderDetails.group.groupCount>0}}">拼团失败</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
  
 </view>

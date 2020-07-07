@@ -37,6 +37,9 @@ Page({
     })
   },
   onSearch() {
+    this.setData({
+      "req.nub": 1,
+    })
     this.getData()
   },
   getMore() {
@@ -46,7 +49,6 @@ Page({
       loadingMore: true
     })
     apiServer.post('/app/activity/list', this.data.req).then(res => {
-      console.log(res.data);
       var newList = that.data.activityList
       if (res.data.data.list.length > 0) {
         newList.push(...res.data.data.list)
@@ -86,7 +88,6 @@ Page({
   getData(){
     var that = this
     apiServer.post('/app/activity/list',this.data.req).then(res => {
-      console.log(res.data);
       that.setData({
         activityList: res.data.data.list,
         refresherTriggered: false

@@ -1,0 +1,29 @@
+<!--pages/editCenter/editCenter.wxml-->
+<view class="container editCenter">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <view class="editCenter-content" style="padding-top:{{height}}px;">
+    <view class="editCenter-content-container">
+      <view class="editCenter-btn btn0" bindtap="goToEditSchoolHome">
+        <image mode="aspectFill" class="editCenter-content-bgImg" src="../../images/editCenter_btn1.png" ></image>
+        <view class="editCenter-btn-text">机构资料</view>
+      </view>
+      
+      <view class="editCenter-btn btn1" bindtap="goToEdit_onlineExperienceList">
+        <image mode="aspectFill" class="editCenter-content-bgImg" src="../../images/editCenter_btn2.png" ></image>
+        <view class="editCenter-btn-text">线上体验</view>
+      </view>
+      
+      <view class="editCenter-btn btn2" bindtap="goToMiddle">
+        <image mode="aspectFill" class="editCenter-content-bgImg" src="../../images/editCenter_btn1.png" ></image>
+        <view class="editCenter-btn-text">发布活动</view>
+      </view>
+      
+      <view class="editCenter-btn btn3" bindtap="goToEditSchoolDetails">
+        <image mode="aspectFill" class="editCenter-content-bgImg" src="../../images/editCenter_btn2.png" ></image>
+        <view class="editCenter-btn-text">学校详情</view>
+      </view>
+      
+    </view>
+    
+  </view>
+</view>

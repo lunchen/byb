@@ -13,7 +13,7 @@
             <text>添加海报/视频</text> -->
             <block wx:if="{{reEditData.img}}">
               <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
-                <image-video show="{{true}}" src="{{reEditData.img}}" type="{{1}}" height="280" width="{{280/375*690}}"></image-video>
+                <image-video show="{{true}}" src="{{reEditData.img}}" type="{{1}}" height="280" width="{{280/180*240}}"></image-video>
               </view>
             </block>
             <block wx:else>
@@ -30,9 +30,14 @@
             <text>添加海报/视频</text> -->
             <block wx:if="{{reEditData.bannerList.length>0}}">
               <view wx:for="{{reEditData.bannerList}}" wx:key="id">
-                <view style="margin:0 10rpx 0 10rpx;flex:0 0 auto;" catchtap="catchfn">
-                  <image-video bind:bindfullscreenchange = "onBindfullscreenchange" cover="{{item.cover}}" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="280" width="{{280/375*690}}"></image-video>
+                <view style="margin:10rpx;width:400rpx;">
+                  <view style="display:inline-block" catchtap="catchfn">
+                    <image-video bind:bindfullscreenchange = "onBindfullscreenchange" cover="{{item.cover}}" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?0:267}}" width="{{400}}"></image-video>
+                  </view>
                 </view>
+              </view>
+              <view class="releaseActivity-content-addView-btn" style="margin:10rpx;">
+                <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
               </view>
               <!-- <view style="width:210rpx;height:210rpx;background:#e5e5e5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
                 <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
@@ -46,20 +51,13 @@
             </block>
           </view>
         </scroll-view>
-        <!-- <view class="releaseActivity-content-addView">
-          <view class="releaseActivity-content-addView-btn">
-          
-            <addVideoComponent></addVideoComponent>
-          </view>
-          <text>添加活动海报/视频</text>
-        </view> -->
-        <!-- 下方form表单 -->
+       
       <view>
-          <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{reEditData}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
+          <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{reEditData}}" bind:getIptMes="getIptMes" newAddr="{{newAddr}}" activityType="{{1}}"></iptActivityInfoComponent>
         </view>
         <view class="releaseActivity-content-btnView">
           <view class="releaseActivity-content-btn" bindtap="release">
-            编辑
+            确认提交
           </view>
         </view>
       </view>

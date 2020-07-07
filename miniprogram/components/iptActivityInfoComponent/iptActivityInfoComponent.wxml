@@ -34,27 +34,44 @@
           readonly="true"
         />
       </view>
-      <view class="iptActivityInfo-content-form-item item1" bindtap="toMap" wx:if="{{type != 2}}">
-        <text class="iptActivityInfo-content-form-item-title">地点</text>
-        <view class="iptActivityInfo-content-form-item-right">
-          <text style="color:#666;" wx:if="{{iptActivityInfo.addr.addr}}">{{iptActivityInfo.addr.addr}}</text>
-          <text wx:else>请选择</text>
-          <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image>
+      <view wx:if="{{type != 2}}">
+        <view class="iptActivityInfo-content-form-item item1" wx:for="{{iptActivityInfo.addrVoList}}" wx:key="id">
+          <text class="iptActivityInfo-content-form-item-title {{index == 0?'':'opacity0'}}">地址</text>
+          <view class="iptActivityInfo-content-form-item-right">
+            <view style="width:500rpx;overflow-y:auto">
+              <text wx:if="{{!item.longitude && !item.latitude}}">请定位并填写详细地址</text>
+              <textarea class="myTextarea" wx:else value="{{item.addr}}" bindblur="onLocationBlur" style="width:100%;color:#333;" bindinput="onLocationChange" bindtap="setindex0" data-index0="{{index}}" auto-height placeholder="请定位并填写详细地址" />
+            </view>
+            <view bindtap="toMap" data-index0="{{index}}" style="padding:10rpx;">
+              <image style="height:60rpx;width:60rpx;" src="../../images/getLocation.png"></image>
+            </view>
+            <!-- <text style="color:#666;" wx:if="{{iptActivityInfoData.addr.addr}}">{{iptActivityInfoData.addr.addr}}</text>
+            <text wx:else>请选择</text>
+            <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image> -->
+          </view>
+          <view style="width:60rpx;">
+            <image wx:if="{{index!=0}}" style="width:40rpx;height:40rpx;" bindtap="cutAddr" data-index0="{{index}} "src="../../images/edit_jian.png"></image>
+          </view>
+        </view>
+        
+        <view wx:if="{{addrmore}}" class="iptActivityInfo-content-form-item" style="color:red;justify-content:center;"bindtap="addAddress">
+          <text class="iptActivityInfo-content-form-item-title" style="color:red;">+ 新增地址</text>
         </view>
       </view>
+      
       <view class="" style="border-bottom: 1rpx #f0f0f0 solid;padding-bottom:30rpx;" bindtap="editVideoDesc" data-key="{{listKeyName}}" >
         <view class="iptActivityInfo-content-form-item item1" style="border:0">
           <text class="iptActivityInfo-content-form-item-title ">活动详情</text>
           
           <view class="iptActivityInfo-content-form-item-right">
-            <text>编辑</text>
+            <text class="mytText">编辑</text>
             <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image>
           </view>
         </view>
         <scroll-view scroll-y style="position:relative;max-height: 280rpx;width:100%;">
-          <view wx:for="{{showList}}">
-            <view catchtap="catchfn">
-              <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+          <view wx:for="{{showList}}" wx:key="id">
+            <view catchtap="catchfn" style="margin-top:10rpx;display:inline-block;">
+              <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?0:400}}" width="{{item.type==1?600:600}}"></image-video>
             </view>
           </view>
         </scroll-view>
@@ -138,4 +155,5 @@
       bind:cancel = "onClose"
     />
   </van-popup>
+  
 </view>

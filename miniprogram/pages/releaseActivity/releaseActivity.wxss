@@ -3,7 +3,8 @@
   background: #f5f5f5;
 }
 .releaseActivity-content-addView{
-  height: 280rpx;
+  /* height: 280rpx; */
+  min-height: 280rpx;
   color: #b3b3b3;
   font-size: 24rpx;
 }
@@ -16,8 +17,7 @@
 }
 .releaseActivity-content-addView.type2{
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 .releaseActivity-content-addView-btn{
   height: 60rpx;

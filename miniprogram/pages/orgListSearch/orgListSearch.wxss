@@ -5,7 +5,7 @@
   flex-direction: column;
   background: #fff;
   border-radius: 50rpx;
-  padding: 20rpx 30rpx 300rpx;
+  padding: 0 0 300rpx;
 }
 .orgListSearch-content-view{
   padding: 0 40rpx;
@@ -16,4 +16,13 @@
   line-height: 80rpx;
   color: #999;
   text-align: center
+}
+.tabs-item{
+  padding: 30rpx 20rpx 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 240rpx;
+}
+.tabs-item-i{
+  margin: 0 10rpx;
 }

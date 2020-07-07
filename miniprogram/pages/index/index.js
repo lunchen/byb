@@ -1,4 +1,3 @@
-// 主页
 //index.js
 const util = require('../../utils/util.js');
 const apiServer = require('../../api/request.js');
@@ -32,6 +31,7 @@ Page({
       orgList:[],
       selectList:[]
     },
+    indexAdvertList:[],
     orgListIndex:0,
     // 导航头的高度
     height: app.globalData.navheight,
@@ -43,6 +43,7 @@ Page({
     tabbar: {},
     active: 0,
     motto: 'Hello World',
+    showlocation: false,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -82,7 +83,6 @@ Page({
     var _this = this
     var orderNo = e.orderNo
     apiServer.post(`/app/order/info/qrCode/${orderNo}`).then(res => {
-      console.log(res.data);
       wx.setStorageSync("scanData", JSON.stringify(res.data.data))
       _this.goToWriteOffOrder(e)
     }).catch(err=>{
@@ -99,11 +99,38 @@ Page({
       activeid: 10000
     })
   },
+  goToPage(e) {
+    var type = e.currentTarget.dataset.type   //1原图放大 2打开h5  3小程序内部页面  4其他图放大
+    var uri = e.currentTarget.dataset.uri
+    var code = e.currentTarget.dataset.code
+    console.log(uri)
+    console.log(type)
+    if (type == 2) {
+      wx.navigateTo({
+        url: `/pages/h5v/h5v?id=${uri}`,
+      })
+    }
+    if(type ==3){
+      wx.navigateTo({
+        url: `${code}`,
+      })
+    }
+    if (type == 4) {
+      var imgArr = [uri];
+      wx.previewImage({
+        current: imgArr[0],     //当前图片地址
+        urls: imgArr,               //所有要预览的图片的地址集合 数组形式
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }
+  },
   goToVideoSwiper(e) {
 
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `../my-video-swiper/video-swiper?id=${id}&type=index`,
+      url: `../myVideoSwiper/myVideoSwiper?id=${id}&type=index`,
     })
   },
   goToVideoTop(e) {
@@ -191,7 +218,6 @@ Page({
     }
     var select = this.data.activityList.selectList[this.data.activityListIndex].value
     apiServer.post(`/app/activity/list/index/select/${select}`).then(res => {
-      console.log(res.data);
       that.setData({
         "activityList.activityList": res.data.data.list
       })
@@ -205,8 +231,10 @@ Page({
       })
     }
     var select = this.data.orgList.selectList[this.data.orgListIndex].value
-    console.log(event)
     if (event && event.detail.title == "附近机构"){
+      that.setData({
+        showlocation: true
+      })
       that.getUserLocation().then((res)=>{
         apiServer.nowLocation.getLocation()
         setTimeout(()=>{
@@ -215,6 +243,9 @@ Page({
         
       })
     }else{
+      that.setData({
+        showlocation: false
+      })
       this.getSelect(select)
     }
    
@@ -222,8 +253,6 @@ Page({
   getSelect(select){
     var that = this
     apiServer.post(`/app/org/list/index/select/${select}`).then(res => {
-      console.log("selectchange");
-      console.log(res.data);
       that.setData({
         "orgList.orgList": res.data.data.list
       })
@@ -236,13 +265,14 @@ Page({
     var currentPage = pages[pages.length - 1]
   },
   onLoad: function (e) {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+    
     // this.comingTo(e)
     var that = this;
     wx.setStorageSync('index_activeVideo', 0)
-    app.editTabbar();
-    this.setData({
-      tabbar: app.editTabbar()
-    })
     wx.setStorageSync('activeVideo', 0)
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
@@ -252,7 +282,10 @@ Page({
     that.getUserLocation()
   },
   onShow: function () {
-    
+
+    this.setData({
+      tabbar: app.editTabbar()
+    })
     var that = this;
     this.setData({
       identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1
@@ -260,11 +293,11 @@ Page({
     wx.hideTabBar()
     var that = this;
     apiServer.post('/app/index/info2').then(res => {
-      console.log(res.data);
       that.setData({
         banner: res.data.data.banner,
         'activityList.selectList': res.data.data.activityList.selectList,
         'orgList.selectList': res.data.data.orgList.selectList,
+        'indexAdvertList': res.data.data.indexAdvertList,
       })
       that.orgListClick() 
       that.activityClick()
@@ -276,12 +309,10 @@ Page({
   },
   // 判断用户是否拒绝地理位置信息授权，拒绝的话重新请求授权
   getUserLocation: function (qqmapsdk) {
-    console.log(qqmapsdk)
     let that = this;
     return new Promise((resolve,reject)=>{
       wx.getSetting({
         success: (res) => {
-          console.log(JSON.stringify(res))
           // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
           // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
           // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
@@ -345,7 +376,6 @@ Page({
     wx.getLocation({
       type: 'wgs84',
       success(res) {
-        console.log(res)
         const latitude = res.latitude
         const longitude = res.longitude
         const speed = res.speed
@@ -363,7 +393,6 @@ Page({
         
       },
       fail(err) {
-        //console.log(err)
         wx.hideLoading({});
         wx.showToast({
           title: '定位失败',

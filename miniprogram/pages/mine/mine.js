@@ -8,11 +8,13 @@ Page({
   data: {
     //navbar
     // 导航头组件所需的参数
+    address1: '../../images/participantBg.png', // 加个背景 不加就是没有
+    address2: '../../images/sponsorBg.png', // 加个背景 不加就是没有
     nvabarData: {
       showCapsule: 0, //是否显示左上角图标   1表示显示    0表示不显示
       title: '我的', //导航栏 中间的标题
       white: true, // 是就显示白的，不是就显示黑的。
-      address: '../../images/participant_1@2x.png', // 加个背景 不加就是没有
+      address: '../../images/participantBg.png', // 加个背景 不加就是没有
     },
 
     // 导航头的高度
@@ -25,7 +27,53 @@ Page({
     participantInfo: {},
     sponsorInfo: {},
     loginShow: 0,
+    
+    active: 0,
+    // 活动
+    participant: {
+      selectList: [{
+        label: "全部订单"
+      },
+      {
+        label: "分销订单"
+      }]
+    },
+    fenxiaoNub:1,
+    fenxiao:[],
   },
+  getfenxiao(){
+    var _this = this
+    var req = {
+      "nub": _this.data.fenxiaoNub,
+      "size": 999
+    }
+    apiServer.post('/app/order/share/list', req).then(res => {
+      if (res.data.data.list.length>0){
+        var data = _this.data.fenxiao
+        data.push(...res.data.data.list)
+        _this.setData({
+          fenxiao: data
+        })
+        _this.setData({
+          fenxiaoNub: _this.data.fenxiaoNub + 1
+        })
+      }
+    }).catch(err => {
+    })
+  },
+  tabChange(e){
+    var index = e.currentTarget.dataset.index;
+    this.setData({
+      active: index
+    })
+    if (index == 0) {
+      this.getParticipantInfo()
+    }
+    if(index == 1){
+      this.getfenxiao()
+    }
+  },
+  
   changeFLogin: function (e) {
     // 获取从底部打开登录弹窗
     this.setData({
@@ -34,14 +82,16 @@ Page({
   },
   openLogin: function (e) {
     // 获取从底部打开登录弹窗
-    this.setData({
-      loginShow: 4
+    // this.setData({
+    //   loginShow: 4
+    // })
+    wx.navigateTo({
+      url: '../getAuth/getAuth',
     })
   },
   changeIdentity(e){
     var identity = e.currentTarget.dataset.identity
     var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")):''
-    console.log(e)
     if (token == ""){
       this.openLogin()
       return
@@ -50,7 +100,7 @@ Page({
       wx.showToast({
         title: '您未开通主办方权限，如需开通主办方权限请点击商务洽谈联系我们。',
         icon: 'none',
-        duration: 5000
+        duration: 1000
       })
       return
     } else {
@@ -58,24 +108,32 @@ Page({
         identity: identity
       })
       wx.setStorageSync('identity', identity)
+      app.editTabbar()
     }
-    if (identity==1){
+    var bg
+    if (identity == 1) {
       this.getParticipantInfo()
-    } else if(identity == 2){
+      bg = this.data.address1
+      this.getfenxiao()
+    } else if (identity == 2) {
+      bg = this.data.address2
       this.getSponsorInfo()
+    }else{
+      bg = this.data.address1
     }
+    this.setData({
+      "nvabarData.address": bg
+    })
     
   },
   goToOutCash(){
     wx.navigateTo({
-      url: `../cash-out/cash-out`
+      url: `../cashOut/cashOut`
     })
   },
   goToReEditActivity(e) {
     var id = e.currentTarget.dataset.id
     var status = e.currentTarget.dataset.status
-    console.log(e)
-    console.log(status)
     if (status == 1){
       wx.showToast({
         title: '正在进行中的活动请下架后再编辑',
@@ -95,14 +153,17 @@ Page({
     })
   },
   goToEditSchoolHome(e) {
+    //去学校编辑或编辑中心
     var id = e.currentTarget.dataset.id;
+    // wx.navigateTo({
+    //   url: `../editSchoolHome/editSchoolHome?id=${id}`
+    // })
     wx.navigateTo({
-      url: `../editSchoolHome/editSchoolHome?id=${id}`
+      url: `../editCenter/editCenter?id=${id}`
     })
   },
   goToOrderDetails(e) {
     var orderNo = e.currentTarget.dataset.orderno;
-    console.log(orderNo);
     var index = e.currentTarget.dataset.index;
     if (this.data.participantInfo.orderList[index].statusName == "待支付" || this.data.participantInfo.orderList[index].statusName == "支付中") {
       this.goToConfirmOrder(e);
@@ -116,7 +177,6 @@ Page({
     var orderNo = e.currentTarget.dataset.orderno
     var activityId = e.currentTarget.dataset.actvityid
     var index = e.currentTarget.dataset.index
-    console.log(e)
     if (this.data.participantInfo.orderList[index].statusName == "待支付" || this.data.participantInfo.orderList[index].statusName == "支付中"){
       this.goToConfirmOrder(e)
       return
@@ -124,7 +184,6 @@ Page({
     if (this.data.participantInfo.orderList[index].statusName == "支付超时") {
       return
     }
-    console.log(orderNo)
     wx.navigateTo({
       url: `../eTicket/eTicket?orderNo=${orderNo}&id=${activityId}`,
     })
@@ -137,7 +196,6 @@ Page({
   },
   goToPersonalCenter(e) {
     var token = wx.getStorageSync('token')?JSON.parse(wx.getStorageSync('token')):'';
-    console.log(token)
     if (token == ''){
       this.openLogin()
     }else{
@@ -147,7 +205,6 @@ Page({
     }
   },
   goToJoinerManage(e){
-    console.log(e)
     var id = e.currentTarget.dataset.id
     var type = e.currentTarget.dataset.type
     wx.navigateTo({
@@ -255,8 +312,6 @@ Page({
   getParticipantInfo(){
     var _this = this
     apiServer.post('/app/my/user/index').then(res => {
-      console.log("user");
-      console.log(res.data);
       _this.setData({
         participantInfo: res.data.data
       })
@@ -269,8 +324,6 @@ Page({
   getSponsorInfo() {
     var _this = this
     apiServer.post('/app/my/org/index').then(res => {
-      console.log("org");
-      console.log(res.data);
       _this.setData({
         sponsorInfo: res.data.data
       })
@@ -283,12 +336,18 @@ Page({
   },
   onShow: function () {
     wx.hideTabBar()
-    console.log("mineshow")
-    console.log(wx.getStorageSync('identity'))
+    var bg
+    if (wx.getStorageSync('identity') == 2) {
+      bg = this.data.address2
+    }else{
+      bg = this.data.address1
+    }
     this.setData({
       participantInfo: {},
       sponsorInfo: {},
-      identity : wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1
+      fenxiao: [],
+      identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1,
+      "nvabarData.address": bg
     })
     var _this = this
     this.renews()
@@ -296,14 +355,15 @@ Page({
   renews: function () {
     this.setData({
       participantInfo: {},
-      sponsorInfo: {}
+      sponsorInfo: {},
+      fenxiao: []
     })
     var _this = this
     var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")) : '';
-    console.log(token)
     var identity = this.data.identity;
     if (token.authorization && identity == "1"){
       this.getParticipantInfo()
+      this.getfenxiao()
     }
     if (token.token && identity == "2") {
       this.getSponsorInfo()

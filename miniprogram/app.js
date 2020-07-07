@@ -5,38 +5,16 @@ App({
     this.hideTabBar();
   },
   onLaunch: function (e) {
-    console.log("onLaunch")
     this.hideTabBar();
     this.getSystemInfo();
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
     });
-    console.log("e.scene")
-    console.log(e)
-    // if (e.scene == 1007 || e.scene == 1008 || e.secne == 1047 || e.secne == 1048 || e.secne == 1035 || e.secne == 1058 || e.secne == 1067) {
-    //   if (e.path != 'pages/index/index'){
-    //     this.globalData.share = true
-    //   } else {
-    //     this.globalData.share = false
-    //   }
-      
-    // } else {
-    //   this.globalData.share = false
-    // }
-    // 展示本地存储能力
-    // var logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
+  
     if (!wx.getStorageSync("identity")) {
       wx.setStorageSync('identity', 1)
     }
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -81,7 +59,17 @@ App({
     });
   },
   editTabbar: function () {
+    if (wx.getStorageSync('identity') == "1") {
+      // this.globalData.tabBar.list[1].iconPath = "icon/middle1.png"
+      this.globalData.tabBar.list[1].text = "入驻"
+      this.globalData.tabBar.list[1].pagePath = "/pages/business/business"
+    } else {
+      // this.globalData.tabBar.list[1].iconPath = "icon/middle.png"
+      this.globalData.tabBar.list[1].text = "发布"
+      this.globalData.tabBar.list[1].pagePath = "/pages/middle/middle"
+    }
     let tabbar = this.globalData.tabBar;
+    
     let currentPages = getCurrentPages();
     let _this = currentPages[currentPages.length - 1];
     let pagePath = _this.route;
@@ -95,8 +83,11 @@ App({
     });
   },
   globalData: {
+    isLinking: false,   //true有前置请求 等待false后才可再请求 
     userInfo: null,
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
+    screenWidth: wx.getSystemInfoSync()['screenWidth'],
+    screenHeight: wx.getSystemInfoSync()['screenHeight'],
     share: false, // 分享默认为false
     height: 0, // 顶部高度
     navheight: 0, // 导航栏高度

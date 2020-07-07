@@ -1,17 +1,14 @@
 <cover-view class='nav-wrap {{navbarData.whitecover? "white_back_bg":""}}' style='background:{{backgroundColor}};height: {{isIphoneX ? (height*1.5 + 20):(height*2 + 20)}}px;'>
   <!-- 导航栏背景图片 -->
-  <cover-image class="backgroundimg" wx:if="{{navbarData.address!=''}}" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px;margin-top:{{needTop?(isIphoneX?(phoneName == 'iPhone X'?140:120):95):0}}rpx" />
+  <cover-image class="backgroundimg" wx:if="{{navbarData.address!=''}}" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px;margin-top:{{needTop?(isIphoneX?(phoneName == 'iPhone X'?170:120):95):0}}rpx" />
   <!-- // 导航栏 中间的标题 -->
-  <cover-view class='nav-title' wx:if='{{!navbarData.white}}' style='line-height: {{height*2 + 44}}px;'>
-    {{navbarData.title}}
-  </cover-view>
-  <cover-view class='nav-title' wx:else='{{!navbarData.white}}' style='line-height: {{height*2 + 44}}px; color:#ffffff'>
+  <cover-view class='nav-title' style="line-height: {{height*2 + 44}}px; color:{{navbarData.white?'#fff':'#333'}}">
     {{navbarData.title}}
   </cover-view>
   <cover-view style='position:absolute;bottom:0;'>
     <!-- // 导航栏  左上角的返回按钮 -->
     <!-- //  其中wx:if='{{navbarData.showCapsule}}' 是控制左上角按钮的显示隐藏，首页不显示 -->
-    <cover-view bindtap='_navback' class='nav-capsule ' style='width:80rpx;height: {{isIphoneX ? (height*0.9):(height*1.7)}}px;' wx:if='{{navbarData.showCapsule}}'>
+    <cover-view bindtap='_navback' class='nav-capsule' style='width:80rpx;height: {{isIphoneX ? (height*0.9):(height*1.7)}}px;' wx:if='{{navbarData.showCapsule}}'>
       <!-- //左上角的返回按钮，wx:if='{{!share}}'空制返回按钮显示 -->
       <!-- //从分享进入小程序时 返回上一级按钮不应该存在 -->
       <!-- navbarData.white是控制按钮颜色的，因为背景有深浅色,返回按钮自己找图片 -->
@@ -21,11 +18,11 @@
       <block  wx:elif='{{!share&&navbarData.white}}'>
         <cover-image src='./icon/back1@2x.png' mode='aspectFit' class='back-pre'></cover-image>
       </block>
-      <block wx:else='{{!share}}'>
+      <block wx:else>
         <cover-image src='./icon/back@2x.png' mode='aspectFit' class='back-pre'></cover-image>
       </block>
     </cover-view>
   </cover-view>
 </cover-view>
 <!-- 导航栏下面的背景图片 -->
-<image wx:if="{{imageHeight}}" class="backgroundimg" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px;margin-top:{{needTop?(isIphoneX?(phoneName == 'iPhone X'?140:120):95):0}}rpx" />
+<image wx:if="{{imageHeight}}" class="backgroundimg" src="{{navbarData.address}}" bindload="imgLoaded" style="width:{{imageWidth}}px;height:{{imageHeight}}px;margin-top:{{needTop?(isIphoneX?(phoneName == 'iPhone X'?170:120):95):0}}rpx" />

@@ -14,13 +14,16 @@
 }
 .item1{
   justify-content: space-between;
-  padding-right: 30rpx;
+  /* padding-right: 30rpx; */
+}
+.opacity0{
+  opacity: 0
 }
 .item2{
   padding-top: 30rpx;
   align-items: flex-start;
 }
-.item2 textarea{
+.item2 .myTextarea{
   font-size: 26rpx;
   height: 100rpx;
   flex: 0 0 auto;
@@ -48,7 +51,7 @@
   align-items: center;
   overflow: hidden;
 }
-.iptActivityInfo-content-form-item-right>text{
+.iptActivityInfo-content-form-item-right>.mytText{
   max-width: 500rpx;
   text-overflow:ellipsis;
   overflow: hidden;

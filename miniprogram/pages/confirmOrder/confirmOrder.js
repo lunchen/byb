@@ -32,9 +32,7 @@ Page({
       orderNo: orderNo
     })
     if (orderNo) {
-      console.log(orderNo)
       apiServer.post(`/app/order/info/id/${orderNo}`).then(res => {
-        console.log(res.data);
         that.setData({
           orderData: res.data.data
         })
@@ -62,7 +60,6 @@ Page({
       "orderNo": orderNo
     }
     apiServer.post(`/app/order/unifiedorder`,req).then(res => {
-      console.log(res.data);
       wx.requestPayment(
         {
           'timeStamp': JSON.stringify(res.data.data.timeStamp),
@@ -72,7 +69,6 @@ Page({
           'paySign': res.data.data.paySign,
           'success': function (res) {
             console.log("success")
-            console.log(res)
             wx.showToast({
               title: '支付成功',
               icon: 'none',

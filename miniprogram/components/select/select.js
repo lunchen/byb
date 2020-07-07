@@ -24,7 +24,6 @@ Component({
         // }
       ],
       observer: function (newVal, oldVal) {
-        console.log(222)
         this.changekv()
       }
     },
@@ -76,28 +75,16 @@ Component({
     // 改变传入值的key 分别为id和name
     changekv(){
       let result = []
-      // if (this.data.key !== 'id' || this.data.text !== 'name') { 
-      //   for (let item of this.data.options) {
-      //     let { [this.data.key]: id, [this.data.text]: name } = item
-      //     result.push({ id, name })
-      //   }
-      // }
       for (let item of this.data.options) {
         let { [this.data.key]: id, [this.data.text]: name } = item
         result.push({ id, name })
       }
       let { [this.data.key]: id, [this.data.text]: name } = this.data.defaultOption
       this.setData({
-        // current: Object.assign({}, this.data.defaultOption),
         current: { id, name },
         result: result
       })
-      console.log(this.data.result[0])
-      console.log(this.data.needchoicefirst)
-      console.log(this.data.onceSelcet)
       if (this.data.result[0] != undefined && this.data.needchoicefirst && this.data.onceSelcet) {
-
-        console.log({ ...this.data.result[0] })
         this.triggerEvent("change", { ...this.data.result[0] })
         this.setData({
           onceSelcet: false

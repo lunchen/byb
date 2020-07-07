@@ -75,8 +75,6 @@ Page({
   getInfo() {
     var _this = this;
     apiServer.post('/app/user/info').then(res => {
-      console.log("user");
-      console.log(res.data);
       _this.setData({
         participantInfo: res.data.data
       })
@@ -85,7 +83,6 @@ Page({
   updataInfo() {
     var _this = this;
     var req = this.data.participantInfo
-    console.log(req)
     if(req.addr == ""){
       req.addr = {}
     }
@@ -102,7 +99,6 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
-        console.log(res)
         let src = res.tempFiles[0];
         wx.uploadFile({
           url: apiServer.apiUrl(`/picture/upload/userIcon`),
@@ -159,7 +155,6 @@ Page({
     })
     this.onCloseAll()
     this.updataInfo()
-      console.log(time)
     // 时间选择确定
   },
   onNameValueChange(e){
@@ -195,7 +190,6 @@ Page({
   chooseGender(e){
     // 选择性别按钮
     var sex = e.currentTarget.dataset.gender
-    console.log(e)
     this.setData({
       gender: sex
     })

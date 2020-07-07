@@ -25,12 +25,44 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 19rpx 0;
 }
 .editSchoolHome-content-view-addActVideo.type2{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+.editSchoolHome-content-view-addActVideo.type3{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 19rpx 0;
+}
+.editSchoolHome-content-view-addActVideo-orgBanner{
+  display: flex;
+}
+.editSchoolHome-content-view-addActVideo-orgBanner-text{
+  margin: 23rpx 20rpx 0 0;
+  color: #666666;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.editSchoolHome-content-view-addActVideo-suggest{
+  flex: 1;
+  text-align: center;
+  color: #b3b3b3;
+  font-size: 24rpx;
+}
+.editSchoolHome-content-view-addActVideo-orgBanner-view{
+  width: 155rpx;
+  height: 208rpx;
+  background: #eaeaea;
+  border: 1rpx solid #b3b3b3;
+  border-radius: 10rpx;
+  overflow: hidden;
+  text-align: center;
 }
 .editSchoolHome-content-view-addActVideo-btn{
   margin-right: 30rpx;
@@ -61,7 +93,7 @@
 }
 .item1{
   justify-content: space-between;
-  padding-right: 30rpx;
+  /* padding-right: 30rpx; */
 }
 .item2{
   padding-bottom: 100rpx;
@@ -81,17 +113,21 @@
   display: flex;
   align-items: center;
 }
-
+.van-field__input--textarea{
+}
 .upPicBtn{
   font-size: 24rpx;
   color: #feb707;
   margin-left: 74rpx;
   text-align: center;
-  padding: 20rpx 0;
-}
-.upPicBtn image{
-  width: 75rpx;
-  height: 75rpx;
+  height: 160rpx;
+  width: 225rpx;
+  flex: 0 0 225rpx;
+  background: #eaeaea;
+  border: 1rpx solid #b3b3b3;
+  margin: 20rpx 0 20rpx 20rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
 }
 .editSchoolHome-content-iptContact{
   margin-left: 30rpx;

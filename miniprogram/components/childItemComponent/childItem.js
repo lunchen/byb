@@ -37,26 +37,3 @@ Component({
   methods: {
   }
 })
-/*informationListData: [
-      {
-        id: 0,
-        readCount: 0,
-        readCountValue: "",
-        remark: "",
-        star: 0,
-        title: "",
-        type: 1,    //1育儿咨询2测试
-        url: {
-          name: "",
-          no: "",
-          skipUrl: "",
-          type: {
-            id: 0,
-            name: "",
-            paramFlg: 0,
-            paramName: ""
-          }
-        }
-      }
-    ]
-    */

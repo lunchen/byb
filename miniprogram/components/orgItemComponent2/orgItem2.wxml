@@ -1,0 +1,26 @@
+<view class="orgItem2-view-item" bindtap="goToOrgItemDetails" data-id="{{orgItemData.id}}">
+  <view class="orgItem2-view-item-left">
+    <image wx:if="{{orgItemData.logo}}" class="" style="height:235rpx;width: 330rpx;" mode="aspectFill" src="{{orgItemData.logo}}"></image>
+    <view class="default-bg flex-middle-center" wx:else>
+      <image class="default-bg-img" src="../../images/default_bill@2x.png"></image>
+    </view>
+  </view>
+  
+  <block>
+    <view class="orgItem2-view-item-right">
+      <view class="orgItem2-view-text1">{{orgItemData.name}}</view>
+      <view class="orgItem2-content-card-label">
+        <view wx:for="{{orgItemData.labelList}}" wx:key="*this" class="label-item">{{item}}</view>
+      </view>
+      
+      <view class="orgItem2-item-visit">
+        <image style="height:30rpx;width:30rpx;margin-left:-4rpx;margin-top:2rpx;" src="../../images/home_6@2x.png"></image>
+        <text>{{orgItemData.hotsValue}}</text>
+      </view>
+      <view class="orgItem2-view-item-right-bottom">
+        <text wx:if="{{showlocation}}" class="orgItem2-view-item-right-bottom-text">{{orgItemData.addr.dist}}</text>
+        <image style="width:30rpx;height:30rpx;" src="../../images/home_icon_1.png"></image>
+      </view>
+    </view>
+  </block>
+</view>

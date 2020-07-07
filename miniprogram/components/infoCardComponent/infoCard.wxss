@@ -18,6 +18,15 @@
   font-size: 28rpx;
   color: #666666;
 }
+.infocard-content-text-addr{
+  align-items: flex-start;
+  position: relative;
+}
+.infocard-content-text-addr-list{
+  max-height: 110rpx;
+  overflow-y: auto;
+  flex: 1;
+}
 .ftSize22{
  font-size: 22rpx;
 }

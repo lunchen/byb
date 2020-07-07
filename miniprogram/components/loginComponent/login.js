@@ -163,7 +163,6 @@ Component({
       if (this.data.showType==1){
         var select = this.data.activityList.filter(item => item.value == e.detail.id)[0]
         if (this.data.signUpType) select.price = 0
-        console.log(select)
         this.setData({
           activitySelected: select
         })
@@ -180,9 +179,7 @@ Component({
       var _this = this
       var data = JSON.parse(wx.getStorageSync('aliveData'))
       var orgId = data.id
-      console.log(data)
       apiServer.post(`/app/activity/select/orgId/${orgId}`).then(res => {
-        console.log(res.data);
         _this.setData({
           activityList: res.data.data.list,
           activeityDefaultOption: res.data.data.list[0],
@@ -236,8 +233,11 @@ Component({
           this.generateOrder()
         }
       } else {
-        this.triggerEvent('changeFLogin', {
-          loginShow: 4
+        // this.triggerEvent('changeFLogin', {
+        //   loginShow: 4
+        // })
+        wx.navigateTo({
+          url: `../getAuth/getAuth`,
         })
       }
     },
@@ -248,7 +248,6 @@ Component({
         icon: 'loading',
         duration: 5000
       })
-      console.log(this.data)
       var _this = this
       var url
       if(this.data.signUpType){
@@ -264,9 +263,7 @@ Component({
         "telephone": this.data.joinTel,
         "count": this.data.stepValue
       }
-      console.log(data)
       apiServer.post(url, data).then(res => {
-        console.log(res.data);
         _this.setData({
           orderNo: res.data.data.orderNo
         })
@@ -302,7 +299,6 @@ Component({
         icon: 'loading',
         duration: 5000
       })
-      console.log(this.data)
       var _this = this
       var url = "/app/activity/join/online"
      
@@ -313,7 +309,6 @@ Component({
         "img": this.data.userImg
       }
       apiServer.post(url, data).then(res => {
-        console.log(res.data);
         _this.setData({
           orderNo: res.data.data.orderNo
         })
@@ -396,11 +391,8 @@ Component({
         success(res) {
           if (res.authSetting['scope.userInfo']) {
             // _this.wxChatLogin()
-            console.log(res)
-            console.log("auth")
             wx.login({
               success(res) {
-                console.log(res)
                 _this.setData({
                   "wxGetMes.code": res.code
                 })
@@ -415,9 +407,6 @@ Component({
     },
     getPhoneNumber(e) {
       // 授权后 微信获取用户手机号一键登录
-      // console.log(e.detail.errMsg)
-      // console.log(e.detail.iv)
-      // console.log(e.detail.encryptedData)
       if (e.detail.iv && e.detail.encryptedData){
         this.setData({
           "wxGetMes.iv": e.detail.iv,
@@ -442,7 +431,6 @@ Component({
         duration: 2000
       })
       apiServer.post(`/app/login/login`, req).then(res => {
-        console.log(res.data);
         wx.setStorageSync('identity', 1)
         var token = {
           token: res.data.data.token,
@@ -475,11 +463,8 @@ Component({
           _this.triggerEvent('changeFLogin', {
             loginShow: 0
           })
-          console.log(1)
 
           if (getCurrentPages().length != 0) {
-            console.log(2)
-            console.log(getCurrentPages()[getCurrentPages().length - 1])
             //刷新当前页面的数据
             getCurrentPages()[getCurrentPages().length - 1].renews()
           }
@@ -497,7 +482,6 @@ Component({
     updataInfo() {
       var _this = this;
       var req = this.data.userInfoModel
-      console.log(req)
       apiServer.post('/app/user/update', req).then(res => {
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
@@ -530,7 +514,6 @@ Component({
         return
       }
       apiServer.post(`/app/login/code`, { "telephone":telephone}).then(res => {
-        console.log(res.data);
         wx.showToast({
           title: '获取验证码成功，请查看短信',
           icon: 'none',
@@ -541,7 +524,6 @@ Component({
         })
         _this.dtFn()
       }).catch(err => {
-        console.log(err.data)
         wx.showToast({
           title: '获取验证码失败：' + err.data.msg,
           icon: 'none',
@@ -579,7 +561,6 @@ Component({
         return
       }
       apiServer.post(`/app/login/login`, req).then(res => {
-        console.log(res.data);
         wx.setStorageSync('identity', 1)
         var token = {
           token: res.data.data.token,
@@ -612,11 +593,8 @@ Component({
           _this.triggerEvent('changeFLogin', {
             loginShow: 0
           })
-          console.log(1)
 
           if (getCurrentPages().length != 0) {
-            console.log(2)
-            console.log(getCurrentPages()[getCurrentPages().length - 1])
             //刷新当前页面的数据
             getCurrentPages()[getCurrentPages().length - 1].renews()
           }

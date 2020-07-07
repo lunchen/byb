@@ -5,16 +5,12 @@
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
       <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
-        <!-- <view class="activityDetailsImg-view">
-          <image class="activityDetailsImg" src="../../images/activityDetails.png"></image>
-        </view> -->
+      
         <swiper wx:if="{{schoolHomeData.orgBannerList.length>0}}" style="height:375rpx;width:100%;" previous-margin="20rpx" next-margin="20rpx" indicator-dots="{{indicatorDots}}"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" bindchange="swiperChange">
           <block wx:for="{{schoolHomeData.orgBannerList}}" wx:key="id">
             <swiper-item>
               <view style="padding:0 10rpx;height:375rpx;width:{{750-60}}rpx;border-radius:20rpx;" class="swiper-item {{item}} {{current==index ? 'scaleY1' : 'scaleY0_95'}}">
-                <!-- <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
-                <video wx:else  style="height:375rpx;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
                 <view style="border-radius:20rpx;overflow:hidden;height:375rpx;" data-id="{{item.id}}">
                   <block  wx:if="{{item.img.url}}">
                     <image-video
@@ -129,20 +125,23 @@
     </view>
   </scroll-view>
   <login orgId="{{schoolHomeData.id}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
-  <tabbarBtn telephone="{{schoolHomeData.telephone}}" wxqecode="{{schoolHomeData.wechatQrcode}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}" bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{true}}"></tabbarBtn>
+  <tabbarBtn orgId="{{schoolHomeData.id}}" telephone="{{schoolHomeData.telephone}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}" bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{true}}"></tabbarBtn>
 
-  <view class="canvas-box">
-    <canvas canvas-id="myCanvas" style="width:800px;height:960px;"></canvas>
-  </view>
+ 
   <view class="canvasImg" wx:if="{{canvasImgShow}}">
     <view class="canvasImg-bg" bindtap="closeCanvasImgShow"></view>
     <view class="canvasImg-view">
       
       <view class="canvasImg-view-top">
         <view style="border:4rpx solid #f0f0f0;font-size:0;">
-          <image mode="aspectFill" bindtap="previewImage" style="width:68vw;height:{{68/80*96}}vw;" src="{{canvasImg}}"></image>
+          <image mode="aspectFill" bindtap="previewImage" style="width:60vw;height:{{60/750*1334}}vw;" src="{{canvasImg}}"></image>
         </view>
-        <view style="text-align:center;" bindtap="saveToPhoto">
+        
+        <button class="huoqutupianquanxian" wx:if="{{canIUseSaveImg === false}}" style="text-align:center;width:100%" open-type="openSetting" bindopensetting='openSetting'>
+          <image style="width:80rpx;height:80rpx;margin-top:30rpx;margin-bottom:10rpx;" src="../../images/save@2x.png"></image>
+          <view style="color:#333">存到相册</view>
+        </button>
+        <view wx:else style="text-align:center;" bindtap="saveToPhoto">
           <image style="width:80rpx;height:80rpx;margin-top:30rpx" src="../../images/save@2x.png"></image>
           <view>存到相册随时分享</view>
         </view>
@@ -151,5 +150,9 @@
         取消
       </view>
     </view>
+  </view>
+  
+  <view class="zhizuo" wx:if="{{firstPage}}" bindtap="goToBusiness">
+    <image style="width:104rpx;height:69rpx" src="../../images/zhizuo.png"></image>
   </view>
 </view>

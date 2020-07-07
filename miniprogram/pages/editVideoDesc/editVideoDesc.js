@@ -34,10 +34,11 @@ Page({
     updateapi: '',      //更新数据接口
     prevIndex: '',       //上一个页面的跳转过来的下标 在动态编辑添加图片用到
     prevKey: '',       //上一个页面的跳转过来的列表取值key
-    firstkey: ''       //上一个页面的跳转过来的列表取值key
+    firstkey: '',       //上一个页面的跳转过来的列表取值key
+    defaultTitle: '',       //初始输入框内容
+    defaultShow: false       //初始输入框是否显示
   },
   onLoad: function (e) {
-    console.log(e)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
@@ -52,7 +53,6 @@ Page({
     })
     if (api) {
       apiServer.post(api).then(res => {
-        console.log(res.data);
         that.setData({
           data: res.data.data.list,
         })
@@ -65,8 +65,6 @@ Page({
       let prevkey = getData.key
       let prevData = getData.list
       let firstkey = getData.firstkey
-      console.log("getData")
-      console.log(getData)
       that.setData({
         prevIndex: prevIndex,
         data: prevData,
@@ -74,9 +72,9 @@ Page({
         firstkey: firstkey,
         
       })
-      console.log(that.data)
-      console.log(5555)
     }
+  },
+  addHandle(){
   },
   onBindfullscreenchange(e) {
     this.setData({
@@ -85,7 +83,6 @@ Page({
   },
   setIndex(e){
     // 设置下标 用于操作某一层图片
-    console.log(e)
     var index = e.currentTarget.dataset.index
     this.setData({
       nowIndex: index,
@@ -96,11 +93,20 @@ Page({
   addNew(){
     // 添加空的编辑
     var data = this.data.data;
-    console.log(this.data)
     if(data=='') data = []
     data.push({...this.data.dataModel})
+    data[data.length-1].title = this.data.defaultTitle
     this.setData({
-      data: data
+      data: data,
+      defaultTitle: ''
+    });
+  },
+  defaultIptValue(e){
+    // this.setData({
+    //   defaultShow: true
+    // });
+    this.setData({
+      defaultTitle: e.detail.value
     });
   },
   iptValue(e) {
@@ -124,6 +130,16 @@ Page({
       data : data
     });
   },
+  delRow(e){
+    var index = this.data.nowIndex;
+    var data = this.data.data;
+    data.splice(index, 1)
+    // data[index].url = ''
+    this.setData({
+      show: false,
+      data: data
+    });
+  },
   del(e) {
     // 删除图片 暂时做全删除
     var index = this.data.nowIndex;
@@ -135,15 +151,32 @@ Page({
       data : data
      });
   },
-
-  onClickShow(e) {
+  onClickDelRow(e) {
     // 显示 删除是否确认的提示
     this.setData({ show: true });
     this.setIndex(e);
     var _this = this
     wx.showModal({
       title: '提示',
-      content: '是否确认删除',
+      content: '是否确认删除这条图片和文字说明',
+      cancelText: '取消',
+      confirmText: '确定',
+      success: function (res) {
+        if (res.cancel) {
+        } else if (res.confirm) {
+          _this.delRow()
+        }
+      }
+    })
+  },
+  onClickdelImg(e) {
+    // 显示 删除是否确认的提示
+    this.setData({ show: true });
+    this.setIndex(e);
+    var _this = this
+    wx.showModal({
+      title: '提示',
+      content: '是否确认删除图片',
       cancelText: '取消',
       confirmText: '确定',
       success: function (res) {
@@ -164,7 +197,6 @@ Page({
     let updateapi = this.data.updateapi;
     if (updateapi){
       apiServer.post(updateapi, data).then(res => {
-        console.log(res);
         wx.showToast({
           title: '修改成功',
           icon: 'loading',
@@ -187,8 +219,6 @@ Page({
         key: this.data.prevKey, 
         list: this.data.data
       }) 
-      console.log("nowData")
-      console.log(this.data.prevKey)
       wx.setStorageSync("addivList", nowData)
       wx.showToast({
         title: '保存成功',
@@ -201,8 +231,6 @@ Page({
         wx.navigateBack({
           // 返回并执行上一页面方法
           success: function () {
-            console.log("nowData")
-            console.log(nowData)
             beforePage.backFn(nowData); // 执行前一个页面的方法
           }
         });

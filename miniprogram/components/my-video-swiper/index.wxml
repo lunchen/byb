@@ -59,30 +59,69 @@
             {{item.name}}
           </view>
           <view class="bottom-left-btn" catchtap="goToGetcourse" data-id="{{item.org.id}}">
-            <text>免费约课</text>
-            <image style="width:30rpx;height:30rpx;margin-top:-2rpx;transform:rotate(-90deg)" src="../../images/home_9@2x.png"></image>
+            <text class="myTest">免费约课</text>
+            <image class="myImage" style="width:30rpx;height:30rpx;margin-top:-2rpx;transform:rotate(-90deg)" src="../../images/home_9@2x.png"></image>
           </view>
         </view>
-        <view class="bottom-right-view">
+        <view class="bottom-right-view" >
           <view class="bottom-right-view-item">
             <image class="bottom-right-view-item-imgs" src="../../images/video_1@2x.png"></image>
             <view>{{item.lookCount}}</view>
           </view>
-          <!-- <view class="bottom-right-view-item" bindtap="likeBtn" data-id="{{item.id}}">
+          <!-- <view class="bottom-right-view-item" catchtap="likeBtn" data-id="{{item.id}}">
             <image wx:if="{{item.likeFlg == 1}}" class="bottom-right-view-item-imgs" src="../../images/video_3@2x.png"></image>
             <image wx:else class="bottom-right-view-item-imgs" src="../../images/video_2@2x.png"></image>
             <view>{{item.likeCount}}</view>
           </view> -->
-          <view class="bottom-right-view-item" >
-            <button class="bottom-right-view-item1"  open-type="share" hover-class='none'>
+          <view class="bottom-right-view-item" catchtap="shareBtn">
+            <view class="bottom-right-view-item1">
               <image class="bottom-right-view-item-imgs" src="../../images/video_4@2x.png"></image>
               <view>{{item.shareCount}}</view>
-            </button>
+            </view>
           </view>
           
         </view>
       </view>
     </swiper-item>
   </swiper>
+
+  <van-popup show="{{ shareShow }}" bind:close="onClose" custom-style="height: 150px" position="bottom">
+   <view class="sharePopup">
+    <view class="sharePopup-item" bindtap="shareFriend">
+      <button class="sharePopup-pyBtn" open-type="share" hover-class='none'>
+        <image style="width:100rpx;height:100rpx;" src="../../images/apply_3@2x.png"></image>
+      </button>
+      <view class="sharePopup-item-text">分享好友</view>
+    </view>
+    <view class="sharePopup-item" bindtap="getShareBill">
+      <image style="width:100rpx;height:100rpx;" src="../../images/apply_4@2x.png"></image>
+      <view class="sharePopup-item-text">分享朋友圈</view>
+    </view>
+   </view>
+  </van-popup>
+
+  <view class="canvasImg" wx:if="{{canvasImgShow}}">
+    <view class="canvasImg-bg" bindtap="closeCanvasImgShow"></view>
+    <view class="canvasImg-view">
+      
+      <view class="canvasImg-view-top">
+        <view style="border:4rpx solid #f0f0f0;font-size:0;">
+          <image mode="aspectFill" bindtap="previewImage" style="width:68vw;height:{{68/750*1334}}vw;" src="{{canvasImg}}"></image>
+        </view>
+        
+        <button class="huoqutupianquanxian" wx:if="{{canIUseSaveImg === false}}" style="text-align:center;width:100%" open-type="openSetting" bindopensetting='openSetting'>
+          <image style="width:80rpx;height:80rpx;margin-top:30rpx;margin-bottom:10rpx;" src="../../images/save@2x.png"></image>
+          <view style="color:#333">存到相册</view>
+        </button>
+        <view wx:else style="text-align:center;" bindtap="saveToPhoto">
+          <image style="width:80rpx;height:80rpx;margin-top:30rpx" src="../../images/save@2x.png"></image>
+          <view>存到相册随时分享</view>
+        </view>
+      </view>
+      <view class="canvasImg-exc" bindtap="closeCanvasImgShow">
+        取消
+      </view>
+    </view>
+  </view>
 </view>
 

@@ -20,7 +20,20 @@ Page({
     height: app.globalData.navheight,
     id: "",      //编辑学校的id 
     active: 0,
-    schoolHome: {},
+    schoolHome: { understand :{
+      "addr": {
+        "addr": "",
+        "city": "",
+        "district": "",
+        "id": '',
+        "latitude": '',
+        "longitude": '',
+        "name": "",
+        "place": "",
+        "placeNo": "",
+        "province": ""
+      },
+    }},
     firstkey: '',
     activityModel: {
       "addr": {
@@ -75,26 +88,22 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onBindfullscreenchange(e) {
-    console.log(987987)
     this.setData({
       navbarShow: !this.data.navbarShow
     })
   },
   bindGetUserInfo(e) {
-    console.log(e.detail.userInfo)
+    console.log(2)
   },
   addHandle() {
     // 添加空的活动
     var dataModel = JSON.parse(JSON.stringify(this.data.activityModel))
     var data = this.data.schoolHome.activityList;
-    console.log(this.data.schoolHome)
     if(data == '') data = []
     data.push(dataModel)
     this.setData({
       "schoolHome.activityList": data
     });
-    console.log(dataModel)
-    console.log(data)
   },
   deleteHandle(e) {
     // 删除活动
@@ -104,7 +113,6 @@ Page({
     this.setData({
       "schoolHome.activityList": data
     });
-    console.log(index)
   },
   addHandle1() {
     // 添加空的课程
@@ -124,31 +132,23 @@ Page({
     this.setData({
       "schoolHome.courseList": data
     });
-    console.log(index)
   },
   backFn(e) {
     // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息
-    console.log(e)
     let getData = JSON.parse(wx.getStorageSync("addivList"));
     let prevIndex = getData.index;
     let prevData = getData.list;
     let prevkey = getData.key;
     var firstkey = this.data.firstkey
-    console.log(321654)
-    console.log(getData)
-    console.log(`schoolHome.${firstkey}[${prevIndex}].${prevkey}`)
     this.setData({
       [`schoolHome.${firstkey}[${prevIndex}].${prevkey}`]: prevData
     })
-    console.log("cdata")
-    console.log(this.data)
   },
   setAddress(e) {
     console.log(e)
     var index = e.index
     var address = e.storeAddress
     var firstkey = this.data.firstkey
-    console.log(firstkey)
     // 地图页返回并执行的方法
     if(firstkey == "understand"){
       this.setData({
@@ -231,29 +231,26 @@ Page({
     var index = e.currentTarget.dataset.index;
     var that = this;
     util.uploadImg("teacherLogo").then(res => {
-      console.log(res)
       that.setData({
         [`schoolHome.courseList[${index}].img`]: res.data.string
       })
     })
   },
-  uploadUsImg(e) {
+  uploadOrgBaanner(e) {
     // 机构封面上传
     var index = e.currentTarget.dataset.index;
     var that = this;
     util.uploadImg("orgicon").then(res => {
-      console.log(res)
       that.setData({
         [`schoolHome.understand.img`]: res.data.string
       })
     })
   },
-  uploadUsLogo(e) {
+  uploadOrgLogo(e) {
     // 机构logo上传
     var index = e.currentTarget.dataset.index;
     var that = this;
     util.uploadImg("orglogo").then(res => {
-      console.log(res)
       that.setData({
         [`schoolHome.understand.logo`]: res.data.string
       })
@@ -264,7 +261,6 @@ Page({
     var index = e.currentTarget.dataset.index;
     var that = this;
     util.uploadImg("orglogo").then(res => {
-      console.log(res)
       that.setData({
         [`schoolHome.understand.wechatQrcode`]: res.data.string
       })
@@ -284,6 +280,13 @@ Page({
     var value = e.detail
     this.setData({
       [`schoolHome.understand.name`]: value,
+    })
+  },
+  onLocationChange(e) {
+    // 详细地址名称输入
+    var value = e.detail.value
+    this.setData({
+      [`schoolHome.understand.addr.addr`]: value,
     })
   },
   onLableChange(e) {
@@ -320,8 +323,6 @@ Page({
       duration: 5000
     })
     var that = this
-    console.log(JSON.stringify(data))
-    console.log(data)
       if (data.activityList == "") {
         data.activityList = []
       }
@@ -360,7 +361,6 @@ Page({
       data.understand.lableList = [...a.split("，")]
     }
     apiServer.post(`/app/org/index/update`, data).then(res => {
-      console.log(res)
       wx.hideToast();
       wx.showModal({
         title: '编辑成功',
@@ -389,8 +389,6 @@ Page({
   getData(){
     var that = this;
     apiServer.post(`/app/org/index`).then(res => {
-      console.log("res.data");
-      console.log(res.data);
       res.data.data.understand.lable = res.data.data.understand.lableList.join('，')
 
       // res.data.data.activityList.map(item =>{
@@ -411,7 +409,6 @@ Page({
     this.getData()
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

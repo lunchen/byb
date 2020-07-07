@@ -1,4 +1,3 @@
-// 编辑活动详情 视频加内容 暂还用上
 //editActivityDesc.js
 const util = require('../../utils/util.js')
 //获取应用实例
@@ -25,12 +24,10 @@ Page({
     console.log(event.detail);
   },
   getUploadMes: function (e) {
-    console.log(666)
     console.log(e.detail)
   },
   onLoad: function (e) {
     var pagess = getCurrentPages();
-    console.log(pagess)
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#fff'
@@ -42,7 +39,6 @@ Page({
     })
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

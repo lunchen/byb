@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "mp-video-full": "../../components/video-full/index",
-    "navbar": "../../components/navbarComponent/navbar"
-  }
-}

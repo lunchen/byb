@@ -40,7 +40,7 @@
   right: 30rpx;
   bottom: 20vh;
   color: #fff;
-
+  z-index: 100;
 }
 .bottom-right-view-item{
   font-size: 28rpx;
@@ -62,7 +62,7 @@
   margin-bottom: 40rpx;
 }
 .item-ellipsis{
-  max-width: 360rpx;
+  max-width: 520rpx;
   max-height: 74rpx;
   line-height: 36rpx;
   overflow: hidden;
@@ -95,11 +95,11 @@
   line-height: 1;
   display: inline-block
 }
-.bottom-left-btn image{
+.bottom-left-btn .myImage{
   display: inline-block;
   vertical-align: middle;
 }
-.bottom-left-btn text{
+.bottom-left-btn .myText{
   display: inline-block;
   vertical-align: middle;
   line-height: 1;
@@ -118,4 +118,94 @@ button.bottom-right-view-item1{
 }
 .videoTop button:not([size='mini']) {
   width: 60rpx;
+}
+.sharePopup{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0;
+  height: 100%
+}
+button.sharePopup-pyBtn{
+  text-align: center;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 28rpx;
+  color: #fff;
+  width: 100rpx;
+  height: 100rpx;
+}
+.sharePopup-item{
+  font-size: 0;
+  text-align: center;
+  margin: 0 40rpx;
+}
+.sharePopup-item-text{
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+
+.canvasImg{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 110;
+}
+.canvasImg-bg{
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  transition: opacity linear 200ms;
+}
+.canvasImg-view{
+  width: 100%;
+  height: 160vw;
+  border-radius: 10rpx;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 40rpx 10rpx 0; 
+}
+.canvasImg-view-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+
+}
+.canvasImg-exc{
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 110rpx;
+  line-height: 110rpx;
+  color: #000;
+  text-align: center;
+  width: 100%;
+}
+button.huoqutupianquanxian{
+  width: 300rpx;
+  background: #fff;
+  color: #333;
+  font-size: 30rpx;
+  padding-bottom: 10rpx;
+}
+button::after {
+  border: none;
+}
+
+button {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  line-height:inherit;
+}
+
+button {
+  border-radius:0;
 }

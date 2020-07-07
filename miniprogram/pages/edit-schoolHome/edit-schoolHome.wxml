@@ -1,0 +1,213 @@
+<!--editSchoolHome.wxml-->
+<view class="container editSchoolHome">
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
+  <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid;">
+  </view>
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{height}}px;'>
+      <view class="editSchoolHome-content">
+
+        <view class="editSchoolHome-content-view">
+          <view class="editSchoolHome-content-view-title mgb20">
+            了解我们
+          </view>
+      
+          <view class="editSchoolHome-content-view-addActVideo type3" bindtap="uploadOrgBaanner">
+            <view class="editSchoolHome-content-view-addActVideo-orgBanner">
+              <text class="editSchoolHome-content-view-addActVideo-orgBanner-text">机构封面</text>
+              <view class="editSchoolHome-content-view-addActVideo-orgBanner-view">
+                <view style="height:154rpx;">
+                  <image-video wx:if="{{schoolHome.understand.img}}" show="{{false}}" src="{{schoolHome.understand.img}}" type="{{1}}" width="154" height="208"></image-video>
+                  <image-video wx:else show="{{false}}" src="../../images/default_icon@2x.png" type="{{1}}" width="154" height="154"></image-video>
+                </view>
+                <view wx:if="{{!schoolHome.understand.img}}" style="color:#feb707;">上传</view>
+              </view>
+            </view>
+            <view class="editSchoolHome-content-view-addActVideo-suggest">(建议封面尺寸：260*350)</view>
+          </view>
+          <view class="editSchoolHome-content-form-item">
+            <text class="editSchoolHome-content-form-item-title">机构logo</text>
+            <view class="upPicBtn" bindtap="uploadOrgLogo">
+              <image style="width:225rpx;height:160rpx;" mode="aspectFill" wx:if="{{schoolHome.understand.logo}}" src="{{schoolHome.understand.logo}}"></image>
+              <image wx:else style="width:102rpx;height:108rpx;" mode="aspectFill" src="../../images/default_icon@2x.png"></image>
+              <view wx:if="{{!schoolHome.understand.logo}}">上传</view>
+            </view>
+            <view class="editSchoolHome-content-view-addActVideo-suggest">（建议logo尺寸：328*233）</view>
+          </view>
+          <view class="editSchoolHome-content-form-item">
+            <text class="editSchoolHome-content-form-item-title">机构名称</text>
+            <van-field
+              value="{{schoolHome.understand.name}}"
+              placeholder="机构名称"
+              border="{{ false }}"
+              bind:change="onOrgnameChange"
+            />
+          </view>
+          <view class="editSchoolHome-content-form-item" style="margin-bottom:6rpx;">
+            <text class="editSchoolHome-content-form-item-title">热门标签</text>
+            <van-field
+              value="{{ schoolHome.understand.lable }}"
+              placeholder="示例：爵士，瑜伽，现代舞"
+              border="{{ false }}"
+              bind:change="onLableChange"
+            />
+          </view>
+          <view style="padding:30rpx">
+             <view class="editSchoolDetails-content-editInfo-title">
+              机构简介
+            </view>
+            <view class="editSchoolDetails-textarea">
+              <textarea value="{{schoolHome.understand.remark}}" bindinput="textareaIpt" maxlength="200" auto-height="{{false}}" placeholder="点击输入内容" />
+            </view>
+          </view>
+          <view class="editSchoolHome-content-view-confirm-btn" bindtap="submit">
+            <image mode="aspectFit" style="width:100%;height:100%" src="../../images/subImg.png"></image>
+          </view>
+
+
+
+          <view class="editSchoolHome-schoolInfoCard" wx:for="{{campusList}}" wx:key="item" bindtap="setindex0" data-index0="{{index}}">
+            <view class="editSchoolHome-schoolInfoCard-handle">
+              <view class="editSchoolHome-schoolInfoCard-handle-del" bindtap="cutCampusCard" data-index0="{{index}}">
+                <image style="height:47rpx;width:44rpx;" src="../../images/edit_del.png"></image>
+              </view>
+              <view class="editSchoolHome-schoolInfoCard-handle-setMain {{item.flg==1?'selected':''}}" bindtap="setMain" data-index0="{{index}}">
+                设为主校区
+              </view>
+            </view>
+
+            
+            <view class="editSchoolHome-content-iptContact">
+              <view class="editSchoolHome-content-iptContact-item">
+                <view class="editSchoolHome-content-iptContact-item-left">校区名字</view>
+                <view class="editSchoolHome-content-iptContact-colum">
+                  <view class="editSchoolHome-content-iptContact-colum-item" >
+                     <view class="editSchoolHome-content-iptContact-item-right">
+                      <van-field
+                        data-index0="{{index}}"
+                        custom-style="padding:0;"
+                        value="{{ item.name }}"
+                        placeholder=""
+                        border="{{ false }}"
+                        bind:change="onNameChange"
+                      />
+                    </view>
+                    
+                  </view>
+                 
+                </view>
+              </view>
+            </view>
+
+
+            <view class="editSchoolHome-content-form-item itemAddress">
+              <text class="editSchoolHome-content-form-item-title">地址</text>
+              <view class="editSchoolHome-content-form-item-right" style="width:600rpx;">
+                <view style="width:500rpx;overflow-y:auto">
+                  <text wx:if="{{!item.addr.longitude && !item.addr.latitude}}">请定位并填写详细地址</text>
+                  <textarea wx:else value="{{item.addr.addr}}" style="width:100%;color:#333;" bindblur="onLocationBlur" bindinput="onLocationChange" data-index0="{{index}}" auto-height placeholder="请定位并填写详细地址" />
+                </view>
+                <view bindtap="toMap" data-index0="{{index}}" style="padding:10rpx;">
+                  <image style="height:60rpx;width:60rpx;" src="../../images/getLocation.png"></image>
+                </view>
+                
+              </view>
+            </view>
+
+            <view class="editSchoolHome-content-iptContact">
+              <text class="editSchoolHome-content-iptContact-title">联系方式：</text>
+              <view class="editSchoolHome-content-iptContact-item">
+                <view class="editSchoolHome-content-iptContact-item-left">电话</view>
+                <view class="editSchoolHome-content-iptContact-colum">
+                  <view class="editSchoolHome-content-iptContact-colum-item" wx:for="{{item.telephone}}" wx:for-item='item1' wx:for-index='index1' wx:key="item1">
+                     <view class="editSchoolHome-content-iptContact-item-right">
+                      <van-field
+                        data-index0="{{index}}"
+                        data-index1="{{index1}}"
+                        custom-style="padding:0;"
+                        value="{{ item1 }}"
+                        placeholder=""
+                        border="{{ false }}"
+                        bind:change="onTelChange"
+                      />
+                    </view>
+                    <view class="editSchoolHome-addOrCut">
+                      <image bindtap="addtel" data-index0="{{index}}" data-index1="{{index1}}" wx:if="{{item.telephone.length-1 == index1}}" style="height:35rpx;width:35rpx;" src="../../images/edit_jia.png"></image>
+                      <image bindtap="cuttel" data-index0="{{index}}" data-index1="{{index1}}" wx:if="{{item.telephone.length>1}}" style="height:35rpx;width:35rpx;" src="../../images/edit_jian.png"></image>
+                    </view>
+                  </view>
+                 
+                </view>
+              </view>
+              <view class="editSchoolHome-content-iptContact-item">
+                <view class="editSchoolHome-content-iptContact-item-left">微信号</view>
+                <view class="editSchoolHome-content-iptContact-colum">
+                  <view class="editSchoolHome-content-iptContact-colum-item" wx:for="{{item.wechat}}" wx:for-item='item1' wx:for-index='index1' bindtap="setindex1" data-index1="{{index1}}" wx:key="item1">
+                    <view class="editSchoolHome-content-iptContact-item-right">
+                      <van-field
+                        data-index0="{{index}}"
+                        data-index1="{{index1}}"
+                        custom-style="padding:0;"
+                        value="{{ item1 }}"
+                        placeholder=""
+                        border="{{ false }}"
+                        bind:change="onWechatChange"
+                      />
+                    </view>
+                    <view class="editSchoolHome-addOrCut">
+                      <image bindtap="addwechat" data-index0="{{index}}" data-index1="{{index1}}" wx:if="{{item.wechat.length-1 == index1}}" style="height:35rpx;width:35rpx;" src="../../images/edit_jia.png"></image>
+                      <image bindtap="cutwechat" data-index0="{{index}}" data-index1="{{index1}}" wx:if="{{item.wechat.length>1}}" style="height:35rpx;width:35rpx;" src="../../images/edit_jian.png"></image>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="editSchoolHome-content-iptContact-item">
+                <view class="editSchoolHome-content-iptContact-item-left">微信二维码</view>
+                <view class="editSchoolHome-content-iptContact-item-right qrCode">
+                  <view class="editSchoolHome-content-iptContact-item-right_img" wx:if="{{item.wechatQrcode!=''}}" wx:for="{{item.wechatQrcode}}" wx:for-item="item1" wx:for-index="index1" wx:key="item1">
+                    <image-video show="{{true}}" src="{{item1}}" type="{{1}}" height="118" width="118"></image-video>
+                    <image bindtap="cutImg" data-index0="{{index}}" data-index1="{{index1}}" style="height:40rpx;width:40rpx;position:absolute;top:-20rpx;right:-20rpx;" src="../../images/img_del.png"></image>
+                  </view>
+                  
+                  <view class="editSchoolHome-content-iptContact-item-right_img" bindtap="uploadQRcode" data-index0="{{index}}">
+                    <image style="height:60rpx;width:60rpx;" src="../../images/edit_add.png"></image>
+                  </view>
+                </view>
+              </view>
+              
+              <view class="editSchoolHome-content-iptContact-item-btn" data-index0="{{index}}" bindtap="subCard">
+                <image mode="aspectFit" style="width:100%;height:100%" src="../../images/subImg.png"></image>
+              </view>
+            </view>
+          </view>
+          <view class="editSchoolHome-addCampus" bindtap="addCampusCard">
+            <image class="vmiddle" style="height:35rpx;width:35rpx;" src="../../images/edit_add.png"></image>
+            <text class="vmiddle">增加校区</text> 
+          </view>
+        </view>
+
+
+        <view class="editSchoolHome-line"></view>
+        
+        <view class="editSchoolHome-content-view-confirm">
+          <view class="editSchoolHome-content-view-confirm-warn">
+            <image src="../../images/warn@2x.png"></image>
+            <text>您可以选择回到学校主页查看效果或继续编辑机构详情</text>
+          </view>
+          <view class="editSchoolHome-content-view-confirm-toOtherPage">
+            <view class="editSchoolHome-content-view-confirm-toOtherPage-left" bindtap="goToSchoolHome">
+              <image style="margin-right:10rpx;margin-top:4rpx;" src="../../images/backl1@2x.png"></image>
+              <text>预览学校主页</text>
+            </view>
+            <view class="editSchoolHome-content-view-confirm-toOtherPage-right" bindtap="goToEditSchoolDetails">
+              <text>编辑详情</text>
+              <image style="margin-left:10rpx;margin-top:4rpx;" src="../../images/more@2x.png"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </scroll-view>
+  
+</view>

@@ -4,8 +4,10 @@
 }
 .search-title{
   margin-left: 30rpx;
+  margin-top: 30rpx;
   color: #000;
   font-size: 32rpx;
+  font-weight: bold;
 }
 .search-theme{
   padding: 30rpx 30rpx;
@@ -27,11 +29,14 @@
   flex: 0 0 auto;
 }
 .activity-view{
-  padding: 0 30rpx;
+  padding: 20rpx 30rpx;
 }
 .loading-bottom-tips{
   height: 80rpx;
   line-height: 80rpx;
   color: #999;
   text-align: center
+}
+.searchBg{
+  background: #ffe600 !important;
 }

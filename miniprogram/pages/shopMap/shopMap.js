@@ -1,3 +1,6 @@
+
+const util = require('../../utils/util.js');
+const apiServer = require('../../api/request.js');
 var QQMapWX = require('../../utils/qqmap-wx-jssdk1.2/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 const app = getApp()
@@ -533,21 +536,24 @@ Page({
     })
   },
   //确认选择地址
-  selectedOk: function () {
+  selectedOk: async function () {
     var _this = this;
     let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
     let prevPage = pages[pages.length - 2]; 
     console.log(this.data.centerData)
+    var addrNo = await util.getAddrNo(this.data.centerData)
     prevPage.setData({
       storeAddress: this.data.centerData,
-      index: this.data.index
+      index: this.data.index,
+      addrNo: addrNo
     })
     wx.navigateBack({
       // 返回并执行上一页面方法
       success: function () {
         prevPage.setAddress({
           storeAddress: _this.data.centerData,
-          index: _this.data.index
+          index: _this.data.index,
+          addrNo: addrNo
         }); // 执行前一个页面的方法
       }
     });

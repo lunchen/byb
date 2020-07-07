@@ -5,12 +5,7 @@ const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
-    activityData: {
-      type: Object,
-      value: {
-        "totalCount": 0
-      }
-    },
+    // 接口名
     base: {
       type: String,
       value: "images"
@@ -18,10 +13,20 @@ Component({
     firstkey: {
       type: String,
       value: ""
+    },
+    mystyle: {
+      type: String,
+      value: ""
+    },
+    hasSlot: {
+      type: Boolean,
+      value: false
     }
   },
+  options: {
+    multipleSlots: true
+  },
   data: {
-    src1: 'https://enlist-dev.oss-cn-hangzhou.aliyuncs.com/wx28653ecae496acb0o6zAJs2g_tkXMXOIOre-Q5OmXMSofLQ896FPt4Ep26d4814714314e91134d1a8192803e5a/2020/03/21/b2411de58655467e8956ca021fe4fb.mp4',
     files: [{
       url: 'http://mmbiz.qpic.cn/mmbiz_png/VUIF3v9blLsicfV8ysC76e9fZzWgy8YJ2bQO58p43Lib8ncGXmuyibLY7O3hia8sWv25KCibQb7MbJW3Q7xibNzfRN7A/0',
     }, {
@@ -38,35 +43,25 @@ Component({
       uplaodFile: this.uplaodFile.bind(this)
     })
   },
-  chooseImage: function (e) {
-    var that = this;
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        that.setData({
-          files: that.data.files.concat(res.tempFilePaths)
-        });
-      }
-    })
-  },
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.files // 需要预览的图片http链接列表
     })
   },
-  imgLoaded(e) {
-    console.log('upload success', e)
-    console.log(789)
-  },
   methods: {
     sendUploadMes(e) {
       this.triggerEvent('getUploadMes', {
         mes: e
       })
-    }, 
+    },
+    clickHandle(){
+      if (this.data.firstkey == 'courseList'){
+        this.asdV()
+      }else{
+        this.asd()
+      }
+    },
     asdV() {
       console.log("点击选择视频了")
       var that = this
@@ -75,7 +70,6 @@ Component({
         camera: 'back',
         compressed: false,
         success(res) {
-          console.log(res)
           if (JSON.stringify(res).indexOf('413') != -1) {
             wx.showToast({
               title: '文件太大请选择的文件不要大于50MB',
@@ -86,6 +80,7 @@ Component({
           }
           wx.showToast({
             title: '努力上传中~',
+            mask:true,
             icon: 'loading',
             duration: 100000
           })
@@ -120,7 +115,6 @@ Component({
               "appRole": apiServer.getIdentity(),
             },
             success(res) {
-              console.log(res.data);
               var data = JSON.parse(res.data)
               if (data.success == true) {
                 wx.showToast({
@@ -158,7 +152,6 @@ Component({
 
     },
     asd() {
-      console.log("点击选择视频了")
       var that = this
       wx.chooseMedia({
         count: 1,
@@ -167,7 +160,7 @@ Component({
         camera: 'back',
         compressed: false,
         success(res) {
-          console.log(res)
+          console.log("点击选择视频了")
           if (JSON.stringify(res).indexOf('413') !=-1){
             wx.showToast({
               title: '文件太大请选择的文件不要大于50MB',
@@ -176,11 +169,6 @@ Component({
             })
             return
           }
-          wx.showToast({
-            title: '努力上传中~',
-            icon: 'loading',
-            duration: 100000
-          })
           var url
           let src = res.tempFiles[0],
             height = src.height,
@@ -216,7 +204,6 @@ Component({
               "appRole": apiServer.getIdentity(),
             },
             success(res) {
-              console.log(res.data);
               var data = JSON.parse(res.data)
               if(data.success == true){
                 wx.showToast({
@@ -239,14 +226,11 @@ Component({
               
             },
             fail(err) {
-
               wx.showToast({
                 title: '上传失败',
                 icon: 'none',
                 duration: 1500
               })
-              console.log("this is err")
-              console.log(err)
             }
           })
         }

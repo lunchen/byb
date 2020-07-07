@@ -1,0 +1,19 @@
+<!--pages/getAuth/getAuth.wxml-->
+<view class="container getAuth">
+  <navbar need-top='{{false}}' navbar-data='{{nvabarData}}'></navbar>
+  <view class="getAuth-content" style="padding-top:{{height}}px;" wx:if="{{showView}}">
+    <view class="getAuth-content-container">
+      <view class="getAuth-content-container-top">
+        <image class="getAuth-content-container-top-img" src="../../images/byb1.png" style="height:120rpx;width:120rpx;"></image>
+        <view>报一报</view>
+      </view>
+      <view class="getAuth-content-container-btnView">
+        <view class="getAuth-content-container-btnView-text">请授权微信用户信息以完整体验小程序</view>
+        <button class="getAuth-view-item-text2 wxgetAuthBtn" style="width:600rpx;margin-top:40rpx;" open-type="getUserInfo" bindgetuserinfo="getuserinfo">
+          <!-- <image src="./icon/login_3@2x.png"></image> -->
+          <text>授权</text>
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,6 +1,6 @@
 <!-- search.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <navbar navbar-data='{{nvabarData}}' needTop="{{true}}" backgroundColor="#ffe600"></navbar>
     <view style="position:relative;z-index:2;margin-top:{{height}}px;">
       <van-search
           value="{{ value }}"
@@ -10,17 +10,18 @@
           bind:search="onSearch"
           bind:cancel="onCancel"
           shape="round"
+          custom-class="searchBg"
         />
     </view>
     
   <scroll-view scroll-y refresher-triggered="{{refresherTriggered}}" style="position:relative;height: 100%;"
 refresher-enabled="{{true}}" refresher-threshold="50" refresher-default-style="black" bindrefresherrefresh="renewData" bindscrolltolower="getMore">
-    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{2*height}}px;'>
+    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{2*height}}px;background:#fff;'>
       <view wx:if="{{activityList.length<1}}">
         <view class="search-title">热门搜索</view>
         <view class="search-theme" wx:if="{{searchTheme.length>0}}">
           <view class="search-theme-item" wx:for="{{searchTheme}}" wx:key="{{item.name}}" bindtap="hotSearch" data-keyword="{{item.name}}">
-            <image style="width:50rpx;height:50rpx" src="../../images/search_1@2x.png"></image>
+            <image style="width:26rpx;height:30rpx;margin-right:10rpx;" src="../../images/search_1@2x.png"></image>
             <text>{{item.name}}</text>
           </view>
         </view>

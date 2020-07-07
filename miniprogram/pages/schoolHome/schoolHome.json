@@ -3,7 +3,6 @@
     "navbar": "../../components/navbarComponent/navbar",
     "activityItem": "../../components/activityItemComponent/activityItem",
     "infoCard": "../../components/infoCardComponent/infoCard",
-    "login": "../../components/loginComponent/login",
     "tabbarBtn": "../../components/tabbarBtnComponent/tabbarBtn",
     "image-video": "../../components/image-video/index"
   },

@@ -1,0 +1,51 @@
+/* pages/editCenter/editCenter.wxss */
+.container.editCenter{
+  background: #fafafa;
+  position: relative;
+}
+.editCenter-content{
+  position: relative;
+  height:100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+.editCenter-content-container{
+  position: relative;
+  height:100%;
+  width: 100%;
+}
+.editCenter-btn{
+  width: 389rpx;
+  height: 337rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.editCenter-btn.btn0{
+  top: 211rpx;
+}
+.editCenter-btn.btn1{
+  top: 346rpx;
+  left: 237rpx;
+}
+.editCenter-btn.btn2{
+  top: 620rpx;
+  left: 237rpx;
+}
+.editCenter-btn.btn3{
+  top: 757rpx;
+}
+.editCenter-content-bgImg{
+  width: 311rpx;
+  height: 270rpx;
+  position: absolute;
+}
+.editCenter-btn-text{
+  position: relative;
+  width: 311rpx;
+  height: 270rpx;
+  line-height: 270rpx;
+  color: #fff;
+  font-size: 58rpx;
+  text-align: center;
+}

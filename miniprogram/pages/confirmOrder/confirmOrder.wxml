@@ -44,7 +44,7 @@
               <view class="confirmOrder-content-item-bottom">
                 <view class="confirmOrder-content-item-bottom-view1">
                   <view>
-                    <text>票种1</text>
+                    <text>{{orderData.typeName}}</text>
                   </view>
                   <view>
                     <text style="font-size:24rpx;">X{{item.count}}</text>

@@ -1,7 +1,6 @@
 {
   "usingComponents": {
     "navbar": "../../components/navbarComponent/navbar",
-    "addVideoComponent": "../../components/addVideoComponent/addVideoComponent",
     "iptActivityInfoComponent": "../../components/iptActivityInfoComponent/iptActivityInfoComponent",
     "image-video": "../../components/image-video/index"
   },

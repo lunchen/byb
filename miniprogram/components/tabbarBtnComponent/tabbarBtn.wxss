@@ -72,13 +72,14 @@
   transition: opacity linear 200ms;
 }
 .contactUs-view{
-  width: 460rpx;
-  height: 330rpx;
+  padding-bottom:60rpx; 
+  width: 96%;
+  min-height: 330rpx;
   border-radius: 10rpx;
   background: #fff;
   position: absolute;
-  bottom: -500rpx;
-  left: 144rpx;
+  bottom: -2000rpx;
+  left: 2%;
   transition: bottom linear 100ms;
 }
 /* 动画 */
@@ -95,7 +96,7 @@
   border: 20rpx transparent solid;
   border-top: 30rpx #ffffff solid;
   bottom: -40rpx; 
-  left: 70rpx;
+  left: 27%;
 }
 .contactUs-view-title{
   color: #fe8800;
@@ -108,19 +109,36 @@
 .contactUs-view-title-txt{
   border-bottom: 1rpx #fe8800 solid;
 }
+.contactUs-view-text-list{
+  max-height: 60vh;
+  overflow-y: auto;
+}
 .contactUs-view-text{
-  padding: 0 40rpx;
+  margin: 30rpx;
   font-size: 30rpx;
   color: #666666;
+  border: 2rpx dashed #ddd;
+  border-radius: 20rpx;
+  padding-left: 30rpx;
+}
+.contactUs-view-text-txt0{
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: right;
+  padding-right: 30rpx;
 }
 .contactUs-view-text-txt1{
   line-height: 80rpx;
   border-bottom: 1rpx #f0f0f0 solid;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start
 }
 .contactUs-view-text-txt2{
   padding: 20rpx 0;
   display: flex;
   align-items: center;
+  border-bottom: 1rpx #f0f0f0 solid;
 }
 .wd100{
   width: 100%;

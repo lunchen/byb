@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "login": "../../components/loginComponent/login",
     "navbar": "../../components/navbarComponent/navbar",
     "activityItem": "../../components/activityItemComponent/activityItem",
     "infoCard": "../../components/infoCardComponent/infoCard",

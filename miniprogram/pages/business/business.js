@@ -30,8 +30,10 @@ Page({
     activityDetails:{},
     telephone:'',
     wechat: "",
-    nameValue: '',
-    telValue: ''
+    req:{
+      name: '',
+      telephone:'',
+    }
   },
   //事件处理函数
   goToSchoolHome: function() {
@@ -46,31 +48,22 @@ Page({
       backgroundColor: '#fff'
     });
     apiServer.post(`/app/call/me`).then(res => {
-      console.log(res.data);
       that.setData({
         telephone: res.data.data.telephone,
         wechat: res.data.data.wechat,
       })
     })
   },
-  nameIpt(e){
-    console.log(e)
+  mesIpt(e){
+    var key = e.currentTarget.dataset.key
     this.setData({
-      nameValue: e.detail.value
-    })
-  },
-  telIpt(e) {
-    this.setData({
-      telValue: e.detail.value
+      [`req.${key}`]: e.detail.value
     })
   },
   submit(){
-    var req = {
-      telephone: this.data.telValue,
-      name: this.data.nameValue,
-    }
+    var req = this.data.req
+    console.log(req)
     apiServer.post(`/businessOrder/add`, req).then(res => {
-      console.log(res.data);
       wx.showToast({
         title: '提交成功',
         icon: 'none',
@@ -79,11 +72,23 @@ Page({
     })
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  makePhoneCall: function (e) {
+    var that = this
+    // var tel = e.currentTarget.dataset.tel
+    wx.makePhoneCall({
+      phoneNumber: this.data.telephone,
+      success: function () {
+        console.log('拨打成功')
+      },
+      fail: function () {
+        console.log('拨打失败')
+      }
     })
   },
   onShareAppMessage: function (ops) {

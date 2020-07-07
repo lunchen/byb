@@ -70,9 +70,7 @@ Page({
     })
     req.startTime = new Date(req.startTime).getTime()
     apiServer.post(`/app/my/org/order/excel`, req).then(res => {
-      console.log(res.data)
       var durl = res.data.data.string
-      console.log(durl)
       // wx.showToast({
       //   title: '导出数据中，请稍后',
       //   icon: 'loading'
@@ -103,7 +101,6 @@ Page({
         url: durl, //仅为示例，并非真实的资源
         success(res) {
           if (res.statusCode == 200) {
-            console.log("tempFilePath" + res.tempFilePath)
             wx.openDocument({
               filePath: res.tempFilePath,
               success(res) {
@@ -139,13 +136,11 @@ Page({
   },
   selectChange(e) {
     // 由于select内部转换过key 所以取值时候 value->id label->name
-    console.log(e.detail)
     this.setData({
       "req.status": e.detail.id,
       "req.nub": 1
     })
 
-    console.log("select")
     this.getOrderList()
   },
   onCloseTime() {
@@ -176,7 +171,6 @@ Page({
     })
   },
   onSearch(event) {
-    console.log("onsearch")
     this.getOrderList()
   },
   onCancel() {
@@ -205,7 +199,6 @@ Page({
       loadingMore: true
     })
     apiServer.post('/app/my/org/order', this.data.req).then(res => {
-      console.log(res.data);
       var newList = that.data.orderList
       if (res.data.data.list.length > 0) {
         newList.push(...res.data.data.list)
@@ -229,7 +222,6 @@ Page({
       req.startTime = new Date(req.startTime).getTime()
     }
     apiServer.post(`/app/my/org/order`, req).then(res => {
-      console.log(res.data);
       res.data.data.list.forEach(item => {
         item.select = false;
       })
@@ -257,12 +249,10 @@ Page({
       backgroundColor: '#fff'
     });
     apiServer.post('/app/my/org/order/select').then(res => {
-      console.log(res.data);
       that.setData({
         selectList: res.data.data.list,
       })
     })
-    console.log(e)
     if (e.id == 'undefined') {
       this.setData({
         "req.type": e.type,

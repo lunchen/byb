@@ -17,13 +17,12 @@
           <view class="business-content-introduction-info">
             <view class="business-content-introduction-info-title">鼎轩网络科技有限公司</view>
             <view class="business-content-introduction-info-text">我们长期专注于互联网云计算软件系统研发和应用，旨在赋能行业，帮助行业变革营销、销售和经营方式、提升效率。业务范围包括定制类app、ERP管理系统、小程序、公众号、企业官网等开发及维护工作，并为商家、品牌及企业提供技术设施及营销平台。帮助行业借助新技术力量与用户和客户进行互动，并高效的进行管理和经营。</view>
-
           </view>
         </view>
         <view class="business-line"></view>
         <view class="contactInfo">
           <view class="contactInfo-title">联系我们</view>
-          <view class="contactInfo-text">小报电话：{{telephone}}</view>
+          <view class="contactInfo-text" style="color:#fe8800" bindtap="makePhoneCall">小报电话：{{telephone}}</view>
           <!-- <view class="contactInfo-text">微信号：123456789</view> -->
           <view class="contactInfo-text-img">
             <text style="margin-right:50rpx;">微信二微码</text>
@@ -39,14 +38,34 @@
 
         <view class="business-line"></view>
         <view class="contactInfo">
-          <view class="contactInfo-title">或者留下您的联系方式，小报将尽快和您联系！</view>
+          <view class="contactInfo-title">请填写您的机构信息，小报会尽快和您联系！</view>
           <view class="ipt-view">
-            <text>姓名</text>
-            <view class="ipt-view-item"><input bindinput="nameIpt" value="{{nameValue}}"></input></view>
+            <view class="ipt-view-text">负责人姓名:</view>
+            <view class="ipt-view-item"><input bindinput="mesIpt" data-key="name" value="{{req.name}}"></input></view>
           </view>
           <view class="ipt-view">
-            <text>手机</text>
-            <view class="ipt-view-item"><input bindinput="telIpt" value="{{telValue}}"></input></view>
+            <view class="ipt-view-text">负责人手机:</view>
+            <view class="ipt-view-item"><input bindinput="mesIpt" data-key="telephone" value="{{req.telephone}}"></input></view>
+          </view>
+          <view class="ipt-view">
+            <view class="ipt-view-text">机构名称:</view>
+            <view class="ipt-view-item"><input bindinput="mesIpt" data-key="orgName" value="{{req.orgName}}"></input></view>
+          </view>
+          <view class="ipt-view">
+            <view class="ipt-view-text">机构地址:</view>
+            <view class="ipt-view-item"><input bindinput="mesIpt" data-key="addr" value="{{req.addr}}"></input></view>
+          </view>
+          <view class="ipt-view">
+            <view class="ipt-view-text">老师人数:</view>
+            <view class="ipt-view-item"><input bindinput="mesIpt" data-key="count" value="{{req.count}}"></input></view>
+          </view>
+          <view class="ipt-view">
+            <view class="ipt-view-text">学员总数:</view>
+            <view class="ipt-view-item"><input bindinput="mesIpt" data-key="totalCount" value="{{req.totalCount}}"></input></view>
+          </view>
+          <view class="ipt-view">
+            <view class="ipt-view-text">专业课程:</view>
+            <view class="ipt-view-item"><input bindinput="mesIpt" data-key="type" value="{{req.type}}"></input></view>
           </view>
         </view>
         <view class="sub" bindtap="submit">提交</view>

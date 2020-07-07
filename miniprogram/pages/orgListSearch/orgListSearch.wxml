@@ -17,10 +17,13 @@
   <scroll-view scroll-y refresher-triggered="{{refresherTriggered}}" style="position:relative;height: 100%;" refresher-enabled="{{true}}" refresher-threshold="50" refresher-default-style="black" bindrefresherrefresh="renewData" bindscrolltolower="getMore">
     <view class="orgListSearch-content">
       <view class="activity-view">
-        <!-- 育儿列表组件 -->
-          <block wx:for="{{orgList}}" wx:key="id">
-            <orgItem orgItemData="{{item}}"></orgItem>
-          </block>
+          <view class="tabs-item">
+            <block wx:for="{{orgList}}" wx:key="id">
+              <view class="tabs-item-i">
+                <orgItem2 showlocation="{{true}}" orgItemData="{{item}}"></orgItem2>
+              </view>
+            </block>
+          </view>
       </view>
       <view class="loading-bottom-tips" wx:if="{{loadingMore}}"> 
         {{loadingMoreText}}

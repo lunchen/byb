@@ -1,0 +1,24 @@
+/**editSchoolHome.wxss**/
+.container{
+  height: 100%;
+}
+.editSchoolHome-content-view{
+  padding: 50rpx 0;
+}
+
+.editSchoolHome-moreActivity-btn{
+  font-size: 32rpx;
+  color: #feb707;
+  text-align: right;
+  margin-top: 30rpx;
+  padding: 0 30rpx;
+}
+.editSchoolHome .deleteBtn{
+  color: #ff0101;
+  text-align: right;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
+}
+.xianshangtiyan{
+  text-align: center;
+}

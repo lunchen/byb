@@ -1,8 +1,8 @@
-<!--business.wxml-->
+<!--h5v.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}'></navbar>
+  <!-- <navbar need-top='{{true}}' navbar-data='{{nvabarData}}' backgroundColor="red"></navbar> -->
   <view style="position:relative;z-index:2;margin-top:{{height}}px;">
   </view>
-  <!-- <web-view width="100px" height="100px" src="https://www.baidu.com/"></web-view> -->
+  <web-view width="100px" height="100px" style="width:100px;height:100px;" src="{{id}}"></web-view>
   
 </view>

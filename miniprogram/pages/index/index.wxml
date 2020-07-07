@@ -1,10 +1,9 @@
 <!--index.wxml-->
 <view class="container index">
-  <navbar navbar-data='{{nvabarData}}' backgroundColor="#ffcf1b"></navbar>
+  <navbar2 city="{{myLocation}}" needTop="{{false}}" navbar-data='{{nvabarData}}'></navbar2>
   <view class="search-view" style="position:relative;z-index:2;margin-top:{{height}}px;">
-    <view class="search-view-location">
+    <!-- <view class="search-view-location">
       <text>{{myLocation}}</text>
-      <!-- <image style="" src="../../images/home_9@2x.png"></image> -->
     </view>
     <view class="search-view-btn" bindtap="goToSearch">
       <van-search
@@ -17,14 +16,17 @@
     </view>
     <view hover-class="btnClick" wx:if="{{identity == 2}}" bindtap="toScan">
       <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/home_3@2x.png"></image>
-    </view>
+    </view> -->
   </view>
       
   <scroll-view bindscrolltoupper="scrolltoupper" bindscroll="scrollY" scroll-y style="position:relative;height: 100%;" scroll-top="{{scrollTop}}px">
     <view class="scroll-view-item" style='padding-top:1px;'>
-        <view style="margin-top:{{cmt}}%;text-align:center">
-          <image style="height:80.4rpx;width:256.8rpx" src="../../images/title-text.png"></image>
+      <view style="margin-top:{{cmt}}%;text-align:center;position:relative;" wx:if="{{identity == 2}}">
+        <image style="height:80.4rpx;width:256.8rpx" src="../../images/title-text.png"></image>
+        <view hover-class="btnClick" style="position:absolute;right:20rpx;top:-10rpx;" wx:if="{{identity == 2}}" bindtap="toScan">
+          <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/home_3@2x.png"></image>
         </view>
+      </view>
       <view class="content" style="min-height:1000rpx;">
         <view class="content-view">
           <view class="content-title">
@@ -68,11 +70,35 @@
           </scroll-view>
         </view>
 
-        <view class="link"></view>
-
+        <!-- <view class="link"></view> -->
+        
+        <swiper wx:if="{{indexAdvertList.length>0}}" style="height:220rpx;width:720rpx;margin:0 auto;" previous-margin="0" next-margin="0" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{1000}}"  indicator-color="{{'#bbb'}}" indicator-active-color="{{'#fff'}}">
+          <block wx:for="{{indexAdvertList}}" wx:key="id">
+            <swiper-item>
+              <view style="height:220rpx;width:100%;" class="swiper-item">
+                <view style="overflow:hidden;height:220rpx;border-radius:10rpx;" bindtap="goToPage" data-type="{{item.type}}" data-code="{{item.code}}" data-uri="{{item.uri}}">
+                  <block  wx:if="{{item.img}}">
+                    <image-video
+                    muted="{{false}}"
+                    show="{{item.type==1?true:false}}"
+                    src="{{item.img}}" 
+                    type="1" 
+                    height="220" 
+                    width="720"></image-video>
+                  </block>
+                  <block  wx:else>
+                    <view class="default-bg flex-middle-center">
+                      <image class="default-bg-img" src="../../images/default_bill@2x.png"></image>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
         <view class="content-view">
           <view class="content-title">
-            <text class="content-title-text1">机构列表</text>
+            <text class="content-title-text1">{{identity==2?"合作机构 | 精选案例":"机构列表"}}</text>
             <view wx:if="{{true}}" class="content-title-right">
               <text class="content-title-text2" bindtap="goToOrgListSearch">查看更多</text>
               <image src="../../images/home_4@2x.png" style="height:26rpx;width:24rpx;"></image>
@@ -84,8 +110,8 @@
               <van-tab title="{{item.label}}">
                 <view class="tabs-item">
                   <!-- 活动列表组件 -->
-                  <view wx:for="{{orgList.orgList}}" wx:key="id">
-                    <orgItem orgItemData="{{item}}"></orgItem>
+                  <view class="tabs-item-i" wx:for="{{orgList.orgList}}" wx:key="id">
+                    <orgItem2 showlocation="{{showlocation}}" orgItemData="{{item}}"></orgItem2>
                   </view>
                 </view>
               </van-tab>
@@ -110,7 +136,7 @@
               <van-tab title="{{item.label}}">
                 <view class="tabs-item">
                   <!-- 活动列表组件 -->
-                  <view wx:for="{{activityList.activityList}}" wx:key="id">
+                  <view style="width:100%" wx:for="{{activityList.activityList}}" wx:key="id">
                     <activityItem activityData="{{item}}"></activityItem>
                   </view>
                 </view>

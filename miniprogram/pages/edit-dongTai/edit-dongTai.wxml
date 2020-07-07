@@ -1,0 +1,50 @@
+<!-- editSchoolDetails.wxml-->
+<view class="container editSchoolDetails">
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
+     
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1rpx'>
+      <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid">
+      </view>
+      <view class="editSchoolDetails-content">
+     
+        <view class="editSchoolDetails-content-view">
+          <view class="dynamic" >
+            <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle">删除</view>
+            
+            <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
+              <view class="editSchoolDetails-content-view-addActVideo {{activityList.img ? 'type1':'type1'}}" bindtap="upDynamicBill" data-key="img" data-index="{{index}}">
+                <block wx:if="{{activityList.img}}">
+                    <view>
+                      <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
+                        <image-video show="{{true}}" src="{{activityList.img}}" type="{{1}}" height="300" width="483"></image-video>
+                      </view>
+                    </view>
+                    <!-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                      <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                    </view> -->
+                </block>
+                <block wx:else>
+                  <view class="editSchoolDetails-content-view-addActVideo-btn">
+                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                  </view>
+                  <view style="margin-top:20rpx">添加动态封面(建议尺寸：322*200)</view>
+                </block>
+              </view>
+            </scroll-view>
+              <!-- 下方活动form表单 -->
+              <view v-if="{{activityList}}">
+                <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{activityList}}" addrmore="{{false}}" viewIndex="{{index}}" listKeyName="{{'remarkList'}}" newAddr="{{newAddr}}" bind:getIptMes="getIptMes"></iptActivityInfoComponent>
+              </view>
+            
+          </view>
+          
+        </view>
+      </view>
+      <view  class="editSchoolDetails-content-view-confirm">
+        <view bindtap="submit" class="editSchoolDetails-content-view-confirm-btn">确认提交</view>
+      </view>
+    </view>
+  </scroll-view>
+  
+</view>

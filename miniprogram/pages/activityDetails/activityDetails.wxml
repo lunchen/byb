@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}' backgroundColor="#ffcf1b"></navbar>
+  <navbar navbar-data='{{nvabarData}}' backgroundColor="rgb(255, 230, 0)"></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
@@ -91,16 +91,16 @@
               <view class="activityDetails-content-introduction-info-text">
                 <view class="textIndent28">{{item.remark}}</view>
               </view>
-              <view class="activityDetails-content-introduction-info-img" wx:if="{{item.url!=''}}">
+              <view class="activityDetails-content-introduction-info-img" data-showimg="{{item}}" data-showimglist="{{activityListData.imgList}}" bindtap="showList" wx:if="{{item.url!=''}}">
                 <image-video 
                   scpb="{{true}}" 
-                  show="{{true}}" 
+                  show="{{false}}" 
                   cover="{{item.cover}}" 
                   src="{{item.url}}" 
                   type="{{item.type}}" 
                   muted="{{false}}"
-                  width="600"
-                  height="300"
+                  width="630"
+                  height="{{item.type==2?'300':0}}"
                   activeid = "{{activeid}}"
                   videoid="{{item.id}}" 
                   bind:play="onPlay"
@@ -109,34 +109,7 @@
               
             </view>
             <view>{{activityListData.imgList.remark}}</view>
-           <!-- <block>
-            <view class="activityDetails-content-introduction-info-title">
-              <text>一：舞蹈课程介绍</text>
-            </view>
-            <view class="activityDetails-content-introduction-info-text">
-              <view class="textIndent28">舞蹈教育适合幼儿的发育成长，使之更好地掌握身体，便于有表情地、创造性地使用动作语言，以表达丰富的内心世界。舞蹈教育适合幼儿的发育成长，使之更好地掌握身体，便于有表情地、创造性地使用动作语言，以表达丰富的内心世界。</view>
-            </view>
-           </block>
-           <block>
-            <view class="activityDetails-content-introduction-info-title">
-              <text>二：关于课程</text>
-            </view>
-            <view class="activityDetails-content-introduction-info-text">
-              <view>适学对象：3岁以上.</view>
-              <view>教师介绍：舞蹈十级舞蹈教师,多年教学,懂教育,抓方法.</view>
-              <view>其他说明：课程课时为90分钟.</view>
-            </view>
-           </block>
-           <block>
-            <view class="activityDetails-content-introduction-info-title">
-              <text>三：教学目标</text>
-            </view>
-            <view class="activityDetails-content-introduction-info-text">
-              <view>1、着重培养孩子的综合能力，为孩子们的全面发展打下基础。</view>
-              <view>2、学习内容以舞蹈基本功、身体的律动开发以及多种小舞蹈组合为主。</view>
-              <view>3、寓教于乐，训练过程轻松愉快，适合少儿天性。</view>
-            </view>
-           </block> -->
+          
           </view>
         </view>
       </view>
@@ -144,22 +117,23 @@
   </scroll-view>
   
   <login orgId="{{activityListData.org.id}}" type="{{activityListData.info.type}}" needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
-  <tabbarBtn telephone="{{activityListData.org.telephone}}" type="{{activityListData.info.type}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
+  <tabbarBtn orgId="{{activityListData.org.id}}" telephone="{{activityListData.org.telephone}}" type="{{activityListData.info.type}}" status="{{activityListData.info.status}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
 
 
-  <view class="canvas-box">
-    <image bindload="imgLoaded" src="{{activityListData.img.url}}"> </image>
-    <canvas canvas-id="myCanvas" style="width:800px;height:1600px;"></canvas>
-  </view>
-  <view class="canvasImg" wx:if="{{canvasImgShow}}">
+   <view class="canvasImg" wx:if="{{canvasImgShow}}">
     <view class="canvasImg-bg" bindtap="closeCanvasImgShow"></view>
     <view class="canvasImg-view">
       
       <view class="canvasImg-view-top">
         <view style="border:4rpx solid #f0f0f0;font-size:0;">
-          <image mode="aspectFill" bindtap="previewImage" style="width:62vw;height:{{62/80*104}}vw;" src="{{canvasImg}}"></image>
+          <image mode="aspectFill" bindtap="previewImage" style="width:60vw;height:{{60/750*1334}}vw;" src="{{canvasImg}}"></image>
         </view>
-        <view style="text-align:center;" bindtap="saveToPhoto">
+        
+        <button class="huoqutupianquanxian" wx:if="{{canIUseSaveImg === false}}" style="text-align:center;width:100%" open-type="openSetting" bindopensetting='openSetting'>
+          <image style="width:80rpx;height:80rpx;margin-top:30rpx;margin-bottom:10rpx;" src="../../images/save@2x.png"></image>
+          <view style="color:#333">存到相册</view>
+        </button>
+        <view wx:else style="text-align:center;" bindtap="saveToPhoto">
           <image style="width:80rpx;height:80rpx;margin-top:30rpx" src="../../images/save@2x.png"></image>
           <view>存到相册随时分享</view>
         </view>

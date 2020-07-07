@@ -1,0 +1,95 @@
+/* pages/getAuthLogin/getAuthLogin.wxss */
+.container.getAuthLogin{
+  position: relative;
+}
+.getAuthLogin-content{
+  position: relative;
+  height:100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+.getAuthLogin-content-container{
+  position: relative;
+  height:100%;
+  width: 100%;
+}
+.getAuthLogin-content-container-top{
+  margin-top: 180rpx;
+  text-align: center;
+  font-weight: bold;
+}
+.getAuthLogin-content-container-top-img{
+  border: 1rpx solid #e5e5e5;
+  border-radius: 50%;
+}
+.getAuthLogin-btn{
+  width: 389rpx;
+  height: 337rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.getAuthLogin-btn.btn0{
+  top: 141rpx;
+}
+.getAuthLogin-btn.btn1{
+  top: 310rpx;
+  left: 294rpx;
+}
+.getAuthLogin-btn.btn2{
+  top: 648rpx;
+  left: 294rpx;
+}
+.getAuthLogin-btn.btn3{
+  top: 817rpx;
+}
+.getAuthLogin-content-bgImg{
+  width: 389rpx;
+  height: 337rpx;
+  position: absolute;
+}
+.getAuthLogin-content-container-btnView{
+  margin-top: 200rpx;
+}
+.getAuthLogin-content-container-btnView-text{
+  text-align: center;
+}
+
+.getAuthLogin-view-item-text2{
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bolder;
+  width: 390rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  font-size: 34rpx;
+}
+.getAuthLogin-view-item-text2 .getAuthLogin-view-item-text2-img{
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+.getAuthLogin-view-item-text2.wxgetAuthLoginBtn{
+  color: #fff;
+  background: #fbaa0d;
+}
+.getAuthLogin-view-item-text2.mpgetAuthLoginBtn{
+  color: #666;
+  background: #f5f5f5;
+  border: 1px #cccccc solid;
+}
+.getAuthLogin-content-container-bottom{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 14vh;
+  font-size: 28rpx;
+}
+.getAuthLogin-content-container-bottom-text{
+  color: rgb(254,136,0);
+}

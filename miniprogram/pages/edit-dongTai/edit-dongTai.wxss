@@ -1,0 +1,128 @@
+/**editSchoolDetails.wxss**/
+.editSchoolDetails-line{
+  height: 10rpx;
+  background: #f0f0f0;
+}
+.editSchoolDetails-content-editInfo-title{
+  color: #666666;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}
+.editSchoolDetails-content-editInfo{
+  padding: 50rpx 0 50rpx 30rpx;
+}
+.editSchoolDetails-textarea{
+  position: relative;
+  z-index: 1;
+  border-bottom: 1rpx #f0f0f0 solid;
+  padding-bottom: 50rpx;
+}
+.editSchoolDetails-textarea::after{
+  content: "限200字以内";
+  position: absolute;
+  bottom: 20rpx;
+  right: 30rpx;
+  font-size: 30rpx;
+  color: #cccccc;
+}
+.editSchoolDetails-textarea textarea{
+  height: 140rpx;
+  font-size: 30rpx;
+}
+.editSchoolDetails-content-toEditList{
+  margin-top: 40rpx;
+}
+.editSchoolDetails-content-toEditList-item{
+  font-size: 32rpx;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+  font-weight: bold;
+  padding-right: 80rpx;
+  border-bottom: 1rpx #f0f0f0 solid;
+}
+.editSchoolDetails-content-toEditList-item-right{
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+.editSchoolDetails-content-toEditList-item image{
+  width: 45rpx;
+  height: 45rpx;
+  margin-left: 30rpx;
+}
+.themeColor{
+  color: #fe8800;
+}
+
+
+.editSchoolDetails-content-view{
+  padding: 50rpx 0;
+}
+.editSchoolDetails-content-view-title{
+  font-size: 30rpx;
+  border-left: 6rpx #fe8800 solid;
+  margin: 0 0 20rpx 30rpx;
+  padding-left: 15rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+.editSchoolDetails-content-view-addActVideo{
+  margin: 0 30rpx;
+  border-top: 1rpx #d9d9d9 dotted; 
+  border-bottom: 1rpx #d9d9d9 dotted; 
+  min-height: 200rpx;
+  font-size: 28rpx;
+  color: #999999;
+}
+.editSchoolDetails-content-view-addActVideo.type1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.editSchoolDetails-content-view-addActVideo.type2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.editSchoolDetails-content-view-addActVideo-btn{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 30rpx;
+}
+.editSchoolDetails-moreActivity-btn{
+  font-size: 28rpx;
+  color: #feb707;
+  text-align: right;
+  margin-top: 30rpx;
+  padding: 0 30rpx;
+}
+
+
+.editSchoolDetails-content-view-confirm{
+  padding: 10rpx 30rpx 70rpx;
+
+}
+.editSchoolDetails-content-view-confirm-btn{
+  background: #fe8800;
+  text-align: center;
+  color: #fff;
+  font-size: 40rpx;
+  border-radius: 10rpx;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.dynamic{
+  border-bottom: 4rpx #d9d9d9 solid;
+}
+.editSchoolDetails .deleteBtn{
+  color: #ff0101;
+  text-align: right;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
+}

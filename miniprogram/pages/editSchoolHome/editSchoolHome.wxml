@@ -6,77 +6,7 @@
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{height}}px;'>
       <view class="editSchoolHome-content">
-        <!-- 去除活动发布 <view class="editSchoolHome-content-view">
-          <view class="editSchoolHome-content-view-title">
-            添加活动
-          </view>
-          <view wx:for="{{schoolHome.activityList}}" wx:key="id">
-            <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle">删除</view>
-            
-            <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
-              <view class="editSchoolHome-content-view-addActVideo {{item.img ? 'type2':'type1'}}" bindtap="upActivityBill" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
-                !-- <view class="editSchoolHome-content-view-addActVideo-btn">
-                  <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                </view>
-                <view>添加海报/视频</view> --
-                <block wx:if="{{item.img}}">
-                  <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
-                      <image-video show="{{true}}" src="{{item.img}}" type="{{1}}" height="210"></image-video>
-                    </view>
-                  !-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
-                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                  </view> --
-                </block>
-                <block wx:else>
-                  <view>
-                    <view class="editSchoolHome-content-view-addActVideo-btn" style="text-align:center;">
-                      <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/add1@2x.png"></image>
-                    </view>
-                    <view>添加活动封面(建议尺寸：180*240)</view>
-                  </view>
-                  
-                </block>
-              </view>
-            </scroll-view>
 
-            <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
-              <view class="editSchoolHome-content-view-addActVideo {{item.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-firstkey="activityList" data-index="{{index}}">
-                !-- <view class="editSchoolHome-content-view-addActVideo-btn">
-                  <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                </view>
-                <view>添加海报/视频</view> --
-                <block wx:if="{{item.bannerList.length>0}}">
-                  <view wx:for="{{item.bannerList}}" wx:key="id">
-                    <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
-                      <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" src="{{item.url}}" type="{{item.type}}" width="{{210/375*690}}" height="210"></image-video>
-                    </view>
-                  </view>
-                  !-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
-                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                  </view> --
-                </block>
-                <block wx:else>
-                  <view>
-                    <view class="editSchoolHome-content-view-addActVideo-btn" style="text-align:center;">
-                      <image style="width:60rpx;height:60rpx;margin-top:4rpx;" src="../../images/add1@2x.png"></image>
-                    </view>
-                    <view>添加轮播图片/视频(建议尺寸：690*375)</view>
-                  </view>
-                  
-                </block>
-              </view>
-            </scroll-view>
-            <block>
-              !-- 下方活动form表单 --
-              <view bindtap="setFirstKey" data-firstkey="activityList" >
-                <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{item}}" viewIndex="{{index}}" bind:getIptMes="getIptMes" activityType="{{1}}"></iptActivityInfoComponent>
-              </view>
-            </block>
-          </view>
-          <view class="editSchoolHome-moreActivity-btn" bindtap="addHandle">+继续新增</view>
-        </view> -->
-
-        <!-- <view class="editSchoolHome-line"></view> -->
 
         <view class="editSchoolHome-content-view">
           <view class="editSchoolHome-content-view-title mgb20">
@@ -98,8 +28,8 @@
             <view class="editSchoolHome-content-form-item" style="border:none">
               <text class="editSchoolHome-content-form-item-title">图片</text>
               <view class="upPicBtn" bindtap="uploadTeacherLogo" data-index="{{index}}">
-                <image mode="aspectFill" wx:if="{{item.img}}" src="{{item.img}}"></image>
-                <image mode="aspectFill" wx:else src="../../images/default_icon@2x.png"></image>
+                <image mode="aspectFill" style="width:225rpx;height:160rpx;" wx:if="{{item.img}}" src="{{item.img}}"></image>
+                <image mode="aspectFill" style="width:108rpx;height:102rpx;" wx:else src="../../images/default_icon@2x.png"></image>
                 <view>上传</view>
               </view>
             </view>
@@ -111,7 +41,7 @@
                 <block wx:if="{{item.imgList.length>0}}">
                   <view wx:for="{{item.imgList}}" wx:key="id">
                     <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
-                      <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="210" width="210"></image-video>
+                      <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?0:400}}" width="600"></image-video>
                     </view>
                   </view>
                   <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
@@ -138,8 +68,10 @@
           <view class="editSchoolHome-content-view-title mgb20">
             了解我们
           </view>
-          <view class="editSchoolHome-content-view-addActVideo type1" bindtap="uploadUsImg">
-            <image-video wx:if="{{schoolHome.understand.img}}" show="{{true}}" src="{{schoolHome.understand.img}}" type="{{1}}" height="200"></image-video>
+          <!-- <view class="editSchoolHome-content-view-addActVideo type1" bindtap="uploadOrgBaanner">
+            <view wx:if="{{schoolHome.understand.img}}" catchtap="catchfn" style="display:inline-block;">
+             <image-video show="{{true}}" src="{{schoolHome.understand.img}}" type="{{1}}" width="260" height="350"></image-video>
+            </view>
             <block wx:else>
                 <view>
                   <view class="editSchoolHome-content-view-addActVideo-btn" style="text-align:center;">
@@ -148,16 +80,28 @@
                   <view>添加机构封面(建议封面尺寸：260*350)</view>
                 </view>
             </block>
-            
+          </view> -->
+          <view class="editSchoolHome-content-view-addActVideo type3" bindtap="uploadOrgBaanner">
+            <view class="editSchoolHome-content-view-addActVideo-orgBanner">
+              <text class="editSchoolHome-content-view-addActVideo-orgBanner-text">机构封面</text>
+              <view class="editSchoolHome-content-view-addActVideo-orgBanner-view">
+                <view style="height:154rpx;">
+                  <image-video wx:if="{{schoolHome.understand.img}}" show="{{false}}" src="{{schoolHome.understand.img}}" type="{{1}}" width="154" height="208"></image-video>
+                  <image-video wx:else show="{{false}}" src="../../images/default_icon@2x.png" type="{{1}}" width="154" height="154"></image-video>
+                </view>
+                <view wx:if="{{!schoolHome.understand.img}}" style="color:#feb707;">上传</view>
+              </view>
+            </view>
+            <view class="editSchoolHome-content-view-addActVideo-suggest">(建议封面尺寸：260*350)</view>
           </view>
-
           <view class="editSchoolHome-content-form-item">
             <text class="editSchoolHome-content-form-item-title">机构logo</text>
-            <view class="upPicBtn" bindtap="uploadUsLogo">
-              <image mode="aspectFill" wx:if="{{schoolHome.understand.logo}}" src="{{schoolHome.understand.logo}}"></image>
-              <image mode="aspectFill" wx:else src="../../images/default_icon@2x.png"></image>
-              <view>上传</view>
+            <view class="upPicBtn" bindtap="uploadOrgLogo">
+              <image style="width:225rpx;height:160rpx;" mode="aspectFill" wx:if="{{schoolHome.understand.logo}}" src="{{schoolHome.understand.logo}}"></image>
+              <image wx:else style="width:102rpx;height:108rpx;" mode="aspectFill" src="../../images/default_icon@2x.png"></image>
+              <view wx:if="{{!schoolHome.understand.logo}}">上传</view>
             </view>
+            <view class="editSchoolHome-content-view-addActVideo-suggest">（建议logo尺寸：328*233）</view>
           </view>
           <view class="editSchoolHome-content-form-item">
             <text class="editSchoolHome-content-form-item-title">机构名称</text>
@@ -177,12 +121,20 @@
               bind:change="onLableChange"
             />
           </view>
-          <view class="editSchoolHome-content-form-item item1" bindtap="toMap" data-firstkey="understand">
+          <view class="editSchoolHome-content-form-item item1" data-firstkey="understand">
             <text class="editSchoolHome-content-form-item-title">地点</text>
-            <view class="editSchoolHome-content-form-item-right">
-              <text wx:if="{{schoolHome.understand.addr.addr!=''}}">{{schoolHome.understand.addr.addr}}</text>
+            <view class="editSchoolHome-content-form-item-right" style="width:600rpx;">
+              <view style="width:500rpx;overflow-y:auto">
+                <text wx:if="{{!schoolHome.understand.addr.longitude && !schoolHome.understand.addr.latitude}}">请定位并填写详细地址</text>
+                <textarea wx:else value="{{schoolHome.understand.addr.addr}}" style="width:100%;color:#333;" bindinput="onLocationChange" auto-height placeholder="请定位并填写详细地址" />
+              </view>
+              <view bindtap="toMap" data-firstkey="understand" style="padding:10rpx;">
+                <image style="height:60rpx;width:60rpx;" src="../../images/getLocation.png"></image>
+              </view>
+              
+              <!-- <text wx:if="{{schoolHome.understand.addr.addr!=''}}">{{schoolHome.understand.addr.addr}}</text>
               <text wx:else>请选择</text>
-              <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image>
+              <image style="height:24rpx;width:24rpx;margin-top:2rpx;" src="../../images/home_4@2x.png"></image> -->
             </view>
           </view>
 

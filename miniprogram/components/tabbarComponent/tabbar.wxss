@@ -64,4 +64,5 @@
 .special-text{
   font-size: 22rpx;
   color: #333;
+  margin-top: 6rpx;
 }

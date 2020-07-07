@@ -1,5 +1,4 @@
 // 电子票
-// pages/mine/mine.js
 const util = require('../../utils/util.js')
 const apiServer = require('../../api/request.js');
 //获取应用实例
@@ -26,9 +25,7 @@ Page({
     this.setData({ show: false });
   },
   previewImg: function (e) {
-    console.log(this.data)
     var imgArr = [this.data.eTicketData.qrcode];
-    console.log(imgArr)
     wx.previewImage({
       current: imgArr[0],     //当前图片地址
       urls: imgArr,               //所有要预览的图片的地址集合 数组形式
@@ -43,11 +40,9 @@ Page({
       backgroundColor: '#000000'
     });
     var _this = this;
-    console.log(e)
     let orderNo = e ? e.orderNo : 1;
     if (orderNo) {
       apiServer.post(`/app/my/user/qrCode/orderNo/${orderNo}`).then(res => {
-        console.log(res.data);
         _this.setData({
           eTicketData: res.data.data,
         })

@@ -1,4 +1,3 @@
-// 学校页详情编辑
 // editSchoolDetails.js
 const util = require('../../utils/util.js');
 const apiServer = require('../../api/request.js');
@@ -104,7 +103,7 @@ Page({
     })
   },
   hasEdit(e){
-    console.log()
+    console.log('end')
   },
   //事件处理函数
   textareaIpt(e){
@@ -122,7 +121,6 @@ Page({
     this.setData({
       "schoolDetails.activityList": data
     });
-    console.log(index)
   },
   addHandle() {
     // 添加空的动态
@@ -132,7 +130,6 @@ Page({
     this.setData({
       "schoolDetails.activityList": data
     });
-    console.log(this.data)
   },
   methods:{
     
@@ -141,7 +138,6 @@ Page({
     var that = this,
       index = e.currentTarget.dataset.index;
     util.uploadImg("dynamicBill").then(res => {
-      console.log(res)
       var data = [{
         "id": '',
         "imgNo": "",
@@ -189,7 +185,6 @@ Page({
     });
   },
   setAddress(e){
-    console.log(e)
     var index = e.index
     var address = e.storeAddress
     // 地图页返回并执行的方法
@@ -206,16 +201,17 @@ Page({
   },
   backFn(e){
     // 活动视频编辑后返回从storage获取单前编辑的新活动图片信息
-    console.log(e)
     let getData = JSON.parse(wx.getStorageSync("addivList"));
     let prevIndex = getData.index;
     let prevData = getData.list;
     let prevkey = getData.key;
-    console.log(321654)
-    console.log(getData)
-    console.log(`schoolDetails.activityList[${prevIndex}].${prevkey}`)
     this.setData({
       [`schoolDetails.activityList[${prevIndex}].${prevkey}`]: prevData
+    })
+  },
+  goToDongTai(e) {
+    wx.navigateTo({
+      url: `../edit-dongTaiList/edit-dongTaiList`
     })
   },
   goToSchoolDetails(e) {
@@ -249,8 +245,6 @@ Page({
         data.recentActivityList[index].remarkList = []
       }
     })
-    console.log(JSON.stringify(data))
-    console.log(data)
     apiServer.post(`/app/org/info/update`, data).then(res => {
       wx.hideToast();
       wx.showModal({
@@ -272,7 +266,6 @@ Page({
       // _this.getData()
       // activityList: res.data.data.activityList
     }).catch(err=>{
-      wx.hideToast();
       _this.setData({
         hasWork: false
       })
@@ -286,7 +279,6 @@ Page({
   getData(){
     var that = this
     apiServer.post(`/app/org/info`).then(res => {
-      console.log(res.data);
       wx.hideToast()
       that.setData({
         schoolDetails: res.data.data,

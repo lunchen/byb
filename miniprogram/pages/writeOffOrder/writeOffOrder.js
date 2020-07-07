@@ -47,7 +47,6 @@ Page({
         writeOffOrderNo: orderNo,
         orderData: JSON.parse(wx.getStorageSync("scanData"))
       })
-      console.log(orderNo)
       // apiServer.post(`/app/order/info/qrCode/${orderNo}`).then(res => {
       //   console.log(res.data);
       //   that.setData({
@@ -65,7 +64,6 @@ Page({
       duration: 5000
     })
     apiServer.post(`/app/my/org/order/off/${this.data.writeOffOrderNo}`).then(res => {
-      console.log(res.data);
       wx.showToast({
         title: '核销成功,正在返回首页',
         icon: 'loading',

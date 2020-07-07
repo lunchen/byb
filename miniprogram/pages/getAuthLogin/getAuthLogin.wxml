@@ -1,0 +1,22 @@
+<!--pages/getAuthLogin/getAuthLogin.wxml-->
+<view class="container getAuthLogin">
+  <navbar need-top='{{false}}' navbar-data='{{nvabarData}}'></navbar>
+  <view class="getAuthLogin-content" style="padding-top:{{height}}px;">
+    <view class="getAuthLogin-content-container">
+      <view class="getAuthLogin-content-container-top">
+        <image class="getAuthLogin-content-container-top-img" src="../../images/byb1.png" style="height:120rpx;width:120rpx;"></image>
+        <view>报一报</view>
+      </view>
+      <view class="getAuthLogin-content-container-btnView">
+        <!-- <view class="getAuthLogin-content-container-btnView-text">请微信授权</view> -->
+        <button class="getAuthLogin-view-item-text2 wxgetAuthLoginBtn" style="width:600rpx;margin-top:40rpx;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+          <!-- <image src="./icon/login_3@2x.png"></image> -->
+          <text>微信用户一键登录</text>
+        </button>
+      </view>
+      <view class="getAuthLogin-content-container-bottom">
+      登录代表您已同意<text class="getAuthLogin-content-container-bottom-text">报一报协议、隐私协议</text>
+      </view>
+    </view>
+  </view>
+</view>

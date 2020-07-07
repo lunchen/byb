@@ -66,6 +66,10 @@
   align-items: center;
   margin-bottom: 30rpx;
 }
+.ipt-view-text{
+  width: 180rpx;
+  text-align: right;
+}
 .ipt-view-item{
   padding: 10rpx 20rpx;
   border: 2rpx #f0f0f0 solid;

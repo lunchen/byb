@@ -22,7 +22,7 @@ Page({
     req :{
       "keyword": '',
       "nub": 1,
-      "size": 6
+      "size": 8
     },
     refresherTriggered: false,
     loadingMore: false,
@@ -40,7 +40,6 @@ Page({
       loadingMore: true
     })
     apiServer.post('/app/org/list/seach', this.data.req).then(res => {
-      console.log(res.data);
       var newList = that.data.orgList
       if (res.data.data.list.length>0){
         newList.push(...res.data.data.list)
@@ -58,16 +57,19 @@ Page({
     console.log("刷新")
   },
   renewData(){
-    this.setData({
-      "req.nub": 1,
-      orgList: [],
-      loadingMore: false
-    })
     setTimeout(() => {
       this.getData()
+      this.setData({
+        "req.nub": 1,
+        orgList: [],
+        loadingMore: false
+      })
     }, 1000)
   },
   onSearch(){
+    this.setData({
+      "req.nub": 1,
+    })
     this.getData()
   },
   comingTo(options) {
@@ -75,7 +77,6 @@ Page({
     var strs = decodeURIComponent(options.scene)
     var pages = getCurrentPages()
     var currentPage = pages[pages.length - 1]
-    console.log(currentPage.options)
   },
   onLoad: function (e) {
     var that = this;
@@ -91,7 +92,6 @@ Page({
   getData(){
     var that = this
     apiServer.post('/app/org/list/seach', this.data.req).then(res => {
-      console.log(res.data);
       that.setData({
         orgList: res.data.data.list,
         refresherTriggered: false

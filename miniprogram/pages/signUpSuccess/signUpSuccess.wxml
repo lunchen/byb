@@ -63,23 +63,22 @@
 
   
 
-  <view class="canvas-box">
-    <image bindload="imgLoaded" src="{{activityListData.img.url}}"> </image>
-    <canvas canvas-id="myCanvas" style="width:800px;height:1600px;"></canvas>
-    <canvas canvas-id="myCanvas1" style="width:800px;height:960px;"></canvas>
-  </view>
   <view class="canvasImg" wx:if="{{canvasImgShow}}">
     <view class="canvasImg-bg" bindtap="closeCanvasImgShow"></view>
     <view class="canvasImg-view">
       
       <view class="canvasImg-view-top">
-        <view style="border:4rpx solid #f0f0f0;overflow:hidden;font-size:0;">
-          <image mode="aspectFill" bindtap="previewImage" style="width:68vw;height:{{68/80*96}}vw;" src="{{canvasImg}}"></image>
+        <view style="border:4rpx solid #f0f0f0;font-size:0;">
+          <image mode="aspectFill" bindtap="previewImage" style="width:60vw;height:{{60/750*1334}}vw;" src="{{canvasImg}}"></image>
         </view>
-        <view style="text-align:center;" bindtap="saveToPhoto">
-          <image style="width:80rpx;height:80rpx;;margin-top:30rpx" src="../../images/save@2x.png"></image>
-          <view>存到相册</view>
-          <view>随时分享</view>
+        
+        <button class="huoqutupianquanxian" wx:if="{{canIUseSaveImg === false}}" style="text-align:center;width:100%" open-type="openSetting" bindopensetting='openSetting'>
+          <image style="width:80rpx;height:80rpx;margin-top:30rpx;margin-bottom:10rpx;" src="../../images/save@2x.png"></image>
+          <view style="color:#333">存到相册</view>
+        </button>
+        <view wx:else style="text-align:center;" bindtap="saveToPhoto">
+          <image style="width:80rpx;height:80rpx;margin-top:30rpx" src="../../images/save@2x.png"></image>
+          <view>存到相册随时分享</view>
         </view>
       </view>
       <view class="canvasImg-exc" bindtap="closeCanvasImgShow">

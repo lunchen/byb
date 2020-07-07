@@ -1,0 +1,30 @@
+<!--editSchoolHome.wxml-->
+<view class="container editSchoolHome">
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
+  <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid;">
+  </view>
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{height}}px;'>
+      <view class="editSchoolHome-content">
+
+        <view class="editSchoolHome-content-view">
+          <!-- <view class="editSchoolHome-content-view-title mgb20">
+            线上体验
+          </view> -->
+          <block  wx:for="{{courseList}}" wx:key="id">
+            <!-- <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle1">删除</view> -->
+            <van-cell title="{{item.name}}" is-link bindtap="goToEdit" data-id="{{item.id}}"/>
+          </block>
+
+          <view class="editSchoolHome-moreActivity-btn xianshangtiyan" bindtap="goToEdit">+ 新增线上体验</view>
+
+        </view>
+
+
+
+      </view>
+
+    </view>
+  </scroll-view>
+  
+</view>

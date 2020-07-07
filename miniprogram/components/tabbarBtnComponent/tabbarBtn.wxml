@@ -29,15 +29,26 @@
         <view class="contactUs-view-title-txt">联系我们</view>
         <image bindtap="closeBtn" style="width:30rpx;height:30rpx;" src="./icon/apply_1@2x.png"></image>
       </view>
-      <view class="contactUs-view-text">
-        <view class="contactUs-view-text-txt1" bindtap="makePhoneCall">
-          <text>一键呼叫：</text>
-          <image style="width:60rpx;height:60rpx;" src="../../images/call@2x.png"></image>
+
+      <view class="contactUs-view-text-list">
+        <view class="contactUs-view-text" wx:for="{{telList}}" wx:key="id">
+          <view class="contactUs-view-text-txt0">{{item.name}}</view>
+          <view class="contactUs-view-text-txt1" >
+            <text>一键呼叫：</text>
+            <view>
+              <image wx:for="{{item.telephone}}" wx:for-item="item1" wx:key="this" bindtap="makePhoneCall" data-tel="{{item1}}" style="width:60rpx;height:60rpx;margin-right:10rpx;" src="../../images/call@2x.png"></image>
+            </view>
+          </view>
+          <view class="contactUs-view-text-txt2">
+            <view>微信二维码：</view>
+            <image wx:for="{{item.wechatQrcode}}" wx:for-item="item2" wx:for-index="index2" data-index0="{{index}}" wx:key="this" data-imgsrc="{{item2}}" bindtap='previewImg' style="width:70rpx;height:70rpx;margin-left:10rpx" src="{{item2}}"></image>
+          </view>
+          <view class="contactUs-view-text-txt1" bindtap="makePhoneCall">
+            <text>一键呼叫：</text>
+            <text>{{item.addr.addr}}</text>
+          </view>
         </view>
-        <view class="contactUs-view-text-txt2">
-          <view>微信二维码：</view>
-          <image bindtap='previewImg' style="width:100rpx;height:100rpx;margin-left:10rpx" src="{{wxqecode}}"></image>
-        </view>
+        
       </view>
       
     </view>

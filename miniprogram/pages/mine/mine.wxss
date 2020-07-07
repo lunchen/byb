@@ -3,22 +3,30 @@
   height: 100%;
   overflow: hidden;
 }
+.mine-top-avatar{
+  width:148rpx;
+  height:148rpx;
+  overflow:hidden;
+  border-radius:50%;
+  background:red;
+  margin-top:4rpx;
+  padding: 4rpx;
+  background: linear-gradient(to right, rgb(250,107,145),rgb(255,255,255))
+}
 .mine-top{
-  padding-top: 130rpx;
 }
 .mine-top-view{
   width: 690rpx;
   height: 160rpx;
   margin: 0 auto;
-  background: #fff;
   border-radius: 18rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20rpx 0;
 }
 .participant .mine-top-view{
   position: relative;
-  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.1);
 }
 .sponsor .mine-top-view{
   position: relative;
@@ -29,7 +37,7 @@
   margin: 0 auto 0;
   background: #fff;
   border-radius: 18rpx;
-  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1); */
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -45,9 +53,8 @@
 }
 .mine-top-view-left{
   display: flex;
-  align-items:flex-end; 
+  align-items:center; 
   margin-left:30rpx;
-  margin-top: -130rpx;
 }
 .mine-top-view-left-noImg{
   width:148rpx;
@@ -61,6 +68,9 @@
 .mine-top-view-right{
   position: absolute;
   right: 0;
+  bottom: 10rpx;
+}
+.mine-top-view-right-view{
   min-width: 210rpx;
   height: 55rpx;
   line-height: 55rpx;
@@ -72,6 +82,7 @@
   display: flex;
   align-items: center;
   padding: 0rpx 20rpx 0 23rpx;
+  margin-top: 6rpx;
 }
 
 .mine-content-title{
@@ -101,6 +112,29 @@
   background: #fe8800;
   margin-right: 13rpx;
 }
+.tab_list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tab_list_item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 80rpx;
+  flex:1 1 30vw;
+  text-align: center;
+}
+.tab_list_item.active{
+  color: #fe8800;
+}
+.tab_list_item .cLine{
+  background: transparent;
+}
+.tab_list_item.active .cLine{
+  background: #fe8800;
+}
+
 /* 参与方下方列表 */
 .participantCard-content-item{
   border-bottom: 20rpx #f0f0f0 solid;
@@ -285,22 +319,6 @@
 
 /* 主办方下方列表 */
 .sponsor .mine-top-view{
-}
-.sponsor-edit{
-  margin: 0 30rpx;
-  padding-left: 200rpx;
-  padding-bottom: 50rpx;
-  margin-top: -40rpx;
-  position: relative;
-}
-.sponsor-edit-btn{
-  border: 1rpx #fe8800 solid;
-  border-radius: 8rpx;
-  color: #fe8800;
-  font-size: 28rpx;
-  line-height: 48 rpx;
-  text-align: center;
-  width: 200rpx;
 }
 .sponsorCard-content-item{
   border-bottom: 20rpx #f0f0f0 solid;
@@ -496,6 +514,65 @@
   text-align: center;
   color: #fe8800;
   border-radius: 8rpx;
+}
+.sponsor-top{
+  border-radius: 10rpx;
+  margin: 0 auto;
+}
+.sponsor-top-view{
+  position: relative;
+  width: 92vw;
+  margin: 0 auto;
+  height: 380rpx;
+  border-radius: 30rpx;
+  background: #ffffff80;
+  box-shadow: 0 0 20rpx 0rpx #ccc;
+}
+.sponsor-top-view-bg{
+  position: absolute;
+  width: 94%;
+  height: 92%;
+  background: rgb(255, 208, 27);
+  border-radius: 30rpx;
+  left: 3%;
+  top: 4%;
+  border: 2rpx #000 dashed; 
+  box-sizing: border-box;
+}
+.sponsor-top-view-content{
+  position: absolute;
+  width: 94%;
+  height: 92%;
+  left: 3%;
+  top: 4%;
+  border-radius: 30rpx;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+}
+.sponsor-top-view-right{
+  top: 120rpx;
+}
+.sponsor-top-view-bottom{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 30rpx;
+  width: 100%;
+}
+.sponsor-top-view-bottom-item{
+  width: 33%;
+  border-left: 1rpx #f2f2f2 solid;
+  height: 55rpx;
+  line-height: 55rpx;
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.sponsor-top-view-bottom-item:first-child{
+  border-left: none;
+  line-height: 27rpx;
+  font-size: 24rpx;
 }
 /* 主办方下方列表 */
 

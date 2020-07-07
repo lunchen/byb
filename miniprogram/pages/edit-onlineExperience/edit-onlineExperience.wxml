@@ -1,0 +1,68 @@
+<!--editSchoolHome.wxml-->
+<view class="container editSchoolHome">
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
+  <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid;">
+  </view>
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{height}}px;'>
+      <view class="editSchoolHome-content">
+        <view class="editSchoolHome-content-view">
+          
+          <block wx:key="id">
+            <view class="deleteBtn" bindtap="deleteHandle1">删除</view>
+            <view class="editSchoolHome-content-form-item">
+              <text class="editSchoolHome-content-form-item-title">标题</text>
+              <van-field
+                value="{{ course.name }}"
+                placeholder="建议4个字以内"
+                border="{{ false }}"
+                bind:change="onCoursenameChange"
+                data-index="{{index}}"
+              />
+            </view>
+
+            <view class="editSchoolHome-content-form-item" style="border:none">
+              <text class="editSchoolHome-content-form-item-title">图片</text>
+              <view class="teacherLogo" bindtap="uploadTeacherLogo" data-index="{{index}}">
+                <image mode="aspectFill" style="width:120rpx;height:120rpx;" wx:if="{{course.img}}" src="{{course.img}}"></image>
+                <image mode="aspectFill" style="width:120rpx;height:120rpx;" wx:else src="../../images/default_icon@2x.png"></image>
+              </view>
+              
+              <view class="editSchoolHome-content-view-addActVideo-suggest">（建议上传教师头像）</view>
+            </view>
+
+            <scroll-view scroll-y style="position:relative;max-height: 600rpx;width:100%;">
+              <view class="editSchoolHome-content-view-addActVideo {{course.imgList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="imgList">
+                <!-- <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
+                <text>添加海报/视频</text> -->
+                <block wx:if="{{course.imgList.length>0}}">
+                  <view wx:for="{{course.imgList}}" wx:key="id" style="width:400rpx;">
+                    <view style="margin:10rpx;" catchtap="catchfn">
+                      <image-video bind:bindfullscreenchange = "onBindfullscreenchange" show="{{true}}" cover="{{item.cover}}" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?0:267}}" width="400"></image-video>
+                    </view>
+                  </view>
+                  <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                  </view>
+                </block>
+                <block wx:else>
+                  <view class="editSchoolHome-content-view-addActVideo-btn">
+                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+                  </view>
+                  <text>添加视频</text>
+                </block>
+              </view>
+            </scroll-view>
+          </block>
+
+          <view class="editSchoolHome-content-view-confirm-btn1" bindtap="submit">确认提交</view>
+
+        </view>
+
+
+      </view>
+
+    </view>
+  </scroll-view>
+  
+</view>

@@ -1,4 +1,4 @@
-/**business.wxss**/
+/**h5v.wxss**/
 
 .business-content {
   position: relative;
@@ -8,6 +8,7 @@
 .business-content-introduction-title{
   color: #fe8800;
   font-size: 36rpx;
+  background: transparent
 }
 
 /* 小三角 */
