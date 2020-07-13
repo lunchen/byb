@@ -1,4 +1,4 @@
-<!-- editSchoolDetails.wxml-->
+<!-- edit-dongTai.wxml-->
 <view class="container editSchoolDetails">
   <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
      
@@ -20,9 +20,7 @@
                         <image-video show="{{true}}" src="{{activityList.img}}" type="{{1}}" height="300" width="483"></image-video>
                       </view>
                     </view>
-                    <!-- <view style="width:210rpx;height:210rpx;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
-                      <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                    </view> -->
+                  
                 </block>
                 <block wx:else>
                   <view class="editSchoolDetails-content-view-addActVideo-btn">

@@ -119,8 +119,11 @@ page {
 .tabs-item{
   padding: 30rpx 20rpx 10rpx;
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
   flex-wrap: wrap;
-  min-height: 240rpx;
+  min-height: 900rpx;
 }
 .tabs-item-i{
   margin: 0 10rpx;

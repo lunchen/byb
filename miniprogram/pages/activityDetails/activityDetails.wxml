@@ -1,4 +1,4 @@
-<!--index.wxml-->
+<!-- activityDetails.wxml-->
 <view class="container">
   <navbar navbar-data='{{nvabarData}}' backgroundColor="rgb(255, 230, 0)"></navbar>
      
@@ -28,12 +28,7 @@
             </swiper-item>
           </block>
         </swiper>
-        <!-- <view class="activityDetailsImg-view">
-          <view class="activityDetailsImg">
-            <image-video show="{{true}}" src="{{activityListData.img.url}}" type="{{activityListData.img.type}}" height="375" width="690"></image-video>
-          </view>
-         
-        </view> -->
+       
       </view>
       <view class="activityDetails-content">
         <!-- 卡片信息 -->

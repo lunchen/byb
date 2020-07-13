@@ -1,4 +1,4 @@
-/**editSchoolHome.wxss**/
+/**edit-dongTaiList.wxss**/
 .container{
   height: 100%;
 }

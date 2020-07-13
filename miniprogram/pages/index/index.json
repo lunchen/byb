@@ -7,7 +7,6 @@
     "activityItem": "../../components/activityItemComponent/activityItem",
     "orgItem": "../../components/orgItemComponent/orgItem",
     "orgItem2": "../../components/orgItemComponent2/orgItem2",
-    "childItem": "../../components/childItemComponent/childItem",
     "van-tab": "../../miniprogram_npm/@vant/weapp/tab/index",
     "van-tabs": "../../miniprogram_npm/@vant/weapp/tabs/index",
     "image-video": "../../components/image-video/index"

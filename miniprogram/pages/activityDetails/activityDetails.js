@@ -1,5 +1,5 @@
 // 活动详情
-//index.js
+//activityDetails.js
 const util = require('../../utils/util.js')
 const apiServer = require('../../api/request.js');
 //获取应用实例

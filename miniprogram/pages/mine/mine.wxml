@@ -1,7 +1,7 @@
 <!--pages/mine/mine.wxml-->
 <!--index.wxml-->
 <view class="container">
-  <navbar need-top='{{fasle}}' navbar-data='{{nvabarData}}'></navbar>
+  <navbar need-top='{{false}}' navbar-data='{{nvabarData}}'></navbar>
   <view class="participant"  wx:if="{{identity==1}}" >
   <!-- 参与方 -->
     <view class="mine-top" style="position:relative;z-index:2;margin-top:{{20+height}}px;">
@@ -396,8 +396,10 @@
                     </block>
                     <view class="sponsorCard-isEnd" wx:if="{{item.status==-1||item.status==-2}}">
                       <view  class="sponsorCard-isEnd-bg"></view>
-                      <view class="sponsorCard-isEnd-top" wx:if="{{item.statusName!='已结束'}}" bindtap="goToReEditActivity" data-id="{{item.id}}">
-                        编辑活动
+                      <view class="sponsorCard-isEnd-top">
+                        <view wx:if="{{item.statusName!='已结束'}}" bindtap="goToReEditActivity" data-id="{{item.id}}">
+                          编辑活动
+                        </view>
                       </view>
                       <view class="sponsorCard-isEnd-middle">
                         <view>{{item.statusName}}</view>
@@ -436,6 +438,5 @@
     </scroll-view>
   </view>
  
-  <!-- <login showType="{{loginShow}}" onlyLogin="{{true}}" bind:changeFLogin="changeFLogin"></login> -->
   <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>

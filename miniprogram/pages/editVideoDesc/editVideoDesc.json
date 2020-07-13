@@ -1,7 +1,6 @@
 {
   "usingComponents": {
     "navbar": "../../components/navbarComponent/navbar",
-    "van-field": "../../miniprogram_npm/@vant/weapp/field/index",
     "van-overlay": "../../miniprogram_npm/@vant/weapp/overlay/index",
     "addVideoComponent": "../../components/addVideoComponent/addVideoComponent",
     "image-video": "../../components/image-video/index"

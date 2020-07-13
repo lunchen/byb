@@ -1,4 +1,4 @@
-/**editSchoolDetails.wxss**/
+/**edit-dongTai.wxss**/
 .editSchoolDetails-line{
   height: 10rpx;
   background: #f0f0f0;

@@ -1,6 +1,6 @@
 <!--schoolHome.wxml-->
 <view class="container schoolHome">
-  <navbar wx:if="{{navbarShow}}" need-top='{{fasle}}' navbar-data='{{nvabarData}}' backgroundColor="#ffcf1b"></navbar>
+  <navbar wx:if="{{navbarShow}}" need-top='{{false}}' navbar-data='{{nvabarData}}' backgroundColor="#ffcf1b"></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>

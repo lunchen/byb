@@ -54,9 +54,9 @@ Page({
         _this.setData({
           fenxiao: data
         })
-        _this.setData({
-          fenxiaoNub: _this.data.fenxiaoNub + 1
-        })
+        // _this.setData({
+        //   fenxiaoNub: _this.data.fenxiaoNub + 1
+        // })
       }
     }).catch(err => {
     })

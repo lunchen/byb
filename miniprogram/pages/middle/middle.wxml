@@ -13,9 +13,7 @@
         <view class="middle-content-item-right">
           <view class="middle-content-item-text1">
             <text>线上活动</text>
-            <!-- <image class="middle-content-item-text-icon" src="../../images/issue_4@2x.png"></image> -->
           </view>
-          <!-- <view class="middle-content-item-text2">通过网络工具举办的线上教学</view> -->
         </view>
       </view>
       <view class="middle-content-item item2 {{isIphoneX?'item2-1':''}}" bindtap="goToRelease" data-type="{{1}}">
@@ -24,19 +22,11 @@
           <view class="middle-content-item-text1">
             <text>线下活动</text>
           </view>
-          <!-- <view class="middle-content-item-text2">在某个具体地点举办的活动</view> -->
         </view>
       </view>
       
       <view class="middle-content-item">
-      <!-- <view class="middle-content-item item3" bindtap="goToRelease" data-type="3">
-        <image class="middle-content-item-left" src="../../images/issue_3@2x.png"></image>
-        <view class="middle-content-item-right">
-          <view class="middle-content-item-text1">
-            <text>其他</text>
-          </view>
-          <view class="middle-content-item-text2">其他无固定地举办点的线上活动</view>
-        </view> -->
+     
       </view>
     </view>
     

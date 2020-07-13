@@ -187,10 +187,6 @@ Page({
       }
     })
   },
-  onClickHide() {
-    // 隐藏 删除是否确认的提示
-    this.setData({ show: false });
-  },
   submit(){
     // 提交图片列表 并返回
     let data = this.data.data

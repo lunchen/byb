@@ -37,10 +37,7 @@
       </view>
      
       <block data-index="new">
-        <!-- <view class="editVideoDesc-textarea">
-          <textarea wx:if="{{!show}}" value="{{defaultTitle}}" bindinput="defaultIptValue" bindfocus="defaultSetIndex" auto-height placeholder="说明文字"/>
-          <text class="textareaReplace" wx:else>{{defaultTitle==''?"说明文字":defaultTitle}}</text>
-        </view> -->
+     
         <view class="editVideoDesc-textareaAddnew" bindtap="addNew">
           <text class="textareaReplace">点击添加</text>
         </view>
@@ -58,15 +55,4 @@
     <view class="editVideoDesc-btn" bindtap="submit">确认提交</view>
   </view>
 
-  <!-- <van-overlay show="{{ show }}" bind:click="onClickHide">
-    <cover-view class="confirm-overlay">
-      <cover-view class="confirm-view">
-        <cover-view class="confirm-title">是否确认</cover-view>
-        <cover-view class="confirm-btn-view">
-          <cover-view class="confirm-esc" catchtap="onClickHide">取消</cover-view>
-          <cover-view  class="confirm-sub" catchtap="del">确认</cover-view>
-        </cover-view>
-      </cover-view>
-    </cover-view>
-  </van-overlay> -->
 </view>

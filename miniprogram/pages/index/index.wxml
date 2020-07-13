@@ -144,7 +144,7 @@
             </block>
           </van-tabs>
         </view>
-        
+        <view style="height:10rpx;"></view>
       </view>
     </view>
   </scroll-view>

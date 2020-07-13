@@ -1,4 +1,4 @@
-/* pages/eTicket/eTicket.wxss */
+/* eTicket.wxss */
 .container.eTicket{
   background: #feb707;
 }

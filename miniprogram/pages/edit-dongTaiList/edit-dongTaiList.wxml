@@ -1,4 +1,4 @@
-<!--editSchoolHome.wxml-->
+<!--edit-dongTaiList.wxml-->
 <view class="container editSchoolHome">
   <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
   <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid;">
@@ -8,11 +8,8 @@
       <view class="editSchoolHome-content">
 
         <view class="editSchoolHome-content-view">
-          <!-- <view class="editSchoolHome-content-view-title mgb20">
-            线上体验
-          </view> -->
+          <!--线上体验-->
           <block  wx:for="{{courseList}}" wx:key="id">
-            <!-- <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle1">删除</view> -->
             <van-cell title="{{item.name}}" is-link bindtap="goToEdit" data-id="{{item.id}}"/>
           </block>
 

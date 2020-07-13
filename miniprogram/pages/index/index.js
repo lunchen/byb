@@ -219,7 +219,12 @@ Page({
     var select = this.data.activityList.selectList[this.data.activityListIndex].value
     apiServer.post(`/app/activity/list/index/select/${select}`).then(res => {
       that.setData({
-        "activityList.activityList": res.data.data.list
+        "activityList.activityList": []
+      })
+      setTimeout(()=>{
+        that.setData({
+          "activityList.activityList": res.data.data.list
+        },10000)
       })
     })
   },

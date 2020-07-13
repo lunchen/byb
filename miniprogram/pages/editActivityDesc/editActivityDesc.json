@@ -1,7 +1,6 @@
 {
   "usingComponents": {
     "navbar": "../../components/navbarComponent/navbar",
-    "van-field": "../../miniprogram_npm/@vant/weapp/field/index",
     "addVideoComponent": "../../components/addVideoComponent/addVideoComponent"
   },
   "navigationBarTextStyle": "white"

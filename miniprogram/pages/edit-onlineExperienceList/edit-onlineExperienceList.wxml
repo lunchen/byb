@@ -1,4 +1,4 @@
-<!--editSchoolHome.wxml-->
+<!-- edit-onlineExperienceList.wxml-->
 <view class="container editSchoolHome">
   <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
   <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid;">

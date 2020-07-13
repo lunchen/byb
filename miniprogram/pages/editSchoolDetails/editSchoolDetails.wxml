@@ -8,13 +8,7 @@
       </view>
       <view class="editSchoolDetails-content">
         <view class="editSchoolDetails-content-editInfo">
-          <!-- <view class="editSchoolDetails-content-editInfo-title">
-            机构简介
-          </view>
-          <view class="editSchoolDetails-textarea">
-            <textarea value="{{schoolDetails.remark}}" bindinput="textareaIpt" maxlength="200" auto-height="{{false}}" placeholder="点击输入内容" auto-focus />
-          </view> -->
-
+    
           <view class="editSchoolDetails-content-toEditList">
             <view class="editSchoolDetails-content-toEditList-item" bindtap="editVideoDesc" data-api="/app/org/info/env" data-updateapi="/app/org/info/update/env" data-key="envList">
               <view>学校环境</view>
@@ -60,43 +54,9 @@
         </view>
         
         <!-- <view class="editSchoolDetails-line"></view> -->
-        <!-- 
-        <view class="editSchoolDetails-content-view">
-          <view class="editSchoolDetails-content-view-title">
-            最近动态
-          </view>
-          <view class="dynamic" wx:for="{{schoolDetails.activityList}}" wx:key="id">
-            <view class="deleteBtn" data-index="{{index}}" bindtap="deleteHandle">删除</view>
-            
-            <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
-              <view class="editSchoolDetails-content-view-addActVideo {{item.imgList.length>0 ? 'type1':'type1'}}" bindtap="upDynamicBill" data-key="imgList" data-index="{{index}}">
-                <block wx:if="{{item.imgList.length>0}}">
-                    <view wx:for="{{item.imgList}}" wx:key="id">
-                      <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
-                        <image-video show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="300" width="483"></image-video>
-                      </view>
-                    </view>
-                </block>
-                <block wx:else>
-                  <view class="editSchoolDetails-content-view-addActVideo-btn">
-                    <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
-                  </view>
-                  <view style="margin-top:20rpx">添加动态封面(建议尺寸：322*200)</view>
-                </block>
-              </view>
-            </scroll-view>
-              <view>
-                <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{item}}" viewIndex="{{index}}" listKeyName="{{'remarkList'}}" bind:getIptMes="getIptMes"></iptActivityInfoComponent>
-              </view>
-            
-          </view>
-          
-          <view class="editSchoolDetails-moreActivity-btn" bindtap="addHandle">+继续新增</view>
-        </view> -->
+       
       </view>
-      <!-- <view  class="editSchoolDetails-content-view-confirm">
-        <view bindtap="submit" class="editSchoolDetails-content-view-confirm-btn">确认提交</view>
-      </view> -->
+     
     </view>
   </scroll-view>
   

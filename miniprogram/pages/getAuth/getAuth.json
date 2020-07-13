@@ -1,7 +1,6 @@
 {
   "usingComponents": {
-    "navbar": "../../components/navbarComponent/navbar",
-    "tabbar": "../../components/tabbarComponent/tabbar"
+    "navbar": "../../components/navbarComponent/navbar"
   },
   "navigationBarTextStyle": "white"
 }

@@ -73,7 +73,5 @@
 
     </view>
   </scroll-view>
-  <tabbarBtn></tabbarBtn>
-  <login></login>
   
 </view>

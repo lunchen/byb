@@ -1,4 +1,3 @@
-// 个人中心编辑
 // cash-out.js
 const util = require('../../utils/util.js')
 const apiServer = require('../../api/request.js');
