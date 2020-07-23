@@ -83,3 +83,16 @@
   align-items: center;
   margin-left:50rpx;
 }
+
+.iptActivityInfo-price{
+  height:0;
+  transition: height linear 200ms;
+  overflow: hidden;
+}
+.iptActivityInfo-slideDown{
+  height:150rpx;
+}
+.iptActivityInfo-radio{
+  display: flex;
+  margin: 10rpx 0;
+}

@@ -1,0 +1,188 @@
+<!--pages/mine/mine.wxml-->
+<!--index.wxml-->
+<view class="container">
+  <navbar need-top='{{false}}' navbar-data='{{nvabarData}}' backgroundColor="rgb(255, 230, 0)"></navbar>
+  <view class="sponsor">
+  <!-- 主办方 -->
+    <view class="sponsor-top" style="position:relative;z-index:2;margin-top:{{height}}px;">
+      <view class="mine-content-title flex-between">
+        <view class="mine-content-title-left">
+          <!-- <view class="cLine"></view> -->
+          <!-- <text>我发布的</text> -->
+        </view>
+        <view class="mine-content-title-right" bindtap="goToJoinerManage" data-type="2">
+          预约者管理
+        </view>
+      </view>
+      <view class="tab_list participant_tab_list">
+        <view class="tab_list_item {{active==index?'active':''}}" data-index="{{index}}"  bindtap="tabChange" wx:for="{{orderStatusSelectList}}" wx:key="item">
+          <view class="cLine"></view>
+          <view>{{item.label}}</view>
+        </view>
+      </view>
+    </view>
+    
+    <scroll-view scroll-y style="position:relative;height: 100%;">
+      <view class="scroll-view" style='padding-top:1px;'>
+        <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{100+height}}px">
+
+          <view class="sponsorCard" style="padding-bottom:{{isIphoneX?160:100}}rpx">
+            <block wx:for="{{sponsorInfo}}" wx:key="id">
+              <van-swipe-cell id="{{'swipe-cell' + index}}" right-width="{{ 65 }}" async-close bind:close="onClose">
+                <van-cell-group>
+                  <view class="sponsorCard-content-item">
+                    <block>
+                      <view class="sponsorCard-content-item-top">
+                        <view class="sponsorCard-content-item-top-left">
+                          <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                          <text>{{item.org.name}}</text>
+                        </view>
+                        <!-- <text wx:if="{{item.status!=-1&&item.status!=-2}}" bindtap="goToReEditActivity" data-id="{{item.id}}">编辑活动</text> -->
+                      </view>
+                      <view class="sponsorCard-content-item-middle" bindtap="goToActivityDetails" data-id="{{item.id}}">
+                        <view>
+                          <image mode="aspectFill" mode="aspectFill" class="sponsorCard-content-item-middle-left" src="{{item.img}}"></image>
+                        </view>
+                        <view class="sponsorCard-content-item-middle-center">
+                          <view class="sponsorCard-content-item-middle-center-text">
+                            <text class="sponsorCard-view-text1">{{item.name}}</text>
+                            <view class="sponsorCard-view-text2">{{item.remark}}</view> 
+                            <view class="sponsorCard-view-text3">时间：{{item.betweenTime}}</view>
+                          </view>
+                          <view class="sponsorCard-view-status {{item.status==-1 || item.status==-2?'statusEnd':'statusIng'}}">{{item.statusName}}</view>
+                        </view>
+                      </view>
+                      <view class="sponsorCard-content-item-bottom">
+                        <view class="sponsorCard-content-item-bottom-view1 {{item.status===-1||item.status==-2?'opacityHide':''}}">
+                          <view class="sponsorCard-content-item-bottom-view1-item" data-id="{{item.id}}">
+                            <image src="../../images/sponsor_6@2x.png"></image>
+                            <text>{{item.lookCount?item.lookCount:0}}</text>
+                          </view>
+                          <view class="sponsorCard-content-item-bottom-view1-item" bindtap="goToJoinerManage" data-id="{{item.id}}" data-type="{{1}}">
+                            <image src="../../images/baomin@2x.png"></image>
+                            <text style="color:#feb707">{{item.joinCount?item.joinCount:0}}</text>
+                          </view>
+                          <view class="sponsorCard-content-item-bottom-view1-item">
+                            <image src="../../images/sponsor_8@2x.png"></image>
+                            <text>{{item.shareCount?item.shareCount:0}}</text>
+                          </view>
+                        <view wx:if="{{item.statusName!='已结束'}}" class="sponsorCard-content-item-bottom-view1-item {{item.share.flg==1?'active':''}}" data-id="{{item.id}}" bindtap="fenxiaoBtn" data-price="{{item.price}}" data-shareflg="{{item.share.flg}}">
+                            <image wx:if="{{item.share.flg==1}}" class="bigimage" style="height:40rpx;width:47rpx" src="../../images/orgfxIconY.png"></image>
+                            <image wx:else class="bigimage" style="height:40rpx;width:47rpx" src="../../images/orgfxIconN.png"></image>
+                            <text>{{item.share.flg==1?'可分销':'不分销'}}</text>
+                          </view>
+                          <view class="sponsorCard-content-item-bottom-view1-item" data-id="{{item.id}}" bindtap="publishBtn" data-publishflg="0">
+                            <image class="bigimage" src="../../images/sponsor_9@2x.png"></image>
+                            <text>下架</text>
+                          </view>
+                        </view>
+                      </view>
+                    </block>
+                    <view class="sponsorCard-isEnd" wx:if="{{item.status==-1||item.status==-2}}">
+                      <view  class="sponsorCard-isEnd-bg"></view>
+                      <view class="sponsorCard-isEnd-top">
+                        <view wx:if="{{item.statusName!='已结束'}}" bindtap="goToReEditActivity" data-id="{{item.id}}">
+                          编辑活动
+                        </view>
+                      </view>
+                      <view class="sponsorCard-isEnd-middle">
+                        <view>{{item.statusName}}</view>
+                      </view>
+                      <view class="sponsorCard-isEnd-bottom">
+                        <view class="sponsorCard-content-item-bottom-view1-item" data-id="{{item.id}}">
+                          <image src="../../images/sponsor_6@2x.png"></image>
+                          <text>{{item.lookCount?item.lookCount:0}}</text>
+                        </view>
+                        <view class="sponsorCard-content-item-bottom-view1-item" bindtap="goToJoinerManage" data-id="{{item.id}}" data-type="{{1}}">
+                          <image src="../../images/baomin@2x.png"></image>
+                          <text style="color:#feb707">{{item.joinCount?item.joinCount:0}}</text>
+                        </view>
+                        <view class="sponsorCard-content-item-bottom-view1-item">
+                          <image src="../../images/sponsor_8@2x.png"></image>
+                          <text>{{item.shareCount?item.shareCount:0}}</text>
+                        </view>
+                        <view wx:if="{{item.statusName!='已结束'}}" class="sponsorCard-content-item-bottom-view1-item {{item.share.flg==1?'active':''}}" data-id="{{item.id}}" bindtap="fenxiaoBtn" data-price="{{item.price}}" data-shareflg="{{item.share.flg}}">
+                          <image wx:if="{{item.share.flg==1}}" class="bigimage" style="height:40rpx;width:47rpx" src="../../images/orgfxIconY.png"></image>
+                          <image wx:else class="bigimage" style="height:40rpx;width:47rpx" src="../../images/orgfxIconN.png"></image>
+                          <text>{{item.share.flg==1?'可分销':'不分销'}}</text>
+                        </view>
+                        <view class="sponsorCard-isEnd-bottom-btn" wx:if="{{item.statusName!='已结束'}}" bindtap="publishBtn" data-publishflg="1" data-id="{{item.id}}">重新上架</view>
+                      </view>
+
+                    </view>
+                  </view>
+                </van-cell-group>
+                <view bindtap="removeBtn" data-id="{{item.id}}" style="display:flex;align-items:center;justify-content:center;height:100%;width:65px;color:#fff;background:red;" class="123" slot="right">
+                  <text>
+                   删除
+                  </text>
+                </view>
+              </van-swipe-cell>
+              
+            </block>
+          </view>
+          
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+   <van-popup show="{{ show }}" bind:close="onClose" custom-style="background-color:transparent">
+    <view style="width:602rpx;height:761rpx;position:relative;">
+      <image style="width:602rpx;height:761rpx;position: absolute;" src="../../images/orgfenxiaoBg.png"></image>
+      <view style="position:relative;">
+        <view style="text-align:right;padding:15rpx;">
+          <image bindtap="onClose" style="width:40rpx;height:40rpx;" src="../../images/orgfenxiaoclose.png"></image>
+        </view>
+        <view style="text-align:center;color:#000;font-size:48rpx;">
+          设置分销金额
+        </view>
+        <view style="width:510rpx;height:365rpx;margin:60rpx auto;border-radius:10rpx;background:#Fff;box-shadow:0px 0px 10px 0px #aaa;display:flex;align-items: center;justify-content: center;">
+          <van-radio-group use-icon-slot value="{{ nop }}" bind:change="onRadioChange" style="width:100%;display:flex;align-items:center;justify-content: center;">
+            <view style="padding:6rpx 0;font-size:26rpx;">
+              <view class="iptActivityInfo-radio"  style="margin:40rpx 0;">
+                <van-radio name="{{true}}" value="{{nop}}" use-icon-slot>
+                  <image style="width:36rpx;height:36rpx;" slot="icon" src="{{ nop == true ? '../../images/orgfenxiaoradioY.png' : '../../images/orgfenxiaoradioN.png' }}" />
+                </van-radio>
+                <van-field
+                  custom-style="padding:0 10rpx;border-bottom:2rpx #666666 solid;width:140rpx;text-align:center;"
+                  value="{{ baifenbi }}"
+                  placeholder=""
+                  autosize
+                  type="number"
+                  border="{{ false }}"
+                  disabled="{{nop==true?false:true}}"
+                  bind:change="onfxIptChange"
+                  bind:blur="baifenbiblur"
+                  data-key="baifenbi"
+                  />%
+                  <text style="color:red;margin-left:10rpx;"> (最高30%)</text>
+              </view>
+              <view class="iptActivityInfo-radio" style="margin:40rpx 0;">
+                <van-radio name="{{false}}" value="{{nop}}" use-icon-slot>
+                  <image style="width:36rpx;height:36rpx;" slot="icon" src="{{ nop == false ? '../../images/orgfenxiaoradioY.png' : '../../images/orgfenxiaoradioN.png' }}" />
+                </van-radio>
+                <van-field
+                  custom-style="padding:0 10rpx;border-bottom:2rpx #666666 solid;width:140rpx;text-align:center;"
+                  value="{{ shuzhi }}"
+                  placeholder=""
+                  autosize
+                  type="number"
+                  border="{{ false }}"
+                  disabled="{{nop===false?false:true}}"
+                  bind:change="onfxIptChange"
+                  bind:blur="shuzhiblur"
+                  data-key="shuzhi"
+                  />元
+                  <text style="color:red;margin-left:10rpx;"> (最高{{maxhb?(maxhb):'XX'}}元)</text>
+              </view>
+            </view>
+          </van-radio-group>
+        </view>
+        
+        <view class="fenxiaoSub" bindtap="fenxiaoSub">提交</view>
+      </view>
+      
+    </view>
+  </van-popup>
+</view>

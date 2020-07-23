@@ -1,6 +1,16 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/signUpSuccess/signUpSuccess",
+    "pages/feedback/feedback",
+    "pages/mine/mine",
+    "pages/contactUs/contactUs",
+    "pages/joinfenxiao/joinfenxiao",
+    "pages/logs/logs",
+    "pages/org-order/org-order",
+    "pages/mine-order/mine-order",
+    "pages/activityDetailsRecent/activityDetailsRecent",
+    "pages/chat/chat",
     "pages/h5v/h5v",
     "pages/edit-dongTai/edit-dongTai",
     "pages/edit-dongTaiList/edit-dongTaiList",
@@ -9,11 +19,9 @@
     "pages/edit-schoolHome/edit-schoolHome",
     "pages/getAuth/getAuth",
     "pages/getAuthLogin/getAuthLogin",
-    "pages/mine/mine",
     "pages/editCenter/editCenter",
     "pages/cashOut/cashOut",
     "pages/myVideoSwiper/myVideoSwiper",
-    "pages/signUpSuccess/signUpSuccess",
     "pages/business/business",
     "pages/releaseActivity/releaseActivity",
     "pages/schoolHome/schoolHome",
@@ -31,12 +39,10 @@
     "pages/middle/middle",
     "pages/shopMap/shopMap",
     "pages/editVideoDesc/editVideoDesc",
-    
 
     "pages/eTicket/eTicket",
     "pages/orgListSearch/orgListSearch",
-    "pages/personalCenter/personalCenter",
-    "pages/logs/logs"
+    "pages/personalCenter/personalCenter"
   ],
   "permission": {
     "scope.userLocation": {

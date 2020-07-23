@@ -58,7 +58,7 @@
           </view>
           <!-- 学校所有课程 -->
           <scroll-view class="schoolHome-scroll-viewX" scroll-x="true" style="width: 100%">
-            <view class="schoolHome-content-course">
+            <view wx:if="{{schoolHomeData.courseList.length>0}}" class="schoolHome-content-course">
               <block wx:for="{{schoolHomeData.courseList}}" wx:key="id">
                 <view class="schoolHome-content-course-item" data-id="{{item.id}}" data-index="{{index}}" bindtap="goToVideoSwiper">
                 <!-- vv -->
@@ -66,7 +66,14 @@
                   <text class="schoolHome-content-course-item-text">{{item.name}}</text>
                 </view>
               </block>
-              
+            </view>
+            <view wx:else class="schoolHome-content-course">
+              <block>
+                <view class="schoolHome-content-course-item" bindtap="goToEditOnlineExperienceList">
+                  <image mode="aspectFill" style="width:120rpx;height:120rpx;border-radius:50%;margin-bottom:30rpx;" src="../../images/default_icon@2x.png"></image>
+                  <image wx:if="{{showEditBtn && identity==2}}" class="lock-img" src="../../images/lock.png"></image>
+                </view>
+              </block>
             </view>
           </scroll-view>
         </view>
@@ -86,8 +93,10 @@
           <view class="schoolHome-content-card" bindtap="goToSchoolDetails" data-id="{{schoolHomeData.id}}">
             <view class="schoolHome-content-card-left">
               <image bindload="imgLoaded" mode="aspectFill" wx:if="{{schoolHomeData.img}}" class="schoolHome-content-card-left" src="{{schoolHomeData.img}}"></image>
-              <view class="default-bg flex-middle-center" wx:else>
-                <image class="default-bg-img" src="../../images/default_bill@2x.png"></image>
+              <view class="default-bg flex-middle-center" wx:else catchtap="gotoEditSchoolHome" data-id="{{schoolHomeData.id}}">
+                <image class="default-bg-img" src="../../images/default_icon@2x.png"></image>
+                <view wx:if="{{showEditBtn && identity==2}}">点击解锁</view>
+                <image wx:if="{{showEditBtn && identity==2}}" class="lock-img1" src="../../images/lock.png"></image>
               </view>
             </view>
             <block>

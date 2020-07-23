@@ -6,7 +6,7 @@
 .mine-top-avatar{
   width:148rpx;
   height:148rpx;
-  overflow:hidden;
+  /* overflow:hidden; */
   border-radius:50%;
   background:red;
   margin-top:4rpx;
@@ -61,6 +61,7 @@
   height:148rpx;
   border-radius:74rpx;
   background: #ddd;
+  position: relative;
 }
 .mine-top-view-left-text{
   margin-left: 20rpx;
@@ -581,4 +582,42 @@
 }
 .opacityHide{
   opacity: 0;
+}
+
+.tapList-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tapList-item:active{
+  background: rgba(0, 0, 0,0.1);
+}
+.tapList-item-left{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.tapList-item-left-img{
+  width: 50rpx;
+  height: 47rpx;
+}
+.tapList-item-right{
+  height: 100rpx;
+  line-height: 100rpx;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx #cdcdcd solid;
+  color: #000;
+  padding-right: 40rpx;
+  font-weight: bold;
+}
+.tapList-item-right-img{
+  width: 22rpx;
+  height: 37rpx;
 }

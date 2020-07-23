@@ -22,6 +22,7 @@
   align-items: center;
   margin: 0rpx 0 40rpx;
   width: 100%;
+  position: relative;
 }
 .activity-view-item-left{
   width: 180rpx;
@@ -30,6 +31,7 @@
   flex: 0 0 auto;
 }
 .activity-view-item-right{
+  position: relative;
   height: 180rpx;
   max-height: 180rpx;
   margin: 12rpx 0;
@@ -114,4 +116,12 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow:ellipsis;
+}
+
+.fxTips{
+  color: #fff;
+  position: absolute;
+  right: -10rpx;
+  top: -42rpx;
+  text-align: center;
 }

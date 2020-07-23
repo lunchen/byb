@@ -1,0 +1,39 @@
+/**joinfenxiao.wxss**/
+.container{
+  /* position: relative; */
+  height: 100%;
+  background: rgb(99, 64, 218);
+}
+.joinfenxiao-text1{
+  position: relative;
+  color: #f4c807;
+  font-size: 66rpx;
+  margin-top: 18%;
+  margin-left: 8vw;
+}
+.joinfenxiao-text2{
+  position: relative;
+  color: #fff;
+  font-size: 48rpx;
+  margin-top: 3vw;
+  margin-left: 8vw;
+
+}
+.joinfenxiao-text3{
+  position: relative;
+  color: #fff;
+  font-size: 38rpx;
+  margin-top: 22%;
+  text-align: center;
+}
+.joinfenxiao-btn{
+  position: absolute;
+  bottom: 10rpx;
+  width: 100%;
+  left: 0;
+  text-align: center;
+
+}
+.joinfenxiao-btn:active{
+  bottom: 0rpx;
+}

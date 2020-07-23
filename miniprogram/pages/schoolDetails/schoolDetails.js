@@ -63,6 +63,13 @@ Page({
       url: `../schoolHome/schoolHome?id=${id}`
     })
   },
+  gotoActivityDetailsRecent(e){
+    var id = e.currentTarget.dataset.id
+    util.setId(id)
+    wx.navigateTo({
+      url: `../activityDetailsRecent/activityDetailsRecent?id=${id}`
+    })
+  },
   methods: {
   },
   onLoad: function (e) {

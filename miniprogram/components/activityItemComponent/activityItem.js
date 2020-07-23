@@ -18,8 +18,13 @@ Component({
     },
   },
   data: {
+    userShareFlg: 0
   },
-
+  attached(){
+    this.setData({
+      userShareFlg: wx.getStorageSync('userShareFlg') ? parseInt(wx.getStorageSync('userShareFlg')) : 0
+    })
+  },
   methods: {
     goToActivityDetails(e) {
       var id = e.currentTarget.dataset.id

@@ -20,8 +20,6 @@ Page({
     },
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
-    //tabbar
-    tabbar: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     wxGetMes: {      //从微信获取的信息
       code: '',
@@ -153,21 +151,16 @@ Page({
           duration: 1000
         })
         _this.updataInfo()
+        _this.getParticipantInfo()
       } else {
         wx.showToast({
           title: '登录成功',
           icon: 'none',
           duration: 1000
         })
-        let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
-        let prevPage = pages[pages.length - 2];
-        wx.navigateBack({
-          // 返回并执行上一页面方法
-          success: function () {
-            prevPage.back() // 执行前一个页面的方法
-          }
-        });
+       
       }
+      _this.getParticipantInfo()
     }).catch(err => {
       console.log(err)
       wx.showToast({
@@ -178,7 +171,24 @@ Page({
     })
     
   },
-
+  getParticipantInfo(){
+    var _this = this
+    apiServer.post('/app/my/user/index').then(res => {
+      wx.setStorageSync('userShareFlg', res.data.data.shareFlg)
+      wx.setStorageSync('userInfo', JSON.stringify(res.data.data.user))
+      //刷新当前页面的数据
+      let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+      let prevPage = pages[pages.length - 2];
+      wx.navigateBack({
+        // 返回并执行上一页面方法
+        success: function () {
+          prevPage.back() // 执行前一个页面的方法
+        }
+      });
+    }).catch(err=>{
+     
+    })
+  },
   // 微信一键登陆后同步信息到后台
   updataInfo() {
     var _this = this;
@@ -186,15 +196,8 @@ Page({
     _this.getUserMes().then(res => {
       var req = _this.data.userInfoModel
       apiServer.post('/app/user/update', req).then(res => {
-        //刷新当前页面的数据
-        let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
-        let prevPage = pages[pages.length - 2];
-        wx.navigateBack({
-          // 返回并执行上一页面方法
-          success: function () {
-            prevPage.back() // 执行前一个页面的方法
-          }
-        });
+        
+        _this.getParticipantInfo()
       })
     })
   },
@@ -203,10 +206,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this
-    this.setData({
-      tabbar: app.editTabbar()
-    })
-
+  
     wx.setStorageSync("needBack", true)
     wx.login({
       success(res) {
@@ -228,7 +228,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.hideTabBar()
   },
 
   /**

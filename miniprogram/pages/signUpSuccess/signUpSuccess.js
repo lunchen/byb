@@ -28,7 +28,11 @@ Page({
     activityListData:'',
     isdefault: false,
   },
-
+  goToIndex(){
+    wx.switchTab({
+      url: '../index/index',
+    })
+  },
   previewImage: function (e) {
     var imgArr = [this.data.canvasImg];
     wx.previewImage({

@@ -1,0 +1,92 @@
+<!-- activityDetailsRecent.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}' backgroundColor="rgb(255, 230, 0)"></navbar>
+     
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px'>
+      <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
+        <swiper style="height:375rpx;width:100%;" previous-margin="20rpx" next-margin="20rpx" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" bindchange="swiperChange">
+          <block wx:for="{{activityListData.imgList}}" wx:key="*this">
+            <swiper-item>
+              <view style="padding:0 10rpx;height:375rpx;width:{{750-60}}rpx;border-radius:20rpx;" class="swiper-item {{item}} {{current==index ? 'scaleY1' : 'scaleY0_95'}}">
+                <!-- <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
+                <video wx:else  style="height:375rpx;width:100%;border-radius:26rpx;" id="{{'myVideo' + index}}" src="{{item.img.url}}" controls></video> -->
+                <view style="border-radius:20rpx;overflow:hidden;height:375rpx;">
+                  <image-video 
+                  muted="{{false}}"
+                  show="{{true}}" 
+                  src="{{item.url}}" 
+                  type="{{item.type}}" 
+                  height="375" 
+                  width="690"
+                  activeid = "{{activeid}}" 
+                  index="{{index}}" 
+                  videoid="{{item.id}}" 
+                  bind:play="onPlay"></image-video>
+                </view>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+       
+      </view>
+     
+      <view class="miaoshabtn">
+        <!-- <view wx:if="{{showActUp}}" bindtap="sjms">一键升级秒杀活动</view> -->
+      </view>
+
+      <view class="activityDetailsRecent-content">
+      
+        <!-- 卡片信息 -->
+        <view class="activityDetailsRecent-infoCard" id="card">
+          <infoCard infoCardrData="{{activityListData}}" infoCardType="{{1}}" ifRencent="{{true}}"></infoCard>
+        </view>
+        
+
+        <view class="activityDetailsRecent-link"></view>
+
+        <view class="activityDetailsRecent-content-introduction">
+          <!-- 课程简介 -->
+          <view class="activityDetailsRecent-content-introduction-title">
+            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
+            <text>动态详情</text>
+          </view>
+          <!-- 小三角 -->
+          <view class="activityDetailsRecent-triangle"></view>
+          <!-- 课程简介详细介绍 -->
+          <view class="activityDetailsRecent-content-introduction-info">
+            <view wx:for="{{activityListData.imgList}}" wx:key="*this">
+              <view class="activityDetailsRecent-content-introduction-info-title">
+                {{item.title}}
+              </view>
+              <view class="activityDetailsRecent-content-introduction-info-text">
+                <view class="textIndent28">{{item.remark}}</view>
+              </view>
+              <view class="activityDetailsRecent-content-introduction-info-img" data-showimg="{{item}}" data-showimglist="{{activityListData.imgList}}" bindtap="showList" wx:if="{{item.url!=''}}">
+                <image-video 
+                  scpb="{{true}}" 
+                  show="{{false}}" 
+                  cover="{{item.cover}}" 
+                  src="{{item.url}}" 
+                  type="{{item.type}}" 
+                  muted="{{false}}"
+                  width="630"
+                  height="{{item.type==2?'300':0}}"
+                  activeid = "{{activeid}}"
+                  videoid="{{item.id}}" 
+                  bind:play="onPlay"
+                  ></image-video>
+              </view>
+              
+            </view>
+            <view>{{activityListData.imgList.remark}}</view>
+          
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  
+
+
+</view>

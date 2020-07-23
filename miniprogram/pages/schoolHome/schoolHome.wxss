@@ -5,18 +5,29 @@
   top: 60%;
 }
 .schoolHome .default-bg{
-  background: #f2f2f2;
+  background: #eaeaea;
   width: 100%;
   height: 100%;
+  position: relative;
+  color: #bbb;
 }
 .schoolHome .default-bg-img{
-  width: 120rpx;
-  height: 120rpx;
+  width: 200rpx;
+  height: 200rpx;
 }
 .flex-middle-center{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.lock-img1{
+  width: 51rpx;
+  height: 63rpx;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  margin-left: -25rpx;
 }
 .schoolHome-content {
   position: relative;
@@ -88,6 +99,14 @@
   flex: 0 0 auto;
   overflow: hidden;
   max-width: 130rpx;
+  position: relative;
+}
+.lock-img{
+  width: 34rpx;
+  height:42rpx;
+  position: absolute;
+  top: 50rpx;
+  left: 43rpx;
 }
 .schoolHome-content-course-item-text{
   overflow: hidden;

@@ -20,8 +20,6 @@ Page({
     },
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
-    //tabbar
-    tabbar: {},
   },
   // 修改函数节流
   goToMiddle: util.throttle(function (e){
@@ -49,9 +47,6 @@ Page({
    */
   onLoad: function (options) {
 
-    this.setData({
-      tabbar: app.editTabbar()
-    })
   },
 
   /**
@@ -65,7 +60,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.hideTabBar()
   },
 
   /**

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-popup": "../../miniprogram_npm/@vant/weapp/popup/index",
+    "navbar": "../../components/navbarComponent/navbar"
+  },
+  "navigationBarTextStyle": "white"
+}

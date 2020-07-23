@@ -2,6 +2,7 @@
 //activityDetails.js
 const util = require('../../utils/util.js')
 const apiServer = require('../../api/request.js');
+
 //获取应用实例
 const app = getApp()
 
@@ -28,14 +29,84 @@ Page({
     indicatorActiveColor: "#fff",
     current: 0,
 
+    identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1,       //1参与方 2主办方
     activityListData:{},
     loginShow: 0,
     signUpType: false,
     id: '',
+    shareId:'', //分销带的参数
     canvasImgShow: false,
     canvasImg: '',
     activeid:'-1',
-    canIUseSaveImg:''
+    canIUseSaveImg:'',
+    showActUp: false,
+    miaoshashow: false,
+    scfxhbActive: false,
+    setTime:'',
+    userShareFlg:0
+  },
+  scfxhb(){
+    //生成分销海报
+    var _this = this
+    if(this.data.userShareFlg !==1){
+      wx.showToast({
+        title: '请在个人信息页面开通分销员身份后，再生成海报赚取红包~',
+        icon:'none',
+        duration: 1000,
+      })
+      return
+    }
+    if(!this.data.scfxhbActive){
+      this.setData({
+        scfxhbActive:true,
+        setTime: setTimeout(function(){
+            _this.setData({
+              scfxhbActive:false
+            })
+          },2000)
+      })
+     
+    }else{
+      clearTimeout(this.data.setTime)
+      this.setData({
+        setTime: setTimeout(function(){
+            _this.setData({
+              scfxhbActive:false
+            })
+          },2000)
+      })
+      this.scfxhbApi()
+    }
+  },
+  scfxhbApi(){
+    //生成红包海报接口
+    var _this = this
+    wx.showToast({
+      title: '图片生成中~',
+      icon: 'loading',
+      duration: 2000
+    })
+    apiServer.post(`/app/activity/poster/share/${this.data.id}`,'','get').then(res => {
+      wx.showToast({
+        icon: 'none',
+        duration: 1
+      })
+      this.setData({
+        canvasImg: res.data.data.string,
+        canvasImgShow: true,
+        shareShow: false
+      })
+    })
+  },
+  sjms(){
+    this.setData({
+      miaoshashow: true
+    })
+  },
+  sjmsClose(){
+    this.setData({
+      miaoshashow: false
+    })
   },
   showList(e){
     var img = e.currentTarget.dataset.showimg
@@ -119,22 +190,39 @@ Page({
 
     var that = this;
     let id = e ? e.id : '';
-    if (e && e.scene) {
-      var strs = decodeURIComponent(e.scene)
-      id = strs.split("=")[1]
-    }
+    
     this.setData({
       id: id
     })
-    if (id) {
+    if(e){
+      if (e.scene) {
+        console.log('scene')
+        console.log(e)
+        var strs = decodeURIComponent(e.scene)
+        let d = strs.split("=")
+        console.log(d)
+        this.setData({
+          id: d[1],
+          shareId: d[2]
+        })
+        wx.setStorageSync('shareId', d[2])
+      }
+    }
+    if (this.data.id) {
       if(e && e.open==3){
         this.setData({
           loginShow: 3,
           signUpType: true
         })
       }
-      apiServer.post(`/app/activity/info/${id}`).then(res => {
+      apiServer.post(`/app/activity/info/${this.data.id}`).then(res => {
         // 设置选中的活动信息用于报名
+        var myorgid = wx.getStorageSync('myOrgMes')?JSON.parse(wx.getStorageSync('myOrgMes')).org.id:''
+        if (res.data.data.org.id == myorgid && this.data.identity == 2){
+          that.setData({
+            showActUp: true
+          }) 
+        }
         var activitySelected = {
           price: res.data.data.info.price,
           value: res.data.data.info.id,
@@ -154,7 +242,11 @@ Page({
       })
     }
   },
-
+  onShow(){
+    this.setData({
+      userShareFlg: wx.getStorageSync('userShareFlg') ? parseInt(wx.getStorageSync('userShareFlg')) : 0
+    })
+  },
   imgLoaded(e) {
     this.setData({
       imageHeight: e.detail.height,

@@ -148,6 +148,5 @@
       </view>
     </view>
   </scroll-view>
-  <login></login>
   <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>

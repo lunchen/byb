@@ -1,0 +1,422 @@
+/* pages/mine/mine.wxss */
+.sponsor,.participant{
+  height: 100%;
+  overflow: hidden;
+}
+.mine-top-avatar{
+  width:148rpx;
+  height:148rpx;
+  overflow:hidden;
+  border-radius:50%;
+  background:red;
+  margin-top:4rpx;
+  padding: 4rpx;
+  background: linear-gradient(to right, rgb(250,107,145),rgb(255,255,255))
+}
+.mine-top{
+}
+.mine-top-view{
+  width: 690rpx;
+  height: 160rpx;
+  margin: 0 auto;
+  border-radius: 18rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+}
+.participant .mine-top-view{
+  position: relative;
+}
+.sponsor .mine-top-view{
+  position: relative;
+}
+.mine-top-capital{
+  width: 690rpx;
+  height: 120rpx;
+  margin: 0 auto 0;
+  background: #fff;
+  border-radius: 18rpx;
+  /* box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1); */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.capital-cline{
+  width: 1px;
+  height: 40rpx;
+  background: #e6e6e6;
+}
+.mine-top-capital view{
+  display: flex;
+  align-items: center;
+}
+.mine-top-view-left{
+  display: flex;
+  align-items:center; 
+  margin-left:30rpx;
+}
+.mine-top-view-left-noImg{
+  width:148rpx;
+  height:148rpx;
+  border-radius:74rpx;
+  background: #ddd;
+}
+.mine-top-view-left-text{
+  margin-left: 20rpx;
+}
+.mine-top-view-right{
+  position: absolute;
+  right: 0;
+  bottom: 10rpx;
+}
+.mine-top-view-right-view{
+  min-width: 210rpx;
+  height: 55rpx;
+  line-height: 55rpx;
+  border-top-left-radius:27.5rpx;
+  border-bottom-left-radius:27.5rpx;
+  background: #fe8800;
+  color: #fff;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  padding: 0rpx 20rpx 0 23rpx;
+  margin-top: 6rpx;
+}
+
+.mine-content-title{
+  display: flex;
+  align-items: center;
+  color: #333333;
+  font-size: 36rpx;
+  font-weight: bolder;
+  padding: 22rpx 30rpx;
+  border-bottom: 1px #f0f0f0 solid;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+}
+.mine-content-title-left{
+  display: flex;
+  align-items: center;
+}
+.mine-content-title-right{
+  font-size: 26rpx;
+  color: #333;
+}
+.cLine{
+  width: 6rpx;
+  height: 38rpx;
+  background: #fe8800;
+  margin-right: 13rpx;
+}
+.tab_list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tab_list_item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 80rpx;
+  flex:1 1 30vw;
+  text-align: center;
+}
+.tab_list_item.active{
+  color: #fe8800;
+}
+.tab_list_item .cLine{
+  background: transparent;
+}
+.tab_list_item.active .cLine{
+  background: #fe8800;
+}
+
+
+/* 主办方下方列表 */
+.sponsor .mine-top-view{
+}
+.sponsorCard-content-item{
+  border-bottom: 20rpx #f0f0f0 solid;
+  position: relative;
+}
+.sponsorCard-content-item-top{
+  display: flex;
+  justify-content: space-between;
+  padding: 40rpx 30rpx;
+  font-size: 26rpx;
+  color: #fe8800;
+  font-weight: bolder;
+}
+.sponsorCard-content-item-top-left{
+  display: flex;
+  align-items: center;
+  color: #999999;
+}
+
+.sponsorCard-content-item-middle{
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+}
+.sponsorCard-content-item-middle-left{
+  width: 180rpx;
+  height: 240rpx;
+  border-radius: 10rpx;
+  flex: 0 0 auto;
+}
+.sponsorCard-content-item-middle-center{
+  display: flex;
+  align-items: center;
+  background:#f5f5f5;
+  flex: 1;
+  padding: 0 23rpx 0 30rpx;
+  border-top-right-radius: 14rpx;
+  border-bottom-right-radius: 14rpx;
+}
+.sponsorCard-content-item-middle-center-text{
+  height: 180rpx;
+  max-height: 180rpx;
+  max-width: 300rpx;
+  padding: 20rpx 0rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow:hidden;
+  margin-right: 30rpx;
+}
+.sponsorCard-view-text1{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bloder;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.sponsorCard-view-text2{
+  font-size: 24rpx;
+  color: #666;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.sponsorCard-view-text3{
+  font-size: 24rpx;
+  color: #666;
+}
+.sponsorCard-view-status{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size:28rpx;
+  color:#fff;
+  font-weight:bloder;
+  padding: 0 24rpx;
+  border-radius: 30rpx;
+}
+.sponsorCard-view-status.statusIng{
+  background: #feb707;
+}
+.sponsorCard-view-status.statusEnd{
+  background: #b3b3b3;
+}
+.sponsorCard-content-item-bottom-view1{
+  height: 75rpx;
+  line-height: 77rpx;
+  color: #999;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px #f0f0f0 solid;
+  margin: 20rpx 0 0;
+  font-size: 28rpx;
+  font-weight: bolder;
+}
+.sponsorCard-content-item-bottom-view1-item{
+  color: #999;
+  font-size: 28rpx;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+}
+.sponsorCard-content-item-bottom-view1-item image{
+  width:40rpx;
+  height:40rpx;
+  margin-top:2rpx;
+  margin-right: 6rpx;
+}
+.sponsorCard-content-item-bottom-view1-item image.bigimage{
+  width:50rpx;
+  height:50rpx;
+}
+.sponsorCard-content-item-bottom-view2{
+  height: 77rpx;
+  line-height: 77rpx;
+  color: #666;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px #f0f0f0 solid;
+  margin: 0 30rpx;
+  font-size: 28rpx;
+  font-weight: bolder;
+}
+
+.sponsorCard-isEnd{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.sponsorCard-isEnd-bg{
+  background: #eee;
+  opacity: 0.4;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.sponsorCard-isEnd-top{
+  padding: 40rpx 30rpx;
+  font-size: 28rpx;
+  color: #fe8800;
+  font-weight: bolder;
+  text-align: right;
+  position: relative;
+  z-index: 2;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.sponsorCard-isEnd-middle{
+  height: 240rpx;
+  padding: 1rpx 30rpx;
+  position: relative;
+  z-index: 2;
+}
+.sponsorCard-isEnd-middle view{
+  height: 110rpx;
+  line-height: 110rpx;
+  width: 110rpx;
+  border-radius: 50%;
+  background: #6e6d68;
+  text-align: center;
+  color: #ffffff;
+  font-size: 28rpx;
+  margin: 64rpx 39rpx;
+}
+.sponsorCard-isEnd-bottom{
+  height: 75rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+  z-index: 2;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.sponsorCard-isEnd-bottom-btn{
+  margin-top: 6rpx;
+  width: 130rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #fdfdfd;
+  border:1px #fe8800 solid;
+  font-size: 28rpx;
+  text-align: center;
+  color: #fe8800;
+  border-radius: 8rpx;
+}
+.sponsor-top{
+  border-radius: 10rpx;
+  margin: 0 auto;
+}
+.sponsor-top-view{
+  position: relative;
+  width: 92vw;
+  margin: 0 auto;
+  height: 380rpx;
+  border-radius: 30rpx;
+  background: #ffffff80;
+  box-shadow: 0 0 20rpx 0rpx #ccc;
+}
+.sponsor-top-view-bg{
+  position: absolute;
+  width: 94%;
+  height: 92%;
+  background: rgb(255, 208, 27);
+  border-radius: 30rpx;
+  left: 3%;
+  top: 4%;
+  border: 2rpx #000 dashed; 
+  box-sizing: border-box;
+}
+.sponsor-top-view-content{
+  position: absolute;
+  width: 94%;
+  height: 92%;
+  left: 3%;
+  top: 4%;
+  border-radius: 30rpx;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+}
+.sponsor-top-view-right{
+  top: 120rpx;
+}
+.sponsor-top-view-bottom{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 30rpx;
+  width: 100%;
+}
+.sponsor-top-view-bottom-item{
+  width: 33%;
+  border-left: 1rpx #f2f2f2 solid;
+  height: 55rpx;
+  line-height: 55rpx;
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.sponsor-top-view-bottom-item:first-child{
+  border-left: none;
+  line-height: 27rpx;
+  font-size: 24rpx;
+}
+/* 主办方下方列表 */
+
+.disable{
+  color: #666;
+}
+.opacityHide{
+  opacity: 0;
+}
+.active{
+  color: #feb707;
+}
+
+.iptActivityInfo-radio{
+  display: flex;
+  margin: 10rpx 0;
+  margin: 0 auto;
+}
+.fenxiaoSub{
+  margin: 0 auto;
+  width: 500rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(to right,rgb(254,183,7),rgb(244,200,7));
+}

@@ -4,6 +4,7 @@
     "tabbar": "../../components/tabbarComponent/tabbar",
     "van-swipe-cell": "../../miniprogram_npm/@vant/weapp/swipe-cell/index",
     "van-tab": "../../miniprogram_npm/@vant/weapp/tab/index",
-    "van-tabs": "../../miniprogram_npm/@vant/weapp/tabs/index"
+    "van-tabs": "../../miniprogram_npm/@vant/weapp/tabs/index",
+    "image-video": "../../components/image-video/index"
   }
 }

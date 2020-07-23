@@ -47,7 +47,7 @@ const formatNumber = n => {
 const setId = id => {
   wx.setStorageSync("id", id)
 }
-const getId = id => {
+const getId = () => {
   return wx.getStorageSync('id')
 }
 const checkLogin = () => {
@@ -193,6 +193,7 @@ const _getLocalSrc = function(url) {
   });
 }
 
+
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
@@ -203,5 +204,5 @@ module.exports = {
   getAuthStatus: getAuthStatus,
   uploadImg: uploadImg,
   _getLocalSrc: _getLocalSrc,
-  getAddrNo: getAddrNo
+  getAddrNo: getAddrNo,
 }

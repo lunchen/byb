@@ -1,0 +1,23 @@
+<!-- joinfenxiao.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}' needTop="{{true}}" backgroundColor="transparent"></navbar>
+    <image bindload="imgLoaded" src="../../images/joinfenxiaobg.png" style="width:{{imageWidth}}px;height:{{imageHeight}}px;position:absolute;top:0;left:0;"></image>
+
+    <view style="position:relative;z-index:2;margin-top:{{height}}px;padding-top:20rpx;">
+      <image bindload="imgLoaded1" src="../../images/joinfenxiaotop.png" style="width:{{imageWidth}}px;height:{{imageHeight1}}px;position:absolute;top:80rpx;left:0;"></image>
+<!-- 
+      <view class="joinfenxiao-text1">加入分销 玩赚生活</view>
+      <view class="joinfenxiao-text2">红包那么多，你确定不要吗？</view>
+      <view class="joinfenxiao-text3">玩玩手机即可实现 躺着赚钱的目标</view> -->
+    </view>
+    <view class="joinfenxiao-btn">
+      <image bindtap="bindHandle" src="../../images/joinfenxiaobtn.png" style="width:528rpx;height:148rpx;"></image>
+    </view>
+
+  <van-popup show="{{ show }}" bind:close="onClose" custom-style="background-color:transparent">
+    <view>
+      <image bindtap="bindHandle" bindtap="onClose" src="../../images/joinfenxiaopop.png" style="width:636rpx;height:987rpx;"></image>
+    </view>
+  </van-popup>
+ 
+</view>

@@ -1,0 +1,167 @@
+<view class="sjmiaosha" style="{{ display ? '' : 'display: none;'}}">
+    <view class="sjmiaosha-bg {{showType?'':'fadeIn'}}" bindtap="sjmsOnClose"></view>
+    <view class="sjmiaosha-view {{showType?'enter-leave':''}}">
+      <view class="sjmiaosha-view-title">
+        <view class="sjmiaosha-view-title-txt">升级秒杀活动</view>
+        <!-- <image bindtap="closeBtn" style="width:30rpx;height:30rpx;" src="./icon/apply_1@2x.png"></image> -->
+      </view>
+
+      <view class="sjmiaosha-view-text-list">
+        <van-cell-group>
+          <view class="sjmiaosha-content-form-item">
+            <text class="sjmiaosha-content-form-item-title">原价</text>
+            <van-field
+              custom-style="padding:0"
+              value="{{ req.orginPrice }}"
+              type="number"
+              placeholder="元"
+              border="{{ false }}"
+              bind:change="onIptChange"
+              data-key="orginPrice"
+            />
+          </view>
+          <view class="sjmiaosha-content-form-item">
+            <text class="sjmiaosha-content-form-item-title">活动价</text>
+            <van-field
+              custom-style="padding:0"
+              value="{{ req.price }}"
+              type="number"
+              placeholder="元"
+              border="{{ false }}"
+              bind:change="onIptChange"
+              bind:blur="onPriceBlur"
+              data-key="price"
+            />
+          </view>
+          <view class="sjmiaosha-content-form-item">
+            <text class="sjmiaosha-content-form-item-title">分享标题</text>
+            <van-field
+              custom-style="padding:0"
+              value="{{ req.shareTitle }}"
+              placeholder="分享标题"
+              type="{{number}}"
+              border="{{ false }}"
+              bind:change="onIptChange"
+              data-key="shareTitle"
+            />
+          </view>
+          <view class="sjmiaosha-content-form-item">
+            <text class="sjmiaosha-content-form-item-title">分享描述</text>
+            <van-field
+              custom-style="padding:0"
+              value="{{ req.shareRemark }}"
+              placeholder="分享描述"
+              type="{{number}}"
+              border="{{ false }}"
+              bind:change="onIptChange"
+              data-key="shareRemark"
+            />
+          </view>
+          <view class="sjmiaosha-content-form-item">
+            <text class="sjmiaosha-content-form-item-title">分享扣减金额</text>
+            <van-field
+              custom-style="padding:0"
+              value="{{ req.sharePrice }}"
+              placeholder="分享扣减金额"
+              type="number"
+              border="{{ false }}"
+              bind:change="onIptChange"
+              bind:blur="onSharePriceBlur"
+              data-key="sharePrice"
+            />
+          </view>
+          <view class="sjmiaosha-content-form-item">
+            <text class="sjmiaosha-content-form-item-title">是否开启分销</text>
+            <van-switch
+                checked="{{ req.shareFlg }}"
+                active-color="#07c160"
+                inactive-color="#aaa"
+                size="20px"
+                bind:change="switchChange"
+              />   
+          </view> 
+          <view class="sjmiaosha-price {{req.shareFlg?'sjmiaosha-slideDown':''}}">
+            <view class="sjmiaosha-content-form-item">
+              <text class="sjmiaosha-content-form-item-title">红包(分销)金额</text>
+              <van-radio-group use-icon-slot value="{{ nop }}" bind:change="onRadioChange" style="width:100%;display:flex;align-items:center">
+                <view style="padding:6rpx 0;font-size:26rpx;">
+                  <view class="sjmiaosha-radio">
+                    <van-radio name="{{true}}" icon-size="36rpx" shape="square" checked-color="#feb707"></van-radio>
+                    <van-field
+                      custom-style="padding:0 10rpx;border-bottom:2rpx #666666 solid;width:140rpx;text-align:center;"
+                      value="{{ baifenbi }}"
+                      placeholder=""
+                      autosize
+                      type="number"
+                      border="{{ false }}"
+                      disabled="{{nop?false:true}}"
+                      bind:change="onIptChange1"
+                      bind:blur="onRadioBlur1"
+                      data-key="baifenbi"
+                      />% 
+                      <text style="color:red;">(最高30%)</text>
+                  </view>
+                  <view class="sjmiaosha-radio">
+                    <van-radio name="{{false}}" icon-size="36rpx" shape="square" checked-color="#feb707"></van-radio>
+                    <van-field
+                      custom-style="padding:0 10rpx;border-bottom:2rpx #666666 solid;width:140rpx;text-align:center;"
+                      value="{{ shuzhi }}"
+                      placeholder=""
+                      autosize
+                      type="number"
+                      border="{{ false }}"
+                      disabled="{{nop?true:false}}"
+                      bind:change="onIptChange1"
+                      bind:blur="onRadioBlur2"
+                      data-key="shuzhi"
+                      />元
+                      <text style="color:red;">(最高{{req.price?(maxhb):'XX'}}元)</text>
+                  </view>
+                </view>
+              </van-radio-group>
+            </view>
+          </view>
+          <view class="sjmiaosha-content-form-item" >
+            <text class="sjmiaosha-content-form-item-title">秒杀时间</text>
+            <van-field
+              custom-style="padding:0;font-size:28rpx;"
+              bindtap="getTime"
+              data-timename = "startTime"
+              value="{{ req.startTime }}"
+              placeholder="请选择时间"
+              border="{{ false }}"
+              readonly="true"
+            />
+            <text class="sjmiaosha-content-form-item-text">至</text>
+            <van-field
+              custom-style="padding:0;font-size:28rpx;"
+              bindtap="getTime"
+              type="{{number}}"
+              data-timename = "endTime"
+              value="{{ req.endTime }}"
+              placeholder="请选择时间"
+              border="{{ false }}"
+              readonly="true"
+            />
+          </view>
+        </van-cell-group>
+        <view class="sjmiaosha-btn" bindtap="sub">
+          提交
+        </view>
+        <!-- <view wx:if="{{msUrl}}" class="sjmiaosha-copyBtn" bindtap="copy">
+          点击复制活动链接：<text style="color:#ff8800">{{msUrl}}</text>   
+        </view> -->
+      </view>
+      
+    </view>
+    <van-popup show="{{ show }}" bind:close="onClose" custom-style="height: 40%" position="bottom">
+      <van-datetime-picker
+        type="datetime"
+        value="{{ currentDate }}"
+        min-date="{{ minDate }}"
+        max-date="{{ maxDate }}"
+        bind:confirm = "confirm"
+        bind:cancel = "onClose"
+      />
+    </van-popup>
+  </view>

@@ -54,7 +54,7 @@ Component({
       this.setData({
         share: true
       })
-      if (currentPage.route == "pages/schoolHome/schoolHome") {
+      if (currentPage.route == "pages/schoolHome/schoolHome" || currentPage.route == "pages/schoolDetails/schoolDetails" || currentPage.route == "pages/activityDetails/activityDetails") {
         this.setData({
           "navbarData.showCapsule": 0
         })

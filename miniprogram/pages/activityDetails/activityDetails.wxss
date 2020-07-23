@@ -8,7 +8,7 @@
   background: #f0f0f0;
 }
 .activityDetails-infoCard{
-  margin-top: 50rpx;
+  /* margin-top: 50rpx; */
 }
 .activityDetailsImg{
   width:690rpx;
@@ -202,4 +202,41 @@ button {
 
 button {
   border-radius:0;
+}
+
+.miaoshabtn{
+  margin: 20rpx 0;
+  min-height: 26rpx;
+  text-align: right;
+  padding-right: 30rpx;
+  font-size: 28rpx;
+  color: #ff8800
+}
+.sjmiaoshabtn{
+  position: fixed;
+  right: 0;
+  top: 42%;
+}
+.fenxiaohaibao{
+  position: fixed;
+  width:294rpx;
+  height:154rpx;
+  right: 0;
+  top: 50%;
+  right: -200rpx;
+  transition: right .5s linear;
+}
+.fenxiaohaibao.active{
+  right: 0;
+}
+.fenxiaohaibao-text{
+  position: absolute;
+  min-width: 64rpx;
+  height: 84rpx;
+  color: #fff;
+  top: 0;
+  left: 0;
+  padding: 46rpx 0rpx 30rpx 24rpx;
+  font-size: 26rpx;
+  transform: rotate(10deg);
 }

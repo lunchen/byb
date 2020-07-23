@@ -33,6 +33,19 @@ Component({
       value: 0,
       observer: function (newVal, oldVal) {
         var _this = this
+        console.log(newVal)
+        if(wx.getStorageSync('userInfo')){
+          var telephone = '' + JSON.parse(wx.getStorageSync('userInfo')).telephone
+          var ary = telephone.split("");
+          ary.splice(3,4,"****");
+          var tel = ary.join("");
+          console.log(tel);
+          this.setData({
+            tel: tel,
+            ifNeedIpt:false,
+          })
+        }
+        
         if (newVal == 1){
           this.getSelect()
           if (this.data.needChooseCourse){
@@ -116,6 +129,7 @@ Component({
     joinTel:'',
     joinName:'',
     orderNo: '',
+
     stepValue: 1,
     totalMoney: '',
     userInfoModel: {
@@ -139,8 +153,75 @@ Component({
       "userNo": ""
     },
     userImg:'',
+    ifNeedIpt:false,
+    tel:''
+  },
+  attached(){
+    if(wx.getStorageSync('userInfo')){
+      var telephone = '' + JSON.parse(wx.getStorageSync('userInfo')).telephone
+      var ary = telephone.split("");
+      ary.splice(3,4,"****");
+      var tel = ary.join("");
+      console.log(tel);
+      this.setData({
+        tel: tel
+      })
+
+    }
+   
   },
   methods: {
+    easyGetMes(){
+      // 提交结果 调用生成订单
+      var hasLogin = util.checkLogin()
+      if (this.data.showType == 3 && this.data.type != 2) {
+        if (this.data.baseSelected == '') {
+          wx.showToast({
+            title: '请输入完整信息后再提交',
+            icon: 'none',
+            duration: 2000
+          })
+          return
+        }
+      } else if (this.data.showType == 3 && this.data.type == 2){
+        if (this.data.userImg == '' || this.data.baseSelected == '' ) {
+          wx.showToast({
+            title: '请输入完整信息后再提交',
+            icon: 'none',
+            duration: 2000
+          })
+          return
+        }
+      }
+      var data = JSON.parse(wx.getStorageSync('userInfo'))
+      console.log(data)
+      this.setData({
+        joinName: data.nickName,
+        joinTel: data.telephone,
+      })
+      if (hasLogin) {
+        if(this.data.type == 2){
+          this.generateOrder1()
+        }else{
+          this.generateOrder()
+        }
+      } else {
+        // this.triggerEvent('changeFLogin', {
+        //   loginShow: 4
+        // })
+        wx.navigateTo({
+          url: `../getAuth/getAuth`,
+        })
+      }
+    },
+    change(){
+      this.setData({
+        ifNeedIpt: !this.data.ifNeedIpt,
+        joinName: '',
+        joinTel: '',
+        baseSelected:''
+      })
+    },
     calcMoney(){
       // 计算总价
       var money = 0;
@@ -217,7 +298,7 @@ Component({
           return
         }
       } else if (this.data.showType == 3 && this.data.type == 2){
-        if (this.data.userImg == '' || this.data.joinName == '' || this.data.joinTel == '') {
+        if (this.data.baseSelected == '' || this.data.userImg == '' || this.data.joinName == '' || this.data.joinTel == '') {
           wx.showToast({
             title: '请输入完整信息后再提交',
             icon: 'none',
@@ -263,7 +344,8 @@ Component({
         "telephone": this.data.joinTel,
         "count": this.data.stepValue
       }
-      apiServer.post(url, data).then(res => {
+      var shareId = wx.getStorageSync('shareId') ? wx.getStorageSync('shareId') : ''
+      apiServer.post(url, data,'post',{'shareId': shareId}).then(res => {
         _this.setData({
           orderNo: res.data.data.orderNo
         })

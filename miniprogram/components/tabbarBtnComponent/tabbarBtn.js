@@ -1,5 +1,6 @@
 // 底部报名 客服 预约 按钮
 const apiServer = require('../../api/request.js');
+const util = require('../../utils/util.js');
 const app = getApp()
 Component({
   properties: {
@@ -106,6 +107,15 @@ Component({
       this.triggerEvent('shareFriend', {})
     },
     appointBtn:function(e) {
+      var hasLogin = util.checkLogin()
+      console.log(hasLogin)
+      if (hasLogin) { 
+      } else {
+        wx.navigateTo({
+          url: `../getAuth/getAuth`,
+        })
+        return
+      }
       if (this.data.status != 1) {
         wx.showToast({
           title: '活动未开始',
@@ -126,6 +136,15 @@ Component({
       }
     },
     freeAppointBtn: function (e) {
+      var hasLogin = util.checkLogin()
+      console.log(hasLogin)
+      if (hasLogin) { 
+      } else {
+        wx.navigateTo({
+          url: `../getAuth/getAuth`,
+        })
+        return
+      }
       // 打开触发父组件打开报名弹窗
       if (this.data.status!=1){
         wx.showToast({

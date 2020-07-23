@@ -160,7 +160,7 @@ Page({
     wx.showToast({
       mask: true,
       icon: 'loading',
-      duration: 100000
+      duration: 10000
     })
     if (app.globalData.isLinking) {
       console.log("loading")

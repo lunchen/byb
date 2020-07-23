@@ -3,5 +3,4 @@
   <block wx:for="{{logs}}" wx:for-item="log">
     <text class="log-item">{{index + 1}}. {{log}}</text>
   </block>
-<web-view style="pading-top:240rpx" src="https://www.baidu.com/"></web-view>
 </view>

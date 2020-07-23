@@ -26,6 +26,7 @@
   max-height: 110rpx;
   overflow-y: auto;
   flex: 1;
+  padding: 6rpx 0;
 }
 .ftSize22{
  font-size: 22rpx;

@@ -11,7 +11,11 @@ Component({
     infoCardType: {
       type: Number,
       value: 1  //1显示价格 2不显示价格 默认1
-    }
+    },
+    ifRencent: {
+      type: Boolean,
+      value: false  //1显示价格 2不显示价格 默认1
+    },
   },
   data: {
     height: '',

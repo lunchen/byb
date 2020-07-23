@@ -52,7 +52,7 @@
           </view>
         </scroll-view>
        
-      <view>
+        <view>
           <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{reEditData}}" bind:getIptMes="getIptMes" newAddr="{{newAddr}}" activityType="{{1}}"></iptActivityInfoComponent>
         </view>
         <view class="releaseActivity-content-btnView">

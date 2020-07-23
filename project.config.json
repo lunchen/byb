@@ -20,7 +20,10 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wx28653ecae496acb0",
 	"projectname": "bybxcx",
@@ -60,7 +63,7 @@
 					"id": 1,
 					"name": "pages/schoolHome/schoolHome",
 					"pathName": "pages/schoolHome/schoolHome",
-					"query": "id=458744",
+					"query": "id=458745",
 					"scene": null
 				},
 				{
@@ -138,6 +141,41 @@
 					"name": "pages/myVideoSwiper/myVideoSwiper",
 					"pathName": "pages/myVideoSwiper/myVideoSwiper",
 					"query": "scene=id%3D317%3Dindex",
+					"scene": null
+				},
+				{
+					"id": 13,
+					"name": "pages/activityDetails/activityDetails",
+					"pathName": "pages/activityDetails/activityDetails",
+					"query": "scene=id%3D327732%3D666",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/releaseActivity/releaseActivity",
+					"pathName": "pages/releaseActivity/releaseActivity",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/reEditActivity/reEditActivity",
+					"pathName": "pages/reEditActivity/reEditActivity",
+					"query": "id=327760",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/activityListSearch/activityListSearch",
+					"pathName": "pages/activityListSearch/activityListSearch",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/activityDetailsRecent/activityDetailsRecent",
+					"pathName": "pages/activityDetailsRecent/activityDetailsRecent",
+					"query": "id=327696",
 					"scene": null
 				}
 			]

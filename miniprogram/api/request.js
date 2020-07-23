@@ -1,3 +1,5 @@
+const { head } = require("request");
+
 var host = "https://www.byb88.cn/";
 var domian = "enlist2";
 
@@ -46,20 +48,24 @@ var theLocation = function(){
 var nowLocation = new theLocation()
 
 const service = {
-  post(url, data, methods) {
+  requset(url, data, methods, nh) {
+    var nheader = { 
+      "content-type": "application/json",
+      "Authorization": getToken("authorization"),
+      "token": getToken("token"),
+      "appRole": getIdentity(),
+      longitude: nowLocation.longitude,
+      latitude: nowLocation.latitude,
+    }
+    if(typeof nh == "object"){
+      Object.assign(nheader,nh)
+    }
     return new Promise((resolve, reject) => {
       wx.request({
         method: methods ? methods : 'post',
         url: host + domian + url,
         data: data,
-        header: { 
-          "content-type": "application/json",
-          "Authorization": getToken("authorization"),
-          "token": getToken("token"),
-          "appRole": getIdentity(),
-          longitude: nowLocation.longitude,
-          latitude: nowLocation.latitude
-        },
+        header: nheader,
         success: (res) => {
           // 调用接口成功
           if(res.data.code == 200){
@@ -97,9 +103,9 @@ const service = {
 }
 
 module.exports = {
-  post: (url, data, methods) => {
+  post: (url, data, methods, nh) => {
     data = data ? data : {};
-    return service.post(url, data, methods)
+    return service.requset(url, data, methods, nh)
   },
   apiUrl: apiUrl,
   getToken: getToken,

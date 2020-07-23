@@ -62,7 +62,12 @@ Page({
       "price": '',
       "startTime": "",
       "style": 0,
-      "totalJoin": ''
+      "totalJoin": '',
+      "amount":'',
+      "amountFlg":0,
+      "rate":'',
+      "rateFlg":0,
+      "shareFlg":0,
     },
     activityModel:{
 
@@ -154,7 +159,7 @@ Page({
     wx.showToast({
       mask: true,
       icon: 'loading',
-      duration: 100000
+      duration: 10000
     })
     if (app.globalData.isLinking) {
       console.log("loading")
@@ -163,9 +168,10 @@ Page({
       }, 500)
       return
     }
-    var data = this.data.activityModel
+    var data = JSON.parse(JSON.stringify(this.data.activityModel))
     data.type = this.data.type
-
+5
+    console.log(data)
     if(data.img){
 
     }else{
@@ -177,10 +183,15 @@ Page({
       return
     } 
     data.addrList = []
-    data.addrVoList.forEach(item => {
-      data.addrList.push(item.addrNo)
-    })
-    delete data.addrVoList
+    if (data.addrVoList.length==0){
+     
+    }else{
+      data.addrVoList.forEach(item => {
+        data.addrList.push(item.addrNo)
+      })
+      delete data.addrVoList
+    }
+    
     apiServer.post(`/app/activity/add`, data).then(res => {
       wx.showToast({
         title: '发布成功',

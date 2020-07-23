@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navbar": "../../components/navbarComponent/navbar",
+    "image-video": "../../components/image-video/index"
+  },
+  "navigationBarTextStyle": "white"
+}

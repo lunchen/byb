@@ -5,7 +5,7 @@
   flex-direction: column;
   background: #fff;
   border-radius: 50rpx;
-  padding: 20rpx 30rpx 240rpx;
+  padding: 20rpx 30rpx 300rpx;
 }
 .activityListSearch-content-view{
   padding: 0 40rpx;

@@ -1,5 +1,5 @@
 <view class="activity-view-item" bindtap="goToActivityDetails" data-id="{{activityData.id}}">
-  <view>
+  <view style="font-size:0;">
     <image wx:if="{{activityData.img}}" class="activity-view-item-left" mode="aspectFill" src="{{activityData.img}}"></image>
     <view class="default-bg flex-middle-center" wx:else>
       <image class="default-bg-img" src="../../images/default_bill@2x.png"></image>
@@ -32,6 +32,10 @@
           立即查看
         </view>
       </view>
+      <view class="fxTips" wx:if="{{userShareFlg === 1 && activityData.share && activityData.share.flg==1}}">
+        <image style="width:66rpx;height:80rpx;" src="../../images/fxTips.png"></image>
+      </view>
     </view>
   </block>
+  
 </view>

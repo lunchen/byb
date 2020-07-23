@@ -74,7 +74,7 @@
   left: 0;
 }
 .signUpSuccess-shareView{
-  padding: 70rpx 70rpx;
+  padding: 50rpx 70rpx;
   display: flex;
   justify-content: center;
 }
@@ -118,6 +118,10 @@ button.signUpSuccess-shareView-item-buttom{
 }
 .videoTop button:not([size='mini']) {
   width: 100rpx;
+}
+.signUpSuccess-shareList{
+  text-align: center;
+  margin-top: 20rpx;
 }
 
 

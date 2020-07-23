@@ -17,15 +17,14 @@
           <view class="signUpSuccess-view-middle-text">活动方式：{{orderData.infoDetailList[0].activity.typeName}}</view>
         </view>
         
-        <button class="signUpSuccess-shareToFriend" open-type='share' bindtap="onShareAppMessage">
+        <view class="signUpSuccess-shareToFriend" bindtap="goToIndex">
           <image src="../../images/apply_2@2x.png"></image>
-          <view>分享给好友</view>
-        </button>
+          <view>回到首页</view>
+        </view>
 
-        <!-- <view class="signUpSuccess-shareToFriend" >
-          <image src="../../images/apply_2@2x.png"></image>
+        <view class="signUpSuccess-shareList" >
           <view>分享给好友</view>
-        </view> -->
+        </view>
         <view class="signUpSuccess-shareView">
           <view class="signUpSuccess-shareView-item">
             <button class="signUpSuccess-shareView-item-buttom"  open-type="share" style="margin-bottom:28rpx" hover-class='none'>

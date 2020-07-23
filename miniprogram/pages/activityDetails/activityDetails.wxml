@@ -30,7 +30,11 @@
         </swiper>
        
       </view>
+      <view class="miaoshabtn">
+        <!-- <view wx:if="{{showActUp}}" bindtap="sjms">一键升级秒杀活动</view> -->
+      </view>
       <view class="activityDetails-content">
+      
         <!-- 卡片信息 -->
         <view class="activityDetails-infoCard" id="card">
           <infoCard infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCard>
@@ -110,10 +114,19 @@
       </view>
     </view>
   </scroll-view>
-  
+  <view class="sjmiaoshabtn">
+    <image wx:if="{{showActUp}}" style="width:200rpx;height:65rpx;" bindtap="sjms" src="../../images/sjms.png"></image>
+  </view>
+  <view wx:if="{{ activityListData.info.share.flg == 1}}" class="fenxiaohaibao {{scfxhbActive?'active':''}}" bindtap="scfxhb">
+    <image style="width:294rpx;height:154rpx;" src="../../images/activityfenxiaoBtn.png"></image>
+    <view class="fenxiaohaibao-text">
+      <view>{{activityListData.info.share.amount}}元</view>
+      <view>红包</view>
+    </view>
+  </view>
+  <shengjimiaosha orginPrice="{{activityListData.info.price}}" miaoshashow="{{miaoshashow}}" actId="{{activityListData.info.id}}" bind:sjmsClose="sjmsClose"></shengjimiaosha>
   <login orgId="{{activityListData.org.id}}" type="{{activityListData.info.type}}" needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
   <tabbarBtn orgId="{{activityListData.org.id}}" telephone="{{activityListData.org.telephone}}" type="{{activityListData.info.type}}" status="{{activityListData.info.status}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
-
 
    <view class="canvasImg" wx:if="{{canvasImgShow}}">
     <view class="canvasImg-bg" bindtap="closeCanvasImgShow"></view>

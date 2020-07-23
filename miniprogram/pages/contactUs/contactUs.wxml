@@ -1,0 +1,33 @@
+<!--business.wxml-->
+<view class="container">
+  <navbar navbar-data='{{nvabarData}}'></navbar>
+    <view style="position:relative;z-index:2;margin-top:{{height}}px;">
+    </view>
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px;border-top:1rpx #f0f0f0 solid;'>
+      
+      <view class="business-content">
+       
+        <view class="contactInfo">
+          <view class="contactInfo-title">联系我们</view>
+          <view class="contactInfo-text" style="color:#fe8800" bindtap="makePhoneCall">小报电话：{{telephone}}</view>
+          <!-- <view class="contactInfo-text">微信号：123456789</view> -->
+          <view class="contactInfo-text-img">
+            <text style="margin-right:50rpx;">微信二微码</text>
+            <image-video 
+              show="{{true}}" 
+              src="{{wechat}}" 
+              type="{{1}}" 
+              width="140"
+              height="140"
+              ></image-video>
+          </view>
+        </view>
+
+        
+      </view>
+
+    </view>
+  </scroll-view>
+  
+</view>

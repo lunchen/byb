@@ -16,8 +16,6 @@ Page({
     // 导航头的高度
     height: app.globalData.navheight,
 
-    //tabbar
-    tabbar: {},
     value: '',
     
     motto: 'Hello World',

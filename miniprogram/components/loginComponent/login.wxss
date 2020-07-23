@@ -349,9 +349,23 @@
   font-weight: bolder;
   margin-bottom: 60rpx;
 }
+.inputMes-view-getMes{
+  width: 570rpx;
+  height: 44rpx;
+  background: #feb707;
+  border-radius: 10rpx;
+  padding: 24rpx 30rpx;
+  border: 1px solid #feb707;
+  margin-top: 30rpx;
+  position: relative;
+  box-shadow: 6rpx 10rpx 0 0 #fe8800;
+  display: flex;
+  align-items: center;
+}
 .inputMes-view{
   padding: 0 60rpx;
 }
+
 .inputMes-view-ipt{
   width: 570rpx;
   height: 44rpx;

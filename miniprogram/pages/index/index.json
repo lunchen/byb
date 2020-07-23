@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "login": "../../components/loginComponent/login",
     "navbar2": "../../components/navbarComponent2/navbar2",
     "tabbar": "../../components/tabbarComponent/tabbar",
     "van-search": "../../miniprogram_npm/@vant/weapp/search/index",

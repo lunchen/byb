@@ -122,6 +122,22 @@ Page({
   videoErrorCallback: function (e) {
     console.log('视频错误信息:' + e.detail.errMsg);
   },
+  goToEditOnlineExperienceList(){
+    if(this.data.showEditBtn && this.data.identity==2){
+      wx.navigateTo({
+        url: `../edit-onlineExperienceList/edit-onlineExperienceList`,
+      })
+    }
+  },
+  gotoEditSchoolHome(e) {
+    if(this.data.showEditBtn && this.data.identity==2){
+      wx.navigateTo({
+        url: `../edit-schoolHome/edit-schoolHome`,
+      })
+    }else{
+      this.goToSchoolDetails(e)
+    }
+  },
   goToBusiness(e) {
     wx.navigateTo({
       url: `../business/business`,

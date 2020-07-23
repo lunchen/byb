@@ -1,0 +1,184 @@
+<!--pages/mine-order/mine-order.wxml-->
+<view class="container">
+  <navbar need-top='{{false}}' navbar-data='{{nvabarData}}' backgroundColor="rgb(255, 230, 0)"></navbar>
+  <view class="participant"  wx:if="{{identity==1}}" >
+  <!-- 参与方 -->
+    <view class="mine-top" style="position:relative;z-index:2;margin-top:{{6+height}}px;">
+        
+    </view>
+    <view class="tab_list participant_tab_list">
+      <view class="tab_list_item {{active==index?'active':''}}" data-index="{{index}}"  bindtap="tabChange" wx:for="{{participant.selectList}}" wx:key="item">
+        <view class="cLine"></view>
+        <view>{{item.label}}</view>
+      </view>
+    </view>
+    <view class="mine-content-title" style="padding:0;">
+              
+    </view>
+    <view class="orderSelect" wx:if="{{active==0}}">
+      <view class="tab_list orderSelect_tab_list">
+        <view class="tab_list_item {{orderSelected==index?'active':''}}" data-index="{{index}}" data-value="{{item.value}}" bindtap="tabOrderChange" wx:for="{{orderStatusSelectList}}" wx:key="item">
+          <view class="orderSelect-text">{{item.label}}</view>
+        </view>
+      </view>
+    </view>
+    <block wx:if="{{active == 0}}">
+      <scroll-view scroll-y style="position:relative;height: 100.0%;">
+        <view class="scroll-view" style='padding-top:1px;'>
+          <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{100+height}}px">
+            
+            
+            <view class="participantCard">
+              <block wx:for="{{participantInfo.orderList}}" wx:key="id">
+              
+                <van-swipe-cell id="{{'swipe-cell' + index}}" right-width="{{ item.activity.status==3?0:0 }}" async-close bind:close="onClose">
+                  <van-cell-group>
+                    <view class="participantCard-content-item">
+                      <block>
+                        <view class="participantCard-content-item-top">
+                          <view class="participantCard-content-item-top-left">
+                            <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                            <text>{{item.org.name}}</text>
+                          </view>
+                          <text>{{item.statusName}}</text>
+                        </view>
+                        <view class="participantCard-content-item-middle" bindtap="goToOrderDetails" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
+                          <view style="font-size:0;border:1rpx #eee solid;border-radius:10rpx;overflow:hidden;">
+                            <image mode="aspectFill" class="participantCard-content-item-middle-left" src="{{item.activity.img}}"></image>
+                          </view>
+                          <view class="participantCard-content-item-middle-center">
+                            <view class="participantCard-content-item-middle-center-text">
+                              <text class="participantCard-view-text1">{{item.activity.name}}</text>
+                              <view class="participantCard-view-text2">时间：{{item.activity.startTime}}</view>
+                              <view class="participantCard-view-text2">地点：{{item.activity.addr}}</view> 
+                            </view>
+                            <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
+                          </view>
+                          <view class="participantCard-content-item-middle-right" catchtap="goToETicket" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}" data-status="{{item.statusName}}">
+                            <view class="trapezoidTop"></view>
+                            <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
+                            <view class="trapezoidBottom"></view>
+                          </view>
+                        </view>
+                        <view class="participantCard-content-item-bottom">
+                          <view class="participantCard-content-item-bottom-view1">
+                            <text>{{item.typeName}}</text>
+                            <text style="font-size:26rpx">X{{item.count}}</text>
+                            <text>¥ {{item.price}}</text>
+                          </view>
+                          <view class="participantCard-content-item-bottom-view2">
+                            <text>共一订单 合计：</text>
+                            <text style="color:#fe8800">¥ {{item.totalPrice}}</text>
+                          </view>
+                        </view>
+                      </block>
+                      <view class="sponsorCard-isEnd" wx:if="{{item.activity.status==3}}">
+                        <view  class="sponsorCard-isEnd-bg"></view>
+                        <view class="sponsorCard-isEnd-top">
+                        </view>
+                        <view class="sponsorCard-isEnd-middle">
+                          <view>已完成</view>
+                        </view>
+                        <view class="sponsorCard-isEnd-bottom">
+                        </view>
+
+                      </view>
+                    </view>
+                  </van-cell-group>
+                  <view bindtap="removeBtn" data-id="{{item.id}}" style="display:flex;align-items:center;justify-content:center;height:100%;width:65px;color:#fff;background:red;" class="" slot="right">
+                    <text>
+                    删除
+                    </text>
+                  </view>
+                </van-swipe-cell>
+              </block>
+              
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </block>
+    <block wx:else>
+      <scroll-view scroll-y style="position:relative;height: 100%;">
+        <view class="scroll-view" style='padding-top:1px;'>
+          <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{100+height}}px">
+            <!-- <view class="mine-content-title" style="padding:0;">
+              <view class="cLine"></view>
+              <text>分销订单</text>
+            </view> -->
+            <view class="participantCard">
+              <block wx:for="{{fenxiao}}" wx:key="id">
+              
+                <van-swipe-cell id="{{'swipe-cell' + index}}" right-width="{{ item.activity.status==3?0:0 }}" async-close bind:close="onClose">
+                  <van-cell-group>
+                    <view class="participantCard-content-item">
+                      <block>
+                        <view class="participantCard-content-item-top">
+                          <view class="participantCard-content-item-top-left">
+                            <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>
+                            <text>{{item.org.name}}</text>
+                          </view>
+                          <view wx:if="{{item.activity.statusName == '支付成功'}}">
+                            <image mode="aspectFill" style="width:47rpx;height:41rpx;margin-right:14rpx;" src="../../images/fxmember.png"></image>
+                            <text>{{item.amount}}元</text>
+                          </view>
+                        </view>
+                        <view class="participantCard-content-item-middle" data-orderNo="{{item.orderNo}}" data-index="{{index}}">
+                          <view style="font-size:0;border:1rpx #eee solid;border-radius:10rpx;overflow:hidden;">
+                            <image mode="aspectFill" class="participantCard-content-item-middle-left" style="height:220rpx;width:160rpx;" src="{{item.activity.img}}"></image>
+                          </view>
+                          <view class="participantCard-content-item-middle-center">
+                            <view class="participantCard-content-item-middle-center-text" style="height:160rpx;max-height:160rpx;">
+                              <text class="participantCard-view-text1">{{item.activity.name}}</text>
+                              <view class="participantCard-view-text2">下单时间：{{item.createTime}}</view>
+                              <view class="participantCard-view-text2">购买者：{{item.name}}</view> 
+                            </view>
+                            <view style="font-size:30rpx;color:#fe8800;font-weight:bloder;">{{item.activity.statusName}}</view>
+                          </view>
+                          <view class="participantCard-content-item-middle-right" style="opacity:0;width:30rpx;" data-orderNo="{{item.orderNo}}" data-index="{{index}}" data-actvityid="{{item.activity.id}}" data-status="{{item.statusName}}">
+                            <view class="trapezoidTop"></view>
+                            <view class="participantCard-content-item-middle-right-text" style="font-size:30rpx;color:#ffffff;font-weight:bloder;">查看电子票</view>
+                            <view class="trapezoidBottom"></view>
+                          </view>
+                        </view>
+                        <!-- <view class="participantCard-content-item-bottom">
+                          <view class="participantCard-content-item-bottom-view1">
+                            <text>{{item.typeName}}</text>
+                            <text style="font-size:26rpx">X{{item.count}}</text>
+                            <text>¥ {{item.price}}</text>
+                          </view>
+                          <view class="participantCard-content-item-bottom-view2">
+                            <text>共一订单 合计：</text>
+                            <text style="color:#fe8800">¥ {{item.totalPrice}}</text>
+                          </view>
+                        </view> -->
+                      </block>
+                      <view class="sponsorCard-isEnd" wx:if="{{item.activity.status==3}}">
+                        <view  class="sponsorCard-isEnd-bg"></view>
+                        <view class="sponsorCard-isEnd-top">
+                        </view>
+                        <view class="sponsorCard-isEnd-middle">
+                          <view>已完成</view>
+                        </view>
+                        <view class="sponsorCard-isEnd-bottom">
+                        </view>
+
+                      </view>
+                    </view>
+                  </van-cell-group>
+                  <view bindtap="removeBtn" data-id="{{item.id}}" style="display:flex;align-items:center;justify-content:center;height:100%;width:65px;color:#fff;background:red;" class="" slot="right">
+                    <text>
+                    删除
+                    </text>
+                  </view>
+                </van-swipe-cell>
+              </block>
+              
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </block>
+  </view>
+ 
+</view>

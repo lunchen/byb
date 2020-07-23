@@ -5,36 +5,43 @@
   </view>
   <view class="infocard-content-text">
     <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_2@2x.png"></image>
-    <text>{{infoCardrData.betweenTime}}</text>
+    <text wx:if="{{infoCardrData.betweenTime}}">{{infoCardrData.betweenTime}}</text>
+    <text wx:else>{{infoCardrData.startTime + ' 至 ' + infoCardrData.endTime}}</text>
   </view>
   <view class="infocard-content-text infocard-content-text-addr" wx:if="{{infoCardrData.type!=2}}">
     <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_3@2x.png"></image>
-    <view class="infocard-content-text-addr-list">
+    <view class="infocard-content-text-addr-list" wx:if="{{infoCardrData.addrList && infoCardrData.addrList.length>0}}">
       <view wx:for="{{infoCardrData.addrList}}" wx:key="id" class="infocard-content-text-addr-list-item">{{item.addr}}</view>
+    </view>
+    <view class="infocard-content-text-addr-list" wx:else>
+      <view class="infocard-content-text-addr-list-item">{{infoCardrData.addr.addr}}</view>
     </view>
     <image wx:if="{{infoCardrData.addrList && infoCardrData.addrList.length>3}}" style="width:30rpx;height:30rpx;position:absolute;top:10rpx;right:20rpx;" src="./icon/xiala.png"></image>
   </view>
   
-  <view class="infocard-content-text">
-    <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/school_4@2x.png"></image>
-    <view>已报名<text class="colorOrange">{{infoCardrData.joinCount}}</text>人/{{infoCardrData.totalJoin}}</view>
-  </view>
-  <block wx:if="{{infoCardType==1}}">
-    <view class="infocard-content-text">
-      <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_4@2x.png"></image>
-      <text class="colorOrange" wx:if="{{infoCardrData.price>0}}">{{infoCardrData.price}}元</text>
-      <text class="colorOrange" wx:else>免费</text>
-    </view>
-    <view class="infocard-content-text">
-      <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_5@2x.png"></image>
-      <text class="colorYellow">安心购</text>
-      <text style="margin-left:20rpx" class="ftSize22">认证卖家  担保风险  24小时客服在线</text>
-    </view>
-  </block>
-  <block wx:else>
+  <block wx:if="{{!ifRencent}}">
     <view class="infocard-content-text">
       <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/school_4@2x.png"></image>
-      <text>已报名{{infoCardrData.totalJoin}} / 不限名额</text>
+      <view>已报名<text class="colorOrange">{{infoCardrData.joinCount}}</text>人/{{infoCardrData.totalJoin}}</view>
     </view>
+    <block wx:if="{{infoCardType==1}}">
+      <view class="infocard-content-text">
+        <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_4@2x.png"></image>
+        <text class="colorOrange" wx:if="{{infoCardrData.price>0}}">{{infoCardrData.price}}元</text>
+        <text class="colorOrange" wx:else>免费</text>
+      </view>
+      <view class="infocard-content-text">
+        <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/detail_5@2x.png"></image>
+        <text class="colorYellow">安心购</text>
+        <text style="margin-left:20rpx" class="ftSize22">认证卖家  担保风险  24小时客服在线</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="infocard-content-text">
+        <image style="width:50rpx;height:50rpx;margin-right:10rpx;" src="./icon/school_4@2x.png"></image>
+        <text>已报名{{infoCardrData.totalJoin}} / 不限名额</text>
+      </view>
+    </block>
   </block>
+  
 </view>

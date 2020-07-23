@@ -9,19 +9,41 @@ Component({
       observer: function (newVal, oldVal) {
 
         var _this = this
-        console.log("newVal111")
-        console.log(newVal)
         
+        console.log("newVal")
+        console.log(newVal)
         if (newVal) {
           if (!newVal.addrVoList) {
-            console.log("newVal000")
             newVal.addrVoList = []
           }
           if (newVal.addrVoList && newVal.addrVoList.length < 1) {
-            console.log("newVal222")
             newVal.addrVoList.push(this.data.addrModel)
           }
+          let nop = ''
+          if(newVal.rateFlg == 1){
+            nop = true
+          }
+          if(newVal.amountFlg == 1){
+            nop = false
+          }
+          if(newVal.price){
+            this.setData({
+              maxhb: newVal.price*0.3*10/10,
+            })
+          }
+          if(newVal.shareFlg==1){
+            this.setData({
+              sFlg: true,
+            })
+          }else{
+            this.setData({
+              sFlg: false,
+            })
+          }
           this.setData({
+            nop: nop,
+            shuzhi:newVal.amount,
+            baifenbi:newVal.rate,
             iptActivityInfo: newVal,
             showList: newVal[_this.data.listKeyName]
           })
@@ -159,12 +181,17 @@ Component({
       "endTime": "",
       "id": 0,
       "name": "",
-      "statusName": ""
+      "statusName": "",
     },
     // 活动数据模板
     showList:[],
     index0:0,
-    locationEditIndex:0
+    locationEditIndex:0,
+    sFlg:'',
+    nop:'',
+    baifenbi:'',
+    shuzhi:'',
+    maxhb:''
   },
   attached() {
     // 每次组件进入页面时执行
@@ -253,11 +280,11 @@ Component({
         index: _this.data.viewIndex
       })
     },
-    getTime: function (event) {
-      var d = event.target.dataset.timename
+    getTime: function (e) {
+      var d = e.target.dataset.timename
       this.setData({
         show: true,
-        picker: event.target.dataset.timename
+        picker: e.target.dataset.timename
       });
     },
     onClose: function () {
@@ -275,15 +302,15 @@ Component({
         "iptActivityInfo.remark": e.detail.value
       });
     },
-    confirm(event) {
+    confirm(e) {
       // 时间选择确定
       var _this = this;
-      var time = util.formatDate(event.detail),
+      var time = util.formatDate(e.detail),
           time1 = _this.data.iptActivityInfo.startTime,
           time2 = _this.data.iptActivityInfo.endTime,
           active = _this.data.picker;
       this.setData({
-        currentDate: event.detail,
+        currentDate: e.detail,
         show: false,
         [`iptActivityInfo.${active}`]: time
       });
@@ -298,47 +325,150 @@ Component({
       }
       this.sendIptMes();
     },
-    inOrOut(event) {
+    inOrOut(e) {
       this.setData({
-        "iptActivityInfo.style": event.target.dataset.io
+        "iptActivityInfo.style": e.target.dataset.io
       });
       this.sendIptMes();
     },
-    onRadio2Change(event) {
-      if (event.detail == 1){
+    onPriceRadioChange(e) {
+      if (e.detail == 1){
         this.setData({
-          "iptActivityInfo.freeFlg": event.detail,
-          "iptActivityInfo.price": ''
+          "iptActivityInfo.freeFlg": e.detail,
+          "iptActivityInfo.price": '',
+          "iptActivityInfo.shareFlg": 0,
+          "iptActivityInfo.rateFlg": 0,
+          "iptActivityInfo.rate": '',
+          "iptActivityInfo.amountFlg": 0,
+          "iptActivityInfo.amount": '',
         });
       }else{
         this.setData({
-          "iptActivityInfo.freeFlg": event.detail
+          "iptActivityInfo.freeFlg": e.detail
         });
       }
       this.sendIptMes();
     },
-    onRadio2iptChange(event){
+    onPriceIptChange(e){
       this.setData({
-        "iptActivityInfo.price": event.detail
+        "iptActivityInfo.price": e.detail
       });
     },
-    onRadio3Change(event) {
-      if (event.detail == 1) {
+    onPriceBlur(e){
+      if(this.data.iptActivityInfo.price*1 && this.data.iptActivityInfo.price*1>0){
         this.setData({
-          "iptActivityInfo.joinLimitlessFlg": event.detail,
+          "iptActivityInfo.price": parseInt(this.data.iptActivityInfo.price*100)/100,
+          maxhb: parseInt(this.data.iptActivityInfo.price*100)/100*0.3*10/10
+        })
+      }else{
+        this.setData({
+          "iptActivityInfo.price": 0,
+        })
+      }
+      this.sendIptMes()
+    },
+    onTotalJoinRadioChange(e) {
+      if (e.detail == 1) {
+        this.setData({
+          "iptActivityInfo.joinLimitlessFlg": e.detail,
           "iptActivityInfo.totalJoin": ''
         });
       } else {
         this.setData({
-          "iptActivityInfo.joinLimitlessFlg": event.detail
+          "iptActivityInfo.joinLimitlessFlg": e.detail
         });
       }
       this.sendIptMes();
     },
-    onRadio3iptChange(event) {
+    onTotalJoinIptChange(e) {
       this.setData({
-        "iptActivityInfo.totalJoin": event.detail
+        "iptActivityInfo.totalJoin": parseInt(e.detail)
       });
     },
-  }
+    switchChange(e){
+      if(this.data.iptActivityInfo.price){
+        this.setData({
+          "iptActivityInfo.shareFlg": e.detail?1:0,
+          "iptActivityInfo.rateFlg": 0,
+          "iptActivityInfo.rate": '',
+          "iptActivityInfo.amountFlg": 0,
+          "iptActivityInfo.amount": '',
+        });
+        this.sendIptMes();
+      }else{
+        wx.showToast({
+          title: '请先设置费用',
+        })
+      }
+    },
+    onRadioChange(e){
+      console.log(e.detail)
+      this.setData({
+        "nop": e.detail,
+        "baifenbi": '',
+        "shuzhi": ''
+      });
+      var a,b
+      if(this.data.nop == true){
+        a = 1
+        b = 0
+      }else if(this.data.nop == false){
+        a = 0
+        b = 1
+      }else{
+        a = 0
+        b = 0
+      }
+      this.setData({
+        "iptActivityInfo.rateFlg": a,
+        "iptActivityInfo.rate": '',
+        "iptActivityInfo.amountFlg": b,
+        "iptActivityInfo.amount": '',
+      });
+    },
+    onfxIptChange: function(e) {
+      var key = e.currentTarget.dataset.key
+      var num = e.detail
+      this.setData({
+        [`${key}`]: num
+      });
+      if(key == 'baifenbi'){
+        this.setData({
+          'iptActivityInfo.rate': num
+        })
+      }
+      if(key == 'shuzhi'){
+        this.setData({
+          'iptActivityInfo.amount': num
+        })
+      }
+      this.sendIptMes();
+    },
+    shuzhiblur(){
+      var num = 0
+      if(this.data.shuzhi<this.data.maxhb && this.data.shuzhi>=0){
+        num = this.data.shuzhi
+      }else{
+        num = this.data.maxhb
+      }
+      this.setData({
+        "shuzhi": num,
+        "iptActivityInfo.amount": num
+      })
+      this.sendIptMes()
+    },
+    baifenbiblur(){
+      var num = 0
+      if(this.data.baifenbi*1<30 && this.data.shuzhi*1>=0){
+        num = this.data.baifenbi
+      }else{
+        num = 30
+      }
+      this.setData({
+        "baifenbi": num,
+        "iptActivityInfo.rate": num
+      })
+      this.sendIptMes()
+    }
+  },
 })

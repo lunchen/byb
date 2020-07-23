@@ -23,7 +23,7 @@ Page({
     cmt: app.globalData.isIphoneX ? 20 : 24,
     //tabbar
     tabbar: {},
-    identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1 ,       //1参与方 2主办方
+    identity: wx.getStorageSync('identity') ? parseInt(wx.getStorageSync('identity')) : 1 ,       //1参与方 2主办方
     participantInfo: {},
     sponsorInfo: {},
     loginShow: 0,
@@ -40,51 +40,10 @@ Page({
     },
     fenxiaoNub:1,
     fenxiao:[],
-  },
-  getfenxiao(){
-    var _this = this
-    var req = {
-      "nub": _this.data.fenxiaoNub,
-      "size": 999
-    }
-    apiServer.post('/app/order/share/list', req).then(res => {
-      if (res.data.data.list.length>0){
-        var data = _this.data.fenxiao
-        data.push(...res.data.data.list)
-        _this.setData({
-          fenxiao: data
-        })
-        // _this.setData({
-        //   fenxiaoNub: _this.data.fenxiaoNub + 1
-        // })
-      }
-    }).catch(err => {
-    })
-  },
-  tabChange(e){
-    var index = e.currentTarget.dataset.index;
-    this.setData({
-      active: index
-    })
-    if (index == 0) {
-      this.getParticipantInfo()
-    }
-    if(index == 1){
-      this.getfenxiao()
-    }
+    userShareFlg: wx.getStorageSync('userShareFlg') ? parseInt(wx.getStorageSync('userShareFlg')) : 0
   },
   
-  changeFLogin: function (e) {
-    // 获取从底部打开登录弹窗
-    this.setData({
-      loginShow: e.detail.loginShow
-    })
-  },
   openLogin: function (e) {
-    // 获取从底部打开登录弹窗
-    // this.setData({
-    //   loginShow: 4
-    // })
     wx.navigateTo({
       url: '../getAuth/getAuth',
     })
@@ -114,44 +73,71 @@ Page({
     if (identity == 1) {
       this.getParticipantInfo()
       bg = this.data.address1
-      this.getfenxiao()
     } else if (identity == 2) {
       bg = this.data.address2
       this.getSponsorInfo()
     }else{
       bg = this.data.address1
     }
+    console.log(bg)
     this.setData({
       "nvabarData.address": bg
     })
     
+  },
+  goToContactUs(){
+    if(util.checkLogin()){
+      wx.navigateTo({
+        url: `../contactUs/contactUs`
+      })
+    }else{
+      this.openLogin()
+    }
+    
+  },
+  goToOrgOrder(){
+    if(util.checkLogin()){
+      wx.navigateTo({
+        url: `../org-order/org-order`
+      })
+    }else{
+      this.openLogin()
+    }
+    
+  },
+  goToJoinfenxiao(){
+    if(this.data.userShareFlg == 1){
+      wx.showToast({
+        title: '您已经是分销员了哦~',
+        icon:'none',
+        duration: 1500
+      })
+    }else{
+      if(util.checkLogin()){
+        wx.navigateTo({
+          url: `../joinfenxiao/joinfenxiao`
+        })
+      }else{
+        this.openLogin()
+      }
+    }
+    
+  },
+  goToMineOrder(){
+    if(util.checkLogin()){
+      wx.navigateTo({
+        url: `../mine-order/mine-order`
+      })
+    }else{
+      this.openLogin()
+    }
   },
   goToOutCash(){
     wx.navigateTo({
       url: `../cashOut/cashOut`
     })
   },
-  goToReEditActivity(e) {
-    var id = e.currentTarget.dataset.id
-    var status = e.currentTarget.dataset.status
-    if (status == 1){
-      wx.showToast({
-        title: '正在进行中的活动请下架后再编辑',
-        icon: 'none',
-        duration: 2000
-      })
-      return
-    }
-    wx.navigateTo({
-      url: `../reEditActivity/reEditActivity?id=${id}`,
-    })
-  },
-  goToActivityDetails(e) {
-    var id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: `../activityDetails/activityDetails?id=${id}`
-    })
-  },
+
   goToEditSchoolHome(e) {
     //去学校编辑或编辑中心
     var id = e.currentTarget.dataset.id;
@@ -162,36 +148,9 @@ Page({
       url: `../editCenter/editCenter?id=${id}`
     })
   },
-  goToOrderDetails(e) {
-    var orderNo = e.currentTarget.dataset.orderno;
-    var index = e.currentTarget.dataset.index;
-    if (this.data.participantInfo.orderList[index].statusName == "待支付" || this.data.participantInfo.orderList[index].statusName == "支付中") {
-      this.goToConfirmOrder(e);
-      return
-    }
+  goToFeedback(e) {
     wx.navigateTo({
-      url: `../orderDetails/orderDetails?orderNo=${orderNo}`,
-    })
-  },
-  goToETicket(e) {
-    var orderNo = e.currentTarget.dataset.orderno
-    var activityId = e.currentTarget.dataset.actvityid
-    var index = e.currentTarget.dataset.index
-    if (this.data.participantInfo.orderList[index].statusName == "待支付" || this.data.participantInfo.orderList[index].statusName == "支付中"){
-      this.goToConfirmOrder(e)
-      return
-    }
-    if (this.data.participantInfo.orderList[index].statusName == "支付超时") {
-      return
-    }
-    wx.navigateTo({
-      url: `../eTicket/eTicket?orderNo=${orderNo}&id=${activityId}`,
-    })
-  },
-  goToConfirmOrder(e) {
-    var orderNo = e.currentTarget.dataset.orderno
-    wx.navigateTo({
-      url: `../confirmOrder/confirmOrder?orderNo=${orderNo}`,
+      url: `../feedback/feedback`
     })
   },
   goToPersonalCenter(e) {
@@ -204,19 +163,6 @@ Page({
       })
     }
   },
-  goToJoinerManage(e){
-    var id = e.currentTarget.dataset.id
-    var type = e.currentTarget.dataset.type
-    wx.navigateTo({
-      url: `../joinerManage/joinerManage?id=${id}&type=${type}`,
-    })
-  },
-  goToReleaseActivity(e){
-    var id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: `../releaseActivity/releaseActivity?id=${id}`,
-    })
-  }, 
   goToSchoolHome(e) {
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
@@ -226,80 +172,6 @@ Page({
   goToBusiness(e) {
     wx.navigateTo({
       url: '../business/business'
-    })
-  },
-  removeBtn(e){
-    var id = e.currentTarget.dataset.id
-    var _this = this
-    wx.showModal({
-      title: '提示',
-      content: '是否否删除该活动',
-      success: function (res) {
-        if (res.cancel) {
-        } else if (res.confirm) {
-          apiServer.post(`/app/my/org/activity/remove/${id}`).then(res => {
-            wx.showToast({
-              title: '活动删除成功',
-              icon: 'none',
-              duration: 1000
-            })
-            _this.renews()
-          }).catch(err => {
-            wx.showToast({
-              title: "操作失败",
-              icon: 'none',
-              duration: 1000
-            })
-          })
-        }
-      }
-    })
-  },
-  publishBtn(e){
-    var _this = this
-    var id = e.currentTarget.dataset.id
-    var publishFlg = e.currentTarget.dataset.publishflg
-    var title,content
-
-    if (publishFlg == 1){
-      title = "是否重新上架活动"
-      content = "重新上架前请确认活动时间"
-    }else{
-      title = "提示"
-      content = "是否确认下架活动"
-    }
-    wx.showModal({
-      title: title,
-      content: content,
-      success: function (res) {
-        if (res.cancel) {
-        } else if (res.confirm) {
-          _this.publishApi({ id, publishFlg})
-        }
-      }
-    })
-  },
-  publishApi(req){
-    var _this = this,
-        toast
-    if (req.publishFlg==1){
-      toast = "上架成功"
-    }else {
-      toast = "下架成功"
-    }
-    apiServer.post('/app/activity/publish',req).then(res => {
-      wx.showToast({
-        title: toast,
-        icon: 'none',
-        duration: 1000
-      })
-      _this.renews()
-    }).catch(err => {
-      wx.showToast({
-        title: "操作失败",
-        icon: 'none',
-        duration: 1000
-      })
     })
   },
   onLoad: function (options) {
@@ -313,8 +185,11 @@ Page({
     var _this = this
     apiServer.post('/app/my/user/index').then(res => {
       _this.setData({
-        participantInfo: res.data.data
+        participantInfo: res.data.data,
+        userShareFlg:res.data.data.shareFlg
       })
+      wx.setStorageSync('userShareFlg', res.data.data.shareFlg)
+      wx.setStorageSync('userInfo', JSON.stringify(res.data.data.user))
     }).catch(err=>{
       _this.setData({
         identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1
@@ -363,7 +238,6 @@ Page({
     var identity = this.data.identity;
     if (token.authorization && identity == "1"){
       this.getParticipantInfo()
-      this.getfenxiao()
     }
     if (token.token && identity == "2") {
       this.getSponsorInfo()

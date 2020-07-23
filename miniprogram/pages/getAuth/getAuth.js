@@ -19,8 +19,6 @@ Page({
     },
     height: app.globalData.navheight,
     isIphoneX: app.globalData.isIphoneX,
-    //tabbar
-    tabbar: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     showView: false,
   },
@@ -50,9 +48,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this
-    this.setData({
-      tabbar: app.editTabbar()
-    })
+    
     // 微信一键登录获取用户信息 提示授权
     wx.getSetting({
       success(res) {
@@ -81,7 +77,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.hideTabBar()
     var needBack
     if (wx.getStorageSync("needBack") == ''){
       needBack = wx.getStorageSync("needBack")

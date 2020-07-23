@@ -44,7 +44,7 @@
             <image wx:for="{{item.wechatQrcode}}" wx:for-item="item2" wx:for-index="index2" data-index0="{{index}}" wx:key="this" data-imgsrc="{{item2}}" bindtap='previewImg' style="width:70rpx;height:70rpx;margin-left:10rpx" src="{{item2}}"></image>
           </view>
           <view class="contactUs-view-text-txt1" bindtap="makePhoneCall">
-            <text>一键呼叫：</text>
+            <text>地址：</text>
             <text>{{item.addr.addr}}</text>
           </view>
         </view>
