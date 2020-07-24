@@ -177,6 +177,20 @@
 					"pathName": "pages/activityDetailsRecent/activityDetailsRecent",
 					"query": "id=327696",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/org-order/org-order",
+					"pathName": "pages/org-order/org-order",
+					"query": "scene=id%3D327732%3D666",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/myVideoSwiper/myVideoSwiper",
+					"pathName": "pages/myVideoSwiper/myVideoSwiper",
+					"query": "id=1387&&type=index",
+					"scene": null
 				}
 			]
 		}

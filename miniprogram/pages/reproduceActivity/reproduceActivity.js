@@ -171,20 +171,29 @@ Page({
     }
     var data = this.data.reEditData
     data.addrList = []
-    data.addrVoList.forEach(item => {
-      if (item.addrNo){
-        data.addrList.push(item.addrNo)
-      }else{
-        data.addrList.push(item.placeNo)
-      }
-    })
-    delete data.addrVoList
+    if(data.addrVoList){
+      data.addrVoList.forEach(item => {
+        if (item.addrNo){
+          data.addrList.push(item.addrNo)
+        }else{
+          data.addrList.push(item.placeNo)
+        }
+      })
+      delete data.addrVoList
+    }
     if(data.imgList==''){
       data.imgList = []
     }
-    apiServer.post(`/app/activity/update`, data).then(res => {
+    if(data.startTime==''|| data.endTime==''){
       wx.showToast({
-        title: '编辑成功',
+        title: '请选择活动开始与结束时间',
+        icon:'none',
+        duration: 1000
+      })
+    }
+    apiServer.post(`/app/activity/add`, data).then(res => {
+      wx.showToast({
+        title: '提交成功',
         icon: 'loading',
         duration: 2000
       })
@@ -212,7 +221,12 @@ Page({
     var that = this;
     console.log(e)
     if(e.id){
-      apiServer.post(`/app/activity/add/info/id/${e.id}`).then(res => {
+      apiServer.post(`/app/activity/copy/info/id/${e.id}`).then(res => {
+        res.data.data.startTime='';
+        res.data.data.endTime='';
+        if(res.data.data.bannerList && res.data.data.bannerList[0]==''){
+          res.data.data.bannerList=[]
+        }
         that.setData({
           reEditData: res.data.data
         })

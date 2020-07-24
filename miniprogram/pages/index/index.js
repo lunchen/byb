@@ -274,7 +274,9 @@ Page({
       withShareTicket: true,
       menus: ['shareAppMessage', 'shareTimeline']
     })
-    
+    // 绑定分享参数
+  console.log('aaa')
+  console.log(e)
     // this.comingTo(e)
     var that = this;
     wx.setStorageSync('index_activeVideo', 0)
@@ -429,4 +431,14 @@ Page({
     }
 
   },
+  //用户点击右上角分享朋友圈
+	onShareTimeline: function () {
+		return {
+	      title: '报1 报',
+	      query: {
+	        id: 666
+	      },
+	      imageUrl: ''
+	    }
+	},
 })

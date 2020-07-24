@@ -1,12 +1,14 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/logs/logs",
+    "pages/reproduceActivity/reproduceActivity",
+    "pages/middle/middle",
+    "pages/mine/mine",
     "pages/signUpSuccess/signUpSuccess",
     "pages/feedback/feedback",
-    "pages/mine/mine",
     "pages/contactUs/contactUs",
     "pages/joinfenxiao/joinfenxiao",
-    "pages/logs/logs",
     "pages/org-order/org-order",
     "pages/mine-order/mine-order",
     "pages/activityDetailsRecent/activityDetailsRecent",
@@ -36,7 +38,6 @@
     "pages/activityDetails/activityDetails",
     "pages/reEditActivity/reEditActivity",
     "pages/activityListSearch/activityListSearch",
-    "pages/middle/middle",
     "pages/shopMap/shopMap",
     "pages/editVideoDesc/editVideoDesc",
 

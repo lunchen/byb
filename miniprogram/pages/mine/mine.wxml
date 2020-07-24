@@ -4,7 +4,7 @@
   <navbar need-top='{{false}}' navbar-data='{{nvabarData}}'></navbar>
   <view class="participant"  wx:if="{{identity==1}}" >
   <!-- 参与方 -->
-    <view class="mine-top" style="position:relative;z-index:2;margin-top:{{20+height}}px;">
+    <view class="mine-top" style="position:relative;z-index:2;margin-top:30%;">
       <view class="mine-top-view">
         <view class="mine-top-view-left">
           <view class="mine-top-avatar" >

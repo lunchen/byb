@@ -1,6 +1,16 @@
 <!--logs.wxml-->
 <view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log">
+  <!-- <block wx:for="{{logs}}" wx:for-item="log">
     <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
+  </block> -->
+  123123
+  <view class="feed" bindtap='addAnimateFun' id="feed1">
+    <view class="heart {{addAnimate}}" id="like1" rel="like" style="background-position: {{cssAnimate}} center;"></view>
+  </view>
+
+  <view class="bottom-right-view-item" catchtap="likeBtn" data-id="{{item.id}}">
+    <image wx:if="{{item.likeFlg == 1}}" class="bottom-right-view-item-imgs" src="../../images/video_3@2x.png"></image>
+    <image wx:else class="bottom-right-view-item-imgs" src="../../images/video_2@2x.png"></image>
+    <view>{{item.likeCount}}</view>
+  </view>
 </view>

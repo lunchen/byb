@@ -249,11 +249,13 @@ Component({
       var detail = e.detail;
       var activeId = e.target.dataset.id;
       var courseId = e.target.dataset.courseid;
+      var cover = e.target.dataset.cover;
+      var name = e.target.dataset.name;
       this.setData({
         activeId: activeId,
         courseId: courseId
       })
-      this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { activeId: activeId, courseId: courseId }), ext));
+      this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { name: name, cover: cover, activeId: activeId, courseId: courseId }), ext));
     },
     shareFriend(){
       var _this = this

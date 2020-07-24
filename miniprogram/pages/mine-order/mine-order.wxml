@@ -99,6 +99,8 @@
       </scroll-view>
     </block>
     <block wx:else>
+    
+      <view style="padding:30rpx 30rpx 0;font-size:24rpx;">总分销金额：<text style="color:#fe8800">{{fxTotal}}</text></view>
       <scroll-view scroll-y style="position:relative;height: 100%;">
         <view class="scroll-view" style='padding-top:1px;'>
           <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{100+height}}px">

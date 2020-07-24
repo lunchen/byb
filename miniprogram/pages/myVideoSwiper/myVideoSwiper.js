@@ -28,9 +28,15 @@ Page({
     },
     type: '',   //index主页视频流  course课程视频流
     id:'',      //主页的视频id  或者课程的id
-    activeId:'' //正在播放的视频id
+    activeId:'', //正在播放的视频id
+    shareCover:'', //正在播放的视频封面图
+    shareName:'', //正在播放的视频标题或线上体验名字
+  },
+  onShow(e){
+    console.log("show")
   },
   onLoad(e) {
+    console.log("load")
     var that = this;
     wx.setNavigationBarColor({
       frontColor: '#000000',
@@ -157,6 +163,7 @@ Page({
           nub: that.data.nub + 1,
           checkVideoList: newdata
         })
+        this.firstGetIndexVideoList()
       }else{
         that.setData({
           nub: that.data.nub + 1,
@@ -182,14 +189,19 @@ Page({
   },
   onPlay(e) {
     var that = this
-    console.log('play', e.detail.activeId)
+    console.log('play', e.detail)
     if(this.data.type== "index"){
       this.setData({
+        shareName: e.detail.name,
+        shareCover: e.detail.cover,
         activeId: e.detail.activeId
+
       })
     }
     if(this.data.type == "course"){
       this.setData({
+        shareName: e.detail.name,
+        shareCover: e.detail.cover,
         id: e.detail.courseId,
         activeId: e.detail.activeId
       })
@@ -271,4 +283,31 @@ Page({
       }
 
   },
+  
+  //用户点击右上角分享朋友圈
+	onShareTimeline: function (ops) {
+    var json = encodeURIComponent(JSON.stringify({ a: 1 }));
+    var id
+    if (this.data.type == "index"){
+      id = this.data.activeId
+    }else{
+      id = this.data.id
+    }
+    var path = 'id=' + id + '&type=' + this.data.type
+    if (this.data.type == "course") {
+      path += '&videoId=' + this.data.activeId
+    }
+    console.log(path)
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+     
+    return {
+      title: this.data.shareName,
+      query: path,
+      imageUrl: this.data.shareCover
+    }
+	
+	},
 })

@@ -62,9 +62,9 @@ Page({
         icon: 'none',
         duration: 1000
       })
-      setTimeout(()=>{
-        _this.goToMine()
-      },1000)
+      // setTimeout(()=>{
+      //   _this.goToMine()
+      // },1000)
     })
   },
   goToMine(){
@@ -76,6 +76,7 @@ Page({
     this.setData({
       show: false
     })
+    this.goToMine()
   },
   onLoad: function () {
     var that = this;

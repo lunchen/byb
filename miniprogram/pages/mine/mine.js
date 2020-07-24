@@ -106,22 +106,22 @@ Page({
     
   },
   goToJoinfenxiao(){
-    if(this.data.userShareFlg == 1){
-      wx.showToast({
-        title: '您已经是分销员了哦~',
-        icon:'none',
-        duration: 1500
+    // if(this.data.userShareFlg == 1){
+    //   wx.showToast({
+    //     title: '您已经是分销员了哦~',
+    //     icon:'none',
+    //     duration: 1500
+    //   })
+    // }else{
+      
+    // }
+    if(util.checkLogin()){
+      wx.navigateTo({
+        url: `../joinfenxiao/joinfenxiao`
       })
     }else{
-      if(util.checkLogin()){
-        wx.navigateTo({
-          url: `../joinfenxiao/joinfenxiao`
-        })
-      }else{
-        this.openLogin()
-      }
+      this.openLogin()
     }
-    
   },
   goToMineOrder(){
     if(util.checkLogin()){

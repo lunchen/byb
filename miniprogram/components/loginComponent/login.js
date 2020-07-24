@@ -35,15 +35,18 @@ Component({
         var _this = this
         console.log(newVal)
         if(wx.getStorageSync('userInfo')){
-          var telephone = '' + JSON.parse(wx.getStorageSync('userInfo')).telephone
-          var ary = telephone.split("");
-          ary.splice(3,4,"****");
-          var tel = ary.join("");
-          console.log(tel);
-          this.setData({
-            tel: tel,
-            ifNeedIpt:false,
-          })
+          if(JSON.parse(wx.getStorageSync('userInfo')).telephone){
+            var telephone = '' + JSON.parse(wx.getStorageSync('userInfo')).telephone
+            var ary = telephone.split("");
+            ary.splice(3,4,"****");
+            var tel = ary.join("");
+            console.log(tel);
+            this.setData({
+              tel: tel,
+            })
+          }else{
+            this.getParticipantInfo()
+          }
         }
         
         if (newVal == 1){
@@ -91,7 +94,9 @@ Component({
             }
           })
         }
-        
+        this.setData({
+          ifNeedIpt:false,
+        })
       }
     },
   },
@@ -171,6 +176,28 @@ Component({
    
   },
   methods: {
+
+    getParticipantInfo(){
+      var _this = this
+      apiServer.post('/app/my/user/index').then(res => {
+        wx.setStorageSync('userInfo', JSON.stringify(res.data.data.user))
+        //刷新当前页面的数据
+        if(wx.getStorageSync('userInfo')){
+          if(JSON.parse(wx.getStorageSync('userInfo')).telephone){
+            var telephone = '' + JSON.parse(wx.getStorageSync('userInfo')).telephone
+            var ary = telephone.split("");
+            ary.splice(3,4,"****");
+            var tel = ary.join("");
+            console.log(tel);
+            this.setData({
+              tel: tel,
+            })
+          }
+        }
+      }).catch(err=>{
+      
+      })
+    },
     easyGetMes(){
       // 提交结果 调用生成订单
       var hasLogin = util.checkLogin()

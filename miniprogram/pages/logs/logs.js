@@ -3,7 +3,11 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    logs: []
+    logs: [],
+    addAnimate:'heartAnimation'
+  },
+  addAnimateFun(){
+    console.log(123)
   },
   onLoad: function () {
     this.setData({

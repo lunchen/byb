@@ -32,7 +32,7 @@
           立即查看
         </view>
       </view>
-      <view class="fxTips" wx:if="{{userShareFlg === 1 && activityData.share && activityData.share.flg==1}}">
+      <view class="fxTips" wx:if="{{activityData.share && activityData.share.flg==1}}">
         <image style="width:66rpx;height:80rpx;" src="../../images/fxTips.png"></image>
       </view>
     </view>

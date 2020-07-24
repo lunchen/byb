@@ -81,8 +81,11 @@
                     <view class="sponsorCard-isEnd" wx:if="{{item.status==-1||item.status==-2}}">
                       <view  class="sponsorCard-isEnd-bg"></view>
                       <view class="sponsorCard-isEnd-top">
-                        <view wx:if="{{item.statusName!='已结束'}}" bindtap="goToReEditActivity" data-id="{{item.id}}">
+                        <view wx:if="{{item.statusName!='已结束'}}" bindtap="goToReEditActivity" data-id="{{item.id}}" data-status="{{item.status}}">
                           编辑活动
+                        </view>
+                        <view wx:else bindtap="goTorReproduceActivity" data-id="{{item.id}}">
+                          复制活动
                         </view>
                       </view>
                       <view class="sponsorCard-isEnd-middle">

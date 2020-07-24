@@ -45,7 +45,17 @@ Page({
       "nub": 1,
       "size": 999,
       "status": ''
-    }
+    },
+    fxTotal:0
+  },
+  getfenxiaoTotal(){
+    var _this = this
+    apiServer.post('/app/order/share/total').then(res => {
+      _this.setData({
+        fxTotal: res.data.data.amount,
+      })
+    }).catch(err => {
+    })
   },
   getfenxiao(){
     var _this = this
@@ -54,16 +64,20 @@ Page({
       "size": 999
     }
     apiServer.post('/app/order/share/list', req).then(res => {
-      if (res.data.data.list.length>0){
+      console.log(_this.data.fenxiao.length)
+      if (_this.data.fenxiaoNub>1){
         var data = _this.data.fenxiao
         data.push(...res.data.data.list)
-        _this.setData({
-          fenxiao: data
-        })
         // _this.setData({
         //   fenxiaoNub: _this.data.fenxiaoNub + 1
         // })
+      }else{
+        var data = res.data.data.list
       }
+      console.log(data)
+      _this.setData({
+        fenxiao: data,
+      })
     }).catch(err => {
     })
   },
@@ -76,6 +90,7 @@ Page({
       this.getParticipantInfo()
     }
     if(index == 1){
+      this.getfenxiaoTotal()
       this.getfenxiao()
     }
   },
@@ -260,6 +275,7 @@ Page({
     this.getOrderSelect()
     this.getParticipantInfo()
     this.getfenxiao()
+    this.getfenxiaoTotal()
     
   },
   onHide: function () {

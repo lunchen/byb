@@ -392,5 +392,12 @@ Page({
       }
     }
 
-  },
+  },//用户点击右上角分享朋友圈
+	onShareTimeline: function () {
+		return {
+	      title: this.data.activityListData.info.name,
+	      query: `id=` + this.data.id,
+	      imageUrl: this.data.activityListData.img.url
+	    }
+	},
 })

@@ -1,0 +1,67 @@
+<!--releaseActivity.wxml-->
+<view class="container releaseActivity">
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
+     
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px'>
+      <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid">
+      </view>
+      <view class="releaseActivity-content">
+        <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
+          <view class="releaseActivity-content-addView {{reEditData.bannerList.length>0 ? 'type1':'type1'}}" bindtap="addBannerImg" data-key="bannerList" data-index="{{index}}">
+            <!-- <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
+            <text>添加海报/视频</text> -->
+            <block wx:if="{{reEditData.img}}">
+              <view style="margin:0 10rpx 0 10rpx;" catchtap="catchfn">
+                <image-video show="{{true}}" src="{{reEditData.img}}" type="{{1}}" height="280" width="{{280/180*240}}"></image-video>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="releaseActivity-content-addView-btn">
+                <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+              </view>
+              <text>添加活动封面(建议尺寸：180*240)</text>
+            </block>
+          </view>
+        </scroll-view>
+        <scroll-view scroll-y style="position:relative;max-height: 420rpx;width:100%;">
+          <view  style="border-top:1rpx #ddd solid;"  class="releaseActivity-content-addView {{reEditData.bannerList.length>0 ? 'type2':'type1'}}" bindtap="editVideoDesc" data-key="bannerList" data-index="{{index}}">
+            <!-- <view class="editSchoolHome-content-view-addActVideo-btn">+</view>
+            <text>添加海报/视频</text> -->
+            <block wx:if="{{reEditData.bannerList.length>0}}">
+              <view wx:for="{{reEditData.bannerList}}" wx:key="id">
+                <view style="margin:10rpx;width:400rpx;">
+                  <view style="display:inline-block" catchtap="catchfn">
+                    <image-video bind:bindfullscreenchange = "onBindfullscreenchange" cover="{{item.cover}}" show="{{true}}" src="{{item.url}}" type="{{item.type}}" height="{{item.type==1?0:267}}" width="{{400}}"></image-video>
+                  </view>
+                </view>
+              </view>
+              <view class="releaseActivity-content-addView-btn" style="margin:10rpx;">
+                <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+              </view>
+              <!-- <view style="width:210rpx;height:210rpx;background:#e5e5e5;display:flex;align-items:center;justify-content:center;margin:0 10rpx 0 10rpx;">
+                <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+              </view> -->
+            </block>
+            <block wx:else>
+              <view class="releaseActivity-content-addView-btn">
+                <image style="width:60rpx;height:60rpx" src="../../images/add1@2x.png"></image>
+              </view>
+              <text>添加轮播图片/视频(建议尺寸：690*375)</text>
+            </block>
+          </view>
+        </scroll-view>
+       
+        <view>
+          <iptActivityInfoComponent bind:bindfullscreenchange = "onBindfullscreenchange" iptActivityInfoData="{{reEditData}}" bind:getIptMes="getIptMes" newAddr="{{newAddr}}" activityType="{{1}}"></iptActivityInfoComponent>
+        </view>
+        <view class="releaseActivity-content-btnView">
+          <view class="releaseActivity-content-btn" bindtap="release">
+            确认提交
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  
+</view>

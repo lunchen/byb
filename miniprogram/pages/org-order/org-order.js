@@ -111,6 +111,12 @@ Page({
       url: `../reEditActivity/reEditActivity?id=${id}`,
     })
   },
+  goTorReproduceActivity(e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../reproduceActivity/reproduceActivity?id=${id}`,
+    })
+  },
   goToActivityDetails(e) {
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
