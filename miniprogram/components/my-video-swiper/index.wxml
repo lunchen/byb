@@ -28,6 +28,7 @@
           data-cover="{{item.cover}}"
           data-index="{{index}}"
           data-name="{{item.name}}"
+          data-orgid="{{item.org.id}}"
           object-fit="{{item.objectFit || 'contain'}}"
           bindplay="onPlay"
           bindpause="onPause"
@@ -70,11 +71,11 @@
             <image class="bottom-right-view-item-imgs" src="../../images/video_1@2x.png"></image>
             <view>{{item.lookCount}}</view>
           </view>
-          <!-- <view class="bottom-right-view-item" catchtap="likeBtn" data-id="{{item.id}}">
-            <image wx:if="{{item.likeFlg == 1}}" class="bottom-right-view-item-imgs" src="../../images/video_3@2x.png"></image>
-            <image wx:else class="bottom-right-view-item-imgs" src="../../images/video_2@2x.png"></image>
+          <view class="bottom-right-view-item" catchtap="likeBtn" data-id="{{item.id}}">
+            <image wx:if="{{item.likeFlg == 1}}" class="bottom-right-view-item-imgs {{needAni?'my-ani':''}}" src="../../images/video_3@2x.png"></image>
+            <image wx:else class="bottom-right-view-item-imgs " src="../../images/video_2@2x.png"></image>
             <view>{{item.likeCount}}</view>
-          </view> -->
+          </view>
           <view class="bottom-right-view-item" catchtap="shareBtn">
             <view class="bottom-right-view-item1">
               <image class="bottom-right-view-item-imgs" src="../../images/video_4@2x.png"></image>

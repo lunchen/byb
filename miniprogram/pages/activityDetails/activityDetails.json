@@ -1,9 +1,10 @@
 {
   "usingComponents": {
     "navbar": "../../components/navbarComponent/navbar",
-    "infoCard": "../../components/infoCardComponent/infoCard",
+    "infoCardComponent2": "../../components/infoCardComponent2/infoCardComponent2",
     "tabbarBtn": "../../components/tabbarBtnComponent/tabbarBtn",
     "shengjimiaosha": "../../components/shengjimiaosha/shengjimiaosha",
+    "baomingComponent": "../../components/baomingComponent/baomingComponent",
     "image-video": "../../components/image-video/index"
   },
   "navigationBarTextStyle": "white"

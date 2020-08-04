@@ -7,8 +7,8 @@
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
       <view wx:for="{{data}}" wx:key='id'>
-        <view class="editVideoDesc-textarea">
-          <textarea wx:if="{{!show}}" value="{{item.title}}" bindinput="iptValue" bindfocus="setIndex" auto-height placeholder="说明文字" data-index="{{index}}" />
+        <view class="editVideoDesc-textarea" wx:if="{{!hiddenTitle}}">
+          <textarea maxlength="-1" wx:if="{{!show}}" value="{{item.title}}" bindinput="iptValue" bindfocus="setIndex" auto-height="{{item.title.length<280?true:false}}" placeholder="说明文字" data-index="{{index}}" />
           <text class="textareaReplace" wx:else>{{item.title==''?"说明文字":item.title}}</text>
         </view>
         <view class="editVideoDesc-content">

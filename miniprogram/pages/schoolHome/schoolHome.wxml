@@ -17,6 +17,7 @@
                     muted="{{false}}"
                     show="{{false}}"
                     src="{{item.img.url}}" 
+                    cover="{{item.img.cover}}" 
                     type="{{item.img.type}}" 
                     height="375" 
                     width="690"
@@ -40,7 +41,7 @@
       
         <!-- 卡片信息 -->
         <view class="schoolHome-infoCard" id="card" wx:if="{{schoolHomeData.orgBannerList.length>0}}" bindtap="goToActivityDetails" data-id="{{activityListData.info.id}}">
-          <infoCard infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCard>
+          <infoCardComponent infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCardComponent>
           <image class="guideGif" src="../../images/tip.gif"></image>
         </view>
 
@@ -103,7 +104,7 @@
               <view class="schoolHome-content-card-right">
                 <text class="schoolHome-content-card-title" style="text-overflow:ellipsis;overflow: hidden;max-height:76rpx">{{schoolHomeData.name}}</text>
                 <view class="schoolHome-content-card-label">
-                  <view wx:for="{{schoolHomeData.labelList}}" wx:key="*this" class="label-item">{{item}}</view>
+                  <view wx:for="{{schoolHomeData.labelList}}" wx:key="labelList" class="label-item">{{item}}</view>
                 </view>
                 <view class="schoolHome-content-card-text">{{schoolHomeData.remark}}</view>
                 <view class="schoolHome-content-card-text getMore">了解更多>></view>
@@ -125,7 +126,7 @@
             </view>
           </view>
           <view class="schoolHome-map">
-            <map id="mymap" longitude="{{longitudeCenter}}" latitude="{{latitudeCenter}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 400rpx;"></map>
+            <map id="mymap" longitude="{{longitudeCenter}}" latitude="{{latitudeCenter}}" scale="14" markers="{{markers}}" show-location bindcallouttap="callouttap" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 400rpx;"></map>
           </view>
         </view>
 
@@ -133,7 +134,7 @@
       
     </view>
   </scroll-view>
-  <login orgId="{{schoolHomeData.id}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
+  <baomingComponent orgId="{{schoolHomeData.id}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></baomingComponent>
   <tabbarBtn orgId="{{schoolHomeData.id}}" telephone="{{schoolHomeData.telephone}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}" bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{true}}"></tabbarBtn>
 
  
@@ -161,6 +162,9 @@
     </view>
   </view>
   
+  <view class="toMine">
+    <image wx:if="{{showToMine}}" style="width:72rpx;height:81rpx;" bindtap="goToMine" src="../../images/toMine.png"></image>
+  </view>
   <view class="zhizuo" wx:if="{{firstPage}}" bindtap="goToBusiness">
     <image style="width:104rpx;height:69rpx" src="../../images/zhizuo.png"></image>
   </view>

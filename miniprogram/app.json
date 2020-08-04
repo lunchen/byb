@@ -1,12 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/mine2/mine2",
     "pages/logs/logs",
     "pages/reproduceActivity/reproduceActivity",
     "pages/middle/middle",
     "pages/mine/mine",
     "pages/signUpSuccess/signUpSuccess",
-    "pages/feedback/feedback",
+    "pages/fankui/fankui",
     "pages/contactUs/contactUs",
     "pages/joinfenxiao/joinfenxiao",
     "pages/org-order/org-order",
@@ -80,7 +81,6 @@
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "login": "./components/loginComponent/login"
   },
   "plugins": {
     "yzVideoPlugin": {

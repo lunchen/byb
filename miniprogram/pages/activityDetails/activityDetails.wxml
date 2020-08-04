@@ -1,12 +1,12 @@
 <!-- activityDetails.wxml-->
 <view class="container">
-  <navbar navbar-data='{{nvabarData}}' backgroundColor="rgb(255, 230, 0)"></navbar>
+  <navbar navbar-data='{{nvabarData}}' backgroundColor="rgb(255, 255, 255)"></navbar>
      
   <scroll-view scroll-y style="position:relative;height: 100%;">
     <view class="scroll-view-item" style='padding-top:1px'>
       <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
         <swiper style="height:375rpx;width:100%;" previous-margin="20rpx" next-margin="20rpx" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" bindchange="swiperChange">
-          <block wx:for="{{activityListData.activityBannerList}}" wx:key="*this">
+          <block wx:for="{{activityListData.activityBannerList}}" wx:key="activityBannerList">
             <swiper-item>
               <view style="padding:0 10rpx;height:375rpx;width:{{750-60}}rpx;border-radius:20rpx;" class="swiper-item {{item}} {{current==index ? 'scaleY1' : 'scaleY0_95'}}">
                 <!-- <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
@@ -17,6 +17,7 @@
                   show="{{true}}" 
                   src="{{item.url}}" 
                   type="{{item.type}}" 
+                  cover="{{item.cover}}"
                   height="375" 
                   width="690"
                   activeid = "{{activeid}}" 
@@ -30,85 +31,83 @@
         </swiper>
        
       </view>
-      <view class="miaoshabtn">
-        <!-- <view wx:if="{{showActUp}}" bindtap="sjms">一键升级秒杀活动</view> -->
-      </view>
+  
       <view class="activityDetails-content">
       
         <!-- 卡片信息 -->
         <view class="activityDetails-infoCard" id="card">
-          <infoCard infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCard>
+          <infoCardComponent2 infoCardrData="{{activityListData.info}}" infoCardType="{{1}}"></infoCardComponent2>
         </view>
-        
-        <!-- 学校卡片 -->
-        <view class="activityDetails-content-view2" bindtap="goToSchoolHome" data-id="{{activityListData.org.id}}">
-          <view class="activityDetails-content-view2-top">
-            <image  mode="aspectFill" style="width:112rpx;height:112rpx;flex:0 0 112rpx;border-radius:56rpx;" src="{{activityListData.org.img}}"></image> 
-            <view class="activityDetails-content-view2-top-textView">
-              <view class="activityDetails-content-view2-top-text">
-                <text style="font-size:32rpx;">{{activityListData.org.name}}</text>
-                <image style="width:32rpx;height:32rpx;flex:0 0 32rpx;margin-left:16rpx;" src="../../images/detail_6@2x.png"></image>
-              </view>
-            <view style="margin-top:14rpx;" class="activityDetails-content-view2-top-text">
-              <text style="font-size:30rpx;">{{activityListData.org.activityCount}}活动</text>
-              <text style="margin-left:16rpx;">|</text>
-              <text style="margin-left:16rpx;">{{activityListData.org.joinCount}}总报名人数</text>
-            </view>
-            </view>
-          </view>
-          <view class="activityDetails-content-view2-middle">
-            {{activityListData.org.remark}}
-          </view>
-          <view class="activityDetails-content-view2-bottom">
-            <view class="activityDetails-content-view2-bottom-item">
-              <image style="width:40rpx;height:40rpx;" src="../../images/detail_7@2x.png"></image>
-              <text style="margin-left:16rpx;">{{activityListData.org.lookCount}}人</text>
-            </view>
-            <view class="activityDetails-content-view2-bottom-item">
-              <image style="width:40rpx;height:40rpx;margin-top:4rpx" src="../../images/detail_8@2x.png"></image>
-              <text style="margin-left:16rpx;">了解更多</text>
-            </view>
-          </view>
-        </view>
-
-        <view class="activityDetails-link"></view>
-
-        <view class="activityDetails-content-introduction">
-          <!-- 课程简介 -->
-          <view class="activityDetails-content-introduction-title">
-            <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
-            <text>活动简介</text>
-          </view>
-          <!-- 小三角 -->
-          <view class="activityDetails-triangle"></view>
-          <!-- 课程简介详细介绍 -->
-          <view class="activityDetails-content-introduction-info">
-            <view wx:for="{{activityListData.imgList}}" wx:key="*this">
-              <view class="activityDetails-content-introduction-info-title">
-                {{item.title}}
-              </view>
-              <view class="activityDetails-content-introduction-info-text">
-                <view class="textIndent28">{{item.remark}}</view>
-              </view>
-              <view class="activityDetails-content-introduction-info-img" data-showimg="{{item}}" data-showimglist="{{activityListData.imgList}}" bindtap="showList" wx:if="{{item.url!=''}}">
-                <image-video 
-                  scpb="{{true}}" 
-                  show="{{false}}" 
-                  cover="{{item.cover}}" 
-                  src="{{item.url}}" 
-                  type="{{item.type}}" 
-                  muted="{{false}}"
-                  width="630"
-                  height="{{item.type==2?'300':0}}"
-                  activeid = "{{activeid}}"
-                  videoid="{{item.id}}" 
-                  bind:play="onPlay"
-                  ></image-video>
-              </view>
-              
-            </view>
-            <view>{{activityListData.imgList.remark}}</view>
+        <view style="padding: 0 30rpx">
           
+          <!-- 学校卡片 -->
+          <view class="activityDetails-content-view2" bindtap="goToSchoolHome" data-id="{{activityListData.org.id}}">
+            <view class="activityDetails-content-view2-top">
+              <image  mode="aspectFill" style="width:112rpx;height:112rpx;flex:0 0 112rpx;border-radius:56rpx;" src="{{activityListData.org.img}}"></image> 
+              <view class="activityDetails-content-view2-top-textView">
+                <view class="activityDetails-content-view2-top-text">
+                  <text style="font-size:32rpx;">{{activityListData.org.name}}</text>
+                  <image style="width:32rpx;height:32rpx;flex:0 0 32rpx;margin-left:16rpx;" src="../../images/detail_6@2x.png"></image>
+                </view>
+              <view style="margin-top:14rpx;" class="activityDetails-content-view2-top-text">
+                <text style="font-size:30rpx;">{{activityListData.org.activityCount}}活动</text>
+                <text style="margin-left:16rpx;">|</text>
+                <text style="margin-left:16rpx;">{{activityListData.org.joinCount}}总报名人数</text>
+              </view>
+              </view>
+            </view>
+            <view class="activityDetails-content-view2-middle">
+              {{activityListData.org.remark}}
+            </view>
+            <view class="activityDetails-content-view2-bottom">
+              <view class="activityDetails-content-view2-bottom-item">
+                <image style="width:40rpx;height:40rpx;" src="../../images/detail_7@2x.png"></image>
+                <text style="margin-left:16rpx;">{{activityListData.org.lookCount}}人</text>
+              </view>
+              <view class="activityDetails-content-view2-bottom-item">
+                <image style="width:40rpx;height:40rpx;margin-top:4rpx" src="../../images/detail_8@2x.png"></image>
+                <text style="margin-left:16rpx;">了解更多</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="activityDetails-link"></view>
+
+          <view class="activityDetails-content-introduction">
+            <!-- 课程简介 -->
+            <view class="activityDetails-content-introduction-title">
+              <image style="width:38rpx;height:38rpx;margin-right:12rpx;" src="../../images/detail_9@2x.png"></image>
+              <text>活动简介</text>
+            </view>
+            <!-- 小三角 -->
+            <view class="activityDetails-triangle"></view>
+            <!-- 课程简介详细介绍 -->
+            <view class="activityDetails-content-introduction-info">
+              <view wx:for="{{activityListData.imgList}}" wx:key="imgList">
+                <view class="activityDetails-content-introduction-info-title" style="white-space:pre-line;">{{item.title}}</view>
+                <view class="activityDetails-content-introduction-info-text">
+                  <view class="textIndent28">{{item.remark}}</view>
+                </view>
+                <view class="activityDetails-content-introduction-info-img" data-showimg="{{item}}" data-showimglist="{{activityListData.imgList}}" bindtap="showList" wx:if="{{item.url!=''}}">
+                  <image-video 
+                    scpb="{{true}}" 
+                    show="{{false}}" 
+                    cover="{{item.cover}}" 
+                    src="{{item.url}}" 
+                    type="{{item.type}}" 
+                    muted="{{false}}"
+                    width="630"
+                    height="{{item.type==2?'300':0}}"
+                    activeid = "{{activeid}}"
+                    videoid="{{item.id}}" 
+                    bind:play="onPlay"
+                    ></image-video>
+                </view>
+                
+              </view>
+              <view>{{activityListData.imgList.remark}}</view>
+            
+            </view>
           </view>
         </view>
       </view>
@@ -124,8 +123,12 @@
       <view>红包</view>
     </view>
   </view>
+  <view class="toMine">
+    <image wx:if="{{showToMine}}" style="width:72rpx;height:81rpx;" bindtap="goToMine" src="../../images/toMine.png"></image>
+  </view>
+
   <shengjimiaosha orginPrice="{{activityListData.info.price}}" miaoshashow="{{miaoshashow}}" actId="{{activityListData.info.id}}" bind:sjmsClose="sjmsClose"></shengjimiaosha>
-  <login orgId="{{activityListData.org.id}}" type="{{activityListData.info.type}}" needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></login>
+  <baomingComponent orgId="{{activityListData.org.id}}" type="{{activityListData.info.type}}" needChooseCourse="{{false}}" signUpType="{{signUpType}}" showType="{{loginShow}}" bind:changeFLogin="changeFLogin"></baomingComponent>
   <tabbarBtn orgId="{{activityListData.org.id}}" telephone="{{activityListData.org.telephone}}" type="{{activityListData.info.type}}" status="{{activityListData.info.status}}" bind:shareFriend="shareFriend" loginShow="{{loginShow}}"  bind:changeSignUpType="changeSignUpType" bind:changeFLogin="changeFLogin" needChooseCourse="{{false}}"></tabbarBtn>
 
    <view class="canvasImg" wx:if="{{canvasImgShow}}">

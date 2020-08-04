@@ -22,7 +22,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wx28653ecae496acb0",
@@ -63,7 +63,7 @@
 					"id": 1,
 					"name": "pages/schoolHome/schoolHome",
 					"pathName": "pages/schoolHome/schoolHome",
-					"query": "id=458745",
+					"query": "id=458757&shareIn=true",
 					"scene": null
 				},
 				{
@@ -190,6 +190,27 @@
 					"name": "pages/myVideoSwiper/myVideoSwiper",
 					"pathName": "pages/myVideoSwiper/myVideoSwiper",
 					"query": "id=1387&&type=index",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/fankui/fankui",
+					"pathName": "pages/fankui/fankui",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 21,
+					"name": "pages/myVideoSwiper/myVideoSwiper",
+					"pathName": "pages/myVideoSwiper/myVideoSwiper",
+					"query": "id=188&type=course&videoId=1530",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/releaseActivity/releaseActivity",
+					"pathName": "pages/releaseActivity/releaseActivity",
+					"query": "",
 					"scene": null
 				}
 			]

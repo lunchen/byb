@@ -66,7 +66,7 @@
 
 
 
-          <view class="editSchoolHome-schoolInfoCard" wx:for="{{campusList}}" wx:key="item" bindtap="setindex0" data-index0="{{index}}">
+          <view class="editSchoolHome-schoolInfoCard" wx:for="{{campusList}}" wx:key="campusList" bindtap="setindex0" data-index0="{{index}}">
             <view class="editSchoolHome-schoolInfoCard-handle">
               <view class="editSchoolHome-schoolInfoCard-handle-del" bindtap="cutCampusCard" data-index0="{{index}}">
                 <image style="height:47rpx;width:44rpx;" src="../../images/edit_del.png"></image>

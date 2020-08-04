@@ -107,7 +107,8 @@ Page({
     // 跳转到视频编辑
     var data = JSON.stringify({
       key: e.currentTarget.dataset.key,
-      list: this.data.reEditData.bannerList
+      list: this.data.reEditData.bannerList,
+      hiddenTitle: true
     })
     wx.setStorageSync("addivList", data)
     wx.navigateTo({

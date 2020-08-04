@@ -197,3 +197,8 @@
 .schoolDetails-content-teachView-item-text{
   padding: 26rpx 0 30rpx 30rpx;
 }
+.toMine{
+  position: fixed;
+  right: 20rpx;
+  bottom: 15%;
+}

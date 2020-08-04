@@ -1,4 +1,4 @@
-// 编辑活动 动态form
+// 编辑活动 form
 const util = require('../../utils/util.js')
 const app = getApp()
 Component({

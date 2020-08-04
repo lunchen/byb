@@ -27,7 +27,6 @@ Page({
     loginShow: 0,   //打开报名弹窗参数
     // 视频
     indicatorDots: true,
-    vertical: false,
     autoplay: false,
     interval: 2000,
     duration: 500,
@@ -44,15 +43,14 @@ Page({
       longitude: 113.324520,
       width: 20,
       height: 26,
-      label: {
-        content: '',  //文本
-        color: '#FF0202',  //文本颜色
-        borderRadius: 3,  //边框圆角
-        borderWidth: 1,  //边框宽度
-        borderColor: '#FF0202',  //边框颜色
-        bgColor: '#ffffff',  //背景色
-        padding: 5,  //文本边缘留白
-        textAlign: 'center'  //文本对齐方式。有效值: left, right, center
+     
+      callout: {
+        content: '气泡名称',
+        color: '#000000',
+        fontSize: 15,
+        borderRadius: 1,
+        display: 'ALWAYS',
+        bgColor: 'FF0000'
       }
     }],
     // 划线
@@ -78,7 +76,8 @@ Page({
     canvasImgShow: false,
     canvasImg:'',
     firstPage: false,
-    canIUseSaveImg: ''
+    canIUseSaveImg: '',
+    showToMine: false
   },
   
   previewImage: function (e) {
@@ -114,6 +113,31 @@ Page({
   // 地图
   regionchange(e) {
     console.log(e.type)
+  },
+  callouttap(){
+    this.copy(this.data.markers[0].callout.content)
+  },
+  copy(e) {
+    var that = this
+    wx.setClipboardData({
+      data: e,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function(res) {
+            // wx.showModal({
+            //   title: '提示',
+            //   content: '地址已复制',
+            //   showCancel:false,
+            //   success: function (res) {
+            //     if (res.cancel) {
+            //     } else if (res.confirm) {
+            //     }
+            //   }
+            // })
+          }
+        })
+      }
+    })
   },
   markertap(e) {
     console.log(e.markerId)
@@ -181,6 +205,11 @@ Page({
       url: `../editSchoolDetails/editSchoolDetails`
     })
   },
+  goToMine(){
+    wx.navigateTo({
+      url: `../mine2/mine2`
+    })
+  },
   changeSignUpType: function (e) {
     // 底部按钮 true 为免费预约 false 花费
     this.setData({
@@ -222,6 +251,17 @@ Page({
           longitude: res.data.data.addr.longitude,
           width: 20,
           height: 26,
+          callout: {
+            content: res.data.data.addr.addr,
+            color: '#000000',
+            fontSize: 15,
+            borderRadius: 10,
+            display: 'ALWAYS',
+            bgColor: '#ffffff',
+            padding: 4,
+            borderWidth:1,
+            borderColor: '#ffffff'
+          }
         }],
         latitudeCenter: res.data.data.addr.latitude,
         longitudeCenter: res.data.data.addr.longitude
@@ -237,7 +277,6 @@ Page({
         firstPage: true
       })
     }
-    console.log(e)
     wx.setStorageSync('schoolHome_activeVideo', 0)
     wx.setNavigationBarColor({
       frontColor: '#000000',
@@ -247,6 +286,8 @@ Page({
     this.setData({
       mapCtx : wx.createMapContext('myMap')
     })
+    console.log("e")
+    console.log(e)
     let id = e ? e.id : '';
     if(e){
       if (e.scene) {
@@ -254,6 +295,10 @@ Page({
         console.log(e)
         var strs = decodeURIComponent(e.scene)
         id = strs.split("=")[1]
+        wx.setStorageSync('shareIn', true)
+      }
+      if(e.shareIn){
+        wx.setStorageSync('shareIn', true)
       }
     }else{
       id = wx.getStorageSync('schoolHomeId')
@@ -265,7 +310,9 @@ Page({
         id: id
       })
     }
-
+    this.setData({
+      showToMine: wx.getStorageSync('shareIn')
+    })
     // 直接打开预约
     if (e && e.open == 3) {
       this.setData({
@@ -460,8 +507,8 @@ Page({
       console.log(ops.target)
     }
     return {
-      title: '报1 报',
-      path: '/pages/schoolHome/schoolHome?id=' + this.data.id,
+      title: this.data.schoolHomeData.name,
+      path: '/pages/schoolHome/schoolHome?id=' + this.data.id + '&shareIn=true',
       imageUrl: "",
       success: function (res) {
         // 转发成功
@@ -478,7 +525,7 @@ Page({
 	onShareTimeline: function () {
 		return {
 	      title: this.data.schoolHomeData.name,
-	      query: `id=` + this.data.id,
+	      query: `id=` + this.data.id + '&&shareIn=true',
 	      imageUrl: this.data.schoolHomeData.logo
 	    }
 	},

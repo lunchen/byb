@@ -108,7 +108,8 @@ Page({
     // 跳转到视频编辑
     var data = JSON.stringify({
       key: e.currentTarget.dataset.key,
-      list: this.data.activityModel.bannerList
+      list: this.data.activityModel.bannerList,
+      hiddenTitle: true
     })
     wx.setStorageSync("addivList", data)
     wx.navigateTo({
@@ -118,6 +119,27 @@ Page({
   catchfn(){
     console.log(666)
   },
+  chooseimage: function() {
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['拍照', '从手机相册选择' , '从模板库选择'],
+      itemColor: "#000",
+      success: function(res) {
+        console.log(res)
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            // that.chooseWxImage('camera')
+          } else if (res.tapIndex == 1) {
+            // that.chooseWxImage('album')
+          } else if (res.tapIndex == 2) {
+            // that.chooseWxImage('camera')
+          }
+        }
+      }
+    })
+ 
+  },
+
   addBannerImg(){
     var that = this
     util.uploadImg("activityBill").then(res => {

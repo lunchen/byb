@@ -5,11 +5,12 @@ const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
-    // 接口名
+    // 接口名 （oss文件夹名字）
     base: {
       type: String,
       value: "images"
     },
+    // 判断 是否 courseList
     firstkey: {
       type: String,
       value: ""
@@ -63,13 +64,13 @@ Component({
       }
     },
     asdV() {
-      console.log("点击选择视频了")
       var that = this
       wx.chooseVideo({
         sourceType: ['album', 'camera'],
         camera: 'back',
         compressed: false,
         success(res) {
+          console.log("点击选择视频了V")
           if (JSON.stringify(res).indexOf('413') != -1) {
             wx.showToast({
               title: '文件太大请选择的文件不要大于50MB',
@@ -169,6 +170,12 @@ Component({
             })
             return
           }
+          wx.showToast({
+            title: '努力上传中~',
+            mask:true,
+            icon: 'loading',
+            duration: 100000
+          })
           var url
           let src = res.tempFiles[0],
             height = src.height,

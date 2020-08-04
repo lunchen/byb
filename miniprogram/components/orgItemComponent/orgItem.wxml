@@ -10,7 +10,7 @@
     <view class="orgItem-view-item-right">
       <text class="orgItem-view-text1">{{orgItemData.name}}</text>
       <view class="orgItem-content-card-label">
-        <view wx:for="{{orgItemData.labelList}}" wx:key="*this" class="label-item">{{item}}</view>
+        <view wx:for="{{orgItemData.labelList}}" wx:key="labelList" class="label-item">{{item}}</view>
       </view>
       <view class="orgItem-view-text2">{{orgItemData.remark}}</view>
       

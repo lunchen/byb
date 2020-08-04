@@ -27,7 +27,7 @@
 }
 .play_btn{
   margin-top: 20rpx;
-  margin-left: 28rpx;
+  margin-left: 32rpx;
   border: 20rpx solid transparent;
   border-left: 30rpx solid #fff;
 }

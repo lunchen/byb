@@ -1,4 +1,4 @@
-// 活动详情
+// 最近动态
 //activityDetails.js
 const util = require('../../utils/util.js')
 const apiServer = require('../../api/request.js');

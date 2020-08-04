@@ -21,7 +21,7 @@
         <view class="confirmOrder-content">
           <view class="confirmOrder-content-item">
 
-            <block wx:for="{{orderData.infoDetailList}}" wx:key="*this">
+            <block wx:for="{{orderData.infoDetailList}}" wx:key="infoDetailList">
               <view class="confirmOrder-content-item-top">
                 <view class="confirmOrder-content-item-top-left">
                   <image mode="aspectFill" style="width:50rpx;height:50rpx;margin-right:14rpx;" src="{{item.org.logo}}"></image>

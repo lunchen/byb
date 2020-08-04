@@ -26,7 +26,7 @@
       <view class="scroll-view" style='padding-top:1px;'>
         <view class="mine-content" style="margin-top:10rpx;padding-bottom:{{100+height}}px">
 
-          <view class="sponsorCard" style="padding-bottom:{{isIphoneX?160:100}}rpx">
+          <view class="sponsorCard">
             <block wx:for="{{sponsorInfo}}" wx:key="id">
               <van-swipe-cell id="{{'swipe-cell' + index}}" right-width="{{ 65 }}" async-close bind:close="onClose">
                 <van-cell-group>

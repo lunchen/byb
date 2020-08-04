@@ -43,7 +43,8 @@ Page({
     miaoshashow: false,
     scfxhbActive: false,
     setTime:'',
-    userShareFlg:0
+    userShareFlg:0,
+    showToMine: wx.getStorageSync('shareIn')
   },
   scfxhb(){
     //生成分销海报
@@ -175,6 +176,11 @@ Page({
       url: `../schoolHome/schoolHome?id=${id}`
     })
   },
+  goToMine(){
+    wx.navigateTo({
+      url: `../mine2/mine2`
+    })
+  },
   changeFLogin: function (e) {
     // 获取从底部3按钮获取的报课弹窗状态  底部按钮组件还需要获取用户登录状态
     // 状态1：需登录，2：由学校主页打开需要选择课程，3：由活动详情页打开不用选取课程直接，4：填写姓名电话和基础
@@ -190,24 +196,29 @@ Page({
 
     var that = this;
     let id = e ? e.id : '';
-    
+    console.log("e")
+    console.log(e)
     this.setData({
       id: id
     })
     if(e){
       if (e.scene) {
-        console.log('scene')
-        console.log(e)
         var strs = decodeURIComponent(e.scene)
         let d = strs.split("=")
-        console.log(d)
         this.setData({
           id: d[1],
-          shareId: d[2]
+          shareId: d[2],
         })
         wx.setStorageSync('shareId', d[2])
+        wx.setStorageSync('shareIn', true)
+      }
+      if(e.shareIn){
+        wx.setStorageSync('shareIn', true)
       }
     }
+    this.setData({
+      showToMine: wx.getStorageSync('shareIn')
+    })
     if (this.data.id) {
       if(e && e.open==3){
         this.setData({
@@ -215,37 +226,50 @@ Page({
           signUpType: true
         })
       }
-      apiServer.post(`/app/activity/info/${this.data.id}`).then(res => {
-        // 设置选中的活动信息用于报名
-        var myorgid = wx.getStorageSync('myOrgMes')?JSON.parse(wx.getStorageSync('myOrgMes')).org.id:''
-        if (res.data.data.org.id == myorgid && this.data.identity == 2){
-          that.setData({
-            showActUp: true
-          }) 
-        }
-        var activitySelected = {
-          price: res.data.data.info.price,
-          value: res.data.data.info.id,
-          label: res.data.data.info.name
-        }
-        wx.setStorageSync("activitySelected", JSON.stringify(activitySelected))
-        if (res.data.data.activityBannerList.length>0){
-          that.setData({
-            "activityListData": res.data.data,
-            activeid: res.data.data.activityBannerList[0].id
-          })
-        }else{
-          that.setData({
-            "activityListData": res.data.data,
-          })
-        }
-      })
+      // this.getData()
     }
+  },
+  getData(){
+    var that = this
+    apiServer.post(`/app/activity/info/${this.data.id}`).then(res => {
+      console.log("getData")
+      // 设置选中的活动信息用于报名
+      var myorgid = wx.getStorageSync('myOrgMes')?JSON.parse(wx.getStorageSync('myOrgMes')).org.id:''
+      if (res.data.data.org.id == myorgid && this.data.identity == 2){
+        that.setData({
+          showActUp: true
+        })
+      }else{
+        that.setData({
+          showActUp: false
+        }) 
+      }
+      var activitySelected = {
+        price: res.data.data.info.price,
+        value: res.data.data.info.id,
+        label: res.data.data.info.name
+      }
+      wx.setStorageSync("activitySelected", JSON.stringify(activitySelected))
+      if (res.data.data.activityBannerList.length>0){
+        that.setData({
+          "activityListData": res.data.data,
+          activeid: res.data.data.activityBannerList[0].id
+        })
+      }else{
+        that.setData({
+          "activityListData": res.data.data,
+        })
+      }
+    })
   },
   onShow(){
     this.setData({
-      userShareFlg: wx.getStorageSync('userShareFlg') ? parseInt(wx.getStorageSync('userShareFlg')) : 0
+      userShareFlg: wx.getStorageSync('userShareFlg') ? parseInt(wx.getStorageSync('userShareFlg')) : 0,
+      identity: wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1,
     })
+    if(this.data.id){
+      this.getData()
+    }
   },
   imgLoaded(e) {
     this.setData({
@@ -378,8 +402,8 @@ Page({
       // 来自页面内转发按钮
     }
     return {
-      title: '报1 报',
-      path: '/pages/activityDetails/activityDetails?id=' + this.data.id,
+      title: '你的好友向你推荐了免费课程，点击领取~',
+      path: '/pages/activityDetails/activityDetails?id=' + this.data.id + '&shareIn=true',
       imageUrl: "",
       success: function (res) {
         // 转发成功
@@ -396,7 +420,7 @@ Page({
 	onShareTimeline: function () {
 		return {
 	      title: this.data.activityListData.info.name,
-	      query: `id=` + this.data.id,
+	      query: `id=` + this.data.id + '&&shareIn=true',
 	      imageUrl: this.data.activityListData.img.url
 	    }
 	},

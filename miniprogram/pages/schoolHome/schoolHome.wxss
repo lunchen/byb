@@ -275,3 +275,9 @@ button {
 button {
   border-radius:0;
 }
+
+.toMine{
+  position: fixed;
+  right: 20rpx;
+  bottom: 15%;
+}

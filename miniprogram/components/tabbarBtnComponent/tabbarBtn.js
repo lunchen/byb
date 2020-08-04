@@ -27,7 +27,7 @@ Component({
       value: false,
     },
     loginShow: {
-      //loginShow  预约课程弹窗状态  1选课程 2不用选课程
+      // 预约课程弹窗状态  1选课程 2不用选课程
       type: Number,
       value: 0,
     },

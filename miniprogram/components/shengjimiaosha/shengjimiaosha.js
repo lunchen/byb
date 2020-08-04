@@ -1,9 +1,10 @@
-// 登陆 选择课种等
+// 升级秒杀
 const util = require('../../utils/util.js');
 const apiServer = require('../../api/request.js');
 const app = getApp()
 Component({
   properties: {
+    // 原价
     orginPrice:{
       type: Number,
       value: 0,
@@ -11,7 +12,7 @@ Component({
         
       }
     },
-    miaoshashow: {   // 1线下活动 2线上活动
+    miaoshashow: {
       type: Boolean,
       value: false,
       observer: function (newVal, oldVal) {

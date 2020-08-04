@@ -104,10 +104,7 @@ Page({
     this.getParticipantInfo()
   },
   openLogin: function (e) {
-    // 获取从底部打开登录弹窗
-    // this.setData({
-    //   loginShow: 4
-    // })
+
     wx.navigateTo({
       url: '../getAuth/getAuth',
     })

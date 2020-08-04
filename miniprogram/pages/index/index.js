@@ -101,8 +101,8 @@ Page({
   },
   goToPage(e) {
     var type = e.currentTarget.dataset.type   //1原图放大 2打开h5  3小程序内部页面  4其他图放大
-    var uri = e.currentTarget.dataset.uri
-    var code = e.currentTarget.dataset.code
+    var uri = e.currentTarget.dataset.uri     //type:2 跳转的页面路径
+    var code = e.currentTarget.dataset.code   //内部页面的路径（带参数）
     console.log(uri)
     console.log(type)
     if (type == 2) {
@@ -269,14 +269,13 @@ Page({
     var pages = getCurrentPages()
     var currentPage = pages[pages.length - 1]
   },
-  onLoad: function (e) {
+  onLoad: async function (e) {
     wx.showShareMenu({
       withShareTicket: true,
       menus: ['shareAppMessage', 'shareTimeline']
     })
     // 绑定分享参数
-  console.log('aaa')
-  console.log(e)
+    console.log(e)
     // this.comingTo(e)
     var that = this;
     wx.setStorageSync('index_activeVideo', 0)

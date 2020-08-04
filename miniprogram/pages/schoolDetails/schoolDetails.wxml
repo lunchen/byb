@@ -199,4 +199,7 @@
     </view>
   </scroll-view>
   
+  <view class="toMine">
+    <image wx:if="{{showToMine}}" style="width:72rpx;height:81rpx;" bindtap="goToMine" src="../../images/toMine.png"></image>
+  </view>
 </view>

@@ -36,7 +36,8 @@ Page({
     prevKey: '',       //上一个页面的跳转过来的列表取值key
     firstkey: '',       //上一个页面的跳转过来的列表取值key
     defaultTitle: '',       //初始输入框内容
-    defaultShow: false       //初始输入框是否显示
+    defaultShow: false,       //初始输入框是否显示
+    hiddenTitle: false      // 是否隐藏输入框
   },
   onLoad: function (e) {
     wx.setNavigationBarColor({
@@ -52,6 +53,7 @@ Page({
       updateapi: updateapi
     })
     if (api) {
+      // 通过当前页面获取数据 如学校详情的几个数据编辑
       apiServer.post(api).then(res => {
         that.setData({
           data: res.data.data.list,
@@ -61,16 +63,30 @@ Page({
       // 通过本地存储获取动态编辑的数据 本地存储的图片仅做本地存储操作 最后统一提交
       wx.getStorageSync("addivList");
       let getData = JSON.parse(wx.getStorageSync("addivList"));
+      wx.removeStorageSync('addivList')
       let prevIndex = getData.index;
       let prevkey = getData.key
       let prevData = getData.list
       let firstkey = getData.firstkey
+      let hiddenTitle = getData.hiddenTitle ? true:false
       that.setData({
         prevIndex: prevIndex,
         data: prevData,
         prevKey: prevkey,
         firstkey: firstkey,
-        
+        hiddenTitle: hiddenTitle
+      })
+    }
+    if(this.data.data.length<1){
+      that.setData({
+        data: [{
+          "id": '',
+          "imgNo": "",
+          "remark": "",
+          "title": "",
+          "type": 0,
+          "url": ""
+        }]
       })
     }
   },
@@ -188,7 +204,7 @@ Page({
     })
   },
   submit(){
-    // 提交图片列表 并返回
+    // 提交图片列表 并返回 （学校详情等）
     let data = this.data.data
     let updateapi = this.data.updateapi;
     if (updateapi){
@@ -210,6 +226,7 @@ Page({
         },1200)
       })
     }else{
+      // 本地存储编辑信息 返回上一页面
       var nowData = JSON.stringify({
         index: this.data.prevIndex, 
         key: this.data.prevKey, 

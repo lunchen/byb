@@ -1,0 +1,57 @@
+/* infoCard.wxss */
+.infocard-content2{
+  position: relative;
+}
+.infocard-content2-title{
+  margin-top: 10rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333;
+  padding: 0 30rpx;
+}
+.infocard-content2-text{
+  margin-top: 10rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666666;
+  padding: 0 30rpx;
+}
+.infocard-content2-text-addr{
+  align-items: flex-start;
+  position: relative;
+}
+.infocard-content2-text-addr-list{
+  max-height: 110rpx;
+  overflow-y: auto;
+  flex: 1;
+  padding: 6rpx 0;
+}
+.ftSize22{
+ font-size: 22rpx;
+}
+.colorOrange{
+  color: #fe8800;
+}
+.colorYellow{
+  color: #feb707;
+}
+
+.fxTips{
+  color: #fff;
+  position: absolute;
+  right: -10rpx;
+  top: -42rpx;
+  text-align: center;
+}
+.flex_bottom{
+  display: flex;
+  align-items: flex-end;
+}
+.infocard-content2-line{
+  width: 100%;
+  height: 10rpx;
+  background: #f3f2f2;
+  margin: 10rpx 0;
+}

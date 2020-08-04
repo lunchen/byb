@@ -24,7 +24,8 @@ Page({
     schoolDetails: {},
 
     id:'',
-    activeid:"-1"
+    activeid:"-1",
+    showToMine: false
   },
 
   showList(e) {
@@ -70,6 +71,11 @@ Page({
       url: `../activityDetailsRecent/activityDetailsRecent?id=${id}`
     })
   },
+  goToMine(){
+    wx.navigateTo({
+      url: `../mine2/mine2`
+    })
+  },
   methods: {
   },
   onLoad: function (e) {
@@ -82,6 +88,11 @@ Page({
     if (e.scene) {
       var strs = decodeURIComponent(e.scene)
       id = strs.split("=")[1]
+      wx.setStorageSync('shareIn', true)
+      
+    }
+    if(e.shareIn){
+      wx.setStorageSync('shareIn', true)
     }
     this.setData({
       id:id
@@ -89,6 +100,9 @@ Page({
     if (id) {
       this.getData()
     }
+    this.setData({
+      showToMine: wx.getStorageSync('shareIn')
+    })
   },
   getData(){
     var that = this
@@ -112,7 +126,7 @@ Page({
     }
     return {
       title: '报1 报',
-      path: '/pages/schoolDetails/schoolDetails?id=' + this.data.id,
+      path: '/pages/schoolDetails/schoolDetails?id=' + this.data.id + '&shareIn=true',
       imageUrl: "",
       success: function (res) {
         // 转发成功
@@ -130,7 +144,7 @@ Page({
 	onShareTimeline: function () {
 		return {
 	      title: this.data.schoolDetails.name,
-	      query: `id=` + this.data.id,
+	      query: `id=` + this.data.id + '&&shareIn=true',
 	      imageUrl: this.data.schoolDetails.logo
 	    }
 	},

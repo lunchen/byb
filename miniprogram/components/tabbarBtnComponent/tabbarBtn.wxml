@@ -12,7 +12,7 @@
       
     </view>
     <view class="tabbar-service-btnView-right">
-      <view wx:if="{{type!=2}}" bindtap="appointFreeBtn" bindtap="freeAppointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn flex-mc lightThemeBGC">
+      <view wx:if="{{type!=2}}" bindtap="freeAppointBtn" data-freetype='{{true}}' class="tabbar-service-btnView-left-btn flex-mc lightThemeBGC">
         <!-- <image style="width:32rpx;height:32rpx;margin-right:12rpx" src="../../images/detail_11@2x.png"></image> -->
         <text>免费约课</text>
       </view>
@@ -41,7 +41,7 @@
           </view>
           <view class="contactUs-view-text-txt2">
             <view>微信二维码：</view>
-            <image wx:for="{{item.wechatQrcode}}" wx:for-item="item2" wx:for-index="index2" data-index0="{{index}}" wx:key="this" data-imgsrc="{{item2}}" bindtap='previewImg' style="width:70rpx;height:70rpx;margin-left:10rpx" src="{{item2}}"></image>
+            <image wx:for="{{item.wechatQrcode}}" wx:for-item="item2" wx:for-index="index2" data-index0="{{index}}" wx:key="wechatQrcode" data-imgsrc="{{item2}}" bindtap='previewImg' style="width:70rpx;height:70rpx;margin-left:10rpx" src="{{item2}}"></image>
           </view>
           <view class="contactUs-view-text-txt1" bindtap="makePhoneCall">
             <text>地址：</text>

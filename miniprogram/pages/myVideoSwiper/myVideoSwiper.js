@@ -25,12 +25,14 @@ Page({
       white: 'true', // 是就显示白的，不是就显示黑的。
       whitecover: 'true',
       address: '', // 加个背景 不加就是没有
+      homePath:''   //首页跳转的路径
     },
     type: '',   //index主页视频流  course课程视频流
     id:'',      //主页的视频id  或者课程的id
     activeId:'', //正在播放的视频id
     shareCover:'', //正在播放的视频封面图
     shareName:'', //正在播放的视频标题或线上体验名字
+    orgId:'',   //正在播放的视频机构id
   },
   onShow(e){
     console.log("show")
@@ -46,6 +48,8 @@ Page({
     console.log(e)
     if(e){
       let id = e ? e.id : '';
+      //课程列表 id为课程id videoId才是视频id  详见 getCourseVideoList 方法
+      //首页列表 id为视频id
       this.setData({
         type: e.type,
         id: e.id,
@@ -203,7 +207,9 @@ Page({
         shareName: e.detail.name,
         shareCover: e.detail.cover,
         id: e.detail.courseId,
-        activeId: e.detail.activeId
+        activeId: e.detail.activeId,
+        orgId: e.detail.orgId,
+        "nvabarData.homePath": `/pages/schoolHome/schoolHome?id=${e.detail.orgId}`
       })
     }
     // 当视频放到最后几个的时候从接口获取后续视频
@@ -268,7 +274,7 @@ Page({
     }
     if (this.data.type)
       return {
-        title: '报1 报',
+        title: '你的好友向你分享了精彩视频，点击观看发现更多精彩吧！',
         path: path,
         imageUrl: "",
         success: function (res) {

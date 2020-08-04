@@ -59,6 +59,31 @@ const checkLogin = () => {
   }
 }
 
+const checkMyOrg = (id) => {
+  if(id){
+    var token = wx.getStorageSync("token") ? JSON.parse(wx.getStorageSync("token")).token : '';
+    var identity = wx.getStorageSync('identity') ? wx.getStorageSync('identity') : 1;
+    if (token && identity==2) {
+      var sponsorId = wx.getStorageSync("myOrgMes") ? JSON.parse(wx.getStorageSync("myOrgMes")).org.id:-404;
+      if (id == sponsorId){
+        return true
+      }else {
+        return false
+      }
+    }
+  }else{
+    return false
+  }
+ 
+}
+const checkShareIn = () => {
+  var ifShare = wx.getStorageSync("ifShare") ? JSON.parse(wx.getStorageSync("ifShare")) : ''
+  if (ifShare){
+    return true
+  }else {
+    return false
+  }
+}
 const throttle = function (fn, gapTime) {
   if (gapTime == null || gapTime == undefined) {
     gapTime = 1500
@@ -94,14 +119,21 @@ const getAuthStatus = function (scopeName) {
     });
   }
 
-const uploadImg = function(fileName){
+const uploadImg = function(fileName, mediaType, sourceType){
+  // mediaType: Array  image 选择图片 video 选择视频 可同时存在
+  var mediaType = mediaType ? mediaType : ['image']
+  // sourceType: Array  album 从相册选择 camera 拍照选择 可同时存在
+  var sourceType = sourceType ? sourceType : ['album', 'camera']
   return new Promise((resolve, reject) => {
-    wx.chooseImage({
+    wx.chooseMedia({
+      mediaType: ['image'],
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      sourceType: sourceType, // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
         console.log(res)
         let src = res.tempFiles[0];
+        console.log(src)
+        console.log(fileName)
         wx.showToast({
           title: '努力上传中~',
           icon: 'loading',
@@ -110,7 +142,7 @@ const uploadImg = function(fileName){
         wx.uploadFile({
           url: apiServer.apiUrl(`/picture/upload/${fileName}`),
           method: 'post',
-          filePath: src.path,
+          filePath: src.tempFilePath,
           name: 'file',
           file: src,
           data: {},

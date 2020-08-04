@@ -1,3 +1,4 @@
+//视频流视频
 const apiServer = require('../../api/request.js');
 const util = require('../../utils/util.js');
 Component({
@@ -61,6 +62,7 @@ Component({
     downloadUrl:'',
     shareId:'',
     canIUseSaveImg: '',
+    needAni:''  //执行点赞动画
   },
   lifetimes: {
     attached: function attached() {
@@ -251,11 +253,12 @@ Component({
       var courseId = e.target.dataset.courseid;
       var cover = e.target.dataset.cover;
       var name = e.target.dataset.name;
+      var orgId = e.target.dataset.orgid;
       this.setData({
         activeId: activeId,
         courseId: courseId
       })
-      this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { name: name, cover: cover, activeId: activeId, courseId: courseId }), ext));
+      this.triggerEvent(type, Object.assign(Object.assign(Object.assign({}, detail), { name: name, cover: cover, activeId: activeId, courseId: courseId, orgId: orgId }), ext));
     },
     shareFriend(){
       var _this = this
@@ -288,6 +291,7 @@ Component({
       });
     },
     likeBtn(e) {
+      var that = this
       var id = e.currentTarget.dataset.id;
       console.log(id)
       var a = this.data.curQueue
@@ -295,20 +299,34 @@ Component({
         if (item.id == id) {
           if (item.likeFlg!=1){
             item.likeCount = item.likeCount - 0 + 1
+            item.likeFlg = 1
+            this.setData({
+              needAni:true
+            })
+            var req = {
+              "id": id,
+              "type": 2
+            }
+            apiServer.post(`/indexVideo/operating`, req).then(res => {
+              console.log(res.data);
+              
+            })
+            setTimeout(()=>{
+              that.setData({
+                needAni:false
+              })
+            },2000)
           }
-          item.likeFlg = 1
+          // else{
+          //   item.likeCount = item.likeCount - 0 - 1
+          //   item.likeFlg = 0
+          // }
         }
       })
       this.setData({
         curQueue: a
       })
-      var req = {
-        "id": id,
-        "type": 2
-      }
-      apiServer.post(`/indexVideo/operating`, req).then(res => {
-        console.log(res.data);
-      })
+     
     },
     goToSchoolHome(e) {
       var id = e.currentTarget.dataset.id

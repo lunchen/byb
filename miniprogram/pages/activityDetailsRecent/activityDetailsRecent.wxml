@@ -6,7 +6,7 @@
     <view class="scroll-view-item" style='padding-top:1px'>
       <view style="position:relative;z-index:2;margin-top:{{height+18}}px;text-align:center;">
         <swiper style="height:375rpx;width:100%;" previous-margin="20rpx" next-margin="20rpx" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" bindchange="swiperChange">
-          <block wx:for="{{activityListData.imgList}}" wx:key="*this">
+          <block wx:for="{{activityListData.imgList}}" wx:key="*imgList">
             <swiper-item>
               <view style="padding:0 10rpx;height:375rpx;width:{{750-60}}rpx;border-radius:20rpx;" class="swiper-item {{item}} {{current==index ? 'scaleY1' : 'scaleY0_95'}}">
                 <!-- <image wx:if="{{item.img.type===1}}" style="height:375rpx;width:100%;border-radius:26rpx;" src="{{item.img.url}}"></image>
@@ -39,7 +39,7 @@
       
         <!-- 卡片信息 -->
         <view class="activityDetailsRecent-infoCard" id="card">
-          <infoCard infoCardrData="{{activityListData}}" infoCardType="{{1}}" ifRencent="{{true}}"></infoCard>
+          <infoCardComponent infoCardrData="{{activityListData}}" infoCardType="{{1}}" ifRencent="{{true}}"></infoCardComponent>
         </view>
         
 
@@ -55,7 +55,7 @@
           <view class="activityDetailsRecent-triangle"></view>
           <!-- 课程简介详细介绍 -->
           <view class="activityDetailsRecent-content-introduction-info">
-            <view wx:for="{{activityListData.imgList}}" wx:key="*this">
+            <view wx:for="{{activityListData.imgList}}" wx:key="imgList1">
               <view class="activityDetailsRecent-content-introduction-info-title">
                 {{item.title}}
               </view>

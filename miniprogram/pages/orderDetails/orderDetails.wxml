@@ -19,7 +19,7 @@
     <view class="scroll-view" style='padding-top:1px;'>
       <view style="padding-bottom:350rpx;">
         <view class="orderDetails-content">
-          <block wx:for="{{orderDetails.infoDetailList}}" wx:key='*this'>
+          <block wx:for="{{orderDetails.infoDetailList}}" wx:key='infoDetailList'>
             <view class="orderDetails-content-item">
             
               <view class="orderDetails-content-item-top">
@@ -84,7 +84,7 @@
             团成员
           </view>
           <view class="orderDetails-bottom-view1-imgList">
-            <view wx:for="{{orderDetails.group.group}}" wx:key="*this" class="orderDetails-bottom-view1-imgList-item {{item.flg==1?'first':''}}">
+            <view wx:for="{{orderDetails.group.group}}" wx:key="group" class="orderDetails-bottom-view1-imgList-item {{item.flg==1?'first':''}}">
               <image  class="orderDetails-bottom-view1-img" mode="aspectFill" style="" src="{{item.img}}"></image>
             </view>
             

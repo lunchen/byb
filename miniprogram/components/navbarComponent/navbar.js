@@ -75,9 +75,18 @@ Component({
     _navback() {
       if(this.data.share){
         app.globalData.share = false
-        wx.switchTab({
-          url: '/pages/index/index',
-        })
+        if(this.data.navbarData.homePath){
+          console.log('885')
+          console.log(this.data.navbarData.homePath)
+          wx.reLaunch({
+            url: this.data.navbarData.homePath,
+          })
+        }else{
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
+        }
+      
         return
       }
       var hasShowValue = false;

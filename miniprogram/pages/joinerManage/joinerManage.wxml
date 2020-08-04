@@ -36,7 +36,7 @@
 refresher-enabled="{{true}}" refresher-threshold="50" refresher-default-style="black" bindrefresherrefresh="renewData" bindscrolltolower="getMore">
     <view class="scroll-view-item" style='padding-top:1px;padding-bottom:400rpx;'>
       <view class="joinerManage-orderList">
-        <block wx:for="{{orderList}}" wx:key="*this">
+        <block wx:for="{{orderList}}" wx:key="orderList">
           <view class="joinerManage-orderList-item">
             <view class="joinerManage-orderList-item-left" bindtap="selectHandle" data-index="{{index}}">
               <!-- <image wx:if="{{item.select}}" class="selected" style="width:30rpx;height:30rpx" src="../../images/select@2x.png"></image>

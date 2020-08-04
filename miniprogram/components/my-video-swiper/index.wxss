@@ -209,3 +209,13 @@ button {
 button {
   border-radius:0;
 }
+
+.my-ani{
+  animation: dd linear 0.6s;
+}
+
+@keyframes dd{
+  0%   {transform:scale(0.6)}
+  30%  {transform:scale(1.4)}
+  100% {transform:scale(1)}
+}

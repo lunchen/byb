@@ -4,7 +4,7 @@
 
   <scroll-view scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
     <!-- <view class='scrollMsg'> -->
-    <block wx:key wx:for='{{msgList}}' wx:for-index="index">
+    <block wx:key="msgList" wx:for='{{msgList}}' wx:for-index="index">
 
       <!-- 单个消息1 客服发出（左） -->
       <view wx:if='{{item.speaker=="server"}}' id='msg-{{index}}' style='display: flex; padding: 2vw 14vw 2vw 2vw;'>

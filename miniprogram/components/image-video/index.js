@@ -1,4 +1,4 @@
-// 显示图片或视频 点击视频放大还需添加 图片流可划动还需修改
+// 显示图片或视频
 const app = getApp()
 Component({
   properties: {

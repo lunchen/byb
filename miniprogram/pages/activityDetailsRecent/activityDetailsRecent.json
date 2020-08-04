@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "navbar": "../../components/navbarComponent/navbar",
-    "infoCard": "../../components/infoCardComponent/infoCard",
+    "infoCardComponent": "../../components/infoCardComponent/infoCardComponent",
     "tabbarBtn": "../../components/tabbarBtnComponent/tabbarBtn",
     "shengjimiaosha": "../../components/shengjimiaosha/shengjimiaosha",
     "image-video": "../../components/image-video/index"
