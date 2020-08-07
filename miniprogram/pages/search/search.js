@@ -41,10 +41,12 @@ Page({
   hotSearch(event) {
     var that = this;
     let keyword = event.currentTarget.dataset.keyword;
+   
     this.setData({
-      value: keyword
+      "req.nub": 1,
+      "req.keyword": keyword
     })
-    apiServer.post('/app/search/search', {keyword: keyword}).then(res => {
+    apiServer.post('/app/search/search', this.data.req).then(res => {
       that.setData({
         activityList: res.data.data.activity.list,
       })

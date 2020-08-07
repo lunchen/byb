@@ -1,6 +1,7 @@
 {
     "component": true,
     "usingComponents": {
+      "likeComponent": "../likeComponent/likeComponent",
       "van-popup": "../../miniprogram_npm/@vant/weapp/popup/index"
     }
 }

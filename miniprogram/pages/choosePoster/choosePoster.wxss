@@ -1,0 +1,55 @@
+/**选择海报**/
+.container{
+  height: 100%;
+}
+.choosePoster-content-view{
+  padding: 0 0 50rpx;
+}
+
+.choosePoster-moreActivity-btn{
+  font-size: 32rpx;
+  color: #feb707;
+  text-align: right;
+  margin-top: 30rpx;
+  padding: 0 30rpx;
+}
+.choosePoster .deleteBtn{
+  color: #ff0101;
+  text-align: right;
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
+}
+.xianshangtiyan{
+  text-align: center;
+}
+
+.posterList{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 0 2vw;
+}
+.posterList-item{
+  width: 32vw;
+  text-align: center;
+}
+.choosePoster .van-tab .van-ellipsis{
+  display: inline-block;
+}
+.van-tab--active .van-ellipsis{
+  position: relative;
+  font-size: 32rpx;
+}
+.van-tab--active .van-ellipsis::after{
+  content: '';
+  display: block;
+  width: 100%;
+  height: 16rpx;
+  background: yellow;
+  opacity: 0.6;
+  position: absolute;
+  top: 46rpx;
+  left: 0rpx;
+  border-radius: 8rpx;
+}

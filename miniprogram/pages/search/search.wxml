@@ -20,7 +20,7 @@ refresher-enabled="{{true}}" refresher-threshold="50" refresher-default-style="b
       <view wx:if="{{activityList.length<1}}">
         <view class="search-title">热门搜索</view>
         <view class="search-theme" wx:if="{{searchTheme.length>0}}">
-          <view class="search-theme-item" wx:for="{{searchTheme}}" wx:key="{{item.name}}" bindtap="hotSearch" data-keyword="{{item.name}}">
+          <view class="search-theme-item" wx:for="{{searchTheme}}" wx:key="hot" bindtap="hotSearch" data-keyword="{{item.name}}">
             <image style="width:26rpx;height:30rpx;margin-right:10rpx;" src="../../images/search_1@2x.png"></image>
             <text>{{item.name}}</text>
           </view>
@@ -29,7 +29,7 @@ refresher-enabled="{{true}}" refresher-threshold="50" refresher-default-style="b
       <view wx:else>
         <view class="activity-view">
           <!-- 活动列表组件 -->
-          <block wx:for="{{activityList}}" wx:key="id">
+          <block wx:for="{{activityList}}" wx:key="activitySearch">
             <activityItem activityData="{{item}}"></activityItem>
           </block>
         </view>

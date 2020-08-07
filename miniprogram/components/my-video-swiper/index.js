@@ -62,7 +62,10 @@ Component({
     downloadUrl:'',
     shareId:'',
     canIUseSaveImg: '',
-    needAni:''  //执行点赞动画
+    needAni:'',  //执行点赞动画
+    touchStartTime: -1, //判断双击
+    ifDoubleClick: false, //判断双击 为true则不执行单击的事件
+    likeItem:{}
   },
   lifetimes: {
     attached: function attached() {
@@ -73,6 +76,39 @@ Component({
     }
   },
   methods: {
+    doubleClick(e){
+      var that = this
+      console.log(e)
+      
+      this.setData({
+        ifDoubleClick: false
+      })
+      if(e.timeStamp - this.data.touchStartTime<300){
+        console.log('双击')
+        let data = {
+          x: e.detail.x-30,
+          y: e.detail.y-50,
+          show: true
+        }
+        console.log(data)
+        
+        this.setData({
+          ifDoubleClick: true,
+          likeItem:data
+        })
+        this.likeBtn(e)
+      }else{
+        console.log('单击')
+        setTimeout(()=>{
+          if(!that.data.ifDoubleClick){
+            that.vchange(e)
+          }
+        },300)
+      }
+      this.setData({
+        touchStartTime: e.timeStamp
+      })
+    },
     vchange: function (e) {
       var vindex = e.currentTarget.dataset.vindex
       if (this.data.showpause == true) {
@@ -178,9 +214,18 @@ Component({
       if (prevQueue.length === 0 && current !== 2) {
         circular = false;
       }
+      
+      let data = {
+        x: e.detail.x-30,
+        y: e.detail.y-50,
+        show: true,
+        clear:true
+      }
+      
       this.setData({
         curQueue: curQueue,
-        circular: circular
+        circular: circular,
+        likeItem:data,
       });
     },
     videoOperating(e) {

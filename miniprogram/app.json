@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/choosePoster/choosePoster",
     "pages/index/index",
     "pages/mine2/mine2",
     "pages/logs/logs",

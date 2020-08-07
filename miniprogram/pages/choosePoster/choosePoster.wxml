@@ -1,0 +1,34 @@
+<!--选择海报-->
+<view class="container choosePoster">
+  <navbar wx:if="{{navbarShow}}" navbar-data='{{nvabarData}}'></navbar>
+  <view style="position:relative;z-index:2;margin-top:{{height}}px;border-top:1rpx #f0f0f0 solid;">
+  </view>
+  <scroll-view scroll-y style="position:relative;height: 100%;">
+    <view class="scroll-view-item" style='padding-top:1px;padding-bottom:{{height}}px;'>
+      <view class="choosePoster-content">
+
+        <view class="choosePoster-content-view">
+        <van-tabs active="{{ active }}" bind:click="orgListClick">
+         
+          <block wx:for="{{posterList}}" wx:key="value">
+            <van-tab title="{{item.name}}">
+              <view class="posterList">
+                <view class="posterList-item" wx:for="{{item.list}}" wx:for-item="item1" wx:key="poster">
+                  <image src="https://enlist-prod.oss-cn-hangzhou.aliyuncs.com/png/c_p_meishu%20(3).jpg" style="width:30vw;height:42vw;"></image>
+                </view>
+              </view>
+            
+            </van-tab>
+          </block>
+        </van-tabs>
+          
+        </view>
+
+
+
+      </view>
+
+    </view>
+  </scroll-view>
+  
+</view>

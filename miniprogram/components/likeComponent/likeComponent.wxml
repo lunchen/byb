@@ -1,0 +1,5 @@
+<view class="like-view-item">
+  <view wx:for="{{likeList}}" wx:key="like" class="{{item.show?'likeScale-ani':''}}">
+    <image style="top:{{item.y}}px;left:{{item.x}}px;" class="like-view-item-img {{item.show?'likeMove-ani':''}}" src="../../images/xin.png"></image>
+  </view>
+</view>

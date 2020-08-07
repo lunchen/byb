@@ -122,7 +122,7 @@ Page({
   chooseimage: function() {
     var that = this;
     wx.showActionSheet({
-      itemList: ['拍照', '从手机相册选择' , '从模板库选择'],
+      itemList: ['拍照', '手机相册' , '模板模板'],
       itemColor: "#000",
       success: function(res) {
         console.log(res)

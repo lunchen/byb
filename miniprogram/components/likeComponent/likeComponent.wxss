@@ -1,0 +1,32 @@
+/* like.wxss */
+.like-view-item{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.like-view-item-img{
+  position: absolute;
+  width:120rpx;
+  height: 110rpx;
+  top: 400rpx;
+  left: 20rpx;
+  opacity: 0;
+}
+/* .likeScale-ani{
+  animation: likeScale linear 1s;
+}
+@keyframes likeScale {
+  60%  {transform:scale(1);}
+  100% {transform:scale(1.5);margin-top: -400rpx;margin-left: 80rpx;}
+} */
+.likeMove-ani{
+  animation: likeMove linear 1s;
+}
+@keyframes likeMove {
+  0%   {transform:translate3d(0px,0px,0px);opacity: 0;}
+  1%   {transform:translate3d(0px,0px,0px);opacity: 1;}
+  30%  {transform:translate3d(-10px,-60px,0px);width:120rpx;height: 110rpx; opacity: .8;}
+  60%  {transform:translate3d(10px,-120px,0px); opacity: .6;}
+  90%  {transform:translate3d(-10px,-200px,0px); opacity: .1;}
+  100% {transform:translate3d(0px,-220px,0px);width:180rpx;height: 165rpx; opacity: 0; }
+}

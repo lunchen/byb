@@ -39,11 +39,14 @@
           bindloadedmetadata="onLoadedMetaData"
         >
         </video>
-
+        
         <view class="playCover {{showpause==true?'hideCover':''}}">
           <image style="width:120rpx;height:120rpx" wx:if="showpause==true" src="../../images/play.png"></image>
         </view>
-
+        <view class="click-screen" catchtap="doubleClick" data-vindex="{{index}}" data-id="{{item.id}}">
+        
+          <likeComponent like="{{likeItem}}"></likeComponent>
+        </view>
         <view class="bottom-left-view">
           <view class="bottom-left-view-item" catchtap="goToSchoolHome" data-id="{{item.org.id}}">
             <view class="bottom-left-view-item-left">
@@ -72,7 +75,7 @@
             <view>{{item.lookCount}}</view>
           </view>
           <view class="bottom-right-view-item" catchtap="likeBtn" data-id="{{item.id}}">
-            <image wx:if="{{item.likeFlg == 1}}" class="bottom-right-view-item-imgs {{needAni?'my-ani':''}}" src="../../images/video_3@2x.png"></image>
+            <image wx:if="{{item.likeFlg == 1}}" class="bottom-right-view-item-imgs {{needAni?'likeChange-ani':''}}" src="../../images/video_3@2x.png"></image>
             <image wx:else class="bottom-right-view-item-imgs " src="../../images/video_2@2x.png"></image>
             <view>{{item.likeCount}}</view>
           </view>
